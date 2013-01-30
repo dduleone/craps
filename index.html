@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DuLeone Craps</title>
+		<script src="jquery.min.js" lang='javascript' type='text/javascript'></script>
+		<script type='text/javascript' language='javascript' src='craps.js'></script>
+		<script type='text/javascript' language='javascript'>
+
+			var p = new Player("Dan", 1000);
+			craps.players = [p];
+
+			craps.placeBet(new HardWaysBet(1000, p.id));
+			craps.placeBet(new HardWaysBet(1500, p.id));
+
+			function roll(){
+				$("#buffer").append("Rolling...<br />");
+				var d = new dice();
+				var roll = d.roll();
+				craps.output(roll);
+				craps.checkBets(roll);
+			}
+		</script>
+		<style type='text/css'>
+			#buffer{
+				height: 1000px;
+				width: 300px;
+				border: 1px solid black;
+				overflow: scroll;
+			}
+		</style>
+	</head>
+	<body>
+		<button id='roll' onclick='roll()'>Roll</button><br />
+		<div id='buffer'></div>
+	</body>
+</html>
