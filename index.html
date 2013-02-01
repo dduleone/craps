@@ -14,7 +14,7 @@
 			craps.placeBet(new HardWaysBet(1500, p.id));
 
 			function roll(){
-				$("#buffer").append("Rolling...<br />");
+				craps.output("---Rolling---");
 				var d = new dice();
 				var roll = d.roll();
 				craps.output(roll);
@@ -22,16 +22,85 @@
 			}
 		</script>
 		<style type='text/css'>
+			button#roll{
+				height: 20px;
+				width: 300px;
+				margin: 0px;
+				padding: 0px;
+				float: left;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
 			#buffer{
-				height: 1000px;
+				position: absolute;
+				top: 20px;
+				left: 0px;
+				font-family: monospace;
+				height: 748px;
 				width: 300px;
 				border: 1px solid black;
 				overflow: scroll;
+				margin: 0px;
+				padding: 0px;
+			}
+			#buffer span{
+				padding-left: 5px;
+			}
+			#board{
+				position: absolute;
+				top: 0px;
+				left: 300px;
+				margin: 0px;
+				padding: 0px;
 			}
 		</style>
 	</head>
 	<body>
+		<!-- canvas id="board" height='1024' width='768'></canvas -->
+		<canvas id="board" height='768' width='1024'></canvas>
 		<button id='roll' onclick='roll()'>Roll</button><br />
 		<div id='buffer'></div>
+
+		<script type='text/javascript' language='javascript'>
+			//var _h = 1024, _w = 768;
+			var _h = 768, _w = 1024;
+			var _l = 0, _r = _w;
+			var _t = 0, _b = _h;
+
+			var colors = {
+				black: "#000",
+				board: "#090"
+			};
+
+
+			var canvas = document.getElementById("board");
+			var board = canvas.getContext("2d");
+			board.fillStyle = colors.board;
+			board.fillRect(_l, _t, _r, _b);
+			board.fillStyle = colors.black;
+			board.strokeRect(_l, _t, _r, _b);
+
+			board.strokeRect(_l+1, _t+1, _r-2, _b-2);
+			board.strokeRect(_l+2, _t+2, _r-4, _b-4);
+			board.moveTo(_l, _t);
+			board.lineTo(_r, _b);
+			board.moveTo(_l, _b);
+			board.lineTo(_r, _t);
+			board.moveTo(_r/2, _t);
+			board.lineTo(_r/2, _b);
+			board.moveTo(_l, _b/2);
+			board.lineTo(_r, _b/2);
+			board.moveTo(_l, _b/4);
+			board.lineTo(_r, _b*3/4);
+			board.moveTo(_l, _b*3/4);
+			board.lineTo(_r, _b/4);
+			board.moveTo(_r/4, _t);
+			board.lineTo(_r*3/4, _b);
+			board.moveTo(_r*3/4, _t);
+			board.lineTo(_r/4, _b);
+
+			board.stroke();
+		</script>
 	</body>
 </html>

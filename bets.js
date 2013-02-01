@@ -1,4 +1,36 @@
 //http://www.nextshooter.com/bets
+// Pass Line
+// Field Bet
+// Come Bet
+// Place Bets
+// Proposition Bets
+// Pass Odds
+// Come Odds
+// Don't Pass
+// Don't Come
+// Hardways
+
+
+//http://www.inodepositbonus.com/casino-blog/craps-list/
+// Come Out Bet (Pass Line)
+// Odds on Pass Line
+// Don't Pass
+// Don't Come
+// Come Odds
+// Field Bet
+// Proposition Bet
+// Hardways
+// One Roll Bets
+// High Horn
+// Horn and Hop
+// Any Craps
+// Craps 2
+// Craps 3
+// Big 6/8
+// Any 7
+// Yo Eleven
+// Craps
+// World
 
 var HardWaysBet = function(value, player){
 	var b = new Bet(value, player);

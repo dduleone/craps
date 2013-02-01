@@ -9,7 +9,7 @@ var craps = {
 		console.log(msg);
 	},
 	output: function(msg){
-		$("#buffer").append(msg + "<br />");
+		$("#buffer").append("<span>" + msg + "</span><br />\n");
 	},
 	betId: 0,
 	getNextBetId: function(){
