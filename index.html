@@ -63,6 +63,9 @@
 		<div id='buffer'></div>
 
 		<script type='text/javascript' language='javascript'>
+			var canvas = document.getElementById("board");
+			var board = canvas.getContext("2d");
+
 			//var _h = 1024, _w = 768;
 			var _h = 768, _w = 1024;
 			var _l = 0, _r = _w;
@@ -73,34 +76,45 @@
 				board: "#090"
 			};
 
+			var DrawCanvas = function(board){
+				return {
+					line: function(x, y, w, h){
+						board.moveTo(x, y);
+						board.lineTo(w, h);
+						board.stroke();
+					},
+					fillRect: function(x, y, w, h, color){
+						board.fillStyle = color;
+						board.fillRect(x, y, w, h);
+					},
+					strokeRect: function(x, y, w, h, etc){
+						// Assumes etc.t is type int.
+						if(typeof etc == 'undefined'){
+							etc = {
+								color: '#000',
+								t: 1 // thickness
+							}
+						}
 
-			var canvas = document.getElementById("board");
-			var board = canvas.getContext("2d");
-			board.fillStyle = colors.board;
-			board.fillRect(_l, _t, _r, _b);
-			board.fillStyle = colors.black;
-			board.strokeRect(_l, _t, _r, _b);
+						for(var i = 0; i < etc.t; i++){
+							board.strokeRect(x+i, y+i, w-(2*i), h-(2*i));
+						}
 
-			board.strokeRect(_l+1, _t+1, _r-2, _b-2);
-			board.strokeRect(_l+2, _t+2, _r-4, _b-4);
-			board.moveTo(_l, _t);
-			board.lineTo(_r, _b);
-			board.moveTo(_l, _b);
-			board.lineTo(_r, _t);
-			board.moveTo(_r/2, _t);
-			board.lineTo(_r/2, _b);
-			board.moveTo(_l, _b/2);
-			board.lineTo(_r, _b/2);
-			board.moveTo(_l, _b/4);
-			board.lineTo(_r, _b*3/4);
-			board.moveTo(_l, _b*3/4);
-			board.lineTo(_r, _b/4);
-			board.moveTo(_r/4, _t);
-			board.lineTo(_r*3/4, _b);
-			board.moveTo(_r*3/4, _t);
-			board.lineTo(_r/4, _b);
+					}
+				}
+			}
 
-			board.stroke();
+			var d = new DrawCanvas(board);
+			d.fillRect(_l, _t, _w, _h, colors.board);
+			d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: 6});
+			d.line(_l, _t, _r, _b);
+			d.line(_l, _b, _r, _t);
+			d.line(_r*1/2, _t, _r*1/2, _b);
+			d.line(_l, _b*1/2, _r, _b*1/2);
+			d.line(_l, _b*1/4, _r, _b*3/4);
+			d.line(_l, _b*3/4, _r, _b*1/4);
+			d.line(_r*1/4, _t, _r*3/4, _b);
+			d.line(_r*3/4, _t, _r*1/4, _b);
 		</script>
 	</body>
 </html>
