@@ -100,13 +100,204 @@
 							board.strokeRect(x+i, y+i, w-(2*i), h-(2*i));
 						}
 
+					},
+					grid: function(n, i){
+						var drawone = function(d, n, i){
+							var _T = _b * i/n;
+							var _R = _r * (n-i)/n;
+							var _L = _r * i/n;
+							var _B =  _b * (n-i)/n;
+							d.line(_L, _t, _L, _b);
+							d.line(_l, _T, _r, _T);
+						};
+
+						if(typeof i == 'undefined'){
+							for(var j = 0; j <= n; j++){
+								drawone(this, n, j);
+							}
+						} else {
+							drawone(this, n, i);
+						}
+					},
+					star: function(n, i){
+						var drawone = function(d, n, i){
+							var _T = _b * i/n;
+							var _R = _r * (n-i)/n;
+							var _L = _r * i/n;
+							var _B =  _b * (n-i)/n;
+							d.line(_L, _t, _R, _b);
+							d.line(_l, _T, _r, _B);
+						};
+
+						if(typeof i == 'undefined'){
+							for(var j = 0; j <= n; j++){
+								drawone(this, n, j);
+							}
+						} else {
+							drawone(this, n, i);
+						}
+					},
+					inverseStar: function(n, i){
+						var drawone = function(d, n, i){
+							var _T = _b * i/n;
+							var _R = _r * (n-i)/n;
+							var _L = _r * i/n;
+							var _B =  _b * (n-i)/n;
+							d.line(_l, _T, _L, _t); // Congruent: d.line(_l, _B, _R, _t);
+							d.line(_L, _b, _r, _T); // Congruent: d.line(_R, _b, _r, _B);
+							d.line(_L, _t, _r, _B); // Congruent: d.line(_R, _t, _r, _T);
+							d.line(_R, _b, _l, _T); // Congruent: d.line(_L, _b, _l, _B);
+						};
+						if(typeof i == 'undefined'){
+							for(var j = 0; j <= n; j++){
+								drawone(this, n, j);
+							}
+						} else {
+							drawone(this, n, i);
+						}
+					},
+					concaveArcs: function(n, i){
+						var drawone = function(d, n, i){
+							var _T = _b * i/n;
+							var _R = _r * (n-i)/n;
+							var _L = _r * i/n;
+							var _B =  _b * (n-i)/n;
+							d.line(_r, _B, _L, _b); // Congruent: d.line(_r, _T, _R, _b); d.line(_R, _b, _r, _T)
+							d.line(_l, _T, _R, _t); // Congruent: d.line(_l, _B, _L, _t);
+							d.line(_R, _t, _r, _B); // Congruent: d.line(_L, _t, _r, _T);
+							d.line(_L, _b, _l, _T); // Congruent: d.line(_R, _b, _l, _B);
+						};
+						if(typeof i == 'undefined'){
+							for(var j = 0; j <= n; j++){
+								drawone(this, n, j);
+							}
+						} else {
+							drawone(this, n, i);
+						}
+					},
+					pyramid: function(n, i){
+						var drawone = function(d, n, i){
+							var _T = _b * i/n;
+							var _R = _r * (n-i)/n;
+							var _L = _r * i/n;
+							var _B =  _b * (n-i)/n;
+							d.line(_r, _t, _L, _T);
+							d.line(_l, _t, _R, _T);
+							d.line(_r, _b, _L, _B);
+							d.line(_l, _b, _R, _B);
+						};
+						if(typeof i == 'undefined'){
+							for(var j = 0; j <= n; j++){
+								drawone(this, n, j);
+							}
+						} else {
+							drawone(this, n, i);
+						}
+					},
+					fromCorners: function(n, i){
+						var drawone = function(d, n, i){
+							var _T = _b * i/n;
+							var _R = _r * (n-i)/n;
+							var _L = _r * i/n;
+							var _B =  _b * (n-i)/n;
+							// Top Left
+							d.line(_l, _t, _L, _b);
+							d.line(_l, _t, _r, _T);
+
+							// Top Right
+							d.line(_r, _t, _L, _b);
+							d.line(_r, _t, _l, _T);
+
+							// Bottom Left
+							d.line(_l, _b, _L, _t);
+							d.line(_l, _b, _r, _T);
+
+							// Bottom Right
+							d.line(_r, _b, _L, _t);
+							d.line(_r, _b, _l, _T);
+						};
+
+						if(typeof i == 'undefined'){
+							for(var j = 0; j <= n; j++){
+								drawone(this, n, j);
+							}
+						} else {
+							drawone(this, n, i);
+						}
+					},
+					demo: function(n){
+						for(var i = 0; i <= n; i++){
+							this.grid(n, i);
+							this.star(n, i);
+							this.inverseStar(n, i);
+							this.concaveArcs(n, i);
+							// FIGURE THIS OUT? this.convexArcs
+							this.pyramid(n, i);
+							this.fromCorners(n, i);
+						}
 					}
 				}
 			}
-
+							
 			var d = new DrawCanvas(board);
 			d.fillRect(_l, _t, _w, _h, colors.board);
 			d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: 6});
+			d.demo(24);
+			//d.inverseStar(4);
+/*
+			d.line(_r* 1/12, _t, _r* 1/12, _b);
+			d.line(_r* 2/12, _t, _r* 2/12, _b);
+			d.line(_r* 3/12, _t, _r* 3/12, _b);
+			d.line(_r* 4/12, _t, _r* 4/12, _b);
+			d.line(_r* 5/12, _t, _r* 5/12, _b);
+			d.line(_r* 6/12, _t, _r* 6/12, _b);
+			d.line(_r* 7/12, _t, _r* 7/12, _b);
+			d.line(_r* 8/12, _t, _r* 8/12, _b);
+			d.line(_r* 9/12, _t, _r* 9/12, _b);
+			d.line(_r*10/12, _t, _r*10/12, _b);
+			d.line(_r*11/12, _t, _r*11/12, _b);
+
+			d.line(_l, _b* 1/12, _r, _b* 1/12);
+			d.line(_l, _b* 2/12, _r, _b* 2/12);
+			d.line(_l, _b* 3/12, _r, _b* 3/12);
+			d.line(_l, _b* 4/12, _r, _b* 4/12);
+			d.line(_l, _b* 5/12, _r, _b* 5/12);			
+			d.line(_l, _b* 6/12, _r, _b* 6/12);
+			d.line(_l, _b* 7/12, _r, _b* 7/12);
+			d.line(_l, _b* 8/12, _r, _b* 8/12);
+			d.line(_l, _b* 9/12, _r, _b* 9/12);
+			d.line(_l, _b*10/12, _r, _b*10/12);
+			d.line(_l, _b*11/12, _r, _b*11/12);
+
+			d.line(_r* 0/12, _t, _r*12/12, _b);
+			d.line(_r* 1/12, _t, _r*11/12, _b);
+			d.line(_r* 2/12, _t, _r*10/12, _b);
+			d.line(_r* 3/12, _t, _r* 9/12, _b);
+			d.line(_r* 4/12, _t, _r* 8/12, _b);
+			d.line(_r* 5/12, _t, _r* 7/12, _b);
+			d.line(_r* 6/12, _t, _r* 6/12, _b);
+			d.line(_r* 7/12, _t, _r* 5/12, _b);
+			d.line(_r* 8/12, _t, _r* 4/12, _b);
+			d.line(_r* 9/12, _t, _r* 3/12, _b);
+			d.line(_r*10/12, _t, _r* 2/12, _b);
+			d.line(_r*11/12, _t, _r* 1/12, _b);
+			d.line(_r*12/12, _t, _r* 0/12, _b);
+
+			d.line(_l, _b* 0/12, _r, _b*12/12);
+			d.line(_l, _b* 1/12, _r, _b*11/12);
+			d.line(_l, _b* 2/12, _r, _b*10/12);
+			d.line(_l, _b* 3/12, _r, _b* 9/12);
+			d.line(_l, _b* 4/12, _r, _b* 8/12);
+			d.line(_l, _b* 5/12, _r, _b* 7/12);			
+			d.line(_l, _b* 6/12, _r, _b* 6/12);
+			d.line(_l, _b* 7/12, _r, _b* 5/12);
+			d.line(_l, _b* 8/12, _r, _b* 4/12);
+			d.line(_l, _b* 9/12, _r, _b* 3/12);
+			d.line(_l, _b*10/12, _r, _b* 2/12);
+			d.line(_l, _b*11/12, _r, _b* 1/12);
+			d.line(_l, _b*12/12, _r, _b* 0/12);
+*/			
+/*
 			d.line(_l, _t, _r, _b);
 			d.line(_l, _b, _r, _t);
 			d.line(_r*1/2, _t, _r*1/2, _b);
@@ -125,6 +316,7 @@
 			d.line(_l, _b*2/6, _r, _b*4/6);
 			d.line(_l, _b*4/6, _r, _b*2/6);
 			d.line(_l, _b*5/6, _r, _b*1/6);
+*/
 		</script>
 	</body>
 </html>
