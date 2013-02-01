@@ -78,6 +78,28 @@
 
 			var DrawCanvas = function(board){
 				return {
+					buildPoints: function(n, i){
+						var _u = i/n;
+						var _d = (n-i)/n;
+						var _T = _b * _u;
+						var _L = _r * _u;
+						var _R = _r * _d;
+						var _B = _b * _d;
+						var p = {
+							up: i/n,
+							down: (n-i)/n,
+							t: _t,
+							l: _l,
+							r: _r,
+							b: _b,
+							T: _T,
+							L: _L,
+							R: _R,
+							B: _B
+						};
+						//console.log(p);
+						return p;
+					},
 					line: function(x, y, w, h){
 						board.moveTo(x, y);
 						board.lineTo(w, h);
@@ -99,151 +121,96 @@
 							board.strokeRect(x+i, y+i, w-(2*i), h-(2*i));
 						}
 					},
-					grid: function(n, i){
-						var drawone = function(d, n, i){
-							var _up = i/n;
-							var _down = (n-i)/n;
-							var _T = _b * _up;
-							var _L = _r * _up;
-							var _R = _r * _down;
-							var _B = _b * _down;
-							d.line(_L, _t, _L, _b);
-							d.line(_l, _T, _r, _T);
-						};
-
-						if(typeof i == 'undefined'){
-							for(var j = 0; j <= n; j++){
-								drawone(this, n, j);
-							}
-						} else {
-							drawone(this, n, i);
+					fullGrid: function(n){
+						for(var j = 0; j <= n; j++){
+							var p = this.buildPoints(n,j);
+							this.grid(n, j, p);
 						}
 					},
-					star: function(n, i){
-						var drawone = function(d, n, i){
-							var _up = i/n;
-							var _down = (n-i)/n;
-							var _T = _b * _up;
-							var _L = _r * _up;
-							var _R = _r * _down;
-							var _B = _b * _down;
-							d.line(_L, _t, _R, _b);
-							d.line(_l, _T, _r, _B);
-						};
-
-						if(typeof i == 'undefined'){
-							for(var j = 0; j <= n; j++){
-								drawone(this, n, j);
-							}
-						} else {
-							drawone(this, n, i);
+					grid: function(n, i, p){
+						this.line(p.L, p.t, p.L, p.b);
+						this.line(p.l, p.T, p.r, p.T);
+					},
+					fullStar: function(n){
+						for(var j = 0; j <= n; j++){
+							var p = this.buildPoints(n,j);
+							this.star(n, j, p);
 						}
 					},
-					inverseStar: function(n, i){
-						var drawone = function(d, n, i){
-							var _up = i/n;
-							var _down = (n-i)/n;
-							var _T = _b * _up;
-							var _L = _r * _up;
-							var _R = _r * _down;
-							var _B = _b * _down;
-							d.line(_l, _T, _L, _t); // Congruent: d.line(_l, _B, _R, _t);
-							d.line(_L, _b, _r, _T); // Congruent: d.line(_R, _b, _r, _B); d.line(_r, _T, _L, _b);
-							d.line(_L, _t, _r, _B); // Congruent: d.line(_R, _t, _r, _T);
-							d.line(_R, _b, _l, _T); // Congruent: d.line(_L, _b, _l, _B);
-						};
-						if(typeof i == 'undefined'){
-							for(var j = 0; j <= n; j++){
-								drawone(this, n, j);
-							}
-						} else {
-							drawone(this, n, i);
+					star: function(n, i, p){
+						this.line(p.L, p.t, p.R, p.b);
+						this.line(p.l, p.T, p.r, p.B);
+					},
+					fullDiagGrid: function(n){
+						for(var j = 0; j <= n; j++){
+							var p = this.buildPoints(n,j);
+							this.diagGrid(n, j, p);
 						}
 					},
-					concaveArcs: function(n, i){
-						var drawone = function(d, n, i){
-							var _up = i/n;
-							var _down = (n-i)/n;
-							var _T = _b * _up;
-							var _L = _r * _up;
-							var _R = _r * _down;
-							var _B = _b * _down;
-							d.line(_l, _T, _R, _t); // Top Left | Congruent: d.line(_l, _B, _L, _t); d.line(_L, _t, _l, _B);
-							d.line(_R, _t, _r, _B); // Top Right | Congruent: d.line(_L, _t, _r, _T);
-							d.line(_L, _b, _l, _T); // Bottom Left | Congruent: d.line(_R, _b, _l, _B);
-							d.line(_r, _B, _L, _b); // Bottom Right | Congruent: d.line(_r, _T, _R, _b); d.line(_R, _b, _r, _T); d.line(_L, _b, _r, _B);
-						};
-						if(typeof i == 'undefined'){
-							for(var j = 0; j <= n; j++){
-								drawone(this, n, j);
-							}
-						} else {
-							drawone(this, n, i);
+					diagGrid: function(n, i, p){
+						this.line(p.l, p.T, p.L, p.t); // Congruent: this.line(_l, _B, _R, _t);
+						this.line(p.L, p.b, p.r, p.T); // Congruent: this.line(_R, _b, _r, _B); this.line(_r, _T, _L, _b);
+						this.line(p.L, p.t, p.r, p.B); // Congruent: this.line(_R, _t, _r, _T);
+						this.line(p.R, p.b, p.l, p.T); // Congruent: this.line(_L, _b, _l, _B);
+					},
+					fullConcaveArcs: function(n){
+						for(var j = 0; j <= n; j++){
+							var p = this.buildPoints(n,j);
+							this.concaveArcs(n, j, p);
 						}
 					},
-					pyramid: function(n, i){
-						var drawone = function(d, n, i){
-							var _up = i/n;
-							var _down = (n-i)/n;
-							var _T = _b * _up;
-							var _L = _r * _up;
-							var _R = _r * _down;
-							var _B = _b * _down;
-							d.line(_r, _t, _L, _T);
-							d.line(_l, _t, _R, _T);
-							d.line(_r, _b, _L, _B);
-							d.line(_l, _b, _R, _B);
-						};
-						if(typeof i == 'undefined'){
-							for(var j = 0; j <= n; j++){
-								drawone(this, n, j);
-							}
-						} else {
-							drawone(this, n, i);
+					concaveArcs: function(n, i, p){
+						this.line(p.l, p.T, p.R, p.t); // Top Left | Congruent: this.line(_l, _B, _L, _t); this.line(_L, _t, _l, _B);
+						this.line(p.R, p.t, p.r, p.B); // Top Right | Congruent: this.line(_L, _t, _r, _T);
+						this.line(p.L, p.b, p.l, p.T); // Bottom Left | Congruent: this.line(_R, _b, _l, _B);
+						this.line(p.r, p.B, p.L, p.b); // Bottom Right | Congruent: this.line(_r, _T, _R, _b); this.line(_R, _b, _r, _T); this.line(_L, _b, _r, _B);
+					},
+					fullPyramid: function(n){
+						for(var j = 0; j <= n; j++){
+							var p = this.buildPoints(n,j);
+							this.pyramid(n, j, p);
 						}
 					},
-					fromCorners: function(n, i){
-						var drawone = function(d, n, i){
-							var _up = i/n;
-							var _down = (n-i)/n;
-							var _T = _b * _up;
-							var _L = _r * _up;
-							var _R = _r * _down;
-							var _B = _b * _down;
-							d.line(_l, _t, _r, _T); // Top Left Top
-							d.line(_l, _t, _L, _b); // Top Left Bottom
-							d.line(_r, _t, _l, _T); // Top Right Top
-							d.line(_r, _t, _L, _b); // Top Right Bottom
-							d.line(_l, _b, _L, _t); // Bottm Left Top
-							d.line(_l, _b, _r, _T); // Bottom Left Bottom
-							d.line(_r, _b, _L, _t); // Bottom Right Top
-							d.line(_r, _b, _l, _T); // Bottom Right Bottom
-						};
-
-						if(typeof i == 'undefined'){
-							for(var j = 0; j <= n; j++){
-								drawone(this, n, j);
-							}
-						} else {
-							drawone(this, n, i);
+					pyramid: function(n, i, p){
+						this.line(p.r, p.t, p.L, p.T);
+						this.line(p.l, p.t, p.R, p.T);
+						this.line(p.r, p.b, p.L, p.B);
+						this.line(p.l, p.b, p.R, p.B);
+					},
+					fullFromCorners: function(n){
+						for(var j = 0; j <= n; j++){
+							var p = this.buildPoints(n,j);
+							this.fromCorners(n, j, p);
 						}
+					},
+					fromCorners: function(n, i, p){
+						this.line(p.l, p.t, p.r, p.T); // Top Left Top
+						this.line(p.l, p.t, p.L, p.b); // Top Left Bottom
+						this.line(p.r, p.t, p.l, p.T); // Top Right Top
+						this.line(p.r, p.t, p.L, p.b); // Top Right Bottom
+						this.line(p.l, p.b, p.L, p.t); // Bottm Left Top
+						this.line(p.l, p.b, p.r, p.T); // Bottom Left Bottom
+						this.line(p.r, p.b, p.L, p.t); // Bottom Right Top
+						this.line(p.r, p.b, p.l, p.T); // Bottom Right Bottom
 					},
 					demo: function(n){
 						for(var i = 0; i <= n; i++){
-							var _up = i/n;
-							var _down = (n-i)/n;
-							var _T = _b * _up;
-							var _L = _r * _up;
-							var _R = _r * _down;
-							var _B = _b * _down;
-							this.grid(n, i);
-							this.star(n, i);
-							this.inverseStar(n, i);
-							this.concaveArcs(n, i);
+							var p = this.buildPoints(n, i);
+							this.grid(n, i, p);
+							this.star(n, i, p);
+							this.diagGrid(n, i, p);
+							this.concaveArcs(n, i, p);
 							// FIGURE THIS OUT? this.convexArcs
-							this.pyramid(n, i);
-							this.fromCorners(n, i);
+							this.pyramid(n, i, p);
+							this.fromCorners(n, i, p);
 						}
+						//this.fullGrid(n);
+						//this.fullStar(n);
+						//this.fullDiagGrid(n);
+						//this.fullConcaveArcs(n);
+						// FIGURE THIS OUT? this.fullConvexArcs(n);
+						//this.fullPyramid(n);
+						//this.fullFromCorners(n);
 					}
 				}
 			}
