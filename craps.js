@@ -9,7 +9,9 @@ var craps = {
 		console.log(msg);
 	},
 	output: function(msg){
-		$("#buffer").append("<span>" + msg + "</span><br />\n");
+		var buffer = document.getElementById("buffer");
+		$(buffer).append("<span>" + msg + "</span><br />\n");
+		buffer.scrollTop = buffer.scrollHeight;
 	},
 	betId: 0,
 	getNextBetId: function(){
