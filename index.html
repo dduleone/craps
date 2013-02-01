@@ -95,18 +95,18 @@
 								t: 1 // thickness
 							}
 						}
-
 						for(var i = 0; i < etc.t; i++){
 							board.strokeRect(x+i, y+i, w-(2*i), h-(2*i));
 						}
-
 					},
 					grid: function(n, i){
 						var drawone = function(d, n, i){
-							var _T = _b * i/n;
-							var _R = _r * (n-i)/n;
-							var _L = _r * i/n;
-							var _B =  _b * (n-i)/n;
+							var _up = i/n;
+							var _down = (n-i)/n;
+							var _T = _b * _up;
+							var _L = _r * _up;
+							var _R = _r * _down;
+							var _B = _b * _down;
 							d.line(_L, _t, _L, _b);
 							d.line(_l, _T, _r, _T);
 						};
@@ -121,10 +121,12 @@
 					},
 					star: function(n, i){
 						var drawone = function(d, n, i){
-							var _T = _b * i/n;
-							var _R = _r * (n-i)/n;
-							var _L = _r * i/n;
-							var _B =  _b * (n-i)/n;
+							var _up = i/n;
+							var _down = (n-i)/n;
+							var _T = _b * _up;
+							var _L = _r * _up;
+							var _R = _r * _down;
+							var _B = _b * _down;
 							d.line(_L, _t, _R, _b);
 							d.line(_l, _T, _r, _B);
 						};
@@ -139,12 +141,14 @@
 					},
 					inverseStar: function(n, i){
 						var drawone = function(d, n, i){
-							var _T = _b * i/n;
-							var _R = _r * (n-i)/n;
-							var _L = _r * i/n;
-							var _B =  _b * (n-i)/n;
+							var _up = i/n;
+							var _down = (n-i)/n;
+							var _T = _b * _up;
+							var _L = _r * _up;
+							var _R = _r * _down;
+							var _B = _b * _down;
 							d.line(_l, _T, _L, _t); // Congruent: d.line(_l, _B, _R, _t);
-							d.line(_L, _b, _r, _T); // Congruent: d.line(_R, _b, _r, _B);
+							d.line(_L, _b, _r, _T); // Congruent: d.line(_R, _b, _r, _B); d.line(_r, _T, _L, _b);
 							d.line(_L, _t, _r, _B); // Congruent: d.line(_R, _t, _r, _T);
 							d.line(_R, _b, _l, _T); // Congruent: d.line(_L, _b, _l, _B);
 						};
@@ -158,14 +162,16 @@
 					},
 					concaveArcs: function(n, i){
 						var drawone = function(d, n, i){
-							var _T = _b * i/n;
-							var _R = _r * (n-i)/n;
-							var _L = _r * i/n;
-							var _B =  _b * (n-i)/n;
-							d.line(_r, _B, _L, _b); // Congruent: d.line(_r, _T, _R, _b); d.line(_R, _b, _r, _T)
-							d.line(_l, _T, _R, _t); // Congruent: d.line(_l, _B, _L, _t);
-							d.line(_R, _t, _r, _B); // Congruent: d.line(_L, _t, _r, _T);
-							d.line(_L, _b, _l, _T); // Congruent: d.line(_R, _b, _l, _B);
+							var _up = i/n;
+							var _down = (n-i)/n;
+							var _T = _b * _up;
+							var _L = _r * _up;
+							var _R = _r * _down;
+							var _B = _b * _down;
+							d.line(_l, _T, _R, _t); // Top Left | Congruent: d.line(_l, _B, _L, _t); d.line(_L, _t, _l, _B);
+							d.line(_R, _t, _r, _B); // Top Right | Congruent: d.line(_L, _t, _r, _T);
+							d.line(_L, _b, _l, _T); // Bottom Left | Congruent: d.line(_R, _b, _l, _B);
+							d.line(_r, _B, _L, _b); // Bottom Right | Congruent: d.line(_r, _T, _R, _b); d.line(_R, _b, _r, _T); d.line(_L, _b, _r, _B);
 						};
 						if(typeof i == 'undefined'){
 							for(var j = 0; j <= n; j++){
@@ -177,10 +183,12 @@
 					},
 					pyramid: function(n, i){
 						var drawone = function(d, n, i){
-							var _T = _b * i/n;
-							var _R = _r * (n-i)/n;
-							var _L = _r * i/n;
-							var _B =  _b * (n-i)/n;
+							var _up = i/n;
+							var _down = (n-i)/n;
+							var _T = _b * _up;
+							var _L = _r * _up;
+							var _R = _r * _down;
+							var _B = _b * _down;
 							d.line(_r, _t, _L, _T);
 							d.line(_l, _t, _R, _T);
 							d.line(_r, _b, _L, _B);
@@ -196,25 +204,20 @@
 					},
 					fromCorners: function(n, i){
 						var drawone = function(d, n, i){
-							var _T = _b * i/n;
-							var _R = _r * (n-i)/n;
-							var _L = _r * i/n;
-							var _B =  _b * (n-i)/n;
-							// Top Left
-							d.line(_l, _t, _L, _b);
-							d.line(_l, _t, _r, _T);
-
-							// Top Right
-							d.line(_r, _t, _L, _b);
-							d.line(_r, _t, _l, _T);
-
-							// Bottom Left
-							d.line(_l, _b, _L, _t);
-							d.line(_l, _b, _r, _T);
-
-							// Bottom Right
-							d.line(_r, _b, _L, _t);
-							d.line(_r, _b, _l, _T);
+							var _up = i/n;
+							var _down = (n-i)/n;
+							var _T = _b * _up;
+							var _L = _r * _up;
+							var _R = _r * _down;
+							var _B = _b * _down;
+							d.line(_l, _t, _r, _T); // Top Left Top
+							d.line(_l, _t, _L, _b); // Top Left Bottom
+							d.line(_r, _t, _l, _T); // Top Right Top
+							d.line(_r, _t, _L, _b); // Top Right Bottom
+							d.line(_l, _b, _L, _t); // Bottm Left Top
+							d.line(_l, _b, _r, _T); // Bottom Left Bottom
+							d.line(_r, _b, _L, _t); // Bottom Right Top
+							d.line(_r, _b, _l, _T); // Bottom Right Bottom
 						};
 
 						if(typeof i == 'undefined'){
@@ -227,6 +230,12 @@
 					},
 					demo: function(n){
 						for(var i = 0; i <= n; i++){
+							var _up = i/n;
+							var _down = (n-i)/n;
+							var _T = _b * _up;
+							var _L = _r * _up;
+							var _R = _r * _down;
+							var _B = _b * _down;
 							this.grid(n, i);
 							this.star(n, i);
 							this.inverseStar(n, i);
@@ -238,12 +247,11 @@
 					}
 				}
 			}
-							
+
 			var d = new DrawCanvas(board);
 			d.fillRect(_l, _t, _w, _h, colors.board);
 			d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: 6});
-			d.demo(24);
-			//d.inverseStar(4);
+			d.demo(36);
 /*
 			d.line(_r* 1/12, _t, _r* 1/12, _b);
 			d.line(_r* 2/12, _t, _r* 2/12, _b);
