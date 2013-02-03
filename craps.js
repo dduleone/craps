@@ -326,6 +326,8 @@ var dice = function(){
 	var d2 = new die();
 	var value = false;
 	this.roll = function(){
+		d1.roll();
+		d2.roll();
 		this.value = this.d1.value + this.d2.value;
 		return [this.d1.value, this.d2.value];
 	}

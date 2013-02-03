@@ -67,7 +67,7 @@ var HardWaysBet = function(value, player){
 	
 	// 7 out
 	b.onSum7 = function(){
-		if(_CRAPS.point > 0()){
+		if(_CRAPS.point > 0){
 			_CRAPS.output("7 out! You lose!");
 			b.playerLoses();
 		}
