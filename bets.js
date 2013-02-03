@@ -1,3 +1,6 @@
+/*
+bets.js
+*/
 //http://www.nextshooter.com/bets
 // Pass Line
 // Field Bet
