@@ -39,7 +39,7 @@ var _CRAPS = {
 				return;
 			}
 			_CRAPS.output("Checking Bet: " + i);
-			this.bets[i].checkRoll(roll.getDice());
+			this.bets[i].checkRoll(roll.getDiceValues());
 		}
 	},
 	// I kinda like the idea of having a 'global' set of dice variable, and thus a global 'dice' variable:
@@ -376,7 +376,16 @@ var crapsDice = function(){
 		return this.dice.getValue() == 7;
 	}
 	
-	this.getDice = function(){
+	this.isHardWays = function(){
+		if ((this.dice.d1.value == this.dice.d2.value) &&
+				(this.dice.getValue() == 4 || this.dice.getValue() == 6 ||
+				 this.dice.getValue() == 8 || this.dice.getValue() == 10)){
+			return true
+		}
+		return false
+	}
+	
+	this.getDiceValues = function(){
 		return [this.dice.d1.value, this.dice.d2.value];
 	}
 }
