@@ -8,17 +8,14 @@
 		<script type='text/javascript' language='javascript'>
 
 			var p = new Player("Dan", 1000);
-			craps.players = [p];
+			_CRAPS.players = [p];
 
-			craps.placeBet(new HardWaysBet(1000, p.id));
-			craps.placeBet(new HardWaysBet(1500, p.id));
+			_CRAPS.placeBet(new HardWaysBet(1000, p.id));
+			_CRAPS.placeBet(new HardWaysBet(1500, p.id));
 
 			function roll(){
-				craps.output("---Rolling---");
-				var d = new dice();
-				var roll = d.roll();
-				craps.output(roll);
-				craps.checkBets(roll);
+				_CRAPS.output("---Rolling---");
+				_CRAPS.roll();
 			}
 		</script>
 		<style type='text/css'>

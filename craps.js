@@ -39,7 +39,37 @@ var _CRAPS = {
 				return;
 			}
 			_CRAPS.output("Checking Bet: " + i);
-			this.bets[i].checkRoll(roll);
+			this.bets[i].checkRoll([roll.d1val, roll.d2val]);
+		}
+	},
+	// I kinda like the idea of having a 'global' set of dice variable, and thus a global 'dice' variable:
+	dice: new dice();
+	point: false,
+	pointOn: function(roll){
+		if (roll.validate() &&
+				roll.value != 2 && roll.value != 3 && roll.value != 7 && roll.value != 11 && roll.value != 12){
+			this.point = roll.value;
+			_CRAPS.output("Setting point: " + roll.value);
+			}
+	},
+	pointOff: function(){
+		_CRAPS.output("Killing point: " + this.point);
+		this.point = false;
+	},
+	roll: function(){
+	// Roll the dice.
+		var roll = this.dice.roll();
+		_CRAPS.output(roll);
+		_CRAPS.checkBets(roll);
+	// Set & unset the point, as appropriate.
+		if (this.point > 0){
+			if (roll.value == 7){
+				this.point = false;
+			}
+		}else{
+			if (roll.value != 2 && roll.value != 3 && roll.value != 7 && roll.value != 11 && roll.value != 12){
+				this.point = roll.value;
+			}
 		}
 	}
 };
@@ -284,16 +314,28 @@ var Bet = function(wager, player){
 };
 
 var die = function(){
+	var value = false;
 	this.roll = function(){
-		return Math.floor(Math.random()*6 + 1)
+		this.value = Math.floor(Math.random()*6 + 1);
+		return this.value;
 	}
 }
 
 var dice = function(){
 	var d1 = new die();
 	var d2 = new die();
+	var value = false;
 	this.roll = function(){
-		return [d1.roll(), d2.roll()];
+		this.value = this.d1.value + this.d2.value;
+		return [this.d1.value, this.d2.value];
+	}
+	
+	var validate = function(){
+		if (this.d1.value < 1 || this.d1.value > 6 ||
+				this.d2.value < 1 || this.d2.value > 6){
+			return false;
+		}
+		return true;
 	}
 }
 

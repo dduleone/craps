@@ -38,14 +38,8 @@ bets.js
 var HardWaysBet = function(value, player){
 	var b = new Bet(value, player);
 	b.multiplier = .2;
-
-	// Hard 2 (win)
-	b.on11 = function(){
-		_CRAPS.output("Hard 2! You win!");
-		b.playerWins();
-	}
 	
-	// No Easy 2
+	// no Hard 2 bet
 
 	// Hard 4 (win)
 	b.on22 = function(){
@@ -68,7 +62,15 @@ var HardWaysBet = function(value, player){
 	// Easy 6 (lose)
 	b.onSum6 = function(){
 		_CRAPS.output("Easy 6! You lose!");
-		b.playerLoses();		
+		b.playerLoses();
+	}
+	
+	// 7 out
+	b.onSum7 = function(){
+		if(_CRAPS.point > 0()){
+			_CRAPS.output("7 out! You lose!");
+			b.playerLoses();
+		}
 	}
 
 	// Hard 8 (win)
@@ -94,14 +96,8 @@ var HardWaysBet = function(value, player){
 		_CRAPS.output("Easy 10! You lose!");
 		b.playerLoses();		
 	}
-
-	// Hard 12 (win)
-	b.on66 = function(){
-		_CRAPS.output("12 the hard way! You win!");
-		b.playerWins();
-	}
-
-	// No Easy 12
+	
+	// no Hard 12 bet
 
 	b.bindRollEvents();
 	return b;
