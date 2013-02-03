@@ -2,12 +2,12 @@
 craps.js
 */
 var Player =  function(name, bank){
-	this.id = craps.getNextBetId();
+	this.id = _CRAPS.getNextBetId();
 	this.name = name;
 	this.bank = bank;
 };
 
-var craps = {
+var _CRAPS = {
 	debug: function(msg){
 		console.log(msg);
 	},
@@ -38,7 +38,7 @@ var craps = {
 			if( (typeof this.bets[i] == 'undefined') || (this.bets[i] == 'RESOLVED') ){
 				return;
 			}
-			craps.output("Checking Bet: " + i);
+			_CRAPS.output("Checking Bet: " + i);
 			this.bets[i].checkRoll(roll);
 		}
 	}
@@ -47,7 +47,7 @@ var craps = {
 var Bet = function(wager, player){
 
 	var bet = this;
-	this.id = craps.getNextBetId();
+	this.id = _CRAPS.getNextBetId();
 
 	this.wager = wager;
 
@@ -59,143 +59,143 @@ var Bet = function(wager, player){
 
 	};
 	this.onSum2 = function(){
-		craps.debug("Roll Total: 2");
+		_CRAPS.debug("Roll Total: 2");
 	};
 	this.onSum3 = function(){
-		craps.debug("Roll Total: 3");	
+		_CRAPS.debug("Roll Total: 3");	
 	};
 	this.onSum4 = function(){
-		craps.debug("Roll Total: 4");
+		_CRAPS.debug("Roll Total: 4");
 	};
 	this.onSum5 = function(){
-		craps.debug("Roll Total: 5");	
+		_CRAPS.debug("Roll Total: 5");	
 	};
 	this.onSum6 = function(){
-		craps.debug("Roll Total: 6");
+		_CRAPS.debug("Roll Total: 6");
 	};
 	this.onSum7 = function(){
-		craps.debug("Roll Total: 7");
+		_CRAPS.debug("Roll Total: 7");
 	};
 	this.onSum8 = function(){
-		craps.debug("Roll Total: 8");
+		_CRAPS.debug("Roll Total: 8");
 	};
 	this.onSum9 = function(){
-		craps.debug("Roll Total: 9");
+		_CRAPS.debug("Roll Total: 9");
 	};
 	this.onSum10 = function(){
-		craps.debug("Roll Total: 10");
+		_CRAPS.debug("Roll Total: 10");
 	};
 	this.onSum11 = function(){
-		craps.debug("Roll Total: 11");
+		_CRAPS.debug("Roll Total: 11");
 	};
 	this.onSum12 = function(){
-		craps.debug("Roll Total: 12");
+		_CRAPS.debug("Roll Total: 12");
 	};
 
 	this.on11 = function(){
 		bet.onSum2();
 		bet.anyRoll();
-		craps.debug("Roll: 1/1");
+		_CRAPS.debug("Roll: 1/1");
 	};
 	this.on12 = function(){
 		bet.onSum3();
 		bet.anyRoll();
-		craps.debug("Roll: 1/2");
+		_CRAPS.debug("Roll: 1/2");
 	};
 	this.on13 = function(){
 		bet.onSum4();
 		bet.anyRoll();
-		craps.debug("Roll: 1/3");
+		_CRAPS.debug("Roll: 1/3");
 	};
 	this.on14 = function(){
 		bet.onSum5();
 		bet.anyRoll();
-		craps.debug("Roll: 1/4");
+		_CRAPS.debug("Roll: 1/4");
 	};
 	this.on15 = function(){
 		bet.onSum6();
 		bet.anyRoll();
-		craps.debug("Roll: 1/5");
+		_CRAPS.debug("Roll: 1/5");
 	};
 	this.on16 = function(){
 		bet.onSum7();
 		bet.anyRoll();
-		craps.debug("Roll: 1/6");
+		_CRAPS.debug("Roll: 1/6");
 	};
 	this.on22 = function(){
 		bet.onSum4();
 		bet.anyRoll();
-		craps.debug("Roll: 2/2");
+		_CRAPS.debug("Roll: 2/2");
 	};
 	this.on23 = function(){
 		bet.onSum5();
 		bet.anyRoll();
-		craps.debug("Roll: 2/3");
+		_CRAPS.debug("Roll: 2/3");
 	};
 	this.on24 = function(){
 		bet.onSum6();
 		bet.anyRoll();
-		craps.debug("Roll: 2/4");
+		_CRAPS.debug("Roll: 2/4");
 	};
 	this.on25 = function(){
 		bet.onSum7();
 		bet.anyRoll();
-		craps.debug("Roll: 2/5");
+		_CRAPS.debug("Roll: 2/5");
 	};
 	this.on26 = function(){
 		bet.onSum8();
 		bet.anyRoll();
-		craps.debug("Roll: 2/6");
+		_CRAPS.debug("Roll: 2/6");
 	};
 	this.on33 = function(){
 		bet.onSum6();
 		bet.anyRoll();
-		craps.debug("Roll: 3/3");
+		_CRAPS.debug("Roll: 3/3");
 	};
 	this.on34 = function(){
 		bet.onSum7();
 		bet.anyRoll();
-		craps.debug("Roll: 3/4");
+		_CRAPS.debug("Roll: 3/4");
 	};
 	this.on35 = function(){
 		bet.onSum8();
 		bet.anyRoll();
-		craps.debug("Roll: 3/5");
+		_CRAPS.debug("Roll: 3/5");
 	};
 	this.on36 = function(){
 		bet.onSum9();
 		bet.anyRoll();
-		craps.debug("Roll: 3/6");
+		_CRAPS.debug("Roll: 3/6");
 	};
 	this.on44 = function(){
 		bet.onSum8();
 		bet.anyRoll();
-		craps.debug("Roll: 4/4");
+		_CRAPS.debug("Roll: 4/4");
 	};
 	this.on45 = function(){
 		bet.onSum9();
 		bet.anyRoll();
-		craps.debug("Roll: 4/5");
+		_CRAPS.debug("Roll: 4/5");
 	};
 	this.on46 = function(){
 		bet.onSum10();
 		bet.anyRoll();
-		craps.debug("Roll: 4/6");
+		_CRAPS.debug("Roll: 4/6");
 	};
 	this.on55 = function(){
 		bet.onSum10();
 		bet.anyRoll();
-		craps.debug("Roll: 5/5");
+		_CRAPS.debug("Roll: 5/5");
 	};
 	this.on56 = function(){
 		bet.onSum11();
 		bet.anyRoll();
-		craps.debug("Roll: 5/6");
+		_CRAPS.debug("Roll: 5/6");
 	};
 	this.on66 = function(){
 		bet.onSum12();
 		bet.anyRoll();
-		craps.debug("Roll: 6/6");
+		_CRAPS.debug("Roll: 6/6");
 	};
 
 	this.checkRoll = function(dice){
@@ -249,10 +249,10 @@ var Bet = function(wager, player){
 	};
 
 	this.dissolveBet = function(){
-		//craps.bets.splice(this.id, 1);
-		// Maybe we make a craps.resolveBet() which is passed a betId, and iterates over the bets, to find the one to resolve.
+		//_CRAPS.bets.splice(this.id, 1);
+		// Maybe we make a _CRAPS.resolveBet() which is passed a betId, and iterates over the bets, to find the one to resolve.
 		// Also could create a betMap object with a mapBets() method which maps a betId to an array position. 
-		craps.bets[this.id] = 'RESOLVED';
+		_CRAPS.bets[this.id] = 'RESOLVED';
 	}
 
 	this.onWin = function(){
@@ -264,18 +264,18 @@ var Bet = function(wager, player){
 	}
 
 	this.playerWins = function(){
-		if( (typeof craps.players != "undefined") && (typeof craps.players[this.player] != "undefined") ){
-			craps.players[this.player].bank += this.wager;
-			craps.players[this.player].bank += this.wager * this.multiplier;
-			craps.output(craps.getPlayerName(this.player) + " won $" + (this.wager + this.wager * this.multiplier));
-			craps.output(craps.getPlayerName(this.player) + "'s new balance is: $" + craps.players[this.player].bank);
+		if( (typeof _CRAPS.players != "undefined") && (typeof _CRAPS.players[this.player] != "undefined") ){
+			_CRAPS.players[this.player].bank += this.wager;
+			_CRAPS.players[this.player].bank += this.wager * this.multiplier;
+			_CRAPS.output(_CRAPS.getPlayerName(this.player) + " won $" + (this.wager + this.wager * this.multiplier));
+			_CRAPS.output(_CRAPS.getPlayerName(this.player) + "'s new balance is: $" + _CRAPS.players[this.player].bank);
 		}
 		this.onWin();
 	};
 
 	this.playerLoses = function(){
-		if( (typeof craps.players != "undefined") && (typeof craps.players[this.player] != "undefined") ){
-			craps.output(craps.getPlayerName(this.player) + " lost a placed bet of $" + this.wager);
+		if( (typeof _CRAPS.players != "undefined") && (typeof _CRAPS.players[this.player] != "undefined") ){
+			_CRAPS.output(_CRAPS.getPlayerName(this.player) + " lost a placed bet of $" + this.wager);
 		}
 		this.onLose();
 	};
