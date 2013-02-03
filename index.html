@@ -78,6 +78,17 @@
 
 			var DrawCanvas = function(board){
 				return {
+					tmpContext: {},
+					preserveContext: function(){
+						for(var i in board){
+							this.tmpContext[i] = board[i];
+						}
+					},
+					restoreContext: function(){
+						for(var i in this.tmpContext){
+							board[i] = this.tmpContext[i];
+						}
+					},
 					buildPoints: function(n, i){
 						var _u = i/n;
 						var _d = (n-i)/n;
@@ -111,15 +122,46 @@
 					},
 					strokeRect: function(x, y, w, h, etc){
 						// Assumes etc.t is type int.
-						if(typeof etc == 'undefined'){
-							etc = {
-								color: '#000',
-								t: 1 // thickness
-							}
-						}
+
+						etc = $.extend({
+							color: '#000',
+							t: 1 // thickness
+						}, etc);
+
+						this.preserveContext();
+						board.lineWidth = etc.t;
+						board.strokeStyle = etc.color;
+						board.strokeRect(x, y, w, h);
+						this.restoreContext();
+/*
+						var tmp = {};
+						tmp.lineWidth = board.lineWidth;
+						tmp.strokeStyle = board.strokeStyle;
+
+						console.log(tmp);
+						console.log(board);
+
+						console.log("before board.lw: " + board.lineWidth);
+						console.log("before tmp.lw: " + tmp.lineWidth);
+
+						board.lineWidth = etc.t;
+						board.strokeStyle = etc.color;
+
+						console.log("during tmp.lw: " + tmp.lineWidth);
+						console.log("during board.lw: " + board.lineWidth);
+						console.log("during tmp.lw: " + tmp.lineWidth);
+						board.strokeRect(x, y, w, h);
+
+						board.lineWidth = tmp.lineWidth;
+						board.strokeStyle = tmp.strokeStyle;
+
+						console.log("after board.lw: " + board.lineWidth);
+						console.log("after tmp.lw: " + tmp.lineWidth);
+						/*
 						for(var i = 0; i < etc.t; i++){
 							board.strokeRect(x+i, y+i, w-(2*i), h-(2*i));
 						}
+						*/
 					},
 					fullGrid: function(n){
 						for(var j = 0; j <= n; j++){
@@ -211,14 +253,54 @@
 						// FIGURE THIS OUT? this.fullConvexArcs(n);
 						//this.fullPyramid(n);
 						//this.fullFromCorners(n);
+					},
+					resetBoard: function(){
+						board.clearRect(_l, _t, _w, _h);
+						d.fillRect(_l, _t, _w, _h, colors.board);
+						d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: 25});
 					}
 				}
 			}
 
 			var d = new DrawCanvas(board);
-			d.fillRect(_l, _t, _w, _h, colors.board);
-			d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: 6});
-			d.demo(36);
+			d.resetBoard();
+			//d.demo(24);
+/*
+			function gogogo(){
+				window.timer = setInterval(drawit, 100);
+				console.log(window.timer);
+			}
+
+
+			var drawit = function(q){
+				if(typeof q != 'undefined'){
+					this.i = 0;
+					return;
+				}
+
+				if(typeof this.i == 'undefined'){
+					this.i = 0;
+				}
+
+				this.i++;
+				console.log(this.i);
+				this.n = 36;
+				var p = d.buildPoints(this.n, this.i);
+				d.grid(this.n, this.i, p);
+				d.star(this.n, this.i, p);
+				//d.diagGrid(this.n, this.i, p);
+				d.pyramid(this.n, this.i, p);
+				d.concaveArcs(n, i, p);
+				if(this.i>=this.n){
+					clearInterval(window.timer);
+					setTimeout(d.resetBoard, 1000);
+					//gogogo('reset');
+					//setTimeout(gogogo, 500);
+				}
+			}
+	*/
+			//setInterval(gogogo, 5000);
+
 /*
 			d.line(_r* 1/12, _t, _r* 1/12, _b);
 			d.line(_r* 2/12, _t, _r* 2/12, _b);
