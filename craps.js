@@ -39,17 +39,16 @@ var _CRAPS = {
 				return;
 			}
 			_CRAPS.output("Checking Bet: " + i);
-			this.bets[i].checkRoll([roll.d1val, roll.d2val]);
+			this.bets[i].checkRoll(roll.getDice());
 		}
 	},
 	// I kinda like the idea of having a 'global' set of dice variable, and thus a global 'dice' variable:
-	dice: new dice();
+	dice: null,
 	point: false,
-	pointOn: function(roll){
-		if (roll.validate() &&
-				roll.value != 2 && roll.value != 3 && roll.value != 7 && roll.value != 11 && roll.value != 12){
-			this.point = roll.value;
-			_CRAPS.output("Setting point: " + roll.value);
+	pointOn: function(diceRoll){
+		if (diceRoll.validate() && !diceRoll.isCraps() && !diceRoll.isComeOutWinner()){
+			this.point = roll.getValue();
+			_CRAPS.output("Setting point: " + diceRoll.getValue());
 			}
 	},
 	pointOff: function(){
@@ -58,17 +57,18 @@ var _CRAPS = {
 	},
 	roll: function(){
 	// Roll the dice.
-		var roll = this.dice.roll();
-		_CRAPS.output(roll);
-		_CRAPS.checkBets(roll);
+		var diceRoll = this.dice;
+		diceRoll.roll();
+		//_CRAPS.output(diceRoll);
+		_CRAPS.checkBets(diceRoll);
 	// Set & unset the point, as appropriate.
 		if (this.point > 0){
-			if (roll.value == 7){
+			if (diceRoll.is7() || diceRoll.getValue() == this.point){
 				this.point = false;
 			}
 		}else{
-			if (roll.value != 2 && roll.value != 3 && roll.value != 7 && roll.value != 11 && roll.value != 12){
-				this.point = roll.value;
+			if (!diceRoll.isCraps() && !diceRoll.isComeOutWinner()){
+				this.point = diceRoll.getValue();
 			}
 		}
 	}
@@ -314,32 +314,71 @@ var Bet = function(wager, player){
 };
 
 var die = function(){
-	var value = false;
+	this.value = false;
 	this.roll = function(){
 		this.value = Math.floor(Math.random()*6 + 1);
+		return this.value;
+	}
+	
+	this.getValue = function(){
 		return this.value;
 	}
 }
 
 var dice = function(){
-	var d1 = new die();
-	var d2 = new die();
-	var value = false;
+	this.d1 = new die();
+	this.d2 = new die();
+	this.value = false;
 	this.roll = function(){
-		d1.roll();
-		d2.roll();
-		this.value = this.d1.value + this.d2.value;
-		return [this.d1.value, this.d2.value];
+		this.d1.roll();
+		this.d2.roll();
+		this.value = this.d1.getValue() + this.d2.getValue();
+		return [this.d1.getValue(), this.d2.getValue()];
+	}
+	
+	this.getValue = function(){
+		return this.value;
 	}
 	
 	var validate = function(){
-		if (this.d1.value < 1 || this.d1.value > 6 ||
-				this.d2.value < 1 || this.d2.value > 6){
+		if (this.d1.getValue() < 1 || this.d1.getValue() > 6 ||
+				this.d2.getValue() < 1 || this.d2.getValue() > 6){
 			return false;
 		}
 		return true;
 	}
 }
 
+var crapsDice = function(){
+	this.dice = new dice();
+	
+	this.getValue = function(){
+		return this.dice.value;
+	}
+	
+	this.roll = function(){
+		this.dice.roll();
+	}
+	
+	this.validate = function(){
+		this.dice.validate();
+	}
+	
+	this.isCraps = function(){
+		return (this.dice.getValue() == 2 || this.dice.getValue() == 3 || this.dice.getValue() == 12);
+	}
+	
+	this.isComeOutWinner = function(){
+		return (this.dice.getValue() == 7 || this.dice.getValue() == 11);
+	}
+	
+	this.is7 = function(){
+		return this.dice.getValue() == 7;
+	}
+	
+	this.getDice = function(){
+		return [this.dice.d1.value, this.dice.d2.value];
+	}
+}
 
 
