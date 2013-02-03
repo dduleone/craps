@@ -1,3 +1,6 @@
+/*
+craps.js
+*/
 var Player =  function(name, bank){
 	this.id = craps.getNextBetId();
 	this.name = name;
