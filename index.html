@@ -2,24 +2,6 @@
 <html>
 	<head>
 		<title>DuLeone Craps</title>
-		<script src="jquery.min.js" lang='javascript' type='text/javascript'></script>
-		<script type='text/javascript' language='javascript' src='craps.js'></script>
-		<script type='text/javascript' language='javascript' src='bets.js'></script>
-		<script type='text/javascript' language='javascript'>
-
-			var p = new Player("Dan", 1000);
-			_CRAPS.players = [p];
-
-			_CRAPS.placeBet(new HardWaysBet(1000, p.id));
-			_CRAPS.placeBet(new HardWaysBet(1500, p.id));
-			
-			_CRAPS.dice = new CrapsDice();
-
-			function roll(){
-				_CRAPS.output("---Rolling---");
-				_CRAPS.roll();
-			}
-		</script>
 		<style type='text/css'>
 			button#roll{
 				height: 20px;
@@ -60,6 +42,27 @@
 		<canvas id="board" height='768' width='1024'></canvas>
 		<button id='roll' onclick='roll()'>Roll</button><br />
 		<div id='buffer'></div>
+
+
+		<script src="jquery.min.js" lang='javascript' type='text/javascript'></script>
+		<script type='text/javascript' language='javascript' src='craps.js'></script>
+		<script type='text/javascript' language='javascript' src='bets.js'></script>
+
+		<script type='text/javascript' language='javascript'>
+			var p = new Player("Dan", 1000);
+			_CRAPS.players = [p];
+
+			_CRAPS.placeBet(new HardWaysBet(1000, p.id));
+			_CRAPS.placeBet(new HardWaysBet(1500, p.id));
+			
+			_CRAPS.dice = new CrapsDice();
+
+			function roll(){
+				_CRAPS.output("---Rolling---");
+				_CRAPS.roll();
+			}
+		</script>
+
 
 		<script type='text/javascript' language='javascript'>
 			var canvas = document.getElementById("board");
@@ -235,9 +238,6 @@
 			var d = new DrawCanvas(board);
 			d.resetBoard();
 			//d.demo(24);
-
-
-
 		</script>
 	</body>
 </html>

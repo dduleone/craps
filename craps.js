@@ -63,12 +63,12 @@ var _CRAPS = {
 		_CRAPS.checkBets(diceRoll);
 	// Set & unset the point, as appropriate.
 		if (this.point > 0){
-			if (diceRoll.is7() || diceRoll.getValue() == this.point){
+			if (diceRoll.getTotal() == 7 || diceRoll.getTotal() == this.point){
 				this.point = false;
 			}
 		}else{
 			if (!diceRoll.isCraps() && !diceRoll.isComeOutWinner()){
-				this.point = diceRoll.getValue();
+				this.point = diceRoll.getTotal();
 			}
 		}
 	}
@@ -319,45 +319,44 @@ function getRandomNumber(n){
 }
 
 
-var Die = function(s){
-	if(typeof s == 'undefined'){
-		this.sides = 6; 
-	} else {
-		this.sides = s;
+
+
+function makeDie(sides){
+	if(typeof sides == 'undefined'){
+		sides = 6;
 	}
-	this.value = false;
-	var DIE = this;
-	this.roll = function(){
-		DIE.value = Math.floor(Math.random() * DIE.sides + 1);
-		return DIE.value;
-	}
-	this.getValue = function(){
-		return DIE.value;
-	}
-	this.validate = function(){
-		if(DIE.value < 1){
-			return false;
+
+	return {
+		value: false,
+		roll: function(){
+			this.value = getRandomNumber(sides);
+			return this.value;
+		},
+		getValue: function(){
+			return this.value;
+		},
+		validate: function(){
+			if( (this.value < 1) || (this.value > sides) ){
+				return false;
+			}
+			return true;
 		}
-		if(DIE.value > DIE.sides){
-			return false;
-		}
-		return true;
-	}
+	};
 }
 
+
 var Dice = function(n){
-	if(typeof n == 'undefined'){
-		count = 2;
-	} else {
-		count = n;
-	}
+	this.count = (typeof n == 'undefined') ? 2 : n;
 
 	var DICE = this;
 	
 	this.roll = function(){
 		var total = 0;
+		_CRAPS.output("Rolling...");
 		for(var i in DICE.d){
-			total += DICE.d[i].roll();
+			var roll = DICE.d[i].roll();
+			_CRAPS.output("Die #" + i + ": " + roll);
+			total += roll;
 		}
 		DICE.sum = total;
 		return DICE;
@@ -391,9 +390,10 @@ var Dice = function(n){
 
 	this.d = [];
 	for(var i = 0; i < this.count; i++){
-		d.push(new Die());
-		this.roll();
+		var x = makeDie();
+		this.d.push(x);
 	}
+
 }
 
 
@@ -411,18 +411,18 @@ var CrapsDice = function(){
 	
 	this.getSum = function(){
 		return CDICE.d.getSum();
-	}
+	};
 	
 	this.roll = function(){
 		return CDICE.d.roll();
-	}
+	};
 	
 	this.validate = function(){
 		return CDICE.d.validate();
-	}
+	};
 	
 	this.isCraps = function(){
-		var val = CDICE.d.getValue();
+		var val = CDICE.d.getSum();
 		switch(val){
 			case 2:
 			case 3:
@@ -433,10 +433,10 @@ var CrapsDice = function(){
 				return false;
 			break;
 		}
-	}
+	};
 	
 	this.isComeOutWinner = function(){
-		switch(val){
+		switch(CDICE.d.getSum()){
 			case 7:
 			case 11:
 				return true;
@@ -445,13 +445,13 @@ var CrapsDice = function(){
 				return false;
 			break;
 		}
-	}
+	};
 	
 	this.isHardWays = function(){
 		if ((CDICE.d.getDie(1).getValue() != CDICE.d.getDie(2).getValue())){
 			return false;
 		}
-		switch(CDICE.d.getSum){
+		switch(CDICE.d.getSum()){
 			case 4:
 			case 6:
 			case 8:
@@ -462,7 +462,11 @@ var CrapsDice = function(){
 				return false;
 			break;
 		}
-	}
+	};
+
+	this.getTotal = function(){
+		return CDICE.d.getSum();
+	};
 	
 	this.getDiceValues = function(){
 		var a = [];
@@ -470,5 +474,5 @@ var CrapsDice = function(){
 			a.push(CDICE.d.d[i].getValue());
 		}
 		return a;
-	}
+	};
 }
