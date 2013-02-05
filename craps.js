@@ -313,6 +313,11 @@ var Bet = function(wager, player){
 	this.bindRollEvents();
 };
 
+function getRandomNumber(n){
+	n = (typeof n == 'undefined') ? 6 : n;
+	return Math.floor(Math.random() * n) + 1;
+}
+
 var Die = function(s){
 	if(typeof s == 'undefined'){
 		this.sides = 6; 
@@ -359,7 +364,7 @@ var Dice = function(n){
 
 	this.getDie = function(n){
 		if(typeof DICE.d[n] != "undefined"){
-			return DICE.d[n];
+			return DICE.d[n-1];
 		}
 		return false;
 	}
@@ -390,45 +395,79 @@ var Dice = function(n){
 	}
 }
 
-var crapsDice = function(){
-	this.dice = new dice();
+
+/* I'm wondering if we shouldn't have:
+1) Die
+2) Dice (n number of Die)
+3) CrapsDice (Dice with properties convenient for Craps)
+4) PointOnCrapsDice (Dice with properties which determine winstate/losestate when the point is on.)
+5) PointOffCrapsDice (Dice with properties which determine winstate/losestate when the point is off.)
+*/
+
+var CrapsDice = function(){
+	this.d = new Dice();
+	var CDICE = this;
 	
-	this.getValue = function(){
-		return this.dice.value;
+	this.getSum = function(){
+		return CDICE.d.getSum();
 	}
 	
 	this.roll = function(){
-		this.dice.roll();
+		return CDICE.d.roll();
 	}
 	
 	this.validate = function(){
-		this.dice.validate();
+		return CDICE.d.validate();
 	}
 	
 	this.isCraps = function(){
-		return (this.dice.getValue() == 2 || this.dice.getValue() == 3 || this.dice.getValue() == 12);
+		var val = CDICE.d.getValue();
+		switch(val){
+			case 2:
+			case 3:
+			case 12:
+				return true;
+			break;
+			default:
+				return false;
+			break;
+		}
 	}
 	
 	this.isComeOutWinner = function(){
-		return (this.dice.getValue() == 7 || this.dice.getValue() == 11);
-	}
-	
-	this.is7 = function(){
-		return this.dice.getValue() == 7;
+		switch(val){
+			case 7:
+			case 11:
+				return true;
+			break;
+			default:
+				return false;
+			break;
+		}
 	}
 	
 	this.isHardWays = function(){
-		if ((this.dice.d1.value == this.dice.d2.value) &&
-				(this.dice.getValue() == 4 || this.dice.getValue() == 6 ||
-				 this.dice.getValue() == 8 || this.dice.getValue() == 10)){
-			return true
+		if ((CDICE.d.getDie(1).getValue() != CDICE.d.getDie(2).getValue()){
+			return false;
 		}
-		return false
+		switch(CDICE.d.getSum){
+			case 4:
+			case 6:
+			case 8:
+			case 10:
+				return true;
+			break;
+			default:
+				return false;
+			break;
+		}
 	}
 	
 	this.getDiceValues = function(){
-		return [this.dice.d1.value, this.dice.d2.value];
+		var a = [];
+		for(var i in CDICE.d.d){
+			a.push(CDICE.d.d[i].getValue());
+		}
+		return a;
 	}
 }
-
-
