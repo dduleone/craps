@@ -313,39 +313,80 @@ var Bet = function(wager, player){
 	this.bindRollEvents();
 };
 
-var die = function(){
+var Die = function(s){
+	if(typeof s == 'undefined'){
+		this.sides = 6; 
+	} else {
+		this.sides = s;
+	}
 	this.value = false;
+	var DIE = this;
 	this.roll = function(){
-		this.value = Math.floor(Math.random()*6 + 1);
-		return this.value;
+		DIE.value = Math.floor(Math.random() * DIE.sides + 1);
+		return DIE.value;
 	}
-	
 	this.getValue = function(){
-		return this.value;
+		return DIE.value;
 	}
-}
-
-var dice = function(){
-	this.d1 = new die();
-	this.d2 = new die();
-	this.value = false;
-	this.roll = function(){
-		this.d1.roll();
-		this.d2.roll();
-		this.value = this.d1.getValue() + this.d2.getValue();
-		return [this.d1.getValue(), this.d2.getValue()];
-	}
-	
-	this.getValue = function(){
-		return this.value;
-	}
-	
-	var validate = function(){
-		if (this.d1.getValue() < 1 || this.d1.getValue() > 6 ||
-				this.d2.getValue() < 1 || this.d2.getValue() > 6){
+	this.validate = function(){
+		if(DIE.value < 1){
+			return false;
+		}
+		if(DIE.value > DIE.sides){
 			return false;
 		}
 		return true;
+	}
+}
+
+var Dice = function(n){
+	if(typeof n == 'undefined'){
+		count = 2;
+	} else {
+		count = n;
+	}
+
+	var DICE = this;
+	
+	this.roll = function(){
+		var total = 0;
+		for(var i in DICE.d){
+			total += DICE.d[i].roll();
+		}
+		DICE.sum = total;
+		return DICE;
+	}
+
+	this.getDie = function(n){
+		if(typeof DICE.d[n] != "undefined"){
+			return DICE.d[n];
+		}
+		return false;
+	}
+	
+	this.getSum = function(cached){
+		if( (typeof cached != 'undefined') && (cached == false) ){
+			for(var i in DICE.d){
+				total += DICE.d[i].getValue();
+			}
+			DICE.sum = total;
+		}
+		return DICE.sum;
+	}
+
+	var validate = function(){
+		for(var i in DICE.d){
+			if(DICE.d[i].validate() == false){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	this.d = [];
+	for(var i = 0; i < this.count; i++){
+		d.push(new Die());
+		this.roll();
 	}
 }
 
