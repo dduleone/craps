@@ -318,6 +318,7 @@ function getRandomNumber(n){
 	return Math.floor(Math.random() * n) + 1;
 }
 
+
 var Die = function(s){
 	if(typeof s == 'undefined'){
 		this.sides = 6; 
@@ -447,7 +448,7 @@ var CrapsDice = function(){
 	}
 	
 	this.isHardWays = function(){
-		if ((CDICE.d.getDie(1).getValue() != CDICE.d.getDie(2).getValue()){
+		if ((CDICE.d.getDie(1).getValue() != CDICE.d.getDie(2).getValue())){
 			return false;
 		}
 		switch(CDICE.d.getSum){
