@@ -128,6 +128,9 @@ var PassLineBet = function(value, player){
 			default:
 			break;
 		}
+		
+	b.bindRollEvents();
+	return b;
 	}
 }
 
