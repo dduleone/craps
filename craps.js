@@ -76,36 +76,37 @@ var _CRAPS = {
 	},
 	roll: function(){
 	// Roll the dice.
-		this.dice.roll();
-		_CRAPS.output("The roll is: " + this.dice.getSum());
-		_CRAPS.checkBets(this.dice);
-	
+		_CRAPS.dice.roll();
+		_CRAPS.output("The roll is: " + _CRAPS.dice.getSum());
+		_CRAPS.checkBets(_CRAPS.dice);
+		_CRAPS.output("The point is: " + GameState.point);
 	// Set & unset the point, as appropriate.
-		if (this.point > 0){
-			if (this.dice.total == 7 || this.dice.total == this.point){
-				this.point = false;
+		if (GameState.point > 0){
+			if (_CRAPS.dice.getSum() == 7 || _CRAPS.dice.getSum() == GameState.point){
+				GameState.point = false;
 				_CRAPS.output("Seven Out! All bets will be resolved!");
-				for(var i in this.bets){
-					if(this.bets[i].betOn){
-						this.bets[i].playerLoses();
+				for(var i in _CRAPS.bets){
+					if(_CRAPS.bets[i].betOn){
+						_CRAPS.bets[i].playerLoses();
 					}
 				}
 			}
 		} else {
-			if(this.dice.isCraps()){
+			if(_CRAPS.dice.isCraps()){
 				_CRAPS.output("Craps!");
 				_CRAPS.output("All Pass Line bets lose!");
 				return;
 			}
-			if(this.dice.isComeOutWinner()){
+
+			if(_CRAPS.dice.isComeOutWinner()){
 				_CRAPS.output("Come out win!");
 				_CRAPS.output("All Pass Line bets pay 1:1!");
 				return;
 			}
 			
 			_CRAPS.output("We have a point. All bets are on!");
-			this.turnBetsOn();
-			this.point = this.dice.total;
+			_CRAPS.turnBetsOn();
+			GameState.point = _CRAPS.dice.getSum();
 		}
 	}
 };
