@@ -1,7 +1,7 @@
 /*
 craps.js
 */
-var Player =  function(name, bank){
+var Player = function(name, bank){
 	this.id = _CRAPS.getNextBetId();
 	this.name = name;
 	this.bank = bank;
@@ -33,13 +33,24 @@ var _CRAPS = {
 	placeBet: function(bet){
 		this.bets[bet.id] = bet;
 	},
-	checkBets: function(roll){
+	checkBets: function(dice){
 		for(var i in this.bets){
 			if( (typeof this.bets[i] == 'undefined') || (this.bets[i] == 'RESOLVED') ){
 				return;
 			}
+			if(!this.bets[i].betOn){
+				return;
+			}
 			_CRAPS.output("Checking Bet: " + i);
-			this.bets[i].checkRoll(roll.getDiceValues());
+			this.bets[i].checkRoll(dice.getDiceAsArray());
+		}
+	},
+	turnBetsOn: function(){
+		for(var i in this.bets){
+			if( (typeof this.bets[i] == 'undefined') || (this.bets[i] == 'RESOLVED') ){
+				return;
+			}
+			this.bets[i].betOn = true;
 		}
 	},
 	// I kinda like the idea of having a 'global' set of dice variable, and thus a global 'dice' variable:
@@ -49,7 +60,7 @@ var _CRAPS = {
 		if (diceRoll.validate() && !diceRoll.isCraps() && !diceRoll.isComeOutWinner()){
 			this.point = roll.getValue();
 			_CRAPS.output("Setting point: " + diceRoll.getValue());
-			}
+		}
 	},
 	pointOff: function(){
 		_CRAPS.output("Killing point: " + this.point);
@@ -57,19 +68,36 @@ var _CRAPS = {
 	},
 	roll: function(){
 	// Roll the dice.
-		var diceRoll = this.dice;
-		diceRoll.roll();
-		//_CRAPS.output(diceRoll);
-		_CRAPS.checkBets(diceRoll);
+		this.dice.roll();
+		_CRAPS.output("The roll is: " + this.dice.getSum());
+		_CRAPS.checkBets(this.dice);
+	
 	// Set & unset the point, as appropriate.
 		if (this.point > 0){
-			if (diceRoll.getTotal() == 7 || diceRoll.getTotal() == this.point){
+			if (this.dice.total == 7 || this.dice.total == this.point){
 				this.point = false;
+				_CRAPS.output("Seven Out! All bets will be resolved!");
+				for(var i in this.bets){
+					if(this.bets[i].betOn){
+						this.bets[i].playerLoses();
+					}
+				}
 			}
-		}else{
-			if (!diceRoll.isCraps() && !diceRoll.isComeOutWinner()){
-				this.point = diceRoll.getTotal();
+		} else {
+			if(this.dice.isCraps()){
+				_CRAPS.output("Craps!");
+				_CRAPS.output("All Pass Line bets lose!");
+				return;
 			}
+			if(this.dice.isComeOutWinner()){
+				_CRAPS.output("Come out win!");
+				_CRAPS.output("All Pass Line bets pay 1:1!");
+				return;
+			}
+			
+			_CRAPS.output("We have a point. All bets are on!");
+			this.turnBetsOn();
+			this.point = this.dice.total;
 		}
 	}
 };
@@ -77,6 +105,9 @@ var _CRAPS = {
 var Bet = function(wager, player){
 
 	var bet = this;
+
+	this.betOn = true;
+
 	this.id = _CRAPS.getNextBetId();
 
 	this.wager = wager;
@@ -322,17 +353,12 @@ function getRandomNumber(n){
 
 
 function makeDie(sides){
-	if(typeof sides == 'undefined'){
-		sides = 6;
-	}
+	sides = (typeof sides == 'undefined') ? 6 : sides;
 
 	return {
 		value: false,
 		roll: function(){
 			this.value = getRandomNumber(sides);
-			return this.value;
-		},
-		getValue: function(){
 			return this.value;
 		},
 		validate: function(){
@@ -345,55 +371,43 @@ function makeDie(sides){
 }
 
 
-var Dice = function(n){
-	this.count = (typeof n == 'undefined') ? 2 : n;
+function makeDice(n){
+	count = (typeof n == 'undefined') ? 2 : n;
 
-	var DICE = this;
-	
-	this.roll = function(){
-		var total = 0;
-		_CRAPS.output("Rolling...");
-		for(var i in DICE.d){
-			var roll = DICE.d[i].roll();
-			_CRAPS.output("Die #" + i + ": " + roll);
-			total += roll;
-		}
-		DICE.sum = total;
-		return DICE;
+	var d = [];
+	for(var i=0; i<count; i++){
+		d.push(makeDie(6));
 	}
 
-	this.getDie = function(n){
-		if(typeof DICE.d[n] != "undefined"){
-			return DICE.d[n-1];
-		}
-		return false;
-	}
-	
-	this.getSum = function(cached){
-		if( (typeof cached != 'undefined') && (cached == false) ){
-			for(var i in DICE.d){
-				total += DICE.d[i].getValue();
+	return {
+		dice: d,
+		total: 0,
+		roll: function(){
+			_CRAPS.output("Rolling...");
+			this.total = 0;
+			for(var i in this.dice){
+				var roll = this.dice[i].roll();
+				_CRAPS.output("Die #" + i + ": " + roll);
+				this.total += roll;
 			}
-			DICE.sum = total;
-		}
-		return DICE.sum;
-	}
-
-	var validate = function(){
-		for(var i in DICE.d){
-			if(DICE.d[i].validate() == false){
-				return false;
+			return this.total;
+		},
+		validate: function(){
+			for(var i in this.dice){
+				if(!this.dice[i].validate()){
+					return false;
+				}
 			}
+			return true;
+		},
+		getArray: function(){
+			var a = [];
+			for(var i in this.dice){
+				a.push(this.dice[i].value);
+			}
+			return a;
 		}
-		return true;
-	}
-
-	this.d = [];
-	for(var i = 0; i < this.count; i++){
-		var x = makeDie();
-		this.d.push(x);
-	}
-
+	};
 }
 
 
@@ -406,73 +420,58 @@ var Dice = function(n){
 */
 
 var CrapsDice = function(){
-	this.d = new Dice();
-	var CDICE = this;
-	
-	this.getSum = function(){
-		return CDICE.d.getSum();
-	};
-	
-	this.roll = function(){
-		return CDICE.d.roll();
-	};
-	
-	this.validate = function(){
-		return CDICE.d.validate();
-	};
-	
-	this.isCraps = function(){
-		var val = CDICE.d.getSum();
-		switch(val){
-			case 2:
-			case 3:
-			case 12:
-				return true;
-			break;
-			default:
-				return false;
-			break;
-		}
-	};
-	
-	this.isComeOutWinner = function(){
-		switch(CDICE.d.getSum()){
-			case 7:
-			case 11:
-				return true;
-			break;
-			default:
-				return false;
-			break;
-		}
-	};
-	
-	this.isHardWays = function(){
-		if ((CDICE.d.getDie(1).getValue() != CDICE.d.getDie(2).getValue())){
+	return {
+		dice: makeDice(2),
+		getSum: function(){
+			return this.dice.total;
+		},
+		roll: function(){
+			return this.dice.roll();
+		},
+		validate: function(){
+			return this.dice.validate();
+		},
+		isCraps: function(){
+			switch(this.dice.total){
+				case 2:
+				case 3:
+				case 12:
+					return true;
+				break;
+				default:
+				break;
+			}
 			return false;
-		}
-		switch(CDICE.d.getSum()){
-			case 4:
-			case 6:
-			case 8:
-			case 10:
-				return true;
-			break;
-			default:
+		},
+		isComeOutWinner: function(){
+			switch(this.dice.total){
+				case 7:
+				case 11:
+					return true;
+				break;
+				default:
+				break;
+			}
+			return false;
+		},
+		isHardWays: function(){
+			if (this.dice[0].value != this.dice[1].value){
 				return false;
-			break;
+			}
+			switch(this.dice.total){
+				case 4:
+				case 6:
+				case 8:
+				case 10:
+					return true;
+				break;
+				default:
+				break;
+			}
+			return false;
+		},
+		getDiceAsArray: function(){
+			return this.dice.getArray();
 		}
-	};
-
-	this.getTotal = function(){
-		return CDICE.d.getSum();
-	};
-	
-	this.getDiceValues = function(){
-		var a = [];
-		for(var i in CDICE.d.d){
-			a.push(CDICE.d.d[i].getValue());
-		}
-		return a;
 	};
 }
