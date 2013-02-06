@@ -53,7 +53,7 @@ var PassLineBet = function(value, player){
 		}
 		
 		b.onSum4 = function(){
-			if (GameState.point == true){
+			if (GameState.point == 4){
 				if (craps.dice.isHardWays){
 					_CRAPS.output("4! Hard 4! Point is off! You Win!");
 				} else {
@@ -64,14 +64,14 @@ var PassLineBet = function(value, player){
 		}
 		
 		b.onSum5 = function(){
-			if (GameState.point == true){
+			if (GameState.point == 5){
 				_CRAPS.output("5! No Field 5! Point is off! You Win!");
 				b.playerWin();
 			}
 		}
 		
 		b.onSum6 = function(){
-			if (GameState.point == true){
+			if (GameState.point == 6){
 				if (craps.dice.isHardWays){
 					_CRAPS.output("6! Hard 6! Point is off! You Win!");
 				} else {
@@ -92,7 +92,7 @@ var PassLineBet = function(value, player){
 		}
 
 		b.onSum8 = function(){
-			if (GameState.point == true){
+			if (GameState.point == 8){
 				if (craps.dice.isHardWays){
 					_CRAPS.output("8! Hard 8! Point is off! You Win!");
 				} else {
@@ -103,14 +103,14 @@ var PassLineBet = function(value, player){
 		}
 		
 		b.onSum9 = function(){
-			if (GameState.point == true){
+			if (GameState.point == 9){
 				_CRAPS.output("9! Center Field 9! You Win!");
 				b.playerWin();
 			}
 		}
 		
 		b.onSum10 = function(){
-			if (GameState.point == true){
+			if (GameState.point == 10){
 				if (craps.dice.isHardWays){
 					_CRAPS.output("10! Hard 10! Point is off! You Win!");
 				} else {
