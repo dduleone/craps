@@ -7,6 +7,14 @@ var Player = function(name, bank){
 	this.bank = bank;
 };
 
+
+var GameState = {
+	pointOn: false,
+	point: 0,
+	players: [],
+	bets: []
+};
+
 var _CRAPS = {
 	debug: function(msg){
 		console.log(msg);
