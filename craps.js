@@ -341,7 +341,7 @@ var Bet = function(wager, player){
 		// Maybe we make a _CRAPS.resolveBet() which is passed a betId, and iterates over the bets, to find the one to resolve.
 		// Also could create a betMap object with a mapBets() method which maps a betId to an array position. 
 		// mdl - BetManager.bets[bet.id] = 'RESOLVED';
-		var index = BetManager.bets.indexof.(bet.id);
+		var index = BetManager.bets.indexOf(bet.id);
 		var oldBet = BetManager.bets.splice(index, 1);
 		if (oldBet.recurring){
 			oldBet.id = BetManager.getNextBetId();
