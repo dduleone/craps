@@ -2,7 +2,7 @@
 craps.js
 */
 var Player = function(name, bank){
-	this.id = _CRAPS.getNextBetId();
+	this.id = _CRAPS.getNextPlayerId();
 	this.name = name;
 	this.bank = bank;
 };
@@ -11,8 +11,39 @@ var Player = function(name, bank){
 var GameState = {
 	pointOn: false,
 	point: 0,
-	players: [],
-	bets: []
+	players: []
+};
+
+var BetManager = {
+	bets: [],
+	placeBet: function(bet){
+		BetManager.bets[bet.id] = bet;
+	},
+	betId: 0,
+	getNextBetId: function(){
+		return BetManager.betId++;
+	},
+	checkBets: function(dice){
+		for(var i in BetManager.bets){
+			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
+				return;
+			}
+			if(!BetManager.bets[i].betOn){
+				return;
+			}
+			_CRAPS.output("Checking Bet: " + i);
+			BetManager.bets[i].checkRoll(dice.getDiceAsArray());
+		}
+	},
+	turnBetsOn: function(){
+		for(var i in this.bets){
+			if( (typeof this.bets[i] == 'undefined') || (this.bets[i] == 'RESOLVED') ){
+				return;
+			}
+			this.bets[i].betOn = true;
+		}
+	},
+
 };
 
 var _CRAPS = {
@@ -24,11 +55,6 @@ var _CRAPS = {
 		$(buffer).append("<span>" + msg + "</span><br />\n");
 		buffer.scrollTop = buffer.scrollHeight;
 	},
-	betId: 0,
-	getNextBetId: function(){
-		return this.betId++;
-	},
-	bets: [],
 	offBets: [],
 	playerId: 0,
 	players: [],
@@ -39,57 +65,44 @@ var _CRAPS = {
 		return this.players[id].name;
 	},
 	placeBet: function(bet){
-		this.bets[bet.id] = bet;
+		BetManager.placeBet(bet);
 	},
-	checkBets: function(dice){
-		for(var i in this.bets){
-			if( (typeof this.bets[i] == 'undefined') || (this.bets[i] == 'RESOLVED') ){
-				return;
-			}
-			if(!this.bets[i].betOn){
-				return;
-			}
-			_CRAPS.output("Checking Bet: " + i);
-			this.bets[i].checkRoll(dice.getDiceAsArray());
-		}
-	},
-	turnBetsOn: function(){
-		for(var i in this.bets){
-			if( (typeof this.bets[i] == 'undefined') || (this.bets[i] == 'RESOLVED') ){
-				return;
-			}
-			this.bets[i].betOn = true;
-		}
+	checkBets: function(){
+		BetManager.checkBets(_CRAPS.dice);
 	},
 	// I kinda like the idea of having a 'global' set of dice variable, and thus a global 'dice' variable:
 	dice: null,
 	point: false,
-	pointOn: function(diceRoll){
-		if (diceRoll.validate() && !diceRoll.isCraps() && !diceRoll.isComeOutWinner()){
-			this.point = roll.getValue();
-			_CRAPS.output("Setting point: " + diceRoll.getValue());
+	pointOn: function(dice){
+		if (dice.validate() && !dice.isCraps() && !dice.isComeOutWinner()){
+			GameState.point = dice.getSum();
+			_CRAPS.output("Setting point: " + dice.getSum());
 		}
 	},
 	pointOff: function(){
 		_CRAPS.output("Killing point: " + this.point);
-		this.point = false;
+		GameState.point = false;
 	},
 	roll: function(){
 	// Roll the dice.
-		_CRAPS.dice.roll();
+		var roll = _CRAPS.dice.roll();
 		_CRAPS.output("The roll is: " + _CRAPS.dice.getSum());
-		_CRAPS.checkBets(_CRAPS.dice);
 		_CRAPS.output("The point is: " + GameState.point);
+		_CRAPS.checkBets();
 	// Set & unset the point, as appropriate.
 		if (GameState.point > 0){
-			if (_CRAPS.dice.getSum() == 7 || _CRAPS.dice.getSum() == GameState.point){
+			if (roll == 7){
 				GameState.point = false;
 				_CRAPS.output("Seven Out! All bets will be resolved!");
-				for(var i in _CRAPS.bets){
-					if(_CRAPS.bets[i].betOn){
-						_CRAPS.bets[i].playerLoses();
-					}
-				}
+				// Resolve Bets.
+			}
+
+			if (roll == GameState.point){
+				GameState.point = false;
+				_CRAPS.output("Shooter made the point!");
+				_CRAPS.output("All Pass Line bets win!");
+				_CRAPS.output("All bets will be resolved!");
+				// Resolve Bets
 			}
 		} else {
 			if(_CRAPS.dice.isCraps()){
@@ -105,8 +118,8 @@ var _CRAPS = {
 			}
 			
 			_CRAPS.output("We have a point. All bets are on!");
-			_CRAPS.turnBetsOn();
-			GameState.point = _CRAPS.dice.getSum();
+			BetManager.turnBetsOn();
+			GameState.point = roll;
 		}
 	}
 };
@@ -117,7 +130,7 @@ var Bet = function(wager, player){
 
 	this.betOn = true;
 
-	this.id = _CRAPS.getNextBetId();
+	this.id = BetManager.getNextBetId();
 
 	this.wager = wager;
 
