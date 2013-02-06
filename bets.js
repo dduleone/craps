@@ -34,6 +34,102 @@ bets.js
 // Yo Eleven
 // Craps
 // World
+var PassLineBet = function(value, player){
+	var b = new Bet(value, player);
+	b.multiplier = 0;
+	
+	if (GameState.point == false){
+		b.onSum7 = function(){
+			_CRAPS.output("7! Lucky 7! You Win!");
+			b.playerWins();
+		}
+		
+		b.onSum11 = function(){
+			_CRAPS.output("11! Yo-leven! You Win!");
+			b.playerWins();
+		}
+		
+		b.onSum2 = function(){
+			_CRAPS.output("2! Craps 2! You Lose!");
+			b.playerLose();
+		}
+		
+		b.onSum3 = function(){
+			_CRAPS.output("3! Craps 3! You Lose!");
+			b.playerLose();
+		}
+		
+		b.onSum12 = function(){
+			_CRAPS.output("12! Craps 12! You Lose!");
+			b.playerLose();
+		}
+	}
+	
+	if (GameState.point == true){
+		switch(craps.dice.getSum()){
+			case 4:
+				b.onSum4 = function(){
+					if (craps.dice.isHardWays){
+						_CRAPS.output("4! Hard 4! Point is off! You Win!");
+					} else {
+						_CRAPS.output("4! Hit the point! Point is off! You Win!");
+					}
+					b.playerWin();
+				}
+			break;
+			case 5:
+				b.onSum5 = function(){
+					_CRAPS.output("5! No Field 5! Point is off! You Win!");
+					b.playerWin();
+				}
+			break;
+			case 6:
+				b.onSum6 = function(){
+					if (craps.dice.isHardWays){
+						_CRAPS.output("6! Hard 6! Point is off! You Win!");
+					} else {
+						_CRAPS.output("6, the easy way! Point is off! You Win!");
+					}
+					b.playerWin();
+				}
+			break;
+			case 7:
+				b.onSum7 = function(){
+					_CRAPS.output("7 out! Point is off! You Lose!");
+					b.playerLose();
+				}
+			break;
+			case 8:
+				b.onSum8 = function(){
+					if (craps.dice.isHardWays){
+						_CRAPS.output("8! Hard 8! Point is off! You Win!");
+					} else {
+						_CRAPS.output("8! Hit the point! Point is off! You Win!");
+					}
+					b.playerWin();
+				}
+			break;
+			case 9:
+				b.onSum9 = function(){
+					_CRAPS.output("9! Center Field 9! You Win!");
+					b.playerWin();
+				}
+			break;
+			case 10:
+				b.onSum10 = function(){
+					if (craps.dice.isHardWays){
+						_CRAPS.output("10! Hard 10! Point is off! You Win!");
+					} else {
+						_CRAPS.output("10! Easy 10! Point is off! You Win!");
+					}
+					b.playerWin();
+				}
+			break;
+			default:
+			break;
+		}
+	}
+}
 
 var HardWaysBet = function(value, player){
 	var b = new Bet(value, player);
