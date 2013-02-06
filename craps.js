@@ -36,11 +36,11 @@ var BetManager = {
 		}
 	},
 	turnBetsOn: function(){
-		for(var i in this.bets){
-			if( (typeof this.bets[i] == 'undefined') || (this.bets[i] == 'RESOLVED') ){
+		for(var i in BetManager.bets){
+			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
 				return;
 			}
-			this.bets[i].betOn = true;
+			BetManager.bets[i].betOn = true;
 		}
 	},
 
@@ -85,9 +85,9 @@ var _CRAPS = {
 	},
 	roll: function(){
 	// Roll the dice.
+		_CRAPS.output("Before Roll - The point is: " + GameState.point);	
 		var roll = _CRAPS.dice.roll();
-		_CRAPS.output("The roll is: " + _CRAPS.dice.getSum());
-		_CRAPS.output("The point is: " + GameState.point);
+		_CRAPS.output("The roll is: " + roll);
 		_CRAPS.checkBets();
 	// Set & unset the point, as appropriate.
 		if (GameState.point > 0){
@@ -95,6 +95,7 @@ var _CRAPS = {
 				GameState.point = false;
 				_CRAPS.output("Seven Out! All bets will be resolved!");
 				// Resolve Bets.
+				return;
 			}
 
 			if (roll == GameState.point){
@@ -103,6 +104,7 @@ var _CRAPS = {
 				_CRAPS.output("All Pass Line bets win!");
 				_CRAPS.output("All bets will be resolved!");
 				// Resolve Bets
+				return;
 			}
 		} else {
 			if(_CRAPS.dice.isCraps()){
@@ -121,6 +123,7 @@ var _CRAPS = {
 			BetManager.turnBetsOn();
 			GameState.point = roll;
 		}
+		_CRAPS.output("After Roll - The point is: " + GameState.point);	
 	}
 };
 
