@@ -455,8 +455,3 @@ var Bet = function(wager, player){
 
 	this.bindRollEvents();
 };
-
-function getRandomNumber(n){
-	n = (typeof n == 'undefined') ? 6 : n;
-	return Math.floor(Math.random() * n) + 1;
-}
