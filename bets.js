@@ -1,206 +1,290 @@
 /*
 bets.js
 */
-//http://www.nextshooter.com/bets
-// Pass Line
-// Field Bet
-// Come Bet
-// Place Bets
-// Proposition Bets
-// Pass Odds
-// Come Odds
-// Don't Pass
-// Don't Come
-// Hardways
+var BetManager = {
+	bets: [],
+	placeBet: function(bet){
+		BetManager.bets[bet.id] = bet;
+	},
+	betId: 0,
+	getNextBetId: function(){
+		return BetManager.betId++;
+	},
+	checkBets: function(dice){
+		for(var i in BetManager.bets){
+			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
+				return;
+			}
+			if(!BetManager.bets[i].betOn){
+				return;
+			}
+			_CRAPS.output("Checking Bet: " + i);
+			BetManager.bets[i].checkRoll(dice.getDiceAsArray());
+		}
+	},
+	turnBetsOn: function(){
+		for(var i in BetManager.bets){
+			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
+				return;
+			}
+			BetManager.bets[i].betOn = true;
+		}
+	},
 
+};
 
-//http://www.inodepositbonus.com/casino-blog/craps-list/
-// Come Out Bet (Pass Line)
-// Odds on Pass Line
-// Don't Pass
-// Don't Come
-// Come Odds
-// Field Bet
-// Proposition Bet
-// Hardways
-// One Roll Bets
-// High Horn
-// Horn and Hop
-// Any Craps
-// Craps 2
-// Craps 3
-// Big 6/8
-// Any 7
-// Yo Eleven
-// Craps
-// World
-var PassLineBet = function(value, player){
-	var b = new Bet(value, player);
-	b.multiplier = 0;
-	
-		b.onSum2 = function(){
-			if (GameState.point == false){
-				_CRAPS.output("2! Craps 2! You Lose!");
-				b.playerLose();
-			}
-		}
-		
-		b.onSum3 = function(){
-			if (GameState.point == false){
-				_CRAPS.output("3! Craps 3! You Lose!");
-				b.playerLose();
-			}
-		}
-		
-		b.onSum4 = function(){
-			if (GameState.point == 4){
-				if (craps.dice.isHardWays){
-					_CRAPS.output("4! Hard 4! Point is off! You Win!");
-				} else {
-					_CRAPS.output("4! Hit the point! Point is off! You Win!");
-				}
-				b.playerWin();
-			}
-		}
-		
-		b.onSum5 = function(){
-			if (GameState.point == 5){
-				_CRAPS.output("5! No Field 5! Point is off! You Win!");
-				b.playerWin();
-			}
-		}
-		
-		b.onSum6 = function(){
-			if (GameState.point == 6){
-				if (craps.dice.isHardWays){
-					_CRAPS.output("6! Hard 6! Point is off! You Win!");
-				} else {
-					_CRAPS.output("6, the easy way! Point is off! You Win!");
-				}
-				b.playerWin();
-			}
-		}
-		
-		b.onSum7 = function(){
-			if (GameState.point == false){
-				_CRAPS.output("7! Lucky 7! You Win!");
-				b.playerWins();
-			} else {
-				_CRAPS.output("7 out! Point is off! You Lose!");
-				b.playerLose();
-			}			
-		}
+var Bet = function(wager, player){
 
-		b.onSum8 = function(){
-			if (GameState.point == 8){
-				if (craps.dice.isHardWays){
-					_CRAPS.output("8! Hard 8! Point is off! You Win!");
-				} else {
-					_CRAPS.output("8! Hit the point! Point is off! You Win!");
-				}
-				b.playerWin();
-			}
-		}
-		
-		b.onSum9 = function(){
-			if (GameState.point == 9){
-				_CRAPS.output("9! Center Field 9! You Win!");
-				b.playerWin();
-			}
-		}
-		
-		b.onSum10 = function(){
-			if (GameState.point == 10){
-				if (craps.dice.isHardWays){
-					_CRAPS.output("10! Hard 10! Point is off! You Win!");
-				} else {
-					_CRAPS.output("10! Easy 10! Point is off! You Win!");
-				}
-				b.playerWin();
-			}
-		}
-		
-		b.onSum11 = function(){
-			if (GameState.point == false){
-				_CRAPS.output("11! Yo-leven! You Win!");
-				b.playerWins();
-			}
-		}
-		
-		b.onSum12 = function(){
-			if (GameState.point == false){
-				_CRAPS.output("12! Craps 12! You Lose!");
-				b.playerLose();
-			}
-		}
-	b.bindRollEvents();
-	return b;
-}
+	var bet = this;
 
-var HardWaysBet = function(value, player){
-	var b = new Bet(value, player);
-	b.multiplier = .2;
-	
-	// no Hard 2 bet
+	this.betOn = true;
 
-	// Hard 4 (win)
-	b.on22 = function(){
-		_CRAPS.output("Hard 4! You win!");
-		b.playerWins();
+	this.id = BetManager.getNextBetId();
+
+	this.wager = wager;
+
+	this.player = player;
+
+	this.multiplier = .5;
+
+	this.anyRoll = function(){
+
+	};
+	this.onSum2 = function(){
+		_CRAPS.debug("Roll Total: 2");
+	};
+	this.onSum3 = function(){
+		_CRAPS.debug("Roll Total: 3");	
+	};
+	this.onSum4 = function(){
+		_CRAPS.debug("Roll Total: 4");
+	};
+	this.onSum5 = function(){
+		_CRAPS.debug("Roll Total: 5");	
+	};
+	this.onSum6 = function(){
+		_CRAPS.debug("Roll Total: 6");
+	};
+	this.onSum7 = function(){
+		_CRAPS.debug("Roll Total: 7");
+	};
+	this.onSum8 = function(){
+		_CRAPS.debug("Roll Total: 8");
+	};
+	this.onSum9 = function(){
+		_CRAPS.debug("Roll Total: 9");
+	};
+	this.onSum10 = function(){
+		_CRAPS.debug("Roll Total: 10");
+	};
+	this.onSum11 = function(){
+		_CRAPS.debug("Roll Total: 11");
+	};
+	this.onSum12 = function(){
+		_CRAPS.debug("Roll Total: 12");
+	};
+
+	this.on11 = function(){
+		bet.onSum2();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 1/1");
+	};
+	this.on12 = function(){
+		bet.onSum3();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 1/2");
+	};
+	this.on13 = function(){
+		bet.onSum4();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 1/3");
+	};
+	this.on14 = function(){
+		bet.onSum5();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 1/4");
+	};
+	this.on15 = function(){
+		bet.onSum6();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 1/5");
+	};
+	this.on16 = function(){
+		bet.onSum7();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 1/6");
+	};
+	this.on22 = function(){
+		bet.onSum4();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 2/2");
+	};
+	this.on23 = function(){
+		bet.onSum5();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 2/3");
+	};
+	this.on24 = function(){
+		bet.onSum6();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 2/4");
+	};
+	this.on25 = function(){
+		bet.onSum7();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 2/5");
+	};
+	this.on26 = function(){
+		bet.onSum8();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 2/6");
+	};
+	this.on33 = function(){
+		bet.onSum6();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 3/3");
+	};
+	this.on34 = function(){
+		bet.onSum7();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 3/4");
+	};
+	this.on35 = function(){
+		bet.onSum8();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 3/5");
+	};
+	this.on36 = function(){
+		bet.onSum9();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 3/6");
+	};
+	this.on44 = function(){
+		bet.onSum8();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 4/4");
+	};
+	this.on45 = function(){
+		bet.onSum9();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 4/5");
+	};
+	this.on46 = function(){
+		bet.onSum10();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 4/6");
+	};
+	this.on55 = function(){
+		bet.onSum10();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 5/5");
+	};
+	this.on56 = function(){
+		bet.onSum11();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 5/6");
+	};
+	this.on66 = function(){
+		bet.onSum12();
+		bet.anyRoll();
+		_CRAPS.debug("Roll: 6/6");
+	};
+
+	this.checkRoll = function(dice){
+		this.onFunc["" + dice[0] + dice[1]]();
 	}
 
-	// Easy 4 (lose)
-	b.onSum4 = function(){
-		_CRAPS.output("Easy 4! You lose!");
-		b.playerLoses();
+	this.bindRollEvents = function(){
+		this.onFunc = {
+			11: this.on11,
+			12: this.on12,
+			13: this.on13,
+			14: this.on14,
+			15: this.on15,
+			16: this.on16,
+
+			21: this.on12,
+			22: this.on22,
+			23: this.on23,
+			24: this.on24,
+			25: this.on25,
+			26: this.on26,
+
+			31: this.on13,
+			32: this.on23,
+			33: this.on33,
+			34: this.on34,
+			35: this.on35,
+			36: this.on36,
+
+			41: this.on14,
+			42: this.on24,
+			43: this.on34,
+			44: this.on44,
+			45: this.on45,
+			46: this.on46,
+
+			51: this.on15,
+			52: this.on25,
+			53: this.on35,
+			54: this.on45,
+			55: this.on55,
+			56: this.on56,
+
+			61: this.on16,
+			62: this.on26,
+			63: this.on36,
+			64: this.on46,
+			65: this.on56,
+			66: this.on66
+		};
+	};
+
+	this.dissolveBet = function(){
+		//_CRAPS.bets.splice(this.id, 1);
+		// Maybe we make a _CRAPS.resolveBet() which is passed a betId, and iterates over the bets, to find the one to resolve.
+		// Also could create a betMap object with a mapBets() method which maps a betId to an array position. 
+		
+		BetManager.bets[bet.id] = 'RESOLVED';
+		
+		// ideally, comment out above line, uncomment below code, and get oldBet.recurring working, remove recurring assumption
+		//Why doesn't this work??
+		//var index = BetManager.bets.indexOf(bet);
+		//var oldBet = BetManager.bets.splice(index, 1);
+		////if (oldBet.recurring){
+		////	oldBet.id = BetManager.getNextBetId();
+		////	BetManager.placeBet(oldBet);
+		////}
+		//// assume recurring bet for now.
+		//oldBet.id = BetManager.getNextBetId();
+		//BetManager.placeBet(oldBet);
+		
 	}
 
-	// Hard 6 (win)
-	b.on33 = function(){
-		_CRAPS.output("Hard 6! You win!");
-		b.playerWins();
+	this.onWin = function(){
+		this.dissolveBet();
 	}
 
-	// Easy 6 (lose)
-	b.onSum6 = function(){
-		_CRAPS.output("Easy 6! You lose!");
-		b.playerLoses();
+	this.onLose = function(){
+		this.dissolveBet();
 	}
-	
-	// 7 out
-	b.onSum7 = function(){
-		if(_CRAPS.point > 0){
-			_CRAPS.output("7 out! You lose!");
-			b.playerLoses();
+
+	this.playerWins = function(){
+		if( (typeof _CRAPS.players != "undefined") && (typeof _CRAPS.players[this.player] != "undefined") ){
+			_CRAPS.players[this.player].bank += this.wager;
+			_CRAPS.players[this.player].bank += this.wager * this.multiplier;
+			_CRAPS.output(_CRAPS.getPlayerName(this.player) + " won $" + (this.wager + this.wager * this.multiplier));
+			_CRAPS.output(_CRAPS.getPlayerName(this.player) + "'s new balance is: $" + _CRAPS.players[this.player].bank);
 		}
-	}
+		this.onWin();
+	};
 
-	// Hard 8 (win)
-	b.on44 = function(){
-		_CRAPS.output("8 the hard way! You win!");
-		b.playerWins();
-	}
+	this.playerLoses = function(){
+		if( (typeof _CRAPS.players != "undefined") && (typeof _CRAPS.players[this.player] != "undefined") ){
+			_CRAPS.output(_CRAPS.getPlayerName(this.player) + " lost a placed bet of $" + this.wager);
+		}
+		this.onLose();
+	};
 
-	// Easy 8 (lose)
-	b.onSum8 = function(){
-		_CRAPS.output("Easy 8! You lose!");
-		b.playerLoses();		
-	}
-
-	// Hard 10 (win)
-	b.on55 = function(){
-		_CRAPS.output("10 the hard way! You win!");
-		b.playerWins();
-	}
-
-	// Easy 10 (lose)
-	b.onSum10 = function(){
-		_CRAPS.output("Easy 10! You lose!");
-		b.playerLoses();		
-	}
-	
-	// no Hard 12 bet
-
-	b.bindRollEvents();
-	return b;
-}
+	this.bindRollEvents();
+};
