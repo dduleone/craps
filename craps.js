@@ -2,19 +2,11 @@
 craps.js
 */
 
-var Player = function(name, bank){
-	this.id = _CRAPS.getNextPlayerId();
-	this.name = name;
-	this.bank = bank;
-};
-
-
 var GameState = {
 	pointOn: false,
 	point: 0,
 	players: []
 };
-
 
 
 var _CRAPS = {
