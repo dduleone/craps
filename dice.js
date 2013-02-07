@@ -5,7 +5,7 @@ function makeDie(sides){
 	return {
 		value: false,
 		roll: function(){
-			this.value = getRandomNumber(sides);
+			this.value = UTILS.getRandomNumber(sides);
 			return this.value;
 		},
 		validate: function(){

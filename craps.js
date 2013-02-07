@@ -2,6 +2,8 @@
 craps.js
 */
 
+var _CRAPS = {};
+
 var GameState = {
 	pointOn: false,
 	point: 0,
@@ -9,7 +11,7 @@ var GameState = {
 };
 
 
-var _CRAPS = {
+$.extend(_CRAPS, {
 	debug: function(msg){
 		console.log(msg);
 	},
@@ -91,5 +93,5 @@ var _CRAPS = {
 	init: function(){
 		_CRAPS.dice = new CrapsDice();
 	}
-};
+});
 _CRAPS.init();
