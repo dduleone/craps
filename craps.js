@@ -1,6 +1,74 @@
 /*
 craps.js
 */
+
+
+/* I'm wondering if we shouldn't have:
+1) Die
+2) Dice (n number of Die)
+3) CrapsDice (Dice with properties convenient for Craps)
+4) PointOnCrapsDice (Dice with properties which determine winstate/losestate when the point is on.)
+5) PointOffCrapsDice (Dice with properties which determine winstate/losestate when the point is off.)
+*/
+
+var CrapsDice = function(){
+	return {
+		dice: makeDice(2),
+		getSum: function(){
+			return this.dice.total;
+		},
+		roll: function(){
+			return this.dice.roll();
+		},
+		validate: function(){
+			return this.dice.validate();
+		},
+		isCraps: function(){
+			switch(this.dice.total){
+				case 2:
+				case 3:
+				case 12:
+					return true;
+				break;
+				default:
+				break;
+			}
+			return false;
+		},
+		isComeOutWinner: function(){
+			switch(this.dice.total){
+				case 7:
+				case 11:
+					return true;
+				break;
+				default:
+				break;
+			}
+			return false;
+		},
+		isHardWays: function(){
+			if (this.dice[0].value != this.dice[1].value){
+				return false;
+			}
+			switch(this.dice.total){
+				case 4:
+				case 6:
+				case 8:
+				case 10:
+					return true;
+				break;
+				default:
+				break;
+			}
+			return false;
+		},
+		getDiceAsArray: function(){
+			return this.dice.getArray();
+		}
+	};
+}
+
+
 var Player = function(name, bank){
 	this.id = _CRAPS.getNextPlayerId();
 	this.name = name;
@@ -124,8 +192,13 @@ var _CRAPS = {
 			GameState.point = roll;
 		}
 		_CRAPS.output("After Roll - The point is: " + GameState.point);	
+	},
+	init: function(){
+		_CRAPS.dice = new CrapsDice();
 	}
 };
+_CRAPS.init();
+
 
 var Bet = function(wager, player){
 
@@ -386,131 +459,4 @@ var Bet = function(wager, player){
 function getRandomNumber(n){
 	n = (typeof n == 'undefined') ? 6 : n;
 	return Math.floor(Math.random() * n) + 1;
-}
-
-
-
-
-function makeDie(sides){
-	sides = (typeof sides == 'undefined') ? 6 : sides;
-
-	return {
-		value: false,
-		roll: function(){
-			this.value = getRandomNumber(sides);
-			return this.value;
-		},
-		validate: function(){
-			if( (this.value < 1) || (this.value > sides) ){
-				return false;
-			}
-			return true;
-		}
-	};
-}
-
-
-function makeDice(n){
-	count = (typeof n == 'undefined') ? 2 : n;
-
-	var d = [];
-	for(var i=0; i<count; i++){
-		d.push(makeDie(6));
-	}
-
-	return {
-		dice: d,
-		total: 0,
-		roll: function(){
-			_CRAPS.output("Rolling...");
-			this.total = 0;
-			for(var i in this.dice){
-				var roll = this.dice[i].roll();
-				_CRAPS.output("Die #" + i + ": " + roll);
-				this.total += roll;
-			}
-			return this.total;
-		},
-		validate: function(){
-			for(var i in this.dice){
-				if(!this.dice[i].validate()){
-					return false;
-				}
-			}
-			return true;
-		},
-		getArray: function(){
-			var a = [];
-			for(var i in this.dice){
-				a.push(this.dice[i].value);
-			}
-			return a;
-		}
-	};
-}
-
-
-/* I'm wondering if we shouldn't have:
-1) Die
-2) Dice (n number of Die)
-3) CrapsDice (Dice with properties convenient for Craps)
-4) PointOnCrapsDice (Dice with properties which determine winstate/losestate when the point is on.)
-5) PointOffCrapsDice (Dice with properties which determine winstate/losestate when the point is off.)
-*/
-
-var CrapsDice = function(){
-	return {
-		dice: makeDice(2),
-		getSum: function(){
-			return this.dice.total;
-		},
-		roll: function(){
-			return this.dice.roll();
-		},
-		validate: function(){
-			return this.dice.validate();
-		},
-		isCraps: function(){
-			switch(this.dice.total){
-				case 2:
-				case 3:
-				case 12:
-					return true;
-				break;
-				default:
-				break;
-			}
-			return false;
-		},
-		isComeOutWinner: function(){
-			switch(this.dice.total){
-				case 7:
-				case 11:
-					return true;
-				break;
-				default:
-				break;
-			}
-			return false;
-		},
-		isHardWays: function(){
-			if (this.dice[0].value != this.dice[1].value){
-				return false;
-			}
-			switch(this.dice.total){
-				case 4:
-				case 6:
-				case 8:
-				case 10:
-					return true;
-				break;
-				default:
-				break;
-			}
-			return false;
-		},
-		getDiceAsArray: function(){
-			return this.dice.getArray();
-		}
-	};
 }

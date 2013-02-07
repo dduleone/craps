@@ -46,11 +46,12 @@
 	<footer>
 
 		<script src="jquery.min.js" lang='javascript' type='text/javascript'></script>
+		<script type='text/javascript' language='javascript' src='dice.js'></script>
 		<script type='text/javascript' language='javascript' src='craps.js'></script>
 		<script type='text/javascript' language='javascript' src='bets.js'></script>
 		<script type='text/javascript' language='javascript' src='board.js'></script>
 
-		<script type='text/javascript' language='javascript'>
+		<script type='text/javascript' language='javascript'>		
 			var p = new Player("Dan", 1000);
 			_CRAPS.players = [p];
 
@@ -58,7 +59,6 @@
 			_CRAPS.placeBet(new HardWaysBet(1500, p.id));
 			_CRAPS.placeBet(new PassLineBet(1000, p.id));
 			
-			_CRAPS.dice = new CrapsDice();
 
 			function roll(){
 				_CRAPS.output("---Rolling---");
