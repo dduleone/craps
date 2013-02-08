@@ -270,18 +270,18 @@ var Bet = function(wager, player){
 	}
 
 	this.playerWins = function(){
-		if( (typeof _CRAPS.players != "undefined") && (typeof _CRAPS.players[this.player] != "undefined") ){
-			_CRAPS.players[this.player].bank += this.wager;
-			_CRAPS.players[this.player].bank += this.wager * this.multiplier;
-			_CRAPS.output(_CRAPS.getPlayerName(this.player) + " won $" + (this.wager + this.wager * this.multiplier));
-			_CRAPS.output(_CRAPS.getPlayerName(this.player) + "'s new balance is: $" + _CRAPS.players[this.player].bank);
+		if( (typeof PlayerManager.players != "undefined") && (typeof PlayerManager.players[this.player] != "undefined") ){
+			PlayerManager.players[this.player].bank += this.wager;
+			PlayerManager.players[this.player].bank += this.wager * this.multiplier;
+			_CRAPS.output(PlayerManager.getPlayerName(this.player) + " won $" + (this.wager + this.wager * this.multiplier));
+			_CRAPS.output(PlayerManager.getPlayerName(this.player) + "'s new balance is: $" + PlayerManager.players[this.player].bank);
 		}
 		this.onWin();
 	};
 
 	this.playerLoses = function(){
-		if( (typeof _CRAPS.players != "undefined") && (typeof _CRAPS.players[this.player] != "undefined") ){
-			_CRAPS.output(_CRAPS.getPlayerName(this.player) + " lost a placed bet of $" + this.wager);
+		if( (typeof PlayerManager.players != "undefined") && (typeof PlayerManager.players[this.player] != "undefined") ){
+			_CRAPS.output(PlayerManager.getPlayerName(this.player) + " lost a placed bet of $" + this.wager);
 		}
 		this.onLose();
 	};

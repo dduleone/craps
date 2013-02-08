@@ -6,8 +6,7 @@ var _CRAPS = {};
 
 var GameState = {
 	pointOn: false,
-	point: 0,
-	players: []
+	point: 0
 };
 
 
@@ -19,15 +18,6 @@ $.extend(_CRAPS, {
 		var buffer = document.getElementById("buffer");
 		$(buffer).append("<span>" + msg + "</span><br />\n");
 		buffer.scrollTop = buffer.scrollHeight;
-	},
-	offBets: [],
-	playerId: 0,
-	players: [],
-	getNextPlayerId: function(){
-		return this.playerId++;
-	},
-	getPlayerName: function(id){
-		return this.players[id].name;
 	},
 	placeBet: function(bet){
 		BetManager.placeBet(bet);
