@@ -139,34 +139,53 @@ var PassLineBet = function(value, player){
 	return b;
 }
 
-var HardWaysBet = function(value, player){
+var HardWaysBet = function(num, value, player){
 	var b = new Bet(value, player);
-	b.multiplier = .2;
+	switch(num){
+	case 4:
+		b.multiplier = 7;
+	case 6:
+		b.multiplier = 9;
+	case 8:
+		b.multiplier = 9;
+	case 10:
+		b.multiplier = 7;
+	default:
+		b.multiplier = 0
+	}
 	
 	// no Hard 2 bet
 
 	// Hard 4 (win)
 	b.on22 = function(){
-		_CRAPS.output("Hard 4! You win!");
-		b.playerWins();
+		if (num == 4){
+			_CRAPS.output("Hard 4! You win!");
+			b.playerWins();
+		}
 	}
 
 	// Easy 4 (lose)
 	b.onSum4 = function(){
-		_CRAPS.output("Easy 4! You lose!");
-		b.playerLoses();
+		if (num == 4){
+			_CRAPS.output("Easy 4! You lose!");
+			b.playerLoses();
+		}
 	}
 
 	// Hard 6 (win)
 	b.on33 = function(){
-		_CRAPS.output("Hard 6! You win!");
-		b.playerWins();
+	if (num == 6){
+			_CRAPS.output("Hard 6! You win!");
+			b.playerWins();
+		}
 	}
 
 	// Easy 6 (lose)
 	b.onSum6 = function(){
-		_CRAPS.output("Easy 6! You lose!");
-		b.playerLoses();
+		if (num == 6){
+			_CRAPS.output("Easy 6! You lose!");
+			b.playerLoses();
+		}
 	}
 	
 	// 7 out
@@ -179,26 +198,34 @@ var HardWaysBet = function(value, player){
 
 	// Hard 8 (win)
 	b.on44 = function(){
-		_CRAPS.output("8 the hard way! You win!");
-		b.playerWins();
+		if (num == 8){
+			_CRAPS.output("8 the hard way! You win!");
+			b.playerWins();
+		}
 	}
 
 	// Easy 8 (lose)
 	b.onSum8 = function(){
-		_CRAPS.output("Easy 8! You lose!");
-		b.playerLoses();		
+		if (num == 8){
+			_CRAPS.output("Easy 8! You lose!");
+			b.playerLoses();		
+		}
 	}
 
 	// Hard 10 (win)
 	b.on55 = function(){
-		_CRAPS.output("10 the hard way! You win!");
-		b.playerWins();
+		if (num == 10){
+			_CRAPS.output("10 the hard way! You win!");
+			b.playerWins();
+		}
 	}
 
 	// Easy 10 (lose)
 	b.onSum10 = function(){
-		_CRAPS.output("Easy 10! You lose!");
-		b.playerLoses();		
+		if (num == 10){
+			_CRAPS.output("Easy 10! You lose!");
+			b.playerLoses();		
+		}
 	}
 	
 	// no Hard 12 bet
