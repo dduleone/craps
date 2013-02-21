@@ -62,9 +62,9 @@
 
 			var p = PlayerManager.players[0];
 
-			_CRAPS.placeBet(new HardWaysBet(1000, p.id));
-			_CRAPS.placeBet(new HardWaysBet(1500, p.id));
-			_CRAPS.placeBet(new PassLineBet(1000, p.id));
+			_CRAPS.placeBet('hardWays4', 1000, p.id);
+			_CRAPS.placeBet('hardWays6', 1500, p.id);
+			_CRAPS.placeBet('passLineBet', 1000, p.id);
 			
 
 			function roll(){

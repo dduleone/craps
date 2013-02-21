@@ -19,8 +19,11 @@ $.extend(_CRAPS, {
 		$(buffer).append("<span>" + msg + "</span><br />\n");
 		buffer.scrollTop = buffer.scrollHeight;
 	},
-	placeBet: function(bet){
-		BetManager.placeBet(bet);
+	//placeBet: function(bet){
+	//	BetManager.placeBet(bet);
+	//},
+	placeBet: function(betType, value, playerId){
+		BetManager.placeBet(BetFactory[betType](value, playerId));
 	},
 	checkBets: function(){
 		BetManager.checkBets(_CRAPS.dice);
