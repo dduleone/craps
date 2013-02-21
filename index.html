@@ -82,13 +82,35 @@
 				lines: "#fff"
 			};
 
+			var thick = {
+				boardframe: 30,
+				boardlines: 5
+			}
+
 			//var _h = 1024, _w = 768;
 			var _h = 768, _w = 1024;
 			var _l = 0, _r = _w;
 			var _t = 0, _b = _h;
-
 			var d = new DrawCanvas(board, _l, _t, _w, _h, colors);
+
+			var pa = { /* pa = Playing Area */
+				_h: d.perimeterAdjust.h(_h),
+				_w: d.perimeterAdjust.w(_w),
+				_l: d.perimeterAdjust.l(_l),
+				_r: d.perimeterAdjust.r(_r),
+				_t: d.perimeterAdjust.t(_t),
+				_b: d.perimeterAdjust.b(_b)
+			};
+
 			d.resetBoard();
+			var boardEtc = {
+				color: colors.lines,
+				t: thick.boardlines
+			}
+			d.line(pa._l + 100, pa._t + 100, pa._r, pa._t + 100, boardEtc);
+			d.line(pa._r, pa._t + 100, pa._r, pa._b, boardEtc);
+			d.line(pa._l + 100, pa._t + 100, pa._l+100, pa._b-150, boardEtc);
+			//d.line(pa._l + 100, pa._t + 100, pa._l+100, pa._b-150, boardEtc);
 			//d.demo(24);
 		</script>
 	</footer>

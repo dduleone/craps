@@ -18,6 +18,32 @@ var DrawCanvas = function(board, l, t, w, h, c){
 				board[i] = this.tmpContext[i];
 			}
 		},
+		perimeterThicknessAdjust: {
+			l: (_l + thick.boardframe/2),
+			t: (_t + thick.boardframe/2),
+			w: (_w - thick.boardframe),
+			h: (_h - thick.boardframe)
+		},
+		perimeterAdjust: {
+			l: function(n){
+				return n + thick.boardframe;
+			},
+			t: function(n){
+				return n + thick.boardframe;
+			},
+			w: function(n){
+				return n - thick.boardframe;
+			},
+			h: function(n){
+				return n - thick.boardframe;
+			},
+			r: function(n){
+				return this.w(n);
+			},
+			b: function(n){
+				return this.h(n);
+			}
+		},
 		buildPoints: function(n, i){
 			var _u = i/n;
 			var _d = (n-i)/n;
@@ -40,9 +66,15 @@ var DrawCanvas = function(board, l, t, w, h, c){
 			//console.log(p);
 			return p;
 		},
-		line: function(x, y, w, h){
-			board.moveTo(x, y);
-			board.lineTo(w, h);
+		line: function(x1, y1, x2, y2, etc){
+			board.moveTo(x1, y1);
+			board.lineTo(x2, y2);
+			etc = $.extend({
+				color: '#000',
+				t: 1 // thickness
+			}, etc);
+			board.lineWidth = etc.t;
+			board.strokeStyle = etc.color;
 			board.stroke();
 		},
 		fillRect: function(x, y, w, h, color){
@@ -157,7 +189,9 @@ var DrawCanvas = function(board, l, t, w, h, c){
 		resetBoard: function(){
 			board.clearRect(_l, _t, _w, _h);
 			d.fillRect(_l, _t, _w, _h, colors.board);
-			d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: 25});
+			pta = this.perimeterThicknessAdjust;
+			d.strokeRect(pta.l, pta.t, pta.w, pta.h, {color: colors.black, t: thick.boardframe});
+			//d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: thick.boardframe});
 		}
 	}
 }
