@@ -85,11 +85,12 @@
 
 			var thick = {
 				boardframe: 30,
-				boardlines: 5
+				boardlines: 8
 			}
 
 			//var _h = 1024, _w = 768;
 			var _h = 768, _w = 1024;
+			//var _h = 640, _w = 800;
 			var _l = 0, _r = _w;
 			var _t = 0, _b = _h;
 			var d = new DrawCanvas(board, _l, _t, _w, _h, colors);
@@ -110,9 +111,9 @@
 			}
 
             var halfthick = boardEtc.t/2;
-            
             var gutter = 100;
-            var passlinewidth = gutter * 3/4;
+            var passlinewidth = gutter * (_h/_w);
+            var gutterplus = gutter * 1;
 
             d.line(
             	pa._l + gutter - halfthick,
@@ -132,11 +133,11 @@
             	pa._l + gutter - halfthick,
             	pa._t + gutter - halfthick,
             	pa._l + gutter - halfthick,
-            	pa._b - 150 - gutter,
+            	pa._b - gutterplus - gutter,
             	boardEtc
             );
             d.line(
-            	pa._l + (150 * (pa._w/pa._h)) - halfthick,
+            	pa._l + (gutterplus * 2) - halfthick,
             	pa._b - gutter - halfthick ,
             	pa._r - halfthick,
             	pa._b - gutter - halfthick,
@@ -144,8 +145,8 @@
             );
             d.curve(
             	pa._l + gutter - halfthick,
-            	pa._b - 150 - gutter,
-            	pa._l + (150 * (pa._w/pa._h)) - halfthick,
+            	pa._b - gutterplus - gutter,
+            	pa._l + (gutterplus * 2) - halfthick,
             	pa._b - gutter - halfthick,
             	pa._l + gutter - halfthick,
             	pa._b - gutter - halfthick,
@@ -157,11 +158,11 @@
             	pa._l + gutter - halfthick + passlinewidth,
             	pa._t + gutter - halfthick,
             	pa._l + gutter - halfthick + passlinewidth,
-            	pa._b - 150 - passlinewidth - gutter,
+            	pa._b - gutterplus - passlinewidth - gutter,
             	boardEtc
             );
             d.line(
-            	pa._l + ((150 + passlinewidth) * (pa._w/pa._h)) - halfthick,
+            	pa._l + ((gutterplus * 2 + passlinewidth)) - halfthick,
             	pa._b - gutter - halfthick - passlinewidth,
             	pa._r - halfthick,
             	pa._b - gutter - halfthick - passlinewidth,
@@ -169,8 +170,8 @@
             );
             d.curve(
             	pa._l + gutter - halfthick + passlinewidth,
-            	pa._b - 150 - passlinewidth - gutter,
-            	pa._l + ((150 + passlinewidth) * (pa._w/pa._h)) - halfthick,
+            	pa._b - gutterplus - passlinewidth - gutter,
+            	pa._l + ((gutterplus * 2 + passlinewidth)) - halfthick,
             	pa._b - gutter - halfthick - passlinewidth,
             	pa._l + gutter - halfthick + passlinewidth,
             	pa._b - gutter - halfthick - passlinewidth,
