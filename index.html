@@ -112,6 +112,7 @@
             var halfthick = boardEtc.t/2;
             
             var gutter = 100;
+            var passlinewidth = gutter * 3/4;
 
             d.line(
             	pa._l + gutter - halfthick,
@@ -150,6 +151,32 @@
             	pa._b - gutter - halfthick,
             	boardEtc
             );
+
+
+            d.line(
+            	pa._l + gutter - halfthick + passlinewidth,
+            	pa._t + gutter - halfthick,
+            	pa._l + gutter - halfthick + passlinewidth,
+            	pa._b - 150 - passlinewidth - gutter,
+            	boardEtc
+            );
+            d.line(
+            	pa._l + ((150 + passlinewidth) * (pa._w/pa._h)) - halfthick,
+            	pa._b - gutter - halfthick - passlinewidth,
+            	pa._r - halfthick,
+            	pa._b - gutter - halfthick - passlinewidth,
+            	boardEtc
+            );
+            d.curve(
+            	pa._l + gutter - halfthick + passlinewidth,
+            	pa._b - 150 - passlinewidth - gutter,
+            	pa._l + ((150 + passlinewidth) * (pa._w/pa._h)) - halfthick,
+            	pa._b - gutter - halfthick - passlinewidth,
+            	pa._l + gutter - halfthick + passlinewidth,
+            	pa._b - gutter - halfthick - passlinewidth,
+            	boardEtc
+            );
+
 //pa._l + gutter - halfthick + ((pa._l + (150 * (pa._w/pa._h)) - halfthick,) - (pa._l + gutter - halfthick))/2,            
 /*
 			d.line(pa._l + 100, pa._t + 100, pa._r, pa._t + 100, boardEtc);
