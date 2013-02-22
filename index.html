@@ -84,7 +84,7 @@
 			};
 
 			var thick = {
-				boardframe: 30,
+				boardframe: 20,
 				boardlines: 8
 			}
 
@@ -110,10 +110,10 @@
 				t: thick.boardlines
 			}
 
-            var halfthick = boardEtc.t/2;
-            var gutter = 100;
-            var passlinewidth = gutter * (_h/_w);
-            var gutterplus = gutter * 1;
+            var halfthick = parseInt(boardEtc.t/2);
+            var gutter = parseInt(pa._w/10);
+            var passlinewidth = parseInt(gutter * (pa._h/pa._w));
+            var gutterplus = parseInt(gutter * 1);
 
             d.line(
             	pa._l + gutter - halfthick,
