@@ -36,10 +36,45 @@ crapsBets.js
 // Yo Eleven
 // Craps
 // World
+
+// Game States:
+// Point On
+// Point Off
+
+// Bet Responses:
+// Win = 1
+// Lose = 2
+// Draw = 3
+// Win & Repeat = 4
+// Lose & Repeat = 5
+// Draw & Repeat = 6
+// Off (Draw & Repeat) = 7
+
+//[[1,1; 1,2; 1,3; 1,4; 1,5; 1,6][2,2; 2,3; 2,4; 2,5; 2,6][3,3; 3,4; 3,5; 3,6][4,4; 4,5; 4,6][5,5; 5,6][6,6]]
+//Ex:
+//var passLineBetPointOff = [[5, 5, 3, 3, 3, 4]
+//															[3, 3, 3, 4, 3]
+//																 [3, 4, 3, 3]
+//																		[3, 3, 3]
+//																			 [3, 4]
+//																					[6]];
 var PassLineBet = function(value, player){
+	passBet = this;
+	passBet.type = "passLineBet";
 	var b = new Bet(value, player);
-	b.multiplier = 0;
+	b.payoutMult = 0;
+	//[[1,1; 1,2; 1,3; 1,4; 1,5; 1,6][2,2; 2,3; 2,4; 2,5; 2,6][3,3; 3,4; 3,5; 3,6][4,4; 4,5; 4,6][5,5; 5,6][6,6]]
+	passBet.passLineBetPointOff = [[5, 5, 3, 3, 3, 4][3, 3, 3, 4, 3][3, 4, 3, 3][3, 3, 3][3, 4][6]];
+	passBet.passLineBetPoint4   = [[6, 6, 4, 6, 6, 2][4, 6, 6, 6, 6][6, 2, 6, 6][6, 6, 6][6, 6][6]];
+	passBet.passLineBetPoint5   = [[6, 6, 6, 4, 6, 2][6, 4, 6, 6, 6][6, 2, 6, 6][6, 6, 6][6, 6][6]];
+	passBet.passLineBetPoint6   = [[6, 6, 6, 6, 4, 2][6, 6, 4, 2, 6][4, 2, 6, 6][6, 6, 6][6, 6][6]];
+	passBet.passLineBetPoint8   = [[6, 6, 6, 6, 6, 2][6, 6, 6, 2, 4][6, 2, 4, 6][4, 6, 6][6, 6][6]];
+	passBet.passLineBetPoint9   = [[6, 6, 6, 6, 6, 2][6, 6, 6, 2, 6][6, 2, 6, 4][6, 4, 6][6, 6][6]];
+	passBet.passLineBetPoint10  = [[6, 6, 6, 6, 6, 2][6, 6, 6, 2, 6][6, 2, 6, 6][6, 6, 4][4, 6][6]];
 	
+	b.result = passBet.passLineBetPointOff;
+	
+	/* Old bet structure.
 		b.onSum2 = function(){
 			if (GameState.point == false){
 				_CRAPS.output("2! Craps 2! You Lose!");
@@ -136,24 +171,32 @@ var PassLineBet = function(value, player){
 			}
 		}
 	b.bindRollEvents();
-	return b;
+	*/
 }
 
 var HardWaysBet = function(num, value, player){
+	hardBet = this;
+	hardBet.type = "hardWaysBet";
 	var b = new Bet(value, player);
 	switch(num){
 	case 4:
-		b.multiplier = 7;
+		b.payoutMult = 7;
+		b.result = [[6, 6, 2, 6, 6, 6][4, 6, 6, 6, 6][6, 6, 6, 6][6, 6, 6][6, 6][6]];
 	case 6:
-		b.multiplier = 9;
+		b.payoutMult = 9;
+		b.result = [[6, 6, 6, 6, 2, 6][6, 6, 2, 6, 6][4, 6, 6, 6][6, 6, 6][6, 6][6]];
 	case 8:
-		b.multiplier = 9;
+		b.payoutMult = 9;
+		b.result = [[6, 6, 6, 6, 6, 6][6, 6, 6, 6, 2][6, 6, 2, 6][4, 6, 6][6, 6][6]];
 	case 10:
-		b.multiplier = 7;
+		b.payoutMult = 7;
+		b.result = [[6, 6, 6, 6, 6, 6][6, 6, 6, 6, 6][6, 6, 6, 6][6, 6, 2][4, 6][6]];
 	default:
-		b.multiplier = 0
+		b.payoutMult = 0
+		b.result = [[6, 6, 6, 6, 6, 6][6, 6, 6, 6, 6][6, 6, 6, 6][6, 6, 6][6, 6][6]];
 	}
 	
+	/* Old Bet Structure
 	// no Hard 2 bet
 
 	// Hard 4 (win)
@@ -232,4 +275,5 @@ var HardWaysBet = function(num, value, player){
 
 	b.bindRollEvents();
 	return b;
+	*/
 }

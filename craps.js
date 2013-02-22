@@ -20,15 +20,14 @@ $.extend(_CRAPS, {
 		buffer.scrollTop = buffer.scrollHeight;
 	},
 	//placeBet: function(bet){
-	//	BetManager.placeBet(bet);
-	//},
+	//	BetManager.placeBet(bet);}
+	//,
 	placeBet: function(betType, value, playerId){
 		BetManager.placeBet(BetFactory[betType](value, playerId));
 	},
 	checkBets: function(){
 		BetManager.checkBets(_CRAPS.dice);
 	},
-	// I kinda like the idea of having a 'global' set of dice variable, and thus a global 'dice' variable:
 	dice: null,
 	point: false,
 	pointOn: function(dice){
@@ -106,3 +105,97 @@ var BetFactory = {
 		return new HardWaysBet(10, value, player);
 	}
 };
+
+var BetManager = {
+	manager = this;
+	
+	bets = [];
+	
+	function placeBet(bet) {
+		manager.bets[bet.id] = bet;
+	}
+	
+	betId = 0;
+	
+	function getNextBetId(){
+		return manager.betId++;
+	}
+	
+	function checkBets(dice){
+		for(var i in manager.bets){
+			var diceValArray = diceToNum(_CRAPS.dice);
+			var betReturn = 0;
+			if(GameState.pointOn = false){
+				betReturn = manager.bets[i].pointOffResult[diceValArray[0]][diceValArray[1]];
+				if(manager.bets[i].type == "passLineBet" && betReturn == 3){
+					eval("manager.bets[i].b.pointOnResult = manager.bets[i].passLineBetPoint" + _CRAPS.dice.total);
+				}
+			} else {
+				
+			}
+			_CRAPS.output("Checking Bet: " + i);
+			manager.bets[i].checkRoll(dice.getDiceAsArray());
+		}
+	}
+	
+	turnBetsOn: function(){
+		for(var i in BetManager.bets){
+			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
+				return;
+			}
+			BetManager.bets[i].betOn = true;
+		}
+	},
+}
+
+function diceToNum(dice){
+	diceArray = dice.getDiceAsArray();
+	if(diceArray[0].value <= diceArray[1].value){
+		return [diceArray[0].value, diceArray[1].value];
+	} else {
+		return [diceArray[1].value, diceArray[0].value];
+	}
+}
+
+var Dealer = {
+	
+	var dealer = this;
+	
+	dealer.betManager = new BetManager
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

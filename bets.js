@@ -1,38 +1,24 @@
 /*
 bets.js
 */
-var BetManager = {
-	bets: [],
-	placeBet: function(bet){
-		BetManager.bets[bet.id] = bet;
-	},
-	betId: 0,
-	getNextBetId: function(){
-		return BetManager.betId++;
-	},
-	checkBets: function(dice){
-		for(var i in BetManager.bets){
-			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
-				return;
-			}
-			if(!BetManager.bets[i].betOn){
-				return;
-			}
-			_CRAPS.output("Checking Bet: " + i);
-			BetManager.bets[i].checkRoll(dice.getDiceAsArray());
-		}
-	},
-	turnBetsOn: function(){
-		for(var i in BetManager.bets){
-			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
-				return;
-			}
-			BetManager.bets[i].betOn = true;
-		}
-	},
+var Bet = function(wager, player){
+	var bet = this;
+	
+	bet.value = wager;
+	
+	bet.player = player;
+	
+	bet.payoutMult = 0;
+	
+	bet.result = [];
+	for(i in [0,1,2,3,4,5]){
+		bet.pointOnResult.push([]);
+	}
+}
 
-};
 
+
+/* Old Bet Structure
 var Bet = function(wager, player){
 
 	var bet = this;
@@ -253,8 +239,8 @@ var Bet = function(wager, player){
 		//var oldBet = BetManager.bets.splice(index, 1);
 		////if (oldBet.recurring){
 		////	oldBet.id = BetManager.getNextBetId();
-		////	BetManager.placeBet(oldBet);
-		////}
+		////	BetManager.placeBet(oldBet);}
+		////
 		//// assume recurring bet for now.
 		//oldBet.id = BetManager.getNextBetId();
 		//BetManager.placeBet(oldBet);
@@ -288,3 +274,4 @@ var Bet = function(wager, player){
 
 	this.bindRollEvents();
 };
+*/

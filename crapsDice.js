@@ -18,45 +18,45 @@ var CrapsDice = function(){
 		validate: function(){
 			return this.dice.validate();
 		},
-		isCraps: function(){
-			switch(this.dice.total){
-				case 2:
-				case 3:
-				case 12:
-					return true;
-				break;
-				default:
-				break;
-			}
-			return false;
-		},
-		isComeOutWinner: function(){
-			switch(this.dice.total){
-				case 7:
-				case 11:
-					return true;
-				break;
-				default:
-				break;
-			}
-			return false;
-		},
-		isHardWays: function(){
-			if (this.dice[0].value != this.dice[1].value){
-				return false;
-			}
-			switch(this.dice.total){
-				case 4:
-				case 6:
-				case 8:
-				case 10:
-					return true;
-				break;
-				default:
-				break;
-			}
-			return false;
-		},
+		//isCraps: function(){
+		//	switch(this.dice.total){
+		//		case 2:
+		//		case 3:
+		//		case 12:
+		//			return true;
+		//		break;
+		//		default:
+		//		break;
+		//	}
+		//	return false;
+		//},
+		//isComeOutWinner: function(){
+		//	switch(this.dice.total){
+		//		case 7:
+		//		case 11:
+		//			return true;
+		//		break;
+		//		default:
+		//		break;
+		//	}
+		//	return false;
+		//},
+		//isHardWays: function(){
+		//	if (this.dice[0].value != this.dice[1].value){
+		//		return false;
+		//	}
+		//	switch(this.dice.total){
+		//		case 4:
+		//		case 6:
+		//		case 8:
+		//		case 10:
+		//			return true;
+		//		break;
+		//		default:
+		//		break;
+		//	}
+		//	return false;
+		//},
 		getDiceAsArray: function(){
 			return this.dice.getArray();
 		}
