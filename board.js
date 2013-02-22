@@ -67,6 +67,8 @@ var DrawCanvas = function(board, l, t, w, h, c){
 			return p;
 		},
 		line: function(x1, y1, x2, y2, etc){
+			this.preserveContext();
+			board.beginPath();
 			board.moveTo(x1, y1);
 			board.lineTo(x2, y2);
 			etc = $.extend({
@@ -75,11 +77,30 @@ var DrawCanvas = function(board, l, t, w, h, c){
 			}, etc);
 			board.lineWidth = etc.t;
 			board.strokeStyle = etc.color;
+			board.lineCap = "butt";
 			board.stroke();
+			this.restoreContext();
+		},
+		curve: function(x1, y1, x2, y2, xc, yc, etc){ // Starting X, Starting Y, Ending X, Ending Y, Control Point X Control Point Y
+			this.preserveContext();
+			board.beginPath();
+			board.moveTo(x1, y1);
+			board.quadraticCurveTo(xc, yc, x2, y2);
+			etc = $.extend({
+				color: '#000',
+				t: 1 // thickness
+			}, etc);
+			board.lineWidth = etc.t;
+			board.strokeStyle = etc.color;
+			board.lineCap = "butt";
+			board.stroke();
+			this.restoreContext();
 		},
 		fillRect: function(x, y, w, h, color){
+			this.preserveContext();
 			board.fillStyle = color;
 			board.fillRect(x, y, w, h);
+			this.restoreContext();
 		},
 		strokeRect: function(x, y, w, h, etc){
 			// Assumes etc.t is type int.
