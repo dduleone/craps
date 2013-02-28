@@ -1,0 +1,12 @@
+Game States:
+Point On
+Point Off
+
+Bet Responses:
+Win
+Lose
+Draw
+Win & Repeat
+Lose & Repeat
+Draw & Repeat
+Off (Draw & Repeat)

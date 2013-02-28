@@ -1,0 +1,8 @@
+Bet Factory - on player?
+
+
+Create bet:
+place bet div 
+ - rollout/unhide/pop up, fade out felt, highlight selected bet
+ - Describe bet, pay outs
+ - plus/minus slider (bet increment), bet input box
