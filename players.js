@@ -5,11 +5,11 @@ var Player = function(name, bank){
 	this.name = name;
 	this.bank = bank;
 	
-	var addToBank = function(amt){
+	function addToBank(amt){
 		this.bank += amt;
 	}
 	
-	var subFromBank = function(amt){
+	function subFromBank(amt){
 		this.bank -= amt;
 	}
 };
@@ -23,7 +23,7 @@ $.extend(PlayerManager, {
 	getPlayerName: function(id){
 		return this.players[id].name;
 	},
-	makePlayer: function(name, bank){
-		this.players.push(new Player(name, bank));
+	addPlayer: function(player){
+		this.players.push(player);
 	}
 });
