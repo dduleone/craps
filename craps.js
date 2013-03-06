@@ -22,8 +22,10 @@ $.extend(_CRAPS, {
 	//placeBet: function(bet){
 	//	BetManager.placeBet(bet);}
 	//,
-	placeBet: function(betType, value, playerId){
-		BetManager.placeBet(BetFactory[betType](value, playerId));
+	placeBet: function(bet){	
+		if(BetManager.validateBet(bet)){
+			BetManager.placeBet(bet);
+		}
 	},
 	checkBets: function(){
 		BetManager.checkBets(_CRAPS.dice);
@@ -88,25 +90,547 @@ $.extend(_CRAPS, {
 });
 _CRAPS.init();
 
-var BetFactory = {
-	passLineBet: function(value, player){
-		return new PassLineBet(value, player);
-	},
-	hardWays4: function(value, player){
-		return new HardWaysBet(4, value, player);
-	},
-	hardWays6: function(value, player){
-		return new HardWaysBet(6, value, player);
-	},
-	hardWays8: function(value, player){
-		return new HardWaysBet(8, value, player);
-	},
-	hardWays10: function(value, player){
-		return new HardWaysBet(10, value, player);
-	}
-};
+var BetChecker = function(point, betArray, dice){
+	newBetArray = [];
+	for(var i in BetArray){
+		var bet = BetArray[i];
+		var _bet = bet.bet;
 
-var BetManager = {
+		if(_bet.on == false){
+			newBetArray.push(bet);
+			continue;
+		}
+		
+		if(bet.type == "passline"){
+			if(point){
+				if(dice.getSum() == point){
+					_bet.player.addToBank(_bet.value);
+					newBetArray.push(bet);
+				}
+				else if(dice.getSum() == 7){
+					continue;
+				}
+			}
+			else if(dice.getSum() == 2 || dice.getSum() == 3){
+				_bet.player.subFromBank(_bet.value);
+				newBetArray.push(bet);
+			}
+			else if(dice.getSum() == 7 || dice.getSum() == 11){
+				_bet.player.addToBank(_bet.value);
+				newBetArray.push(bet);
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "passlineOdds"){
+			if(dice.getSum() == point){
+				if(point == 4 || point == 10){
+					_bet.player.addToBank(2*_bet.value + _bet.value);
+				} else if(point == 5 || point == 9){
+					_bet.player.addToBank(3*_bet.value/2 + _bet.value);
+				} else if(point == 6 || point == 8){
+					_bet.player.addToBank(6*_bet.value/5 + _bet.value);
+				}
+			} else if(dice.getSum() == 7){
+				continue;
+			} else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "come"){
+			if(bet.comePoint){
+				if(dice.getSum() == bet.comePoint){
+					_bet.player.addToBank(_bet.value);
+					if(bet.repeat){
+						newBetArray.push(bet);
+					}
+				}
+				else if(dice.getSum() == 7){
+					continue;
+				}
+			}
+			else if(dice.getSum() == 2 || dice.getSum() == 3){
+				continue;
+			}
+			else if(dice.getSum() == 7 || dice.getSum() == 11){
+				_bet.player.addToBank(_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+			}
+			else if(dice.getSum() == 12){
+				newBetArray.push(bet);
+			}
+			else {
+				bet.comePoint = dice.getSum();
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "comeOdds"){
+			if(dice.getSum() == bet.comePoint){
+				if(bet.comePoint == 4 || bet.comePoint == 10){
+					_bet.player.addToBank(2*_bet.value + _bet.value);
+				} else if(bet.comePoint == 5 || bet.comePoint == 9){
+					_bet.player.addToBank(3*_bet.value/2 + _bet.value);
+				} else if(bet.comePoint == 6 || bet.comePoint == 8){
+					_bet.player.addToBank(6*_bet.value/5 + _bet.value);
+				}
+			} else if(dice.getSum() == 7){
+				continue;
+			} else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "dontPass"){
+			if(point){
+				if(dice.getSum() == point){
+					continue;
+				}
+				else if(dice.getSum() == 7){
+					_bet.player.addToBank(_bet.value);
+					if(bet.repeat){
+						newBetArray.push(bet);
+					}
+				}
+			}
+			else if(dice.getSum() == 2 || dice.getSum() == 3){
+				_bet.player.addToBank(_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+			}
+			else if(dice.getSum() == 7 || dice.getSum == 11){
+				_bet.player.subFromBank(_bet.value);
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "dontPassOdds"){
+			if(dice.getSum() == 7){
+				if(point == 4 || point == 10){
+					_bet.player.addToBank(_bet.value/2 + _bet.value);
+				} else if(point == 5 || point == 9){
+					_bet.player.addToBank(2*_bet.value/3 + _bet.value);
+				} else if(point == 6 || point == 8){
+					_bet.player.addToBank(5*_bet.value/6 + _bet.value);
+				}
+			} else if(dice.getSum() == point){
+				continue;
+			} else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "dontCome"){
+			if(bet.comePoint){
+				if(dice.getSum() == bet.comePoint){
+					continue
+				}
+				else if(dice.getSum() == 7){
+					_bet.player.addToBank(_bet.value);
+					if(bet.repeat){
+						newBetArray.push(bet);
+					}
+				}
+			}
+			else if(dice.getSum() == 2 || dice.getSum() == 3){
+				_bet.player.addToBank(_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+			}
+			else if(dice.getSum() == 7 || dice.getSum() == 11){
+				continue;
+			}
+			else if(dice.getSum() == 12){
+				newBetArray.push(bet);
+			}
+			else {
+				bet.comePoint = dice.getSum();
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "dontComeOdds"){
+			if(dice.getSum() == 7){
+				if(bet.comePoint == 4 || bet.comePoint == 10){
+					_bet.player.addToBank(_bet.value/2 + _bet.value);
+				} else if(bet.comePoint == 5 || bet.comePoint == 9){
+					_bet.player.addToBank(2*_bet.value/3 + _bet.value);
+				} else if(bet.comePoint == 6 || bet.comePoint == 8){
+					_bet.player.addToBank(5*_bet.value/6 + _bet.value);
+				}
+			} else if(dice.getSum() == point){
+				continue;
+			} else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "place4"){
+			if(dice.getSum() == 4){
+				_bet.player.addToBank(9*_bet.value/5);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "place5"){
+			if(dice.getSum() == 5){
+				_bet.player.addToBank(7*_bet.value/5);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "place6"){
+			if(dice.getSum() == 6){
+				_bet.player.addToBank(7*_bet.value/6);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "place8"){
+			if(dice.getSum() == 8){
+				_bet.player.addToBank(7*_bet.value/6);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "place9"){
+			if(dice.getSum() == 9){
+				_bet.player.addToBank(7*_bet.value/5);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "place10"){
+			if(dice.getSum() == 10){
+				_bet.player.addToBank(9*_bet.value/5);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "hard4"){
+			if(dice.getSum() == 7){
+				continue;
+			}
+			else if(dice.getSum() == 4){
+				if(dice.dice[0].value == dice.dice[1].value){
+					_bet.player.addToBank(_bet.value*7);
+					if(bet.repeat){
+						newBetArray.push(bet);
+					}
+					else {
+						_bet.player.addToBank(_bet.value);
+					}
+				}
+				else {
+					continue;
+				}
+			}
+			newBetArray.push(bet);
+		}
+		else if(bet.type == "hard6"){
+			if(dice.getSum() == 7){
+				continue;
+			}
+			else if(dice.getSum() == 6){
+				if(dice.dice[0].value == dice.dice[1].value){
+					_bet.player.addToBank(_bet.value*9);
+					if(bet.repeat){
+						newBetArray.push(bet);
+					}
+					else {
+						_bet.player.addToBank(_bet.value);
+					}
+				}
+				else {
+					continue;
+				}
+			}
+			newBetArray.push(bet);
+		}
+		else if(bet.type == "hard8"){
+			if(dice.getSum() == 7){
+				continue;
+			}
+			else if(dice.getSum() == 8){
+				if(dice.dice[0].value == dice.dice[1].value){
+					_bet.player.addToBank(_bet.value*9);
+					if(bet.repeat){
+						newBetArray.push(bet);
+					}
+					else {
+						_bet.player.addToBank(_bet.value);
+					}
+				}
+				else {
+					continue;
+				}
+			}
+			newBetArray.push(bet);
+		}
+		else if(bet.type == "hard10"){
+			if(dice.getSum() == 7){
+				continue;
+			}
+			else if(dice.getSum() == 10){
+				if(dice.dice[0].value == dice.dice[1].value){
+					_bet.player.addToBank(_bet.value*7);
+					if(bet.repeat){
+						newBetArray.push(bet);
+					}
+					else {
+						_bet.player.addToBank(_bet.value);
+					}
+				}
+				else {
+					continue;
+				}
+			}
+			newBetArray.push(bet);
+		}
+		else if(bet.type == "field"){
+			if(dice.getSum() == 2 || dice.getSum() == 12){
+				_bet.player.addToBank(2*_bet.value);
+			}
+			else if(dice.getSum() == 3 || dice.getSum() == 4 || dice.getSum() == 9 ||
+							dice.getSum() == 10 || dice.getSum() == 11){
+				_bet.player.addToBank(_bet.value);
+			}
+			else{
+				continue;
+			}
+			if(bet.repeat){
+				newBetArray.push(bet);
+			}
+			else {
+				_bet.player.addToBank(_bet.value);
+			}
+		}
+		else if(bet.type == "cAndE"){
+			if(dice.getSum() == 2 || dice.getSum() == 3 || dice.getSum() == 12){
+				_bet.player.addToBank(3*_bet.value - _bet.value/2);
+			}
+			else if(dice.getSum() == 11){
+				_bet.player.addToBank(7*_bet.value - _bet.value/2);
+			}
+			else{
+				continue;
+			}
+			if(bet.repeat){
+				newBetArray.push(bet);
+			}
+			else {
+				_bet.player.addToBank(_bet.value);
+			}
+		}
+		else if(bet.type == "any7"){
+			if(dice.getSum() == 7){
+				_bet.player.addToBank(4*_bet.value);
+			}
+			else{
+				continue;
+			}
+			if(bet.repeat){
+				newBetArray.push(bet);
+			}
+			else {
+				_bet.player.addToBank(_bet.value);
+			}
+		}
+		else if(bet.type == "anyCraps"){
+			if(dice.getSum() == 2 || dice.getSum() == 3 || dice.getSum() == 12){
+				_bet.player.addToBank(7*_bet.value);
+			}
+			else{
+				continue;
+			}
+			if(bet.repeat){
+				newBetArray.push(bet);
+			}
+			else {
+				_bet.player.addToBank(_bet.value);
+			}
+		}
+		else if(bet.type == "horn"){
+			if(dice.getSum() == 2 || dice.getSum() == 12){
+				bet.player.addToBank(27*_bet.value/4);
+			}
+			else if(dice.getSum() == 3 || dice.getSum() == 11){
+				bet.player.addToBank(3*_bet.value);
+			}
+			else{
+				continue;
+			}
+			if(bet.repeat){
+				newBetArray.push(bet);
+			}
+			else {
+				_bet.player.addToBank(_bet.value);
+			}
+		}
+		else if(bet.type == "aceTwo"){
+			if(dice.getSum() == 3){
+				bet.player.addToBank(15*_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+		}
+		else if(bet.type == "snakeEyes"){
+			if(dice.getSum() == 2){
+				bet.player.addToBank(30*_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+		}
+		else if(bet.type == "midnight"){
+			if(dice.getSum() == 12){
+				bet.player.addToBank(30*_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+		}
+		else if(bet.type == "yoleven"){
+			if(dice.getSum() == 11){
+				bet.player.addToBank(15*_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+		}
+		else if(bet.type == "big6"){
+			if(dice.getSum() == 6){
+				_bet.player.addToBank(_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "big8"){
+			if(dice.getSum() == 8){
+				_bet.player.addToBank(_bet.value);
+				if(bet.repeat){
+					newBetArray.push(bet);
+				}
+				else {
+					_bet.player.addToBank(_bet.value);
+				}
+			}
+			else if(dice.getSum() == 7){
+				continue;
+			}
+			else {
+				newBetArray.push(bet);
+			}
+		}
+		else if(bet.type == "world"){
+			if(dice.getSum() == 2 || dice.getSum() == 12){
+				_bet.player.addToBank(26*_bet.value/5);
+			}
+			else if(dice.getSum() == 3 || dice.getSum() == 11){
+				_bet.player.addToBank(11*_bet.value/5);
+			}
+			else if(dice.getSum() == 7){
+				_bet.player.addToBank(0);
+			}
+			else{
+				continue;
+			}
+			if(bet.repeat){
+				newBetArray.push(bet);
+			}
+			else{
+				_bet.player.addToBank(_bet.value);
+			}
+		}
+	}
+	return newBetArray;
+}
+
+var BetManager = function() {
 	manager = this;
 	
 	bets = [];
@@ -122,30 +646,53 @@ var BetManager = {
 	}
 	
 	function checkBets(dice){
+		manager.bets = BetChecker(GameState.point, manager.bets, _CRAPS.dice);
+	}
+	
+	function turnBetsOn(){
 		for(var i in manager.bets){
-			var diceValArray = diceToNum(_CRAPS.dice);
-			var betReturn = 0;
-			if(GameState.pointOn = false){
-				betReturn = manager.bets[i].pointOffResult[diceValArray[0]][diceValArray[1]];
-				if(manager.bets[i].type == "passLineBet" && betReturn == 3){
-					eval("manager.bets[i].b.pointOnResult = manager.bets[i].passLineBetPoint" + _CRAPS.dice.total);
-				}
-			} else {
-				
-			}
-			_CRAPS.output("Checking Bet: " + i);
-			manager.bets[i].checkRoll(dice.getDiceAsArray());
+			manager.bets[i].betOn = true;
 		}
 	}
 	
-	turnBetsOn: function(){
-		for(var i in BetManager.bets){
-			if( (typeof BetManager.bets[i] == 'undefined') || (BetManager.bets[i] == 'RESOLVED') ){
-				return;
-			}
-			BetManager.bets[i].betOn = true;
+	function validateBet(bet){
+		switch(bet.type){
+		case "passline":
+		case "passlineOdds":
+		case "come":
+		case "comeOdds":
+		case "dontPass":
+		case "dontPassOdds":
+		case "dontCome":
+		case "dontComeOdds":
+		case "place4":
+		case "place5":
+		case "place6":
+		case "place9":
+		case "place8":
+		case "place10":
+		case "hard4":
+		case "hard6":
+		case "hard8":
+		case "hard10":
+		case "field":
+		case "cAndE":
+		case "any7":
+		case "anyCraps":
+		case "horn":
+		case "aceTwo":
+		case "snakeEyes":
+		case "midnight":
+		case "yoleven":
+		case "big6":
+		case "big8":
+		case "world":
+			return true;
+		default:
+			return;
 		}
-	},
+
+	}
 }
 
 function diceToNum(dice){
@@ -157,11 +704,11 @@ function diceToNum(dice){
 	}
 }
 
-var Dealer = {
+var Dealer = function(){
 	
 	var dealer = this;
 	
-	dealer.betManager = new BetManager
+	dealer.betManager = new BetManager;
 }
 
 
