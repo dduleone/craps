@@ -7,6 +7,8 @@ var Bet = function(wager, player){
 	bet.value = wager;
 	
 	bet.player = player;
+	
+	bet.on = true;
 }
 
 
