@@ -4,6 +4,14 @@ var Player = function(name, bank){
 	this.id = PlayerManager.getNextPlayerId();
 	this.name = name;
 	this.bank = bank;
+	
+	var addToBank = function(amt){
+		this.bank += amt;
+	}
+	
+	var subFromBank = function(amt){
+		this.bank -= amt;
+	}
 };
 
 $.extend(PlayerManager, {

@@ -7,13 +7,6 @@ var Bet = function(wager, player){
 	bet.value = wager;
 	
 	bet.player = player;
-	
-	bet.payoutMult = 0;
-	
-	bet.result = [];
-	for(i in [0,1,2,3,4,5]){
-		bet.pointOnResult.push([]);
-	}
 }
 
 
