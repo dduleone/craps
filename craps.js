@@ -157,8 +157,11 @@ $.extend(_CRAPS, {
 	dealer: new Dealer(),
 	minBet: 10,
 	placeBet: function(bet){	
-		if(this.dealer.betManager.validateBet(bet)){
+		if(this.dealer.betManager.validateBet(bet)[0]){
 			this.dealer.betManager.placeBet(bet);
+		}
+		else{
+			console.log(this.dealer.betManager.validateBet(bet)[1]);
 		}
 	},
 	checkBets: function(){
@@ -534,7 +537,9 @@ var BetChecker = function(point, betArray, dice){
 					continue;
 				}
 			}
-			newBetArray.push(bet);
+			else{
+				newBetArray.push(bet);
+			}
 			break;
 		case "hard6":
 			if(dice.getSum() == 7){
@@ -554,7 +559,9 @@ var BetChecker = function(point, betArray, dice){
 					continue;
 				}
 			}
-			newBetArray.push(bet);
+			else{
+				newBetArray.push(bet);
+			}
 			break;
 		case "hard8":
 			if(dice.getSum() == 7){
@@ -574,7 +581,9 @@ var BetChecker = function(point, betArray, dice){
 					continue;
 				}
 			}
-			newBetArray.push(bet);
+			else{
+				newBetArray.push(bet);
+			}
 			break;
 		case "hard10":
 			if(dice.getSum() == 7){
@@ -594,7 +603,9 @@ var BetChecker = function(point, betArray, dice){
 					continue;
 				}
 			}
-			newBetArray.push(bet);
+			else{
+				newBetArray.push(bet);
+			}
 			break;
 		case "field":
 			if(dice.getSum() == 2 || dice.getSum() == 12){

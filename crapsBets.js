@@ -183,7 +183,7 @@ var ComeLineBet = function(value, player){
 	$bet.comePoint = false;
 }
 	
-var ComeLineOdds = function(value, player, comeBet){
+var ComeLineOddsBet = function(value, player, comeBet){
 	$bet = this;
 	$bet.type = "comeOdds";
 	$bet.repeat = false;
