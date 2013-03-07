@@ -44,8 +44,8 @@ crapsBets.js
 var PassLineBet = function(value, player){
 	$bet = this;
 	$bet.type = "passline";
-	$bet.repeat = false;
-	var bet = new Bet(value, player);
+	//$bet.repeat = false;
+	$bet.bet = new Bet(value, player);
 	
 	
 	/* Old bet structure.
@@ -148,51 +148,69 @@ var PassLineBet = function(value, player){
 	*/
 }
 
-var PassLineOddsBet = function(value, player){
+var PassLineOddsBet = function(value, player, passBet){
 	$bet = this;
 	$bet.type = "passlineOdds";
 	$bet.repeat = false;
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
+	
+	$bet.passBet = passBet
+}
+
+var DontPassLineBet = function(value, player){
+	$bet = this;
+	$bet.type = "dontPass";
+	//$bet.repeat = false;
+	$bet.bet = new Bet(value, player);
+}
+
+var DontPassLineOddsBet = function(value, player, dontPassBet){
+	$bet = this;
+	$bet.type = "dontPassOdds";
+	$bet.repeat = false;
+	$bet.bet = new Bet(value, player);
+	
+	$bet.dontPassBet = dontPassBet
 }
 
 var ComeLineBet = function(value, player){
 	$bet = this;
 	$bet.type = "come";
 	$bet.repeat = false;
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 	
 	//Bet Specific Fields
 	$bet.comePoint = false;
 }
 	
-var ComeLineOdds = function(value, player, point){
+var ComeLineOdds = function(value, player, comeBet){
 	$bet = this;
 	$bet.type = "comeOdds";
 	$bet.repeat = false;
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 	
 	//Bet Specific Fields
-	$bet.comePoint = point;
+	$bet.comeBet = comeBet;
 }
 
 var DontComeLineBet = function(value, player){
 	$bet = this;
 	$bet.type = "dontCome";
 	$bet.repeat = false;
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 	
 	//Bet Specific Fields
 	$bet.comePoint = false;
 }
 	
-var DontComeLineOdds = function(value, player, point){
+var DontComeLineOdds = function(value, player, dontComeBet){
 	$bet = this;
 	$bet.type = "dontComeOdds";
 	$bet.repeat = false;
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 	
 	//Bet Specific Fields
-	$bet.comePoint = point;
+	$bet.dontComeBet = dontComeBet;
 }
 
 var Place4Bet = function(value, player){
@@ -200,7 +218,7 @@ var Place4Bet = function(value, player){
 	$bet.type = "place4";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Place5Bet = function(value, player){
@@ -208,7 +226,7 @@ var Place5Bet = function(value, player){
 	$bet.type = "place5";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Place6Bet = function(value, player){
@@ -216,7 +234,7 @@ var Place6Bet = function(value, player){
 	$bet.type = "place6";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Place8Bet = function(value, player){
@@ -224,7 +242,7 @@ var Place8Bet = function(value, player){
 	$bet.type = "place8";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Place9Bet = function(value, player){
@@ -232,7 +250,7 @@ var Place9Bet = function(value, player){
 	$bet.type = "place9";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Place10Bet = function(value, player){
@@ -240,24 +258,29 @@ var Place10Bet = function(value, player){
 	$bet.type = "place10";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var HardWaysBet = function(value, player, num){
 	$bet = this;
 	$bet.type = "";
 	$bet.repeat = true;
-	var bet = new Bet(value, player);
+	
+	$bet.bet = new Bet(value, player);
 	
 	switch(num){
 	case 4:
 		$bet.type = "hard4";
+		break;
 	case 6:
 		$bet.type = "hard6";
+		break;
 	case 8:
 		$bet.type = "hard8";
+		break;
 	case 10:
 		$bet.type = "hard10";
+		break;
 	default:
 		$bet.type = "";
 	}
@@ -349,7 +372,7 @@ var FieldBet = function(value, player){
 	$bet.type = "field";
 	$bet.repeat = true;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var CAndEBet = function(value, player){
@@ -357,7 +380,7 @@ var CAndEBet = function(value, player){
 	$bet.type = "cAndE";
 	$bet.repeat = true;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Any7Bet = function(value, player){
@@ -365,7 +388,7 @@ var Any7Bet = function(value, player){
 	$bet.type = "any7";
 	$bet.repeat = true;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var AnyCrapsBet = function(value, player){
@@ -373,7 +396,7 @@ var AnyCrapsBet = function(value, player){
 	$bet.type = "anyCraps";
 	$bet.repeat = true;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var HornBet = function(value, player){
@@ -381,7 +404,7 @@ var HornBet = function(value, player){
 	$bet.type = "horn";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var AceTwoBet = function(value, player){
@@ -389,7 +412,7 @@ var AceTwoBet = function(value, player){
 	$bet.type = "aceTwo";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var SnakeEyesBet = function(value, player){
@@ -397,7 +420,7 @@ var SnakeEyesBet = function(value, player){
 	$bet.type = "snakeEyes";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var MidnightBet = function(value, player){
@@ -405,7 +428,7 @@ var MidnightBet = function(value, player){
 	$bet.type = "midnight";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var YolevenBet = function(value, player){
@@ -413,7 +436,7 @@ var YolevenBet = function(value, player){
 	$bet.type = "yoleven";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Big6Bet = function(value, player){
@@ -421,7 +444,7 @@ var Big6Bet = function(value, player){
 	$bet.type = "big6";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var Big8Bet = function(value, player){
@@ -429,7 +452,7 @@ var Big8Bet = function(value, player){
 	$bet.type = "big8";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 
 var WorldBet = function(value, player){
@@ -437,6 +460,6 @@ var WorldBet = function(value, player){
 	$bet.type = "world";
 	$bet.repeat = false;
 	
-	var bet = new Bet(value, player);
+	$bet.bet = new Bet(value, player);
 }
 

@@ -11,15 +11,19 @@ var CrapsPlayer = function(name, bank){
 		switch(betType){
 		case 'passLineBet':
 			return new PassLineBet(value, $player);
-	
+			break;
 		case 'hardWays4':
-			return new HardWaysBet(4, value, $player);
+			return new HardWaysBet(value, $player, 4);
+			break;
 		case 'hardWays6':
-			return new HardWaysBet(6, value, $player);
+			return new HardWaysBet(value, $player, 6);
+			break;
 		case 'hardWays8':
-			return new HardWaysBet(8, value, $player);
+			return new HardWaysBet(value, $player, 8);
+			break;
 		case 'hardWays10':
-			return new HardWaysBet(10, value, $player);
+			return new HardWaysBet(value, $player, 10);
+			break;
 		default:
 			return;
 		}

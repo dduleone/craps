@@ -1,18 +1,19 @@
 var PlayerManager = {};
 
 var Player = function(name, bank){
-	this.id = PlayerManager.getNextPlayerId();
-	this.name = name;
-	this.bank = bank;
+	var player = this;
+	player.id = PlayerManager.getNextPlayerId();
+	player.name = name;
+	player.bank = bank;
 	
-	function addToBank(amt){
+	player.addToBank = function(amt){
 		this.bank += amt;
 	}
 	
-	function subFromBank(amt){
+	player.subFromBank = function(amt){
 		this.bank -= amt;
 	}
-};
+}
 
 $.extend(PlayerManager, {
 	players: [],
