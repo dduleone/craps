@@ -41,6 +41,28 @@ crapsBets.js
 // Point On
 // Point Off
 
+var CrapsBet = function(betType, value, player, attachedBet){
+	var $bet = this;
+	$bet.type = betType;
+	$bet.bet = new Bet(value, player);
+	$bet.origBet = null;
+	$bet.point = false;
+	if(betType == 'passlineOdds' || betType == 'dontPassOdds' || betType == 'comeOdds' || 'dontComeOdds'){
+		$bet.origBet = attachedBet;
+	}
+	
+	$bet.toString = function(){
+		str =  "Bet Type: " + $bet.type + " Value: " + $bet.bet.value;
+		if($bet.type == 'passOdds' || $bet.type == 'dontPassOdds' || $bet.type == 'comeOdds' || $bet.type == 'dontComeOdds'){
+			str = str + "(Original Bet): {" + $bet.origBet.toString + "}";
+		}
+		if($bet.type == 'come' || $bet.type == 'dontCome'){
+			str = str + " Bet Point: " + $bet.point;
+		}
+		return str;
+	}
+}
+
 var PassLineBet = function(value, player){
 	$bet = this;
 	$bet.type = "passline";
