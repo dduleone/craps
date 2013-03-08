@@ -74,13 +74,13 @@ BetManager.prototype = {
 		case "dontCome":
 			return [true, ''];
 		case "dontComeOdds":
-			if(_bet._bet.origBet.point == 4 || _bet._bet.origBet.point == 10){
+			if(_bet.origBet.point == 4 || _bet.origBet.point == 10){
 				return [_bet.value % 2 && _bet.value < 6 * _origBet.value, 'Bet must be even and 3 times the Don\'t Pass Line Bet or less'];
 			}
-			else if(_bet._bet.origBet.point == 5 || _bet._bet.origBet.point == 9){
+			else if(_bet.origBet.point == 5 || _bet.origBet.point == 9){
 				return [(_bet.value % 3 && _bet.value < 8 * _origBet.value), 'Bet value must be divisible by 3 and 4 times the Don\'t Pass Line bet or less.'];
 			}
-			else if(_bet._bet.origBet.point == 6 || _bet._bet.origBet.point == 8){
+			else if(_bet.origBet.point == 6 || _bet.origBet.point == 8){
 				return [(_bet.value % 6 && _bet.value < 10 * _origBet.value), 'Bet value must be divisible by 6 and 5 times the Don\'t Pass Line bet or less.'];
 			}
 		case "place4":
