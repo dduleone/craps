@@ -159,12 +159,13 @@ $.extend(_CRAPS, {
 	//,
 	dealer: new Dealer(),
 	minBet: 10,
-	placeBet: function(bet){	
-		if(this.dealer.betManager.validateBet(bet)[0]){
+	placeBet: function(bet){
+		betResponse = this.dealer.betManager.validateBet(bet);
+		if(betResponse[0]){
 			this.dealer.betManager.placeBet(bet);
 		}
 		else{
-			console.log(this.dealer.betManager.validateBet(bet)[1]);
+			console.log(betResponse[1]);
 		}
 	},
 	checkBets: function(){
