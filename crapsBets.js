@@ -54,8 +54,8 @@ var CrapsBet = function(betType, value, player, repeat, attachedBet){
 	
 	$bet.toString = function(){
 		str =  "Bet Type: " + $bet.type + " Value: $" + $bet.bet.value + " Repeat: " + $bet.repeat;
-		if($bet.type == 'passOdds' || $bet.type == 'dontPassOdds' || $bet.type == 'comeOdds' || $bet.type == 'dontComeOdds'){
-			str = str + "(Original Bet): {" + $bet.origBet.toString + "}";
+		if($bet.type == 'passlineOdds' || $bet.type == 'dontPassOdds' || $bet.type == 'comeOdds' || $bet.type == 'dontComeOdds'){
+			str = str + " (Original Bet): {" + $bet.origBet.toString() + "}";
 		}
 		if($bet.type == 'come' || $bet.type == 'dontCome'){
 			str = str + " Bet Point: " + $bet.point;

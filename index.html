@@ -251,9 +251,9 @@
 			//console.log($('#betRepeat').is(':checked'));
 			//console.log(parseInt($('#betValue').val()));
 			var origBet = null;
-			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType')) != -1){
+			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
 				for(x in _CRAPS.dealer.betManager.bets){
-					switch($('#betType')){
+					switch($('#betType').val()){
 					case 'passlineOdds':
 						if(_CRAPS.dealer.betManager.bets[x].type == 'passline'){
 							origBet = _CRAPS.dealer.betManager.bets[x];

@@ -23,8 +23,8 @@ BetManager.prototype = {
 	},
 	validateBet: function(bet){
 		var _bet = bet.bet;
-		if(_bet.origBet){
-			var _origBet = _origBet;
+		if(	bet.origBet){
+			var _origBet = bet.origBet.bet;
 		}
 		
 		if(_bet.value < _CRAPS['minBet']){
@@ -36,19 +36,22 @@ BetManager.prototype = {
 		
 		switch(bet.type){
 		case "passline":
+			if(GameState.point){
+				return [false, 'Cannot place a Pass Line Bet while there is a point'];
+			}
 			return [true, '']
 		case "passlineOdds":
 			if(bet.origBet == null){
 				return[false, 'There must be a Pass Line Bet on the table.'];
 			}
 			if(GameState.point == 4 || GameState.point == 10){
-				return [_bet.value < 3 * _origBet.value, 'Bet must be 3 times the Pass Line Bet or less'];
+				return [_bet.value <= 3 * _origBet.value, 'Bet must be 3 times the Pass Line Bet or less'];
 			}
 			else if(GameState.point == 5 || GameState.point == 9){
-				return [(_bet.value % 2 && _bet.value < 4 * _origBet.value), 'Bet value must be even and 4 times the Pass Line bet or less.'];
+				return [(_bet.value % 2 == 0 && _bet.value <= 4 * _origBet.value), 'Bet value must be even and 4 times the Pass Line bet or less.'];
 			}
 			else if(GameState.point == 6 || GameState.point == 8){
-				return [(_bet.value % 5 && _bet.value < 5 * _origBet.value), 'Bet value must be divisible by 5 and 5 times the Pass Line bet or less.'];
+				return [(_bet.value % 5 == 0 && _bet.value <= 5 * _origBet.value), 'Bet value must be divisible by 5 and 5 times the Pass Line bet or less.'];
 			}
 		case "come":
 			return [true, '']
@@ -57,13 +60,13 @@ BetManager.prototype = {
 				return[false, 'There must be a Come Line Bet on the table.'];
 			}
 			if(_bet.origBet.point == 4 || _bet.origBet.point == 10){
-				return [_bet.value < 3 * _origBet.value, 'Bet must be 3 times the Come Line Bet or less'];
+				return [_bet.value <= 3 * _origBet.value, 'Bet must be 3 times the Come Line Bet or less'];
 			}
 			else if(_bet.origBet.point == 5 || _bet.origBet.point == 9){
-				return [(_bet.value % 2 && _bet.value < 4 * _origBet.value), 'Bet value must be even and 4 times the Come Line bet or less.'];
+				return [(_bet.value % 2 == 0 && _bet.value <= 4 * _origBet.value), 'Bet value must be even and 4 times the Come Line bet or less.'];
 			}
 			else if(_bet.origBet.point == 6 || _bet.origBet.point == 8){
-				return [(_bet.value % 5 && _bet.value < 5 * _origBet.value), 'Bet value must be divisible by 5 and 5 times the Come Line bet or less.'];
+				return [(_bet.value % 5 == 0 && _bet.value <= 5 * _origBet.value), 'Bet value must be divisible by 5 and 5 times the Come Line bet or less.'];
 			}
 		case "dontPass":
 			return [true, ''];
@@ -72,13 +75,13 @@ BetManager.prototype = {
 				return[false, 'There must be a Don\' Pass Line Bet on the table.'];
 			}
 			if(GameState.point == 4 || GameState.point == 10){
-				return [_bet.value % 2 && _bet.value < 6 * _origBet.value, 'Bet must be even and 3 times the Don\'t Pass Line Bet or less'];
+				return [_bet.value % 2 == 0 && _bet.value <= 6 * _origBet.value, 'Bet must be even and 3 times the Don\'t Pass Line Bet or less'];
 			}
 			else if(GameState.point == 5 || GameState.point == 9){
-				return [(_bet.value % 3 && _bet.value < 8 * _origBet.value), 'Bet value must be divisible by 3 and 4 times the Don\'t Pass Line bet or less.'];
+				return [(_bet.value % 3 == 0 && _bet.value <= 8 * _origBet.value), 'Bet value must be divisible by 3 and 4 times the Don\'t Pass Line bet or less.'];
 			}
 			else if(GameState.point == 6 || GameState.point == 8){
-				return [(_bet.value % 6 && _bet.value < 10 * _origBet.value), 'Bet value must be divisible by 6 and 5 times the Don\'t Pass Line bet or less.'];
+				return [(_bet.value % 6 == 0 && _bet.value <= 10 * _origBet.value), 'Bet value must be divisible by 6 and 5 times the Don\'t Pass Line bet or less.'];
 			}
 		case "dontCome":
 			return [true, ''];
@@ -87,26 +90,26 @@ BetManager.prototype = {
 				return[false, 'There must be a Don\'t Pass Line Bet on the table.'];
 			}
 			if(_bet.origBet.point == 4 || _bet.origBet.point == 10){
-				return [_bet.value % 2 && _bet.value < 6 * _origBet.value, 'Bet must be even and 3 times the Don\'t Pass Line Bet or less'];
+				return [_bet.value % 2 == 0 && _bet.value <= 6 * _origBet.value, 'Bet must be even and 3 times the Don\'t Pass Line Bet or less'];
 			}
 			else if(_bet.origBet.point == 5 || _bet.origBet.point == 9){
-				return [(_bet.value % 3 && _bet.value < 8 * _origBet.value), 'Bet value must be divisible by 3 and 4 times the Don\'t Pass Line bet or less.'];
+				return [(_bet.value % 3 == 0 && _bet.value <= 8 * _origBet.value), 'Bet value must be divisible by 3 and 4 times the Don\'t Pass Line bet or less.'];
 			}
 			else if(_bet.origBet.point == 6 || _bet.origBet.point == 8){
-				return [(_bet.value % 6 && _bet.value < 10 * _origBet.value), 'Bet value must be divisible by 6 and 5 times the Don\'t Pass Line bet or less.'];
+				return [(_bet.value % 6 == 0 && _bet.value <= 10 * _origBet.value), 'Bet value must be divisible by 6 and 5 times the Don\'t Pass Line bet or less.'];
 			}
 		case "place4":
-			return [_bet.value % 5, 'Bet value must be divisible by 5'];
+			return [_bet.value % 5 == 0, 'Bet value must be divisible by 5'];
 		case "place5":
-			return [_bet.value % 5, 'Bet value must be divisible by 5'];
+			return [_bet.value % 5 == 0, 'Bet value must be divisible by 5'];
 		case "place6":
-			return [_bet.value % 6, 'Bet value must be divisible by 6'];
+			return [_bet.value % 6 == 0, 'Bet value must be divisible by 6'];
 		case "place8":
-			return [_bet.value % 6, 'Bet value must be divisible by 6'];
+			return [_bet.value % 6 == 0, 'Bet value must be divisible by 6'];
 		case "place9":
-			return [_bet.value % 5, 'Bet value must be divisible by 5'];
+			return [_bet.value % 5 == 0, 'Bet value must be divisible by 5'];
 		case "place10":
-			return [_bet.value % 5, 'Bet value must be divisible by 5'];
+			return [_bet.value % 5 == 0, 'Bet value must be divisible by 5'];
 		case "hard4":
 			return [true, ''];
 		case "hard6":
@@ -118,13 +121,13 @@ BetManager.prototype = {
 		case "field":
 			return [true, ''];
 		case "cAndE":
-			return [_bet.value % 2, 'Bet value must be divisible by 2'];
+			return [_bet.value % 2 == 0, 'Bet value must be divisible by 2'];
 		case "any7":
-			return [_bet.value % 3, 'Bet value must be divisible by 3'];
+			return [_bet.value % 3 == 0, 'Bet value must be divisible by 3'];
 		case "anyCraps":
 			return [true, ''];
 		case "horn":
-			return [_bet.value % 4, 'Bet value must be divisible by 4'];
+			return [_bet.value % 4 == 0, 'Bet value must be divisible by 4'];
 		case "aceTwo":
 			return [true, ''];
 		case "snakeEyes":
@@ -134,11 +137,11 @@ BetManager.prototype = {
 		case "yoleven":
 			return [true, ''];
 		case "big6":
-			return [_bet.value % 6, 'Bet value must be divisible by 6'];
+			return [_bet.value % 6 == 0, 'Bet value must be divisible by 6'];
 		case "big8":
-			return [_bet.value % 6, 'Bet value must be divisible by 6'];
+			return [_bet.value % 6 == 0, 'Bet value must be divisible by 6'];
 		case "world":
-			return [_bet.value % 5, 'Bet value must be divisible by 5'];
+			return [_bet.value % 5 == 0, 'Bet value must be divisible by 5'];
 		default:
 			return;
 		}
