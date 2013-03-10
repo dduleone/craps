@@ -38,6 +38,9 @@ BetManager.prototype = {
 		case "passline":
 			return [true, '']
 		case "passlineOdds":
+			if(bet.origBet == null){
+				return[false, 'There must be a Pass Line Bet on the table.'];
+			}
 			if(GameState.point == 4 || GameState.point == 10){
 				return [_bet.value < 3 * _origBet.value, 'Bet must be 3 times the Pass Line Bet or less'];
 			}
@@ -50,6 +53,9 @@ BetManager.prototype = {
 		case "come":
 			return [true, '']
 		case "comeOdds":
+			if(bet.origBet == null){
+				return[false, 'There must be a Come Line Bet on the table.'];
+			}
 			if(_bet.origBet.point == 4 || _bet.origBet.point == 10){
 				return [_bet.value < 3 * _origBet.value, 'Bet must be 3 times the Come Line Bet or less'];
 			}
@@ -62,6 +68,9 @@ BetManager.prototype = {
 		case "dontPass":
 			return [true, ''];
 		case "dontPassOdds":
+			if(bet.origBet == null){
+				return[false, 'There must be a Don\' Pass Line Bet on the table.'];
+			}
 			if(GameState.point == 4 || GameState.point == 10){
 				return [_bet.value % 2 && _bet.value < 6 * _origBet.value, 'Bet must be even and 3 times the Don\'t Pass Line Bet or less'];
 			}
@@ -74,6 +83,9 @@ BetManager.prototype = {
 		case "dontCome":
 			return [true, ''];
 		case "dontComeOdds":
+			if(bet.origBet == null){
+				return[false, 'There must be a Don\'t Pass Line Bet on the table.'];
+			}
 			if(_bet.origBet.point == 4 || _bet.origBet.point == 10){
 				return [_bet.value % 2 && _bet.value < 6 * _origBet.value, 'Bet must be even and 3 times the Don\'t Pass Line Bet or less'];
 			}
@@ -165,6 +177,7 @@ $.extend(_CRAPS, {
 			this.dealer.betManager.placeBet(bet);
 		}
 		else{
+			bet.bet.player.player.addToBank(bet.bet.value);
 			console.log(betResponse[1]);
 		}
 	},
@@ -189,16 +202,18 @@ $.extend(_CRAPS, {
 		var roll = _CRAPS.dice.roll();
 		_CRAPS.output("The roll is: " + roll);
 		_CRAPS.checkBets();
-		console.log('Players:');
+		var playersArray = []
 		for(i in PlayerManager.players){
-			console.log(PlayerManager.players[i].toString());
+			playersArray.push(PlayerManager.players[i].toString());
 			//console.log('Player Bank: ' + PlayerManager.players[i].player.bank);
 		}
-		console.log('Bets:');
+		console.log('Players:', playersArray);
+		var betsArray = [];
 		for(i in this.dealer.betManager.bets){
-			console.log(this.dealer.betManager.bets[i].toString());
+			betsArray.push(this.dealer.betManager.bets[i].toString());
 			//console.log('Bet Value: ' + this.dealer.betManager.bets[i].bet.value);
 		}
+		console.log('Bets:', betsArray);
 	// Set & unset the point, as appropriate.
 		if (GameState.point > 0){
 			if (roll == 7){

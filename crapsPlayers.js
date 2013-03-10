@@ -1,14 +1,22 @@
 var CrapsPlayer = function(name, bank){
 	$player = this;
 	$player.player = new Player(name, bank);
-	player = $player.player;
+	_player = $player.player;
 	
-	$player.createBet = function(betType, value, origBet){
-		if(value < player.bank){
+	$player.toString = function(){
+		return 'Player Name: ' + _player.name + ' Bank: $' + _player.bank;
+	}
+	
+	$player.createBet = function(betType, value, repeat, origBet){
+		if(_player.bank < value){
+			console.log(this.toString());
+			console.log(value);
+			console.log(_player.bank);
 			console.log("Not enough money, bitches");
 			return;
 		}
-		return new CrapsBet(betType, value, $player, origBet);
+		_player.subFromBank(value);
+		return new CrapsBet(betType, value, $player, repeat, origBet);
 		/* switch(betType){
 		case 'passline':
 			return new PassLineBet(value, $player);
@@ -104,10 +112,6 @@ var CrapsPlayer = function(name, bank){
 			return;
 		}
 		*/
-	}
-	
-	$player.toString = function(){
-		return 'Player Name: ' + player.name + ' Bank: $' + player.bank;
 	}
 }
 

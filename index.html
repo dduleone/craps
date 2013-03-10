@@ -35,6 +35,13 @@
 				margin: 0px;
 				padding: 0px;
 			}
+			#betInfo{
+				position: absolute;
+				top: 0px;
+				left: 1324px;
+				margin: 0px;
+				padding: 0px;
+			}
 		</style>
 	</head>
 	<body>
@@ -42,6 +49,57 @@
 		<canvas id="board" height='768' width='1024'></canvas>
 		<button id='roll' onclick='roll()'>Roll</button><br />
 		<div id='buffer'></div>
+		
+		<div id='betForm'>
+			<fieldset id='betInfo'>	
+				<legend>Bet!</legend>
+				<p>
+					<label for='betType'>Bet Type</label>
+					<select id='betType' name='betType'>
+						<option value="passline">Pass Line Bet</option>
+						<option value="passlineOdds">Pass Line Odds</option>
+						<option value="come">Come Bet</option>
+						<option value="comeOdds">Come Odds</option>
+						<option value="dontPass">Don't Pass Line Bet</option>
+						<option value="dontPassOdds">Don't Pass Line Odds</option>
+						<option value="dontCome">Don't Come Bet</option>
+						<option value="dontComeOdds">Don't Come Odds</option>
+						<option value="place4">Place 4</option>
+						<option value="place5">Place 5</option>
+						<option value="place6">Place 6</option>
+						<option value="place8">Place 8</option>
+						<option value="place9">Place 9</option>
+						<option value="place10">Place 10</option>
+						<option value="hard4">Hard 4</option>
+						<option value="hard6">Hard 6</option>
+						<option value="hard8">Hard 8</option>
+						<option value="hard10">Hard 10</option>
+						<option value="field">Field</option>
+						<option value="cAndE">C and E</option>
+						<option value="any7">Any 7</option>
+						<option value="anyCraps">Any Craps</option>
+						<option value="horn">Horn</option>
+						<option value="aceTwo">Ace Two</option>
+						<option value="shakeEyes">Snake Eyes</option>
+						<option value="midnight">Midnight</option>
+						<option value="yoleven">Yo-leven</option>
+						<option value="big6">Big 6</option>
+						<option value="big8">Big 8</option>
+						<option value="world">World</option>
+					</select>
+				</p>
+				<p>
+					<label for='betValue'>Bet Value</label>
+					<input id='betValue' name='betValue' value='0' type='text'>
+				</p>
+				<p>
+					<label for='repeat'>Repeat Bet on Win?</label>
+					<input id='betRepeat' name='betRepeat' type='checkbox'>
+				</p>
+				<p>
+					<button id='submit'>Submit</button>
+			</fieldset>
+		</div>
 	</body>
 	<footer>
 
@@ -57,14 +115,14 @@
 		<script type='text/javascript' language='javascript' src='board.js'></script>
 
 		<script type='text/javascript' language='javascript'>		
-			makeCrapsPlayer("Dan", 1000);
+			makeCrapsPlayer("Dan", 10000);
 			//_CRAPS.players = [p];
 
 			var p = PlayerManager.players[0];
 			
-			_CRAPS.placeBet(p.createBet('hard4', 1000));
-			_CRAPS.placeBet(p.createBet('hard6', 1500));
-			_CRAPS.placeBet(p.createBet('passline', 1000));
+			//_CRAPS.placeBet(p.createBet('hard4', 1000));
+			//_CRAPS.placeBet(p.createBet('hard6', 1500));
+			//_CRAPS.placeBet(p.createBet('passline', 1000));
 
 			function roll(){
 				_CRAPS.output("---Rolling---");
@@ -186,5 +244,47 @@
 			//d.line(pa._l + 100, pa._t + 100, pa._l+100, pa._b-150, boardEtc);
 			//d.demo(24);
 		</script>
-	</footer>
+	<script type='text/javascript' lang='javascript'>
+		$("#betForm button").click(function(){
+			//console.log($('#betType').val());
+			//console.log($('#betValue').val());
+			//console.log($('#betRepeat').is(':checked'));
+			//console.log(parseInt($('#betValue').val()));
+			var origBet = null;
+			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType')) != -1){
+				for(x in _CRAPS.dealer.betManager.bets){
+					switch($('#betType')){
+					case 'passlineOdds':
+						if(_CRAPS.dealer.betManager.bets[x].type == 'passline'){
+							origBet = _CRAPS.dealer.betManager.bets[x];
+						}
+						break;
+					case 'comeOdds':
+						if(_CRAPS.dealer.betManager.bets[x].type == 'come'){
+							origBet = _CRAPS.dealer.betManager.bets[x];
+						}
+						break;
+					case 'dontPassOdds':
+						if(_CRAPS.dealer.betManager.bets[x].type == 'dontPass'){
+							origBet = _CRAPS.dealer.betManager.bets[x];
+						}
+						break;
+					case 'dontComeOdds':
+						if(_CRAPS.dealer.betManager.bets[x].type == 'dontCome'){
+							origBet = _CRAPS.dealer.betManager.bets[x];
+						}
+						break;
+					default:
+						break;
+					}
+				}
+			}
+			var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
+			console.log('Placing bet:', newBet.toString());
+			_CRAPS.placeBet(newBet);
+			//alert("You clicked submit!");
+		});
+	</script>
+
+		</footer>
 </html>
