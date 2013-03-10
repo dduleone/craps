@@ -2,6 +2,16 @@
 craps.js
 */
 
+function onWin(bet, amount){
+		var _bet = bet.bet;
+		var _player = _bet.player.player;
+		
+		_CRAPS.output("Bet " + bet.type + " wins! Pays out $" + amount);
+		_player.addToBank(amount);
+}
+
+$('window').bind(onWin);
+
 var BetManager = function() {
 	var manager = this;
 	manager.bets = [];
@@ -12,9 +22,39 @@ BetManager.prototype = {
 	bets: [],
 	placeBet: function(bet) {
 		this.bets.push(bet);
+		var betListing = document.getElementById('betListing');
+		var newBetDisp = document.createElement('fieldset');
+		var legend = document.createElement('legend');
+		var pTag = document.createElement('p');
+		var legendText = document.createTextNode('Bet: ' + bet.type);
+		var pTagText = document.createTextNode('Value: $' + bet.bet.value);
+		betListing.appendChild(newBetDisp);
+		newBetDisp.appendChild(legend);
+		legend.appendChild(legendText);
+		newBetDisp.appendChild(pTag);
+		pTag.appendChild(pTagText);
 	},
 	checkBets: function(dice){
 		this.bets = BetChecker(GameState.point, this.bets, _CRAPS.dice);
+		var betListing = document.getElementById('betListing');
+		if(betListing.childNodes.length == 0){
+			return;
+		}
+		while(betListing.childNodes.length > 0){
+			betListing.removeChild(betListing.childNodes[0]);
+		}
+		for(var betNum in this.bets){
+			var newBetDisp = document.createElement('fieldset');
+			var legend = document.createElement('legend');
+			var pTag = document.createElement('p');
+			var legendText = document.createTextNode('Bet: ' + this.bets[betNum].type);
+			var pTagText = document.createTextNode('Value: $' + this.bets[betNum].bet.value);
+			betListing.appendChild(newBetDisp);
+			newBetDisp.appendChild(legend);
+			legend.appendChild(legendText);
+			newBetDisp.appendChild(pTag);
+			pTag.appendChild(pTagText);
+		}
 	},
 	turnBetsOn: function(){
 		for(var i in this.bets){
@@ -275,7 +315,7 @@ var BetChecker = function(point, betArray, dice){
 		case "passline":
 			if(point){
 				if(dice.getSum() == point){
-					_player.addToBank(_bet.value);
+					$('window').trigger(onWin(bet, _bet.value));
 					newBetArray.push(bet);
 				}
 				else if(dice.getSum() == 7){
@@ -290,7 +330,7 @@ var BetChecker = function(point, betArray, dice){
 				newBetArray.push(bet);
 			}
 			else if(dice.getSum() == 7 || dice.getSum() == 11){
-				_player.addToBank(_bet.value);
+				$('window').trigger(onWin(bet, _bet.value));
 				newBetArray.push(bet);
 			}
 			else{
@@ -300,11 +340,11 @@ var BetChecker = function(point, betArray, dice){
 		case "passlineOdds":
 			if(dice.getSum() == point){
 				if(point == 4 || point == 10){
-					_player.addToBank(2*_bet.value + _bet.value);
+					$('window').trigger(onWin(bet, 2*_bet.value + _bet.value));
 				} else if(point == 5 || point == 9){
-					_player.addToBank(3*_bet.value/2 + _bet.value);
+					$('window').trigger(onWin(bet, 3*_bet.value/2 + _bet.value));
 				} else if(point == 6 || point == 8){
-					_player.addToBank(6*_bet.value/5 + _bet.value);
+					$('window').trigger(onWin(bet, 6*_bet.value/5 + _bet.value));
 				}
 			} else if(dice.getSum() == 7){
 				continue;
@@ -315,7 +355,7 @@ var BetChecker = function(point, betArray, dice){
 		case "come":
 			if(bet.point){
 				if(dice.getSum() == bet.point){
-					_player.addToBank(_bet.value);
+					$('window').trigger(onWin(bet, _bet.value));
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
@@ -328,7 +368,7 @@ var BetChecker = function(point, betArray, dice){
 				continue;
 			}
 			else if(dice.getSum() == 7 || dice.getSum() == 11){
-				_player.addToBank(_bet.value);
+				$('window').trigger(onWin(bet, _bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -344,11 +384,11 @@ var BetChecker = function(point, betArray, dice){
 		case "comeOdds":
 			if(dice.getSum() == bet.point){
 				if(bet.point == 4 || bet.point == 10){
-					_player.addToBank(2*_bet.value + _bet.value);
+					$('window').trigger(onWin(bet, 2*_bet.value + _bet.value));
 				} else if(bet.point == 5 || bet.point == 9){
-					_player.addToBank(3*_bet.value/2 + _bet.value);
+					$('window').trigger(onWin(bet, 3*_bet.value/2 + _bet.value));
 				} else if(bet.point == 6 || bet.point == 8){
-					_player.addToBank(6*_bet.value/5 + _bet.value);
+					$('window').trigger(onWin(bet, 6*_bet.value/5 + _bet.value));
 				}
 			} else if(dice.getSum() == 7){
 				continue;
@@ -362,14 +402,14 @@ var BetChecker = function(point, betArray, dice){
 					continue;
 				}
 				else if(dice.getSum() == 7){
-					_player.addToBank(_bet.value);
+					$('window').trigger(onWin(bet, _bet.value));
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
 				}
 			}
 			else if(dice.getSum() == 2 || dice.getSum() == 3){
-				_player.addToBank(_bet.value);
+				$('window').trigger(onWin(bet, _bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -384,11 +424,11 @@ var BetChecker = function(point, betArray, dice){
 		case "dontPassOdds":
 			if(dice.getSum() == 7){
 				if(point == 4 || point == 10){
-					_player.addToBank(_bet.value/2 + _bet.value);
+					$('window').trigger(onWin(bet, _bet.value/2 + _bet.value));
 				} else if(point == 5 || point == 9){
-					_player.addToBank(2*_bet.value/3 + _bet.value);
+					$('window').trigger(onWin(bet, 2*_bet.value/3 + _bet.value));
 				} else if(point == 6 || point == 8){
-					_player.addToBank(5*_bet.value/6 + _bet.value);
+					$('window').trigger(onWin(bet, 5*_bet.value/6 + _bet.value));
 				}
 			} else if(dice.getSum() == point){
 				continue;
@@ -402,14 +442,14 @@ var BetChecker = function(point, betArray, dice){
 					continue
 				}
 				else if(dice.getSum() == 7){
-					_player.addToBank(_bet.value);
+					$('window').trigger(onWin(bet, _bet.value));
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
 				}
 			}
 			else if(dice.getSum() == 2 || dice.getSum() == 3){
-				_player.addToBank(_bet.value);
+				$('window').trigger(onWin(bet, _bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -428,11 +468,11 @@ var BetChecker = function(point, betArray, dice){
 		case "dontComeOdds":
 			if(dice.getSum() == 7){
 				if(bet.point == 4 || bet.point == 10){
-					_player.addToBank(_bet.value/2 + _bet.value);
+					$('window').trigger(onWin(bet, _bet.value/2 + _bet.value));
 				} else if(bet.point == 5 || bet.point == 9){
-					_player.addToBank(2*_bet.value/3 + _bet.value);
+					$('window').trigger(onWin(bet, 2*_bet.value/3 + _bet.value));
 				} else if(bet.point == 6 || bet.point == 8){
-					_player.addToBank(5*_bet.value/6 + _bet.value);
+					$('window').trigger(onWin(bet, 5*_bet.value/6 + _bet.value));
 				}
 			} else if(dice.getSum() == point){
 				continue;
@@ -442,7 +482,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place4":
 			if(dice.getSum() == 4){
-				_player.addToBank(9*_bet.value/5);
+				$('window').trigger(onWin(bet, 9*_bet.value/5));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -459,7 +499,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place5":
 			if(dice.getSum() == 5){
-				_player.addToBank(7*_bet.value/5);
+				$('window').trigger(onWin(bet, 7*_bet.value/5));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -476,7 +516,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place6":
 			if(dice.getSum() == 6){
-				_player.addToBank(7*_bet.value/6);
+				$('window').trigger(onWin(bet, 7*_bet.value/6));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -493,7 +533,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place8":
 			if(dice.getSum() == 8){
-				_player.addToBank(7*_bet.value/6);
+				$('window').trigger(onWin(bet, 7*_bet.value/6));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -510,7 +550,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place9":
 			if(dice.getSum() == 9){
-				_player.addToBank(7*_bet.value/5);
+				$('window').trigger(onWin(bet, 7*_bet.value/5));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -527,7 +567,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place10":
 			if(dice.getSum() == 10){
-				_player.addToBank(9*_bet.value/5);
+				$('window').trigger(onWin(bet, 9*_bet.value/5));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -548,7 +588,7 @@ var BetChecker = function(point, betArray, dice){
 			}
 			else if(dice.getSum() == 4){
 				if(dice.dice.getArray()[0] == dice.dice.getArray()[1]){
-					_player.addToBank(_bet.value*7);
+					$('window').trigger(onWin(bet, _bet.value*7));
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
@@ -570,7 +610,7 @@ var BetChecker = function(point, betArray, dice){
 			}
 			else if(dice.getSum() == 6){
 				if(dice.dice.getArray()[0] == dice.dice.getArray()[1]){
-					_player.addToBank(_bet.value*9);
+					$('window').trigger(onWin(bet, _bet.value*9));
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
@@ -592,7 +632,7 @@ var BetChecker = function(point, betArray, dice){
 			}
 			else if(dice.getSum() == 8){
 				if(dice.dice.getArray()[0] == dice.dice.getArray()[1]){
-					_player.addToBank(_bet.value*9);
+					$('window').trigger(onWin(bet, _bet.value*9));
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
@@ -614,7 +654,7 @@ var BetChecker = function(point, betArray, dice){
 			}
 			else if(dice.getSum() == 10){
 				if(dice.dice.getArray()[0] == dice.dice.getArray()[1]){
-					_player.addToBank(_bet.value*7);
+					$('window').trigger(onWin(bet, _bet.value*7));
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
@@ -632,11 +672,11 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "field":
 			if(dice.getSum() == 2 || dice.getSum() == 12){
-				_player.addToBank(2*_bet.value);
+				$('window').trigger(onWin(bet, 2*_bet.value));
 			}
 			else if(dice.getSum() == 3 || dice.getSum() == 4 || dice.getSum() == 9 ||
 							dice.getSum() == 10 || dice.getSum() == 11){
-				_player.addToBank(_bet.value);
+				$('window').trigger(onWin(bet, _bet.value));
 			}
 			else{
 				continue;
@@ -650,10 +690,10 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "cAndE":
 			if(dice.getSum() == 2 || dice.getSum() == 3 || dice.getSum() == 12){
-				_player.addToBank(3*_bet.value - _bet.value/2);
+				$('window').trigger(onWin(bet, 3*_bet.value - _bet.value/2));
 			}
 			else if(dice.getSum() == 11){
-				_player.addToBank(7*_bet.value - _bet.value/2);
+				$('window').trigger(onWin(bet, 7*_bet.value - _bet.value/2));
 			}
 			else{
 				continue;
@@ -667,7 +707,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "any7":
 			if(dice.getSum() == 7){
-				_player.addToBank(4*_bet.value);
+				$('window').trigger(onWin(bet, 4*_bet.value));
 			}
 			else{
 				continue;
@@ -681,7 +721,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "anyCraps":
 			if(dice.getSum() == 2 || dice.getSum() == 3 || dice.getSum() == 12){
-				_player.addToBank(7*_bet.value);
+				$('window').trigger(onWin(bet, 7*_bet.value));
 			}
 			else{
 				continue;
@@ -695,10 +735,10 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "horn":
 			if(dice.getSum() == 2 || dice.getSum() == 12){
-				bet.player.addToBank(27*_bet.value/4);
+				$('window').trigger(onWin(bet, 27*_bet.value/4));
 			}
 			else if(dice.getSum() == 3 || dice.getSum() == 11){
-				bet.player.addToBank(3*_bet.value);
+				$('window').trigger(onWin(bet, 3*_bet.value));
 			}
 			else{
 				continue;
@@ -712,7 +752,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "aceTwo":
 			if(dice.getSum() == 3){
-				bet.player.addToBank(15*_bet.value);
+				$('window').trigger(onWin(bet, 15*_bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -723,7 +763,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "snakeEyes":
 			if(dice.getSum() == 2){
-				bet.player.addToBank(30*_bet.value);
+				$('window').trigger(onWin(bet, 30*_bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -734,7 +774,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "midnight":
 			if(dice.getSum() == 12){
-				bet.player.addToBank(30*_bet.value);
+				$('window').trigger(onWin(bet, 30*_bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -745,7 +785,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "yoleven":
 			if(dice.getSum() == 11){
-				bet.player.addToBank(15*_bet.value);
+				$('window').trigger(onWin(bet, 15*_bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -756,7 +796,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "big6":
 			if(dice.getSum() == 6){
-				_player.addToBank(_bet.value);
+				$('window').trigger(onWin(bet, _bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -773,7 +813,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "big8":
 			if(dice.getSum() == 8){
-				_player.addToBank(_bet.value);
+				$('window').trigger(onWin(bet, _bet.value));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -790,13 +830,13 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "world":
 			if(dice.getSum() == 2 || dice.getSum() == 12){
-				_player.addToBank(26*_bet.value/5);
+				$('window').trigger(onWin(bet, 26*_bet.value/5));
 			}
 			else if(dice.getSum() == 3 || dice.getSum() == 11){
-				_player.addToBank(11*_bet.value/5);
+				$('window').trigger(onWin(bet, 11*_bet.value/5));
 			}
 			else if(dice.getSum() == 7){
-				_player.addToBank(0);
+				$('window').trigger(onWin(bet, 0));
 			}
 			else{
 				continue;

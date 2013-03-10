@@ -35,11 +35,18 @@
 				margin: 0px;
 				padding: 0px;
 			}
-			#betInfo{
+			#betForm{
 				position: absolute;
 				top: 0px;
 				left: 1324px;
-				margin: 0px;
+				margin: 2px;
+				padding: 0px;
+			}
+			#betListing{
+				position: absolute;
+				top: 250px;
+				left: 1324px;
+				margin: 2px;
 				padding: 0px;
 			}
 		</style>
@@ -52,7 +59,7 @@
 		
 		<div id='betForm'>
 			<fieldset id='betInfo'>	
-				<legend>Bet!</legend>
+				<legend>Create a Bet!</legend>
 				<p>
 					<label for='betType'>Bet Type</label>
 					<select id='betType' name='betType'>
@@ -100,6 +107,7 @@
 					<button id='submit'>Submit</button>
 			</fieldset>
 		</div>
+		<div id='betListing'></div>
 	</body>
 	<footer>
 
