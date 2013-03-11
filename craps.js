@@ -236,6 +236,7 @@ BetManager.prototype = {
 			legend.appendChild(legendText);
 			newBetDisp.appendChild(pTag);
 			pTag.appendChild(pTagText);
+			pTag.appendChild(document.createElement('br'));
 			pTag.appendChild(button);
 		}
 	}
