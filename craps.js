@@ -442,11 +442,11 @@ var BetChecker = function(point, betArray, dice){
 		case "comeOdds":
 			if(dice.getSum() == bet.point){
 				if(bet.point == 4 || bet.point == 10){
-					$('window').trigger(onWin(bet, 2*_bet.value + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(2*_bet.value + _bet.value)));
 				} else if(bet.point == 5 || bet.point == 9){
-					$('window').trigger(onWin(bet, 3*_bet.value/2 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(3*_bet.value/2 + _bet.value)));
 				} else if(bet.point == 6 || bet.point == 8){
-					$('window').trigger(onWin(bet, 6*_bet.value/5 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(6*_bet.value/5 + _bet.value)));
 				}
 			} else if(dice.getSum() == 7){
 				continue;
@@ -482,11 +482,11 @@ var BetChecker = function(point, betArray, dice){
 		case "dontPassOdds":
 			if(dice.getSum() == 7){
 				if(point == 4 || point == 10){
-					$('window').trigger(onWin(bet, _bet.value/2 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(_bet.value/2 + _bet.value)));
 				} else if(point == 5 || point == 9){
-					$('window').trigger(onWin(bet, 2*_bet.value/3 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(2*_bet.value/3 + _bet.value)));
 				} else if(point == 6 || point == 8){
-					$('window').trigger(onWin(bet, 5*_bet.value/6 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(5*_bet.value/6 + _bet.value)));
 				}
 			} else if(dice.getSum() == point){
 				continue;
@@ -526,11 +526,11 @@ var BetChecker = function(point, betArray, dice){
 		case "dontComeOdds":
 			if(dice.getSum() == 7){
 				if(bet.point == 4 || bet.point == 10){
-					$('window').trigger(onWin(bet, _bet.value/2 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(_bet.value/2 + _bet.value)));
 				} else if(bet.point == 5 || bet.point == 9){
-					$('window').trigger(onWin(bet, 2*_bet.value/3 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(2*_bet.value/3 + _bet.value)));
 				} else if(bet.point == 6 || bet.point == 8){
-					$('window').trigger(onWin(bet, 5*_bet.value/6 + _bet.value));
+					$('window').trigger(onWin(bet, Math.floor(5*_bet.value/6 + _bet.value)));
 				}
 			} else if(dice.getSum() == point){
 				continue;
@@ -540,7 +540,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place4":
 			if(dice.getSum() == 4){
-				$('window').trigger(onWin(bet, 9*_bet.value/5));
+				$('window').trigger(onWin(bet, Math.floor(9*_bet.value/5)));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -557,7 +557,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place5":
 			if(dice.getSum() == 5){
-				$('window').trigger(onWin(bet, 7*_bet.value/5));
+				$('window').trigger(onWin(bet, Math.floor(7*_bet.value/5)));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -574,7 +574,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place6":
 			if(dice.getSum() == 6){
-				$('window').trigger(onWin(bet, 7*_bet.value/6));
+				$('window').trigger(onWin(bet, Math.floor(7*_bet.value/6)));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -591,7 +591,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place8":
 			if(dice.getSum() == 8){
-				$('window').trigger(onWin(bet, 7*_bet.value/6));
+				$('window').trigger(onWin(bet, Math.floor(7*_bet.value/6)));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -608,7 +608,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place9":
 			if(dice.getSum() == 9){
-				$('window').trigger(onWin(bet, 7*_bet.value/5));
+				$('window').trigger(onWin(bet, Math.floor(7*_bet.value/5)));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -625,7 +625,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "place10":
 			if(dice.getSum() == 10){
-				$('window').trigger(onWin(bet, 9*_bet.value/5));
+				$('window').trigger(onWin(bet, Math.floor(9*_bet.value/5)));
 				if(bet.repeat){
 					newBetArray.push(bet);
 				}
@@ -748,10 +748,10 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "cAndE":
 			if(dice.getSum() == 2 || dice.getSum() == 3 || dice.getSum() == 12){
-				$('window').trigger(onWin(bet, 3*_bet.value - _bet.value/2));
+				$('window').trigger(onWin(bet, Math.floor(3*_bet.value - _bet.value/2)));
 			}
 			else if(dice.getSum() == 11){
-				$('window').trigger(onWin(bet, 7*_bet.value - _bet.value/2));
+				$('window').trigger(onWin(bet, Math.floor(7*_bet.value - _bet.value/2)));
 			}
 			else{
 				continue;
@@ -793,7 +793,7 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "horn":
 			if(dice.getSum() == 2 || dice.getSum() == 12){
-				$('window').trigger(onWin(bet, 27*_bet.value/4));
+				$('window').trigger(onWin(bet, Math.floor(27*_bet.value/4)));
 			}
 			else if(dice.getSum() == 3 || dice.getSum() == 11){
 				$('window').trigger(onWin(bet, 3*_bet.value));
@@ -888,10 +888,10 @@ var BetChecker = function(point, betArray, dice){
 			break;
 		case "world":
 			if(dice.getSum() == 2 || dice.getSum() == 12){
-				$('window').trigger(onWin(bet, 26*_bet.value/5));
+				$('window').trigger(onWin(bet, Math.floor(26*_bet.value/5)));
 			}
 			else if(dice.getSum() == 3 || dice.getSum() == 11){
-				$('window').trigger(onWin(bet, 11*_bet.value/5));
+				$('window').trigger(onWin(bet, Math.floor(11*_bet.value/5)));
 			}
 			else if(dice.getSum() == 7){
 				$('window').trigger(onWin(bet, 0));
