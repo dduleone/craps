@@ -1,6 +1,9 @@
 /*
 bets.js
 */
+
+var nextBetId = 0;
+
 var Bet = function(wager, player){
 	var bet = this;
 	
@@ -9,6 +12,10 @@ var Bet = function(wager, player){
 	bet.player = player;
 	
 	bet.on = true;
+	
+	bet.betId = nextBetId;
+	
+	nextBetId++;
 }
 
 

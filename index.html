@@ -49,6 +49,13 @@
 				margin: 2px;
 				padding: 0px;
 			}
+			#playerArea{
+				position: absolute;
+				top: 0px;
+				left: 1574px;
+				margin: 2px;
+				padding: 0px;
+			}
 		</style>
 	</head>
 	<body>
@@ -108,6 +115,13 @@
 			</fieldset>
 		</div>
 		<div id='betListing'></div>
+		<div id='playerArea'>
+			<fieldset id='playerInfo'>
+				<legend>Player Info!</legend>
+				<p id='name'></p>
+				<p id='bank'></p>
+			</fieldset>
+		</div>
 	</body>
 	<footer>
 
@@ -127,6 +141,7 @@
 			//_CRAPS.players = [p];
 
 			var p = PlayerManager.players[0];
+			PlayerManager.updatePlayerArea();
 			
 			//_CRAPS.placeBet(p.createBet('hard4', 1000));
 			//_CRAPS.placeBet(p.createBet('hard6', 1500));
@@ -290,6 +305,7 @@
 			var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
 			console.log('Placing bet:', newBet.toString());
 			_CRAPS.placeBet(newBet);
+			PlayerManager.updatePlayerArea();
 			//alert("You clicked submit!");
 		});
 	</script>
