@@ -44,7 +44,7 @@
 			}
 			#betListing{
 				position: absolute;
-				top: 215px;
+				top: 275px;
 				left: 1324px;
 				margin: 2px;
 				padding: 0px;
@@ -52,7 +52,7 @@
 			#playerArea{
 				position: absolute;
 				top: 0px;
-				left: 1574px;
+				left: 1624px;
 				margin: 2px;
 				padding: 0px;
 			}
@@ -110,8 +110,10 @@
 					<label for='repeat'>Repeat Bet on Win?</label>
 					<input id='betRepeat' name='betRepeat' type='checkbox'>
 				</p>
+				<p id='origBet'></p>
 				<p>
 					<button id='create'>Create that Bet!</button>
+				</p>
 			</fieldset>
 		</div>
 		<div id='betListing'></div>
@@ -268,6 +270,18 @@
 			//d.demo(24);
 		</script>
 	<script type='text/javascript' lang='javascript'>
+		$('#betType').change(function(){
+			$('#origBet').empty();
+			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
+				var origBet = $('#origBet');
+				var origLabel = $(document.createElement('label'));
+				var orig = $(document.createElement('input'));
+				orig.attr('type', 'text');
+				orig.attr('id', 'orig');
+				origLabel.html('Original Bet ID: ');
+				origBet.append(origLabel).append(orig);
+			}
+		});
 		$("#betForm button").click(function(){
 			//console.log($('#betType').val());
 			//console.log($('#betValue').val());
@@ -275,35 +289,36 @@
 			//console.log(parseInt($('#betValue').val()));
 			var origBet = null;
 			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
-				for(x in _CRAPS.dealer.betManager.bets){
-					switch($('#betType').val()){
-					case 'passlineOdds':
-						if(_CRAPS.dealer.betManager.bets[x].type == 'passline'){
-							origBet = _CRAPS.dealer.betManager.bets[x];
-						}
-						break;
-					case 'comeOdds':
-						if(_CRAPS.dealer.betManager.bets[x].type == 'come'){
-							origBet = _CRAPS.dealer.betManager.bets[x];
-						}
-						break;
-					case 'dontPassOdds':
-						if(_CRAPS.dealer.betManager.bets[x].type == 'dontPass'){
-							origBet = _CRAPS.dealer.betManager.bets[x];
-						}
-						break;
-					case 'dontComeOdds':
-						if(_CRAPS.dealer.betManager.bets[x].type == 'dontCome'){
-							origBet = _CRAPS.dealer.betManager.bets[x];
-						}
-						break;
-					default:
-						break;
-					}
-				}
+				origBet = _CRAPS.dealer.betManager.getBetById($('#orig').val());
+				//for(x in _CRAPS.dealer.betManager.bets){
+				//	switch($('#betType').val()){
+				//	case 'passlineOdds':
+				//		if(_CRAPS.dealer.betManager.bets[x].type == 'passline'){
+				//			origBet = _CRAPS.dealer.betManager.bets[x];
+				//		}
+				//		break;
+				//	case 'comeOdds':
+				//		if(_CRAPS.dealer.betManager.bets[x].type == 'come'){
+				//			origBet = _CRAPS.dealer.betManager.bets[x];
+				//		}
+				//		break;
+				//	case 'dontPassOdds':
+				//		if(_CRAPS.dealer.betManager.bets[x].type == 'dontPass'){
+				//			origBet = _CRAPS.dealer.betManager.bets[x];
+				//		}
+				//		break;
+				//	case 'dontComeOdds':
+				//		if(_CRAPS.dealer.betManager.bets[x].type == 'dontCome'){
+				//			origBet = _CRAPS.dealer.betManager.bets[x];
+				//		}
+				//		break;
+				//	default:
+				//		break;
+				//	}
+				//}
 			}
 			var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
-			console.log('Placing bet:', newBet.toString());
+			//console.log('Placing bet:', newBet.toString());
 			_CRAPS.placeBet(newBet);
 			PlayerManager.updatePlayerArea();
 			//alert("You clicked submit!");

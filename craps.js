@@ -26,10 +26,6 @@ BetManager.prototype = {
 	},
 	checkBets: function(dice){
 		this.bets = BetChecker(GameState.point, this.bets, _CRAPS.dice);
-		var betListing = document.getElementById('betListing');
-		if(betListing.childNodes.length == 0){
-			return;
-		}
 		this.displayBets();
 	},
 	RemoveBet: function(betId){
@@ -97,19 +93,22 @@ BetManager.prototype = {
 			if(bet.origBet == null){
 				return[0, function(){alert('There must be a Come bet on the table. Bet has not been placed.')}];
 			}
-			if(_bet.origBet.point == 4 || _bet.origBet.point == 10){
+			if(!bet.origBet.point){
+				return[0, function(){alert('The associated Come bet must have a point on. Bet has not been placed')}];
+			}
+			if(bet.origBet.point == 4 || bet.origBet.point == 10){
 				return [(_bet.value <= 3 * _origBet.value) ? 1 : 0, function(){alert('Bet value must be 3 times the Come Line bet or less. Bet has not been placed.')}];
 			}
-			else if(_bet.origBet.point == 5 || _bet.origBet.point == 9){
+			else if(bet.origBet.point == 5 || bet.origBet.point == 9){
 				if (_bet.value <= 4 * _origBet.value){
 					return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be even. Consider adjusting.')}];
 				} else {
 					return [0 , function(){alert('Bet value must be 4 times the Come Line bet or less. Bet has not been placed.')}];
 				}
 			}
-			else if(_bet.origBet.point == 6 || _bet.origBet.point == 8){
+			else if(bet.origBet.point == 6 || bet.origBet.point == 8){
 				if(_bet.value <= 5 * _origBet.value){
-					return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+					return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
 				} else {
 					return [0 , function(){alert('Bet value must be 5 times the Come Line bet or less. Bet has not been placed.')}];
 				}
@@ -119,6 +118,9 @@ BetManager.prototype = {
 		case "dontPassOdds":
 			if(bet.origBet == null){
 				return[0, function(){alert('There must be a Don\' Pass Line Bet on the table.')}];
+			}
+			if(!bet.origBet.point){
+				return[0, function(){alert('The associated Don\'t Come bet must have a point on. Bet has not been placed')}];
 			}
 			if(GameState.point == 4 || GameState.point == 10){
 				if(_bet.value <= 6 * _origBet.value){
@@ -147,21 +149,21 @@ BetManager.prototype = {
 			if(bet.origBet == null){
 				return[0, function(){alert('There must be a Don\'t Pass Line Bet on the table.')}];
 			}
-			if(_bet.origBet.point == 4 || _bet.origBet.point == 10){
+			if(bet.origBet.point == 4 || bet.origBet.point == 10){
 				if(_bet.value <= 6 * _origBet.value){
 					return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet should be even. Consider adjusting.')}];
 				} else {
 					return [0, function(){alert('Bet must be 6 times the Don\'t Come bet or less. Bet has not been placed.')}];
 				}
 			}
-			else if(_bet.origBet.point == 5 || _bet.origBet.point == 9){
+			else if(bet.origBet.point == 5 || bet.origBet.point == 9){
 				if(_bet.value <= 8 * _origBet.value){
 					return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.')}];
 				} else {
 					return [0 , function(){alert('Bet value must 8 times the Don\'t Come bet or less. Bet has not been placed.')}];
 				}
 			}
-			else if(_bet.origBet.point == 6 || _bet.origBet.point == 8){
+			else if(bet.origBet.point == 6 || bet.origBet.point == 8){
 				if(_bet.value <= 10 * _origBet.value){
 				return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
 				} else {
@@ -217,28 +219,55 @@ BetManager.prototype = {
 		}
 	},
 	displayBets: function(){
-		while(betListing.childNodes.length > 0){
-			betListing.removeChild(betListing.childNodes[0]);
+		var betListing = $('#betListing');
+		if(betListing.children().length > 0){
+			betListing.empty();
 		}
 		for(var betNum in this.bets){
-			var newBetDisp = document.createElement('fieldset');
-			var legend = document.createElement('legend');
-			var pTag = document.createElement('p');
-			var legendText = document.createTextNode('Bet: ' + this.bets[betNum].type);
-			var pTagText = document.createTextNode('Value: $' + this.bets[betNum].bet.value);
-			var button = document.createElement('button');
-			var buttonText = document.createTextNode('Remove Bet');
-			button.setAttribute('type', 'button');
-			button.setAttribute('onclick', '_CRAPS.dealer.betManager.RemoveBet(' + this.bets[betNum].bet.betId + ')');
-			button.appendChild(buttonText);
-			betListing.appendChild(newBetDisp);
-			newBetDisp.appendChild(legend);
-			legend.appendChild(legendText);
-			newBetDisp.appendChild(pTag);
-			pTag.appendChild(pTagText);
-			pTag.appendChild(document.createElement('br'));
-			pTag.appendChild(button);
+			var newBetDisp = $(document.createElement('fieldset'));
+			var legend = $(document.createElement('legend'));
+			var pTag = $(document.createElement('p'));
+			legend.html('Bet: ' + this.bets[betNum].type);
+			var comePoint = '';
+			if(['come', 'dontCome'].indexOf(this.bets[betNum].type) != -1){
+				comePoint = '<br />Come Point: ' + this.bets[betNum].point;
+			}
+			var orig = '';
+			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
+				orig = '<br />Original Bet Id: ' + this.bets[betNum].origBet.bet.betId;
+			}
+			pTag.html('Bet Id: ' + this.bets[betNum].bet.betId + '<br />Value: $' + this.bets[betNum].bet.value +
+								comePoint + orig);
+			var betOnLabel = $(document.createElement('label'));
+			var betOn = $(document.createElement('input'));
+			betOnLabel.html('<br />Bet On: ');
+			betOn.attr('type', 'checkbox');
+			betOn.attr('checked', this.bets[betNum].bet.on);
+			betOn.change(function(){_CRAPS.dealer.betManager.bets[betNum].bet.on = betOn.is(':checked');});
+			pTag.append(betOnLabel).append(betOn);
+			var repeatWinLabel = $(document.createElement('label'));
+			var repeatWin = $(document.createElement('input'));
+			repeatWinLabel.html('<br />Repeat On Win: ');
+			repeatWin.attr('type', 'checkbox');
+			repeatWin.attr('checked', this.bets[betNum].repeat);
+			repeatWin.change(function(){_CRAPS.dealer.betManager.bets[betNum].repeat = betOn.is(':checked');});
+			pTag.append(repeatWinLabel).append(repeatWin).append('<br />');
+			var button = $(document.createElement('button'));
+			button.html('Remove Bet');
+			button.attr('onclick', '_CRAPS.dealer.betManager.RemoveBet(' + this.bets[betNum].bet.betId + ')');
+			pTag.append(button);
+			newBetDisp.append(legend);
+			newBetDisp.append(pTag);
+			betListing.append(newBetDisp);
 		}
+	},
+	getBetById: function(betId){
+		for(x in this.bets){
+			if(this.bets[x].bet.betId == betId){
+				return this.bets[x];
+			}
+		}
+		return null;
 	}
 }
 
@@ -303,18 +332,18 @@ $.extend(_CRAPS, {
 		_CRAPS.output("The roll is: " + roll);
 		_CRAPS.checkBets();
 		PlayerManager.updatePlayerArea();
-		var playersArray = []
-		for(i in PlayerManager.players){
-			playersArray.push(PlayerManager.players[i].toString());
-			//console.log('Player Bank: ' + PlayerManager.players[i].player.bank);
-		}
-		console.log('Players:', playersArray);
-		var betsArray = [];
-		for(i in this.dealer.betManager.bets){
-			betsArray.push(this.dealer.betManager.bets[i].toString());
-			//console.log('Bet Value: ' + this.dealer.betManager.bets[i].bet.value);
-		}
-		console.log('Bets:', betsArray);
+		//var playersArray = []
+		//for(i in PlayerManager.players){
+		//	playersArray.push(PlayerManager.players[i].toString());
+		//	//console.log('Player Bank: ' + PlayerManager.players[i].player.bank);
+		//}
+		//console.log('Players:', playersArray);
+		//var betsArray = [];
+		//for(i in this.dealer.betManager.bets){
+		//	betsArray.push(this.dealer.betManager.bets[i].toString());
+		//	//console.log('Bet Value: ' + this.dealer.betManager.bets[i].bet.value);
+		//}
+		//console.log('Bets:', betsArray);
 	// Set & unset the point, as appropriate.
 		if (GameState.point > 0){
 			if (roll == 7){
@@ -347,6 +376,7 @@ $.extend(_CRAPS, {
 			
 			_CRAPS.output("We have a point. All bets are on!");
 			this.dealer.betManager.turnBetsOn();
+			this.dealer.betManager.displayBets();
 			GameState.point = roll;
 		}
 		_CRAPS.output("After Roll - The point is: " + GameState.point);
@@ -420,6 +450,8 @@ var BetChecker = function(point, betArray, dice){
 				}
 				else if(dice.getSum() == 7){
 					continue;
+				}else{
+					newBetArray.push(bet);
 				}
 			}
 			else if(dice.getSum() == 2 || dice.getSum() == 3){
@@ -464,6 +496,8 @@ var BetChecker = function(point, betArray, dice){
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
+				}else{
+					newBetArray.push(bet);
 				}
 			}
 			else if(dice.getSum() == 2 || dice.getSum() == 3){
@@ -504,6 +538,8 @@ var BetChecker = function(point, betArray, dice){
 					if(bet.repeat){
 						newBetArray.push(bet);
 					}
+				}else{
+					newBetArray.push(bet);
 				}
 			}
 			else if(dice.getSum() == 2 || dice.getSum() == 3){
