@@ -47,6 +47,9 @@ var CrapsBet = function(betType, value, player, repeat, attachedBet){
 	$bet.bet = new Bet(value, player);
 	$bet.origBet = null;
 	$bet.point = false;
+	if(betType == 'passline'){
+		repeat = true;
+	}
 	$bet.repeat = repeat;
 	if(betType == 'passlineOdds' || betType == 'dontPassOdds' || betType == 'comeOdds' || 'dontComeOdds'){
 		$bet.origBet = attachedBet;

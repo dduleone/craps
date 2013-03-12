@@ -329,7 +329,7 @@ $.extend(_CRAPS, {
 	// Roll the dice.
 		_CRAPS.output("Before Roll - The point is: " + GameState.point);	
 		var roll = _CRAPS.dice.roll();
-		_CRAPS.output("The roll is: " + roll);
+		_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
 		_CRAPS.checkBets();
 		PlayerManager.updatePlayerArea();
 		//var playersArray = []
@@ -348,7 +348,7 @@ $.extend(_CRAPS, {
 		if (GameState.point > 0){
 			if (roll == 7){
 				GameState.point = false;
-				_CRAPS.output("Seven Out! All bets will be resolved!");
+				_CRAPS.output("Seven Out! Pay all Don't Come and Don't Pass! All other bets lose.");
 				// Resolve Bets.
 				return;
 			}
@@ -357,14 +357,18 @@ $.extend(_CRAPS, {
 				GameState.point = false;
 				_CRAPS.output("Shooter made the point!");
 				_CRAPS.output("All Pass Line bets win!");
-				_CRAPS.output("All bets will be resolved!");
+				//_CRAPS.output("All bets will be resolved!");
 				// Resolve Bets
 				return;
 			}
 		} else {
 			if(_CRAPS.dice.isCraps()){
-				_CRAPS.output("Craps!");
-				_CRAPS.output("All Pass Line bets lose!");
+				_CRAPS.output("Craps " + roll + "!");
+				if(roll == 12){
+					_CRAPS.output("All Pass Line bets push!");
+				}else{
+					_CRAPS.output("All Pass Line bets lose!");
+				}
 				return;
 			}
 
