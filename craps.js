@@ -367,6 +367,7 @@ $.extend(_CRAPS, {
 				_CRAPS.output("All Pass Line bets win!");
 				//_CRAPS.output("All bets will be resolved!");
 				// Resolve Bets
+				this.dealer.betManager.displayBets();
 				return;
 			}
 		} else {
