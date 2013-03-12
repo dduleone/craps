@@ -225,6 +225,7 @@ BetManager.prototype = {
 		}
 		for(var betNum in this.bets){
 			var newBetDisp = $(document.createElement('fieldset'));
+			newBetDisp.attr('id', 'bet' + this.bets[betNum].bet.betId);
 			var legend = $(document.createElement('legend'));
 			var pTag = $(document.createElement('p'));
 			legend.html('Bet: ' + this.bets[betNum].type);
@@ -244,6 +245,9 @@ BetManager.prototype = {
 			betOn.attr('type', 'checkbox');
 			betOn.attr('checked', this.bets[betNum].bet.on);
 			betOn.change(function(){_CRAPS.dealer.betManager.bets[betNum].bet.on = betOn.is(':checked');});
+			if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds'].indexOf(this.bets[betNum].type) != -1 && GameState.point > 0){
+				betOn.attr('disabled', 'true');
+			}
 			pTag.append(betOnLabel).append(betOn);
 			var repeatWinLabel = $(document.createElement('label'));
 			var repeatWin = $(document.createElement('input'));
@@ -251,6 +255,9 @@ BetManager.prototype = {
 			repeatWin.attr('type', 'checkbox');
 			repeatWin.attr('checked', this.bets[betNum].repeat);
 			repeatWin.change(function(){_CRAPS.dealer.betManager.bets[betNum].repeat = betOn.is(':checked');});
+			if(['passline', 'dontPass'].indexOf(this.bets[betNum].type) != -1){
+				repeatWin.attr('disabled', 'true');
+			}
 			pTag.append(repeatWinLabel).append(repeatWin).append('<br />');
 			var button = $(document.createElement('button'));
 			button.html('Remove Bet');
@@ -380,8 +387,8 @@ $.extend(_CRAPS, {
 			
 			_CRAPS.output("We have a point. All bets are on!");
 			this.dealer.betManager.turnBetsOn();
-			this.dealer.betManager.displayBets();
 			GameState.point = roll;
+			this.dealer.betManager.displayBets();
 		}
 		_CRAPS.output("After Roll - The point is: " + GameState.point);
 	},
