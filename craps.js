@@ -304,6 +304,7 @@ $.extend(_CRAPS, {
 	//,
 	dealer: new Dealer(),
 	minBet: 10,
+	maxBet: 10000,
 	placeBet: function(bet){
 		betResponse = this.dealer.betManager.validateBet(bet);
 		if(betResponse[0] > 0){
