@@ -62,6 +62,11 @@
 			#create{
 				height: 40px;
 			}
+			#tableInfo{
+				position: absolute;
+				top: 30px;
+				left: 350px;
+			}
 		</style>
 	</head>
 	<body>
@@ -130,6 +135,7 @@
 				<p id='bank'></p>
 			</fieldset>
 		</div>
+		<div id='tableInfo'></div>
 	</body>
 	<footer>
 
@@ -277,6 +283,7 @@
 		</script>
 	<script type='text/javascript' lang='javascript'>
 		$('#betValue').attr('value', _CRAPS.minBet);
+		$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
 		$('#betType').change(function(){
 			$('#origBet').empty();
 			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
