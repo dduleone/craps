@@ -110,7 +110,7 @@
 				</p>
 				<p>
 					<label for='betValue'>Bet Value</label>
-					<input id='betValue' name='betValue' value='0' type='text'>
+					<input id='betValue' name='betValue' type='text'>
 				</p>
 				<p>
 					<label for='repeat'>Repeat Bet on Win?</label>
@@ -276,6 +276,7 @@
 			//d.demo(24);
 		</script>
 	<script type='text/javascript' lang='javascript'>
+		$('#betValue').attr('value', _CRAPS.minBet);
 		$('#betType').change(function(){
 			$('#origBet').empty();
 			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
