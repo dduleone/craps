@@ -29,17 +29,37 @@ $.extend(PlayerManager, {
 	},
 	updatePlayerArea: function(){
 		
-		var name = document.getElementById('name');
-		var bank = document.getElementById('bank');
-		while(name.childNodes.length > 0){
-			name.removeChild(name.childNodes[0]);
+		var name = $(document.getElementById('name'));
+		var bank = $(document.getElementById('bank'));
+		bank.empty();
+		name.html(this.players[0].player.name);
+		var bankTitle = $(document.createElement('p'));
+		bankTitle.html('<center>Bank</center>');
+		if(bank.children().length == 0){
+			bank.append(bankTitle);
 		}
-		while(bank.childNodes.length > 0){
-			bank.removeChild(bank.childNodes[0]);
+		var avail = $(document.createElement('div'));
+		var inPlay = $(document.createElement('div'));
+		var total = $(document.createElement('div'));
+		var totalBets = 0;
+		//if(_CRAPS.betManager.bets){
+		for(x in _CRAPS.dealer.betManager.bets){
+			totalBets += _CRAPS.dealer.betManager.bets[x].bet.value;
 		}
-		var nameText = document.createTextNode('Player: ' + this.players[0].player.name);
-		var bankText = document.createTextNode('Bank: $' + this.players[0].player.bank);
-		name.appendChild(nameText);
-		bank.appendChild(bankText);
+		avail.attr('id', 'availBank');
+		avail.html('Available Bank:<br />$' + this.players[0].player.bank);
+		inPlay.html('Money In Play:<br />$' + totalBets);
+		inPlay.attr('id', 'inPlay');
+		total.html('Total Worth:<br />$' + (this.players[0].player.bank + totalBets));
+		total.attr('id', 'totBank');
+		if(this.players[0].player.bank + totalBets < 10000){
+			total.attr('class','losing');
+		}else if(this.players[0].player.bank + totalBets == 10000){
+			total.attr('class', '');
+		}else{
+			total.attr('class', 'winning');
+		}
+		bank.append(avail).append(inPlay).append(total);		
+		//bank.append(avail).append(inPlay).append(total);
 	}
 });

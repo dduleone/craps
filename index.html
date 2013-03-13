@@ -67,6 +67,52 @@
 				top: 30px;
 				left: 350px;
 			}
+			#playerInfo{
+				border-style: none;
+			}
+			#name{
+				position: relative;
+				text-align: center;
+				top: -10px;
+				font-size: 3em;
+			}
+			#bank{
+				position: relative;
+				top: -30px;
+				text-align: center;
+			}
+			#availBank{
+				position: absolute;
+				top: 25px;
+				left: -10px;
+				width: 100px;
+			}
+			#inPlay{
+				position: absolute;
+				top: 25px;
+				left: 90px;
+				width: 100px;
+				float: left;
+			}
+			#totBank{
+				position: absolute;
+				top: 25px;
+				left: 190px;
+				width: 100px;
+				float: left;
+			}
+			.winning{
+				color: green;
+			}
+			.losing{
+				color: red;
+			}
+			#pointWindow{
+				position: absolute;
+				top: 30px;
+				left: 700px;
+				font-size: 3em;
+			}
 		</style>
 	</head>
 	<body>
@@ -131,11 +177,13 @@
 		<div id='playerArea'>
 			<fieldset id='playerInfo'>
 				<legend>Player Info!</legend>
-				<p id='name'></p>
-				<p id='bank'></p>
+				<div id='name'></div>
+				<div id='bank'></div>
 			</fieldset>
 		</div>
 		<div id='tableInfo'></div>
+		<div id='pointWindow'></div>
+		
 	</body>
 	<footer>
 
@@ -151,7 +199,7 @@
 		<script type='text/javascript' language='javascript' src='board.js'></script>
 
 		<script type='text/javascript' language='javascript'>		
-			makeCrapsPlayer("Dan", 10000);
+			makeCrapsPlayer("Matt", 10000);
 			//_CRAPS.players = [p];
 
 			var p = PlayerManager.players[0];
@@ -164,6 +212,7 @@
 			function roll(){
 				_CRAPS.output("---Rolling---");
 				_CRAPS.roll();
+				$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
 			}
 		</script>
 		<!-- Draw Tabletop -->
@@ -281,63 +330,37 @@
 			//d.line(pa._l + 100, pa._t + 100, pa._l+100, pa._b-150, boardEtc);
 			//d.demo(24);
 		</script>
-	<script type='text/javascript' lang='javascript'>
-		$('#betValue').attr('value', _CRAPS.minBet);
-		$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
-		$('#betType').change(function(){
-			$('#origBet').empty();
-			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
-				var origBet = $('#origBet');
-				var origLabel = $(document.createElement('label'));
-				var orig = $(document.createElement('input'));
-				orig.attr('type', 'text');
-				orig.attr('id', 'orig');
-				origLabel.html('Original Bet ID: ');
-				origBet.append(origLabel).append(orig);
-			}
-		});
-		$("#betForm button").click(function(){
-			//console.log($('#betType').val());
-			//console.log($('#betValue').val());
-			//console.log($('#betRepeat').is(':checked'));
-			//console.log(parseInt($('#betValue').val()));
-			var origBet = null;
-			if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
-				origBet = _CRAPS.dealer.betManager.getBetById($('#orig').val());
-				//for(x in _CRAPS.dealer.betManager.bets){
-				//	switch($('#betType').val()){
-				//	case 'passlineOdds':
-				//		if(_CRAPS.dealer.betManager.bets[x].type == 'passline'){
-				//			origBet = _CRAPS.dealer.betManager.bets[x];
-				//		}
-				//		break;
-				//	case 'comeOdds':
-				//		if(_CRAPS.dealer.betManager.bets[x].type == 'come'){
-				//			origBet = _CRAPS.dealer.betManager.bets[x];
-				//		}
-				//		break;
-				//	case 'dontPassOdds':
-				//		if(_CRAPS.dealer.betManager.bets[x].type == 'dontPass'){
-				//			origBet = _CRAPS.dealer.betManager.bets[x];
-				//		}
-				//		break;
-				//	case 'dontComeOdds':
-				//		if(_CRAPS.dealer.betManager.bets[x].type == 'dontCome'){
-				//			origBet = _CRAPS.dealer.betManager.bets[x];
-				//		}
-				//		break;
-				//	default:
-				//		break;
-				//	}
-				//}
-			}
-			var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
-			//console.log('Placing bet:', newBet.toString());
-			_CRAPS.placeBet(newBet);
-			PlayerManager.updatePlayerArea();
-			//alert("You clicked submit!");
-		});
-	</script>
-
+		<script type='text/javascript' lang='javascript'>
+			$('#betValue').attr('value', _CRAPS.minBet);
+			$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
+			$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
+			$('#betType').change(function(){
+				$('#origBet').empty();
+				if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
+					var origBet = $('#origBet');
+					var origLabel = $(document.createElement('label'));
+					var orig = $(document.createElement('input'));
+					orig.attr('type', 'text');
+					orig.attr('id', 'orig');
+					origLabel.html('Original Bet ID: ');
+					origBet.append(origLabel).append(orig);
+				}
+			});
+			$("#betForm button").click(function(){
+				//console.log($('#betType').val());
+				//console.log($('#betValue').val());
+				//console.log($('#betRepeat').is(':checked'));
+				//console.log(parseInt($('#betValue').val()));
+				var origBet = null;
+				if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
+					origBet = _CRAPS.dealer.betManager.getBetById($('#orig').val());
+				}
+				var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
+				//console.log('Placing bet:', newBet.toString());
+				_CRAPS.placeBet(newBet);
+				PlayerManager.updatePlayerArea();
+				//alert("You clicked submit!");
+			});
+		</script>
 		</footer>
 </html>

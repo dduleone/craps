@@ -258,6 +258,9 @@ BetManager.prototype = {
 			if(['passline', 'dontPass'].indexOf(this.bets[betNum].type) != -1){
 				repeatWin.attr('disabled', 'true');
 			}
+			if(['passlineOdds', 'dontPassOdds', 'comeOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
+				repeatWin.attr('disabled', 'true');
+			}
 			pTag.append(repeatWinLabel).append(repeatWin).append('<br />');
 			var button = $(document.createElement('button'));
 			button.html('Remove Bet');
@@ -299,9 +302,6 @@ $.extend(_CRAPS, {
 		$(buffer).append("<span>" + msg + "</span><br />\n");
 		buffer.scrollTop = buffer.scrollHeight;
 	},
-	//placeBet: function(bet){
-	//	BetManager.placeBet(bet);}
-	//,
 	dealer: new Dealer(),
 	minBet: 10,
 	maxBet: 10000,
@@ -340,18 +340,6 @@ $.extend(_CRAPS, {
 		_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
 		_CRAPS.checkBets();
 		PlayerManager.updatePlayerArea();
-		//var playersArray = []
-		//for(i in PlayerManager.players){
-		//	playersArray.push(PlayerManager.players[i].toString());
-		//	//console.log('Player Bank: ' + PlayerManager.players[i].player.bank);
-		//}
-		//console.log('Players:', playersArray);
-		//var betsArray = [];
-		//for(i in this.dealer.betManager.bets){
-		//	betsArray.push(this.dealer.betManager.bets[i].toString());
-		//	//console.log('Bet Value: ' + this.dealer.betManager.bets[i].bet.value);
-		//}
-		//console.log('Bets:', betsArray);
 	// Set & unset the point, as appropriate.
 		if (GameState.point > 0){
 			if (roll == 7){
