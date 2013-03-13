@@ -11,7 +11,17 @@
 				float: left;
 				position: absolute;
 				top: 150px;
-				left: 100px;
+				left: 25px;
+			}
+			button#reset{
+				height: 40px;
+				width: 100px;
+				margin: 0px;
+				padding: 0px;
+				float: left;
+				position: absolute;
+				top: 150px;
+				left: 175px;
 			}
 			#buffer{
 				position: absolute;
@@ -118,7 +128,8 @@
 	<body>
 		<!-- canvas id="board" height='1024' width='768'></canvas -->
 		<canvas id="board" height='768' width='1024'></canvas>
-		<button id='roll' onclick='roll()'>Roll</button><br />
+		<button id='roll' onclick='roll()'>Roll</button>
+		<button id='reset' onclick='reset()'>Reset Bets</button><br />
 		<div id='buffer'></div>
 		
 		<div id='betForm'>
@@ -214,6 +225,27 @@
 				_CRAPS.roll();
 				$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
 				_CRAPS.dealer.betManager.displayBets();
+			}
+			
+			function reset(){
+				var _bets = _CRAPS.dealer.betManager.bets
+				for(x in _bets){
+					if(_bets[x].type == 'passline'){
+						if(GameState.point > 0){
+							continue;
+						}else{
+							_CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
+						}
+					}
+					if(_bets[x].type == 'come'){
+						if(_bets[x].point > 0){
+							continue;
+						}else{
+							_CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
+						}
+					}
+					_CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
+				}
 			}
 		</script>
 		<!-- Draw Tabletop -->
