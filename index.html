@@ -213,6 +213,7 @@
 				_CRAPS.output("---Rolling---");
 				_CRAPS.roll();
 				$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
+				_CRAPS.dealer.betManager.displayBets();
 			}
 		</script>
 		<!-- Draw Tabletop -->

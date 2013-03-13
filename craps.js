@@ -264,7 +264,18 @@ BetManager.prototype = {
 			pTag.append(repeatWinLabel).append(repeatWin).append('<br />');
 			var button = $(document.createElement('button'));
 			button.html('Remove Bet');
-			button.attr('onclick', '_CRAPS.dealer.betManager.RemoveBet(' + this.bets[betNum].bet.betId + ')');
+			if(this.bets[betNum].type == 'passline'){
+				if(GameState.point > 0){
+					button.attr('onclick', 'alert("You cannot take down a Pass Line bet when a point is on.")');
+					button.attr('disabled', 'true');
+				}
+			}
+			if(this.bets[betNum].type == 'come'){
+				if(this.bets[betNum].point > 0){
+					button.attr('onclick', 'alert("You cannot take down a Come bet when it has a point.")');
+					button.attr('disabled', 'true');
+				}
+			}
 			pTag.append(button);
 			newBetDisp.append(legend);
 			newBetDisp.append(pTag);
@@ -355,7 +366,6 @@ $.extend(_CRAPS, {
 				_CRAPS.output("All Pass Line bets win!");
 				//_CRAPS.output("All bets will be resolved!");
 				// Resolve Bets
-				this.dealer.betManager.displayBets();
 				return;
 			}
 		} else {
@@ -378,7 +388,6 @@ $.extend(_CRAPS, {
 			_CRAPS.output("We have a point. All bets are on!");
 			this.dealer.betManager.turnBetsOn();
 			GameState.point = roll;
-			this.dealer.betManager.displayBets();
 		}
 		_CRAPS.output("After Roll - The point is: " + GameState.point);
 	},
