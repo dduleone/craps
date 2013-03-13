@@ -28,7 +28,7 @@ BetManager.prototype = {
 		this.bets = BetChecker(GameState.point, this.bets, _CRAPS.dice);
 		this.displayBets();
 	},
-	RemoveBet: function(betId){
+	removeBet: function(betId){
 		var _bets = this.bets
 		var newBetArray = [];
 		for(x in _bets){
@@ -268,13 +268,19 @@ BetManager.prototype = {
 				if(GameState.point > 0){
 					button.attr('onclick', 'alert("You cannot take down a Pass Line bet when a point is on.")');
 					button.attr('disabled', 'true');
+				}else{
+					button.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
 				}
 			}
 			if(this.bets[betNum].type == 'come'){
 				if(this.bets[betNum].point > 0){
 					button.attr('onclick', 'alert("You cannot take down a Come bet when it has a point.")');
 					button.attr('disabled', 'true');
+				}else{
+					button.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
 				}
+			}else{
+				button.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
 			}
 			pTag.append(button);
 			newBetDisp.append(legend);
