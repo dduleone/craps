@@ -6,6 +6,9 @@ function onWin(bet, amount){
 	var _bet = bet.bet;
 	var _player = _bet.player.player;
 	
+	var _cssBetId = '#bet' + _bet.betId;
+	$(_cssBetId).animate({backgroundColor: "green", borderColor: "green"});
+	
 	_CRAPS.output("Bet " + bet.type + " wins! Pays out $" + amount);
 	_player.addToBank(amount);
 }
@@ -55,6 +58,9 @@ BetManager.prototype = {
 		
 		if(_bet.value < _CRAPS['minBet']){
 			return [0, function(){alert('Bet must be bigger than the Table Minimum. Bet has not been placed.')}];
+		}
+		if(_bet.value > _CRAPS['maxBet']){
+			return [0, function(){alert('Bet must be smaller than the Table Maximum. Bet has not been placed.')}];
 		}
 		if(_bet.value % 1 != 0){
 			return [0, function(){alert('Bet must be an integer. Bet has not been placed.')}];
