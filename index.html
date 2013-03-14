@@ -226,10 +226,10 @@
 				_CRAPS.roll();
 				$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
 				if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
-					var animatedTimeout = setInterval(
+					var animateTimeout = setInterval(
 						function(){
 							_CRAPS.dealer.betManager.displayBets();
-							clearInterval(animatedTimeout);
+							clearInterval(animateTimeout);
 						}, 1000);
 				}else{
 					_CRAPS.dealer.betManager.displayBets();
