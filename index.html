@@ -225,7 +225,15 @@
 				_CRAPS.output("---Rolling---");
 				_CRAPS.roll();
 				$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
-				_CRAPS.dealer.betManager.displayBets();
+				if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
+					var animatedTimeout = setInterval(
+						function(){
+							_CRAPS.dealer.betManager.displayBets();
+							clearInterval(animatedTimeout);
+						}, 1000);
+				}else{
+					_CRAPS.dealer.betManager.displayBets();
+				}
 			}
 			
 			function reset(){
