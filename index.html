@@ -154,7 +154,8 @@
 			}
 
 			//var _h = 1024, _w = 768;
-			var _h = 768, _w = 1024;
+			// Use size of actual canvas, allows for future flexibility. --dracoling
+			var _h = canvas.height, _w = canvas.width;
 			//var _h = 640, _w = 800;
 			var _l = 0, _r = _w;
 			var _t = 0, _b = _h;
