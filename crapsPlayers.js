@@ -15,7 +15,9 @@ var CrapsPlayer = function(name, bank){
 			console.log("Not enough money, bitches");
 			return;
 		}
-		_player.subFromBank(value);
+		if(!isNaN(value)){
+			_player.subFromBank(value);
+		}
 		return new CrapsBet(betType, value, $player, repeat, origBet);
 		/* switch(betType){
 		case 'passline':

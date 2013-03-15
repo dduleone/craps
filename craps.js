@@ -363,7 +363,9 @@ $.extend(_CRAPS, {
 			}
 		}
 		else{
-			bet.bet.player.player.addToBank(bet.bet.value);
+			if(!isNaN(bet.bet.value)){
+				bet.bet.player.player.addToBank(bet.bet.value);
+			}
 			betResponse[1]();
 		}
 	},
