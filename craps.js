@@ -310,13 +310,13 @@ BetManager.prototype = {
 		for(x in this.losingBetIds){
 			$('#bet' + this.losingBetIds[x]).attr('class', 'losingBet');
 		}
-        $('.winningBet').animate({backgroundColor: 'green', borderColor: 'green'}, 500, function(){$('.winningBet').animate({backgroundColor: 'none', borderColor: 'none'}, 500)});
-        $('.losingBet').animate({backgroundColor: 'red', borderColor: 'red', opacity: 0}, 1000);
+        $('.winningBet').animate({backgroundColor: 'green', borderColor: 'green'}, BET_FADE_INTERVAL/2, function(){$('.winningBet').animate({backgroundColor: 'none', borderColor: 'none'}, BET_FADE_INTERVAL/2)});
+        $('.losingBet').animate({backgroundColor: 'red', borderColor: 'red', opacity: 0}, BET_FADE_INTERVAL);
 		var animateTimeout = setInterval(function(){
 						$('.winningBet').removeClass('winningBet');
 						$('.losingBet').removeClass('losingBet');
 						clearInterval(animateTimeout);
-						}, 1000);
+						}, BET_FADE_INTERVAL);
 		this.winningBetIds = [];
 		this.losingBetIds = [];
 	},

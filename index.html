@@ -217,6 +217,7 @@
 			var p = PlayerManager.players[0];
 			PlayerManager.updatePlayerArea();
 			
+			var BET_FADE_INTERVAL = 2000;
 			//_CRAPS.placeBet(p.createBet('hard4', 1000));
 			//_CRAPS.placeBet(p.createBet('hard6', 1500));
 			//_CRAPS.placeBet(p.createBet('passline', 1000));
@@ -230,7 +231,7 @@
 						function(){
 							_CRAPS.dealer.betManager.displayBets();
 							clearInterval(animateTimeout);
-						}, 1000);
+						}, BET_FADE_INTERVAL);
 				}else{
 					_CRAPS.dealer.betManager.displayBets();
 				}
