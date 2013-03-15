@@ -1,0 +1,120 @@
+	button#roll{
+		height: 40px;
+		width: 100px;
+		margin: 0px;
+		padding: 0px;
+		float: left;
+		position: absolute;
+		top: 150px;
+		left: 25px;
+	}
+	button#reset{
+		height: 40px;
+		width: 100px;
+		margin: 0px;
+		padding: 0px;
+		float: left;
+		position: absolute;
+		top: 150px;
+		left: 175px;
+	}
+	#buffer{
+		position: absolute;
+		top: 200px;
+		left: 0px;
+		font-family: monospace;
+		height: 498px;
+		width: 300px;
+		border: 1px solid black;
+		overflow: auto;
+		margin: 0px;
+		padding: 0px;
+	}
+	#buffer span{
+		padding-left: 5px;
+	}
+	#board{
+		position: absolute;
+		top: 0px;
+		left: 300px;
+		margin: 0px;
+		padding: 0px;
+	}
+	#betForm{
+		position: absolute;
+		top: 0px;
+		height: 275px;
+		left: 1324px;
+		margin: 2px;
+		padding: 0px;
+	}
+	#betListing{
+		position: absolute;
+		top: 275px;
+		left: 1324px;
+		margin: 2px;
+		padding: 0px;
+	}
+	#playerArea{
+		position: absolute;
+		height: 150px;
+		width: 300px;
+		top: 0px;
+		left: 0px;
+		margin: 2px;
+		padding: 0px;
+	}
+	#create{
+		height: 40px;
+	}
+	#tableInfo{
+		position: absolute;
+		top: 30px;
+		left: 350px;
+	}
+	#playerInfo{
+		border-style: none;
+	}
+	#name{
+		position: relative;
+		text-align: center;
+		top: -10px;
+		font-size: 3em;
+	}
+	#bank{
+		position: relative;
+		top: -30px;
+		text-align: center;
+	}
+	#availBank{
+		position: absolute;
+		top: 25px;
+		left: -10px;
+		width: 100px;
+	}
+	#inPlay{
+		position: absolute;
+		top: 25px;
+		left: 90px;
+		width: 100px;
+		float: left;
+	}
+	#totBank{
+		position: absolute;
+		top: 25px;
+		left: 190px;
+		width: 100px;
+		float: left;
+	}
+	.winning{
+		color: green;
+	}
+	.losing{
+		color: red;
+	}
+	#pointWindow{
+		position: absolute;
+		top: 30px;
+		left: 700px;
+		font-size: 3em;
+	}
