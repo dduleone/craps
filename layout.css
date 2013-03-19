@@ -1,22 +1,32 @@
+	button{
+		height: 30px;
+	}
 	button#roll{
-		height: 40px;
-		width: 100px;
+		width: 75px;
 		margin: 0px;
 		padding: 0px;
 		float: left;
 		position: absolute;
 		top: 150px;
-		left: 25px;
+		left: 12px;
+	}
+	button#place{
+		width: 75px;
+		margin: 0px;
+		padding: 0px;
+		float: left;
+		position: absolute;
+		top: 150px;
+		left: 112px;
 	}
 	button#reset{
-		height: 40px;
-		width: 100px;
+		width: 75px;
 		margin: 0px;
 		padding: 0px;
 		float: left;
 		position: absolute;
 		top: 150px;
-		left: 175px;
+		left: 212px;
 	}
 	#buffer{
 		position: absolute;
@@ -41,12 +51,14 @@
 		padding: 0px;
 	}
 	#betForm{
+		display:none;
 		position: absolute;
 		top: 0px;
 		height: 275px;
 		left: 1324px;
 		margin: 2px;
 		padding: 0px;
+		background-color: #FFF;
 	}
 	#betListing{
 		position: absolute;
@@ -63,9 +75,6 @@
 		left: 0px;
 		margin: 2px;
 		padding: 0px;
-	}
-	#create{
-		height: 40px;
 	}
 	#tableInfo{
 		position: absolute;

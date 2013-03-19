@@ -9,6 +9,7 @@
 		<canvas id="board" height='768' width='1024'></canvas>
 		<button id='roll' onclick='roll()'>Roll</button>
 		<button id='reset' onclick='reset()'>Reset Bets</button><br />
+		<button id='place' onclick='place()'>Place a Bet</button><br />
 		<div id='buffer'></div>
 		
 		<div id='betForm'>
@@ -59,7 +60,8 @@
 				</p>
 				<p id='origBet'></p>
 				<p>
-					<button id='create'>Create that Bet!</button>
+					<button id='create' onclick='create()'>Create that Bet!</button>
+					<button id='cancel' onclick='cancel()'>Cancel</button>
 				</p>
 			</fieldset>
 		</div>
@@ -135,6 +137,11 @@
 					}
 					_CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
 				}
+			}
+			
+			function place(){
+				$('#betForm').show()
+				$('#betForm').animate({left: '1024px'}, 1000);
 			}
 		</script>
 		<!-- Draw Tabletop -->
@@ -269,7 +276,8 @@
 					origBet.append(origLabel).append(orig);
 				}
 			});
-			$("#betForm button").click(function(){
+			
+			function create(){
 				//console.log($('#betType').val());
 				//console.log($('#betValue').val());
 				//console.log($('#betRepeat').is(':checked'));
@@ -282,8 +290,11 @@
 				//console.log('Placing bet:', newBet.toString());
 				_CRAPS.placeBet(newBet);
 				PlayerManager.updatePlayerArea();
-				//alert("You clicked submit!");
-			});
+				$('#betForm').animate({left: '1324px'}, 1000, function(){$('#betForm').hide();});
+			}
+			function cancel(){
+				$('#betForm').animate({left: '1324px'}, 1000, function(){$('#betForm').hide();});
+			}
 		</script>
 		</footer>
 </html>
