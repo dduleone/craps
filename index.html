@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<!-- canvas id="board" height='1024' width='768'></canvas -->
-		<canvas id="board" style="height: 55%; width:40%;"></canvas>
+		<canvas id="board" style="height: 55%; width:55%;"></canvas>
 		<div id='buffer'></div>
 		
 		<div id='betForm'>
@@ -322,10 +322,10 @@
 				//console.log('Placing bet:', newBet.toString());
 				_CRAPS.placeBet(newBet);
 				PlayerManager.updatePlayerArea();
-				$('#betForm').animate({left: ($('#PlayerArea').width() + $('#board').width()), opacity: 0}, 1000, function(){$('#betForm').hide();});
+				$('#betForm').animate({left: ($('#PlayerArea').width() + $('#board').width()) + 'px', opacity: 0}, 1000, function(){$('#betForm').hide();});
 			}
 			function cancel(){
-				$('#betForm').animate({left: ($('#PlayerArea').width() + $('#board').width()), opacity: 0}, 1000, function(){$('#betForm').hide();});
+				$('#betForm').animate({left: ($('#PlayerArea').width() + $('#board').width()) + 'px', opacity: 0}, 1000, function(){$('#betForm').hide();});
 			}
 		</script>
 		</footer>
