@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<!-- canvas id="board" height='1024' width='768'></canvas -->
-		<canvas id="board" style="height: 40%; width: 40%;"></canvas>
+		<canvas id="board" style="height: 80%; width: 80%;"></canvas>
 		<div id='buffer'></div>
 		
 		<div id='tableInfo'></div>
@@ -55,7 +55,7 @@
 				</p>
 				<p id='origBet'></p>
 				<p>
-					<button id='create' onclick='create()'>Create that Bet!</button>
+					<button id='create' onclick='create()'>Create Bet!</button>
 					<button id='cancel' onclick='cancel()'>Cancel</button>
 				</p>
 			</fieldset>
@@ -158,6 +158,8 @@
 			
 			function place(){
 				$('#betForm').show()
+				$('#betForm').height($('#betInfo').height() + 8 + 4);
+				$('#betForm').width($('#betInfo').width() + 8 + 4);
 				$('#betForm').animate({left: ($('#playerArea').width() + $('#board').width() - $('#betForm').width()), opacity: 1}, 1000);
 			}
 		</script>
@@ -281,10 +283,9 @@
 			$('#betValue').attr('value', _CRAPS.minBet);
 			$('#betValue').css({width: '50px'});
 			$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
-			$('#betListing').css({top: ($('#board').height() + 3)});
-			$('#betListing').css({left: ($('#buffer').width() + 3), float: 'left'});
+			$('#betListing').css({top: ($('#board').height() + 4)});
+			$('#betListing').css({left: ($('#buffer').width() + 4), float: 'left'});
 			$('#betForm').css({left: ($('#playerArea').width() + $('#board').width())});
-			$('#betForm').css({height: 162});
 			$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
 			$('#buffer').height($('#board').height() - $('#playerArea').height());
 			$('#betType').change(function(){

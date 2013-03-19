@@ -414,11 +414,11 @@
             ctx.strokeStyle = this.board.colors.lines;
             ctx.lineWidth = 10;
             ctx.beginPath();
-            ctx.moveTo(1200, 450);
+            ctx.moveTo(1200, 445);
             ctx.lineTo(1200, 500);
             ctx.lineTo(1900, 500);
             ctx.lineTo(1900, 450);
-            ctx.lineTo(1200, 450);
+            ctx.lineTo(1195, 445);
             ctx.stroke();
             this.drawText();
         },

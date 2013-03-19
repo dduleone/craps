@@ -91,8 +91,14 @@
 	#tableInfo{
 		position: absolute;
 		top: 35px;
-		left: 800px;
+		left: 70%;
 		font-size: 13pt;
+	}
+	#pointWindow{
+		position: absolute;
+		top: 30px;
+		left: 70%;
+		font-size: 15pt;
 	}
 	#playerInfo{
 		border-style: none;
@@ -133,10 +139,4 @@
 	}
 	.losing{
 		color: red;
-	}
-	#pointWindow{
-		position: absolute;
-		top: 30px;
-		left: 800px;
-		font-size: 15pt;
 	}
