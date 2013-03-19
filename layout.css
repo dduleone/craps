@@ -51,10 +51,11 @@
 		padding: 0px;
 	}
 	#betForm{
-		display:none;
+		display: none;
 		position: absolute;
 		top: 0px;
 		height: 275px;
+		width: 225;
 		left: 1324px;
 		margin: 2px;
 		padding: 0px;
