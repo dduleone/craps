@@ -91,13 +91,13 @@
 	#tableInfo{
 		position: absolute;
 		top: 35px;
-		left: 70%;
+		left: 75%;
 		font-size: 13pt;
 	}
 	#pointWindow{
 		position: absolute;
 		top: 30px;
-		left: 70%;
+		left: 75%;
 		font-size: 15pt;
 	}
 	#playerInfo{
