@@ -6,27 +6,27 @@
 		margin: 0px;
 		padding: 0px;
 		float: left;
-		position: absolute;
 		top: 150px;
-		left: 12px;
+		//position: absolute;
+		//left: 12px;
 	}
 	button#place{
 		width: 75px;
-		margin: 0px;
+		margin: 0 auto;
 		padding: 0px;
 		float: left;
+		top: 135px;
 		position: absolute;
-		top: 150px;
 		left: 112px;
 	}
 	button#reset{
 		width: 75px;
 		margin: 0px;
 		padding: 0px;
-		float: left;
-		position: absolute;
+		float: right;
 		top: 150px;
-		left: 212px;
+		//position: absolute;
+		//left: 212px;
 	}
 	#buffer{
 		position: absolute;
@@ -52,21 +52,32 @@
 	}
 	#betForm{
 		display: none;
+		opacity: 0;
 		position: absolute;
 		top: 0px;
-		height: 275px;
+		height: 194px;
 		width: 225;
 		left: 1324px;
 		margin: 2px;
 		padding: 0px;
 		background-color: #FFF;
 	}
+	#betInfo{
+		margin: 2px;
+		padding: 2px;
+	}
 	#betListing{
 		position: absolute;
-		top: 275px;
+		top: 248px;
 		left: 1324px;
 		margin: 2px;
 		padding: 0px;
+	}
+	button#create{
+		float: left;
+	}
+	button#cancel{
+		float: right;
 	}
 	#playerArea{
 		position: absolute;
