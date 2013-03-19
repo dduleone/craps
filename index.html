@@ -6,9 +6,11 @@
 	</head>
 	<body>
 		<!-- canvas id="board" height='1024' width='768'></canvas -->
-		<canvas id="board" style="height: 55%; width:55%;"></canvas>
+		<canvas id="board" style="height: 40%; width: 40%;"></canvas>
 		<div id='buffer'></div>
 		
+		<div id='tableInfo'></div>
+		<div id='pointWindow'></div>
 		<div id='betForm'>
 			<fieldset id='betInfo'>	
 				<legend>Create a Bet!</legend>
@@ -45,13 +47,9 @@
 						<option value="big6">Big 6</option>
 						<option value="big8">Big 8</option>
 						<option value="world">World</option>
-					</select>
-				</p>
-				<p>
+					</select><br />
 					<label for='betValue'>Bet Value</label>
-					<input id='betValue' name='betValue' type='text'>
-				</p>
-				<p>
+					<input id='betValue' name='betValue' type='text'><br />
 					<label for='repeat'>Repeat Bet on Win?</label>
 					<input id='betRepeat' name='betRepeat' type='checkbox'>
 				</p>
@@ -73,8 +71,6 @@
 				<button id='reset' onclick='reset()'>Reset Bets</button>
 			</fieldset>
 		</div>
-		<div id='tableInfo'></div>
-		<div id='pointWindow'></div>
 		
 	</body>
 	<footer>
@@ -162,7 +158,7 @@
 			
 			function place(){
 				$('#betForm').show()
-				$('#betForm').animate({left: '1024px', opacity: 1}, 1000);
+				$('#betForm').animate({left: ($('#playerArea').width() + $('#board').width() - $('#betForm').width()), opacity: 1}, 1000);
 			}
 		</script>
 		<!-- Draw Tabletop -->
@@ -285,12 +281,12 @@
 			$('#betValue').attr('value', _CRAPS.minBet);
 			$('#betValue').css({width: '50px'});
 			$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
-			$('#betListing').css({top: ($('#betForm').height() + 3)});
-			$('#betForm').css({left: ($('#PlayerArea').width() + $('#board').width())});
-			$('#betListing').css({left: ($('#PlayerArea').width() + $('#board').width())});
-			//$height = $('#betInfo').height() + 3;
-			//$('#betForm').css({height: $height});
+			$('#betListing').css({top: ($('#board').height() + 3)});
+			$('#betListing').css({left: ($('#buffer').width() + 3), float: 'left'});
+			$('#betForm').css({left: ($('#playerArea').width() + $('#board').width())});
+			$('#betForm').css({height: 162});
 			$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
+			$('#buffer').height($('#board').height() - $('#playerArea').height());
 			$('#betType').change(function(){
 				$('#origBet').empty();
 				if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
@@ -305,8 +301,6 @@
 				}
 				var _height = $('#betInfo').height() + 8 + 3;
 				$('#betForm').css({height: _height});
-				$('#betListing').css({top: ($('#betForm').height() + 3)});
-				$('#betForm').css({left: ($('#PlayerArea').width() + $('#board').width())});
 			});
 			
 			function create(){
@@ -322,10 +316,10 @@
 				//console.log('Placing bet:', newBet.toString());
 				_CRAPS.placeBet(newBet);
 				PlayerManager.updatePlayerArea();
-				$('#betForm').animate({left: ($('#PlayerArea').width() + $('#board').width()) + 'px', opacity: 0}, 1000, function(){$('#betForm').hide();});
+				$('#betForm').animate({left: ($('#playerArea').width() + $('#board').width()), opacity: 0}, 1000, function(){$('#betForm').hide();});
 			}
 			function cancel(){
-				$('#betForm').animate({left: ($('#PlayerArea').width() + $('#board').width()) + 'px', opacity: 0}, 1000, function(){$('#betForm').hide();});
+				$('#betForm').animate({left: ($('#playerArea').width() + $('#board').width()), opacity: 0}, 1000, function(){$('#betForm').hide();});
 			}
 		</script>
 		</footer>

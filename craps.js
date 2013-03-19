@@ -258,6 +258,7 @@ BetManager.prototype = {
 		for(var betNum in this.bets){
 			var newBetDisp = $(document.createElement('fieldset'));
 			newBetDisp.attr('id', 'bet' + this.bets[betNum].bet.betId);
+			newBetDisp.css({float: 'left'});
 			newBetDisp.css('width','225px');
 			var legend = $(document.createElement('legend'));
 			var pTag = $(document.createElement('p'));
