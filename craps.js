@@ -65,7 +65,25 @@ BetManager.prototype = {
 		}
 		
 		if(_bet.value < _CRAPS['minBet']){
-			return [0, function(){alert('Bet must be bigger than the Table Minimum. Bet has not been placed.')}];
+			if(['passline', 
+					'passlineOdds',
+					'come',
+					'comeOdds',
+					'dontPass',
+					'dontPassOdds',
+					'dontCome',
+					'dontComeOdds',
+					'place4',
+					'place5',
+					'place6',
+					'place8',
+					'place9',
+					'place10',
+					'field',
+					'big6',
+					'big8'].indexOf(bet.type) != -1){
+				return [0, function(){alert('Bet must be bigger than the Table Minimum. Bet has not been placed.')}];
+			}
 		}
 		if(_bet.value > _CRAPS['maxBet']){
 			return [0, function(){alert('Bet must be smaller than the Table Maximum. Bet has not been placed.')}];

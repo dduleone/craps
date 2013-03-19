@@ -5,17 +5,17 @@
 		width: 75px;
 		margin: 0px;
 		padding: 0px;
-		float: left;
+		//float: left;
 		top: 150px;
-		//position: absolute;
-		//left: 12px;
+		position: absolute;
+		left: 12px;
 	}
 	button#place{
 		width: 75px;
 		margin: 0 auto;
 		padding: 0px;
-		float: left;
-		top: 135px;
+		//float: left;
+		top: 150px;
 		position: absolute;
 		left: 112px;
 	}
@@ -23,10 +23,10 @@
 		width: 75px;
 		margin: 0px;
 		padding: 0px;
-		float: right;
+		//float: right;
 		top: 150px;
-		//position: absolute;
-		//left: 212px;
+		position: absolute;
+		left: 212px;
 	}
 	#buffer{
 		position: absolute;
@@ -90,8 +90,9 @@
 	}
 	#tableInfo{
 		position: absolute;
-		top: 30px;
-		left: 350px;
+		top: 35px;
+		left: 800px;
+		font-size: 13pt;
 	}
 	#playerInfo{
 		border-style: none;
@@ -136,6 +137,6 @@
 	#pointWindow{
 		position: absolute;
 		top: 30px;
-		left: 700px;
-		font-size: 3em;
+		left: 800px;
+		font-size: 15pt;
 	}
