@@ -127,20 +127,20 @@
 		text-align: center;
 	}
 	#availBank{
-		position: absolute;
+		position: relative;
 		top: 25px;
 		left: 0;
 		width: 6.67%;
 	}
 	#inPlay{
-		position: absolute;
+		position: relative;
 		top: 25px;
 		left: 6.67%;
 		width: 6.67%;
 		float: left;
 	}
 	#totBank{
-		position: absolute;
+		position: relative;
 		top: 25px;
 		left: 13.33%;
 		width: 6.67%;
