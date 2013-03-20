@@ -130,20 +130,20 @@
 		position: relative;
 		top: -30px;
 		left: 0%;
-		width: 6.67%;
+		width: 7%;
 	}
 	#inPlay{
 		position: relative;
 		top: -30px;
-		left: 33%%;
-		width: 6.67%;
+		left: 33%;
+		width: 7%;
 		float: left;
 	}
 	#totBank{
 		position: relative;
 		top: -30px;
 		left: 66%;
-		width: 6.67%;
+		width: 7%;
 		float: left;
 	}
 	.winning{
