@@ -252,6 +252,7 @@ BetManager.prototype = {
 	},
 	displayBets: function(){
 		var betListing = $('#betListing');
+		betListing.css({top: '71%', left: '22%'});
 		if(betListing.children().length > 0){
 			betListing.empty();
 		}
