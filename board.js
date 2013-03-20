@@ -830,6 +830,72 @@
         }
     };
 
+    var Horn = function(board) {
+        this.board = board;
+        return this;
+    }
+    Horn.prototype = {
+        name: "Horn",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+            ctx.font = "40pt Calibri";
+
+						ctx.strokeStyle = this.board.colors.lines;
+						ctx.beginPath();
+						ctx.arc(930, 900, 30, 2 * Math.PI, false);
+						ctx.textAlign = "left";
+						ctx.font = "14pt Calibri";
+						//ctx.rotate(Math.PI * -0.2);
+						ctx.fillText("Horn", 910, 905);
+						ctx.stroke();
+						ctx.restore();
+						
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 900 && x < 960 && y > 870 && y < 930) {
+                return true;
+            }
+            return false;
+        }
+    };
+
+    var World = function(board) {
+        this.board = board;
+        return this;
+    }
+    World.prototype = {
+        name: "World",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+            ctx.font = "40pt Calibri";
+
+						ctx.strokeStyle = this.board.colors.lines;
+						ctx.beginPath();
+						ctx.arc(1000, 900, 30, 2 * Math.PI, false);
+						ctx.textAlign = "left";
+						ctx.font = "14pt Calibri";
+						//ctx.rotate(Math.PI * -0.2);
+						ctx.fillText("World", 975, 905);
+						ctx.stroke();
+						ctx.restore();
+						
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 970 && x < 1030 && y > 870 && y < 930) {
+                return true;
+            }
+            return false;
+        }
+    };
+
     var regions = [
         PassLine,
         DontPass,
@@ -856,7 +922,9 @@
         Eleven,
         Eleven2,
         Craps,
-        EAndC
+        EAndC,
+				Horn,
+				World
     ];
 
     var Board = function(canvas, colors) {

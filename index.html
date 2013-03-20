@@ -12,7 +12,7 @@
 		<div id='tableInfo'></div>
 		<div id='pointWindow'></div>
 		<div id='betForm'>
-			<fieldset id='betInfo'>	
+			<fieldset id='betInfo'>
 				<legend>Create a Bet!</legend>
 				<p>
 					<label for='betType'>Bet Type</label>
@@ -48,6 +48,7 @@
 						<option value="big8">Big 8</option>
 						<option value="world">World</option>
 					</select><br />
+					<p id='betDesc'></p>
 					<label for='betValue'>Bet Value</label>
 					<input id='betValue' name='betValue' type='text'><br />
 					<label for='repeat'>Repeat Bet on Win?</label>
@@ -67,7 +68,7 @@
 				<div id='name'></div>
 				<div id='bank'></div>
 				<button id='roll' onclick='roll()'>Roll</button>
-				<button id='place' onclick='place()'>Place a Bet</button>
+				<!--button id='place' onclick='place()'>Place a Bet</button-->
 				<button id='reset' onclick='reset()'>Reset Bets</button>
 			</fieldset>
 		</div>
@@ -88,6 +89,7 @@
 		<script type='text/javascript' language='javascript' src='board.js'></script>
 
 		<script type='text/javascript' language='javascript'>
+			//var testingClick;
 			(function(Board) {
 					var canvas = document.getElementById("board"),
 							colors = {
@@ -103,12 +105,363 @@
 					board.draw();
 			
 					canvas.onclick = function(e) {
-							console.log(board.processClick(e.x - canvas.offsetLeft, e.y - canvas.offsetTop));
+							//console.log(board.processClick(e.x - canvas.offsetLeft, e.y - canvas.offsetTop));
+							boardArea = board.processClick(e.x - canvas.offsetLeft, e.y - canvas.offsetTop);
+							if(boardArea){
+								clickAreaPlaceBet(boardArea);
+							}
 					};
 			
 			})(Board);
-		</script>
-		<script type='text/javascript' language='javascript'>
+			
+			function updateBetDesc(){
+				switch($('#betType').val()){
+				case "passline":
+					$('#betDesc').html('Payout:<br /> 1 pays 1');
+					break;
+				case "passlineOdds":
+					$('#betDesc').html('Payout:<br />Point 4, 10: 1 pays 2<br />Point 5, 9: 2 pays 3 <br />Point 6, 8: 5 pays 6');
+					break;
+				case "dontPass":
+					$('#betDesc').html('Payout:<br /> 1 pays 1');
+					break;
+				case "dontPassOdds":
+					$('#betDesc').html('Payout:<br />Point 4, 10: 2 pays 1<br />Point 5, 9: 3 pays 2 <br />Point 6, 8: 6 pays 5');
+					break;
+				case "come":
+					$('#betDesc').html('Payout:<br /> 1 pays 1');
+					break;
+				case "comeOdds":
+					$('#betDesc').html('Payout:<br />Point 4, 10: 1 pays 2<br />Point 5, 9: 2 pays 3 <br />Point 6, 8: 5 pays 6');
+					break;
+				case "dontCome":
+					$('#betDesc').html('Payout:<br /> 1 pays 1');
+					break;
+				case "dontComeOdds":
+					$('#betDesc').html('Payout:<br />Point 4, 10: 2 pays 1<br />Point 5, 9: 3 pays 2 <br />Point 6, 8: 6 pays 5');
+					break;
+				case "place4":
+					$('#betDesc').html('Payout:<br /> 5 pays 9');
+					break;
+				case "place5":
+					$('#betDesc').html('Payout:<br /> 5 pays 7');
+					break;
+				case "place6":
+					$('#betDesc').html('Payout:<br /> 6 pays 7');
+					break;
+				case "place8":
+					$('#betDesc').html('Payout:<br /> 6 pays 7');
+					break;
+				case "place9":
+					$('#betDesc').html('Payout:<br /> 5 pays 7');
+					break;
+				case "place10":
+					$('#betDesc').html('Payout:<br /> 5 pays 9');
+					break;
+				case "big6":
+					$('#betDesc').html('Payout:<br /> 1 pays 1');
+					break;
+				case "big8":
+					$('#betDesc').html('Payout:<br /> 1 pays 1');
+					break;
+				case "field":
+					$('#betDesc').html('Payout:<br />Roll 3, 4, 9, 10, 11: 1 pays 1<br />Roll 2, 12: 1 pays 2');
+					break;
+				case "cAndE":
+					$('#betDesc').html('Payout:<br />Craps: 1 pays 3<br />Yo-leven: 1 pays 7<br />No Minimum Bet');
+					break;
+				case "any7":
+					$('#betDesc').html('Payout:<br />1 pays 4<br />No Minimum Bet<br />Increments of 3');
+					break;
+				case "hard4":
+					$('#betDesc').html('Payout:<br /> 1 pays 7');
+					break;
+				case "hard6":
+					$('#betDesc').html('Payout:<br /> 1 pays 9');
+					break;
+				case "hard8":
+					$('#betDesc').html('Payout:<br /> 1 pays 9');
+					break;
+				case "hard10":
+					$('#betDesc').html('Payout:<br /> 1 pays 7');
+					break;
+				case "aceTwo":
+					$('#betDesc').html('Payout:<br /> 1 pays 15');
+					break;
+				case "snakeEyes":
+					$('#betDesc').html('Payout:<br /> 1 pays 30');
+					break;
+				case "midnight":
+					$('#betDesc').html('Payout:<br /> 1 pays 30');
+					break;
+				case "yoleven":
+					$('#betDesc').html('Payout:<br /> 1 pays 15');
+					break;
+				case "anyCraps":
+					$('#betDesc').html('Payout: 1 pays 7<br />No Minimum Bet<br />Increments of 4');
+					break;
+				case "horn":
+					$('#betDesc').html('Payout:<br />Roll 2, 12: 4 pays 27<br />Roll 3, 11: 1 pays 3<br />No Minimum Bet<br />Increments of 4');
+					break;
+				case "world":
+					$('#betDesc').html('Payout:<br />Roll 2, 12: 5 pays 26<br />Roll 3, 11: 5 pays 11<br />Roll 7: Push<br />No Minimum Bet<br />Increments of 5');
+					break;
+				default:
+					return false;
+				}
+			};
+			
+			function clickAreaPlaceBet(area){
+				switch(area.name){
+				case "Pass Line":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'passline');
+					opt.html(area.name);
+					var opt2 = $(document.createElement('option'));
+					opt2.attr('value', 'passlineOdds');
+					opt2.html('Pass Line Odds');
+					$('#betType').append(opt).append(opt2);
+					updateBetDesc();
+					break;
+				case "Don't Pass":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'dontPass');
+					opt.html('Don\'t Pass Line');
+					var opt2 = $(document.createElement('option'));
+					opt2.attr('value', 'dontPassOdds');
+					opt2.html('Don\'t Pass Odds');
+					$('#betType').append(opt).append(opt2);
+					updateBetDesc();
+					break;
+				case "Come":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'come');
+					opt.html('Come Line');
+					var opt2 = $(document.createElement('option'));
+					opt2.attr('value', 'comeOdds');
+					opt2.html('Come Line Odds');
+					$('#betType').append(opt).append(opt2);
+					updateBetDesc();
+					break;
+				case "Don't Come":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'dontCome');
+					opt.html('Don\'t Come Line');
+					var opt2 = $(document.createElement('option'));
+					opt2.attr('value', 'dontComeOdds');
+					opt2.html('Don\'t Come Odds');
+					$('#betType').append(opt).append(opt2);
+					updateBetDesc();
+					break;
+				case "Place 4":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'place4');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Place 5":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'place5');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Place 6":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'place6');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Place 8":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'place8');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Place 9":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'place9');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Place 10":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'place10');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Big 6":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'big6');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Big 8":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'big8');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Field":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'field');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "C and E":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'cAndE');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Seven":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'any7');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Hard 4":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'hard4');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Hard 6":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'hard6');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Hard 8":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'hard8');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Hard 10":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'hard10');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Ace Two":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'aceTwo');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Snake Eyes":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'snakeEyes');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Midnight":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'midnight');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Yo-leven":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'yoleven');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Craps":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'anyCraps');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "Horn":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'horn');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				case "World":
+					$('#betType').empty();
+					var opt = $(document.createElement('option'));
+					opt.attr('value', 'world');
+					opt.html(area.name);
+					$('#betType').append(opt);
+					$('#betType').attr('disabled', 'true');
+					updateBetDesc();
+					break;
+				default:
+					return false;
+				}
+				
+				place();
+			}
+			
 			makeCrapsPlayer("Matt", 10000);
 			//_CRAPS.players = [p];
 
@@ -162,124 +515,7 @@
 				$('#betForm').width($('#betInfo').width() + 8 + 4);
 				$('#betForm').animate({left: ($('#playerArea').width() + $('#board').width() - $('#betForm').width()), opacity: 1}, 1000);
 			}
-		</script>
-		<!-- Draw Tabletop -->
-		<!--script type='text/javascript' language='javascript'>
-			var canvas = document.getElementById("board");
-			var board = canvas.getContext("2d");
-
-			var colors = {
-				black: "#000",
-				board: "#090",
-				lines: "#fff"
-			};
-
-			var thick = {
-				boardframe: 20,
-				boardlines: 8
-			}
-
-			//var _h = 1024, _w = 768;
-			// Use size of actual canvas, allows for future flexibility. --dracoling
-			var _h = canvas.height, _w = canvas.width;
-			//var _h = 640, _w = 800;
-			var _l = 0, _r = _w;
-			var _t = 0, _b = _h;
-			var d = new DrawCanvas(board, _l, _t, _w, _h, colors);
-
-			var pa = { /* pa = Playing Area */
-				_h: d.perimeterAdjust.h(_h),
-				_w: d.perimeterAdjust.w(_w),
-				_l: d.perimeterAdjust.l(_l),
-				_r: d.perimeterAdjust.r(_r),
-				_t: d.perimeterAdjust.t(_t),
-				_b: d.perimeterAdjust.b(_b)
-			};
-
-			d.resetBoard();
-			var boardEtc = {
-				color: colors.lines,
-				t: thick.boardlines
-			}
-
-            var halfthick = parseInt(boardEtc.t/2);
-            var gutter = parseInt(pa._w/10);
-            var passlinewidth = parseInt(gutter * (pa._h/pa._w));
-            var gutterplus = parseInt(gutter * 1);
-
-            d.line(
-            	pa._l + gutter - halfthick,
-            	pa._t + gutter,
-            	pa._r - halfthick,
-            	pa._t + gutter,
-            	boardEtc
-            );
-            d.line(
-            	pa._r - halfthick,
-            	pa._t + gutter - halfthick,
-            	pa._r - halfthick,
-            	pa._b - gutter,
-            	boardEtc
-            );
-            d.line(
-            	pa._l + gutter - halfthick,
-            	pa._t + gutter - halfthick,
-            	pa._l + gutter - halfthick,
-            	pa._b - gutterplus - gutter,
-            	boardEtc
-            );
-            d.line(
-            	pa._l + (gutterplus * 2) - halfthick,
-            	pa._b - gutter - halfthick ,
-            	pa._r - halfthick,
-            	pa._b - gutter - halfthick,
-            	boardEtc
-            );
-            d.curve(
-            	pa._l + gutter - halfthick,
-            	pa._b - gutterplus - gutter,
-            	pa._l + (gutterplus * 2) - halfthick,
-            	pa._b - gutter - halfthick,
-            	pa._l + gutter - halfthick,
-            	pa._b - gutter - halfthick,
-            	boardEtc
-            );
-
-
-            d.line(
-            	pa._l + gutter - halfthick + passlinewidth,
-            	pa._t + gutter - halfthick,
-            	pa._l + gutter - halfthick + passlinewidth,
-            	pa._b - gutterplus - passlinewidth - gutter,
-            	boardEtc
-            );
-            d.line(
-            	pa._l + ((gutterplus * 2 + passlinewidth)) - halfthick,
-            	pa._b - gutter - halfthick - passlinewidth,
-            	pa._r - halfthick,
-            	pa._b - gutter - halfthick - passlinewidth,
-            	boardEtc
-            );
-            d.curve(
-            	pa._l + gutter - halfthick + passlinewidth,
-            	pa._b - gutterplus - passlinewidth - gutter,
-            	pa._l + ((gutterplus * 2 + passlinewidth)) - halfthick,
-            	pa._b - gutter - halfthick - passlinewidth,
-            	pa._l + gutter - halfthick + passlinewidth,
-            	pa._b - gutter - halfthick - passlinewidth,
-            	boardEtc
-            );
-
-//pa._l + gutter - halfthick + ((pa._l + (150 * (pa._w/pa._h)) - halfthick,) - (pa._l + gutter - halfthick))/2,            
-/*
-			d.line(pa._l + 100, pa._t + 100, pa._r, pa._t + 100, boardEtc);
-			d.line(pa._r, pa._t + 100, pa._r, pa._b, boardEtc);
-			d.line(pa._l + 100, pa._t + 100, pa._l+100, pa._b-150, boardEtc);
-*/
-			//d.line(pa._l + 100, pa._t + 100, pa._l+100, pa._b-150, boardEtc);
-			//d.demo(24);
-		</script-->
-		<script type='text/javascript' lang='javascript'>
+			
 			$('#betValue').attr('value', _CRAPS.minBet);
 			$('#betValue').css({width: '50px'});
 			$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
@@ -300,6 +536,7 @@
 					origLabel.html('Original Bet ID: ');
 					origBet.append(origLabel).append(orig);
 				}
+				updateBetDesc();
 				var _height = $('#betInfo').height() + 8 + 3;
 				$('#betForm').css({height: _height});
 			});

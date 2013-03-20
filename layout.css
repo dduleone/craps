@@ -65,6 +65,7 @@
 	#betInfo{
 		margin: 2px;
 		padding: 2px;
+		width: 200px;
 	}
 	#betListing{
 		position: absolute;
