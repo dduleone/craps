@@ -128,22 +128,22 @@
 	}
 	#availBank{
 		position: relative;
-		top: 0%;
+		top: auto;
 		left: 0%;
-		width: 7%;
+		width: 33%;
 	}
 	#inPlay{
 		position: relative;
-		top: 10%;
+		top: auto;
 		left: 33%;
-		width: 7%;
+		width: 33%;
 		float: left;
 	}
 	#totBank{
 		position: relative;
-		top: -10%;
+		top: auto;
 		left: 66%;
-		width: 7%;
+		width: 33%;
 		float: left;
 	}
 	.winning{
