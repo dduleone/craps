@@ -950,10 +950,10 @@
 						ctx.fillStyle = this.colors.specialText;
 						ctx.strokeStyle = this.colors.specialText;
 						ctx.font = "20pt Calibri";
-						ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1400, 75);
-						ctx.fillText('3x-4x-5x Odds', 1400, 100); 
-						ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1400, 125); 
-						ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1400, 150); 
+						ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
+						ctx.fillText('3x-4x-5x Odds', 1200, 100); 
+						ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
+						ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150); 
         },
         drawBackground: function() {
             this.context.fillStyle = this.colors.board;
