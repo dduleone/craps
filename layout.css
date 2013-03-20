@@ -14,10 +14,10 @@
 		width: 75px;
 		margin: 0px;
 		padding: 0px;
-		//float: left;
-		top: 150px;
-		position: absolute;
-		left: 12px;
+		float: left;
+		//top: 150px;
+		position: relative;
+		//left: 12px;
 	}
 	button#place{
 		width: 75px;
@@ -32,10 +32,10 @@
 		width: 75px;
 		margin: 0px;
 		padding: 0px;
-		//float: right;
-		top: 150px;
-		position: absolute;
-		left: 212px;
+		float: right;
+		//top: 150px;
+		position: relative;
+		//left: 212px;
 	}
 	#buffer{
 		position: absolute;
