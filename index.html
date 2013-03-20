@@ -16,38 +16,7 @@
 				<legend>Create a Bet!</legend>
 				<p>
 					<label for='betType'>Bet Type</label>
-					<select id='betType' name='betType'>
-						<option value="passline">Pass Line Bet</option>
-						<option value="passlineOdds">Pass Line Odds</option>
-						<option value="come">Come Bet</option>
-						<option value="comeOdds">Come Odds</option>
-						<option value="dontPass">Don't Pass Line Bet</option>
-						<option value="dontPassOdds">Don't Pass Line Odds</option>
-						<option value="dontCome">Don't Come Bet</option>
-						<option value="dontComeOdds">Don't Come Odds</option>
-						<option value="place4">Place 4</option>
-						<option value="place5">Place 5</option>
-						<option value="place6">Place 6</option>
-						<option value="place8">Place 8</option>
-						<option value="place9">Place 9</option>
-						<option value="place10">Place 10</option>
-						<option value="hard4">Hard 4</option>
-						<option value="hard6">Hard 6</option>
-						<option value="hard8">Hard 8</option>
-						<option value="hard10">Hard 10</option>
-						<option value="field">Field</option>
-						<option value="cAndE">C and E</option>
-						<option value="any7">Any 7</option>
-						<option value="anyCraps">Any Craps</option>
-						<option value="horn">Horn</option>
-						<option value="aceTwo">Ace Two</option>
-						<option value="snakeEyes">Snake Eyes</option>
-						<option value="midnight">Midnight</option>
-						<option value="yoleven">Yo-leven</option>
-						<option value="big6">Big 6</option>
-						<option value="big8">Big 8</option>
-						<option value="world">World</option>
-					</select><br />
+					<select id='betType' name='betType'></select><br />
 					<p id='betDesc'></p>
 					<label for='betValue'>Bet Value</label>
 					<input id='betValue' name='betValue' type='text'><br />
@@ -89,7 +58,6 @@
 		<script type='text/javascript' language='javascript' src='board.js'></script>
 
 		<script type='text/javascript' language='javascript'>
-			//var testingClick;
 			(function(Board) {
 					var canvas = document.getElementById("board"),
 							colors = {
@@ -113,7 +81,7 @@
 					};
 			
 			})(Board);
-			
+						
 			function updateBetDesc(){
 				switch($('#betType').val()){
 				case "passline":
@@ -221,7 +189,7 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'passlineOdds');
 					opt2.html('Pass Line Odds');
-					$('#betType').append(opt).append(opt2);
+					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
 				case "Don't Pass":
@@ -232,7 +200,7 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'dontPassOdds');
 					opt2.html('Don\'t Pass Odds');
-					$('#betType').append(opt).append(opt2);
+					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
 				case "Come":
@@ -243,7 +211,7 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'comeOdds');
 					opt2.html('Come Line Odds');
-					$('#betType').append(opt).append(opt2);
+					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
 				case "Don't Come":
@@ -254,7 +222,7 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'dontComeOdds');
 					opt2.html('Don\'t Come Odds');
-					$('#betType').append(opt).append(opt2);
+					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
 				case "Place 4":
@@ -476,7 +444,8 @@
 			function roll(){
 				_CRAPS.output("---Rolling---");
 				_CRAPS.roll();
-				$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
+				window.Board.draw();
+				//$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
 				if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
 					var animateTimeout = setInterval(
 						function(){
@@ -510,6 +479,7 @@
 			}
 			
 			function place(){
+				$('#betInfo').width($('#board').width() * (3/20));
 				$('#betForm').show()
 				$('#betForm').height($('#betInfo').height() + 8 + 4);
 				$('#betForm').width($('#betInfo').width() + 8 + 4);
@@ -518,11 +488,11 @@
 			
 			$('#betValue').attr('value', _CRAPS.minBet);
 			$('#betValue').css({width: '50px'});
-			$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
+			//$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
+			//$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
 			$('#betListing').css({top: ($('#board').height() + 4)});
 			$('#betListing').css({left: ($('#buffer').width() + 4), float: 'left'});
 			$('#betForm').css({left: ($('#playerArea').width() + $('#board').width())});
-			$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
 			$('#buffer').height($('#board').height() - $('#playerArea').height());
 			$('#betType').change(function(){
 				$('#origBet').empty();
