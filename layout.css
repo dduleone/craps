@@ -15,7 +15,7 @@
 		margin: 0px;
 		padding: 0px;
 		float: left;
-		//top: 150px;
+		top: -20px;
 		position: relative;
 		//left: 12px;
 	}
@@ -33,7 +33,7 @@
 		margin: 0px;
 		padding: 0px;
 		float: right;
-		//top: 150px;
+		top: -20px;
 		position: relative;
 		//left: 212px;
 	}
