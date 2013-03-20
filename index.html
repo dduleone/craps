@@ -58,7 +58,8 @@
 		<script type='text/javascript' language='javascript' src='board.js'></script>
 
 		<script type='text/javascript' language='javascript'>
-			(function(Board) {
+			
+			function draw(Board) {
 					var canvas = document.getElementById("board"),
 							colors = {
 									board: "#090",
@@ -80,7 +81,8 @@
 							}
 					};
 			
-			})(Board);
+			}
+			draw(Board);
 						
 			function updateBetDesc(){
 				switch($('#betType').val()){
@@ -444,7 +446,7 @@
 			function roll(){
 				_CRAPS.output("---Rolling---");
 				_CRAPS.roll();
-				window.Board.draw();
+				draw(Board);
 				//$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
 				if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
 					var animateTimeout = setInterval(
