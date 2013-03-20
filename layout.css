@@ -55,7 +55,7 @@
 	#board{
 		position: absolute;
 		top: 0px;
-		left: 20%px;
+		left: 20%;
 		margin: 0px;
 		padding: 0px;
 	}
