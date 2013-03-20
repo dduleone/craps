@@ -43,7 +43,7 @@
 		left: 0px;
 		font-family: monospace;
 		height: 498px;
-		width: 30%;
+		width: 20%;
 		border: 1px solid black;
 		overflow: auto;
 		margin: 0px;
@@ -55,7 +55,7 @@
 	#board{
 		position: absolute;
 		top: 0px;
-		left: 300px;
+		left: 20%px;
 		margin: 0px;
 		padding: 0px;
 	}
@@ -93,7 +93,7 @@
 	#playerArea{
 		position: absolute;
 		height: 150px;
-		width: 30%;
+		width: 20%;
 		top: 0px;
 		left: 0px;
 		margin: 2px;
