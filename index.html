@@ -551,7 +551,7 @@
 				$('#betForm').show()
 				$('#betForm').height($('#betInfo').height() + 8 + 4);
 				$('#betForm').width($('#betInfo').width() + 8 + 4);
-				$('#betForm').animate({left: ($('#board').css('right') - $('#betForm').width()), opacity: 1}, 1000);
+				$('#betForm').animate({left: ($('#board').offset().right - $('#betForm').width()), opacity: 1}, 1000);
 			}
 			
 			$('#betValue').attr('value', _CRAPS.minBet);
@@ -560,7 +560,7 @@
 			//$('#tableInfo').append($(document.createElement('p')).html('3x-4x-5x Odds <br /> Table Min Bet: $' + _CRAPS.minBet + '<br /> Table Max Bet: $' + _CRAPS.maxBet));
 			$('#betListing').css({top: ($('#board').height() + 4)});
 			$('#betListing').css({left: ($('#buffer').width() + 4), float: 'left'});
-			$('#betForm').css({left: ($('#board').css('right') + 2)});
+			$('#betForm').css({left: ($('#board').offset().right + 2)});
 			$('#buffer').height($('#board').height() - $('#playerArea').height());
 			$('#betType').change(function(){
 				$('#origBet').empty();
@@ -592,10 +592,10 @@
 				//console.log('Placing bet:', newBet.toString());
 				_CRAPS.placeBet(newBet);
 				PlayerManager.updatePlayerArea();
-				$('#betForm').animate({left: ($('#board').css('right') + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
+				$('#betForm').animate({left: ($('#board').offset().right + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
 			}
 			function cancel(){
-				$('#betForm').animate({left: ($('#board').css('right') + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
+				$('#betForm').animate({left: ($('#board').offset().right + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
 			}
 		</script>
 		</footer>
