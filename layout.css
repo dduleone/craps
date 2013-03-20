@@ -128,20 +128,20 @@
 	}
 	#availBank{
 		position: relative;
-		top: 25px;
+		top: -30px;
 		left: 0;
 		width: 6.67%;
 	}
 	#inPlay{
 		position: relative;
-		top: 25px;
+		top: -30px;
 		left: 6.67%;
 		width: 6.67%;
 		float: left;
 	}
 	#totBank{
 		position: relative;
-		top: 25px;
+		top: -30px;
 		left: 13.33%;
 		width: 6.67%;
 		float: left;
