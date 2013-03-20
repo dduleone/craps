@@ -1,6 +1,12 @@
 	body{
 		overflow-x: hidden;
 	}
+	.round{
+		-moz-border-radius: 20px;
+		-webkit-border-radius: 20px;
+		-khtml-border-radius: 20px;
+		border-radius: 20px;
+	}
 	button{
 		height: 30px;
 	}
@@ -69,6 +75,7 @@
 		margin: 2px;
 		padding: 2px;
 		width: 200px;
+		border: none;
 	}
 	#betListing{
 		position: absolute;
