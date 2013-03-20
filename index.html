@@ -191,6 +191,17 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'passlineOdds');
 					opt2.html('Pass Line Odds');
+					$('#origBet').empty();
+					if($('#betType').val() == 'passlineOdds'){
+						var origBet = $('#origBet');
+						var origLabel = $(document.createElement('label'));
+						var orig = $(document.createElement('input'));
+						orig.attr('type', 'text');
+						orig.css({width: '50px'});
+						orig.attr('id', 'orig');
+						origLabel.html('Original Bet ID: ');
+						origBet.append(origLabel).append(orig);
+					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
@@ -202,6 +213,17 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'dontPassOdds');
 					opt2.html('Don\'t Pass Odds');
+					$('#origBet').empty();
+					if($('#betType').val() == 'dontPassOdds'){
+						var origBet = $('#origBet');
+						var origLabel = $(document.createElement('label'));
+						var orig = $(document.createElement('input'));
+						orig.attr('type', 'text');
+						orig.css({width: '50px'});
+						orig.attr('id', 'orig');
+						origLabel.html('Original Bet ID: ');
+						origBet.append(origLabel).append(orig);
+					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
@@ -213,6 +235,17 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'comeOdds');
 					opt2.html('Come Line Odds');
+					$('#origBet').empty();
+					if($('#betType').val() == 'comeOdds'){
+						var origBet = $('#origBet');
+						var origLabel = $(document.createElement('label'));
+						var orig = $(document.createElement('input'));
+						orig.attr('type', 'text');
+						orig.css({width: '50px'});
+						orig.attr('id', 'orig');
+						origLabel.html('Original Bet ID: ');
+						origBet.append(origLabel).append(orig);
+					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
@@ -224,6 +257,17 @@
 					var opt2 = $(document.createElement('option'));
 					opt2.attr('value', 'dontComeOdds');
 					opt2.html('Don\'t Come Odds');
+					$('#origBet').empty();
+					if($('#betType').val() == 'dontComeOdds'){
+						var origBet = $('#origBet');
+						var origLabel = $(document.createElement('label'));
+						var orig = $(document.createElement('input'));
+						orig.attr('type', 'text');
+						orig.css({width: '50px'});
+						orig.attr('id', 'orig');
+						origLabel.html('Original Bet ID: ');
+						origBet.append(origLabel).append(orig);
+					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
 					updateBetDesc();
 					break;
@@ -234,6 +278,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Place 5":
@@ -243,6 +288,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Place 6":
@@ -252,6 +298,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Place 8":
@@ -261,6 +308,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Place 9":
@@ -270,6 +318,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Place 10":
@@ -279,6 +328,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Big 6":
@@ -288,6 +338,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Big 8":
@@ -297,6 +348,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Field":
@@ -306,6 +358,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "C and E":
@@ -315,6 +368,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Seven":
@@ -324,6 +378,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Hard 4":
@@ -333,6 +388,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Hard 6":
@@ -342,6 +398,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Hard 8":
@@ -351,6 +408,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Hard 10":
@@ -360,6 +418,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Ace Two":
@@ -369,6 +428,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Snake Eyes":
@@ -378,6 +438,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Midnight":
@@ -387,6 +448,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Yo-leven":
@@ -396,6 +458,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Craps":
@@ -405,6 +468,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "Horn":
@@ -414,6 +478,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				case "World":
@@ -423,6 +488,7 @@
 					opt.html(area.name);
 					$('#betType').append(opt);
 					$('#betType').attr('disabled', 'true');
+					$('#origBet').empty();
 					updateBetDesc();
 					break;
 				default:
