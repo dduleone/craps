@@ -131,6 +131,7 @@
 		top: auto;
 		left: 0%;
 		width: 33%;
+		float: left;
 	}
 	#inPlay{
 		position: relative;
