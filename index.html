@@ -551,7 +551,7 @@
 				$('#betForm').show()
 				$('#betForm').height($('#betInfo').height() + 8 + 4);
 				$('#betForm').width($('#betInfo').width() + 8 + 4);
-				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width()), opacity: 1}, 1000);
+				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - 5), opacity: 1}, 1000);
 			}
 			
 			$('#betValue').attr('value', _CRAPS.minBet);

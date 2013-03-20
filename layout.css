@@ -60,6 +60,7 @@
 		padding: 0px;
 	}
 	#betForm{
+		background: #000 url(bet_bg.jpg) repeat-y;
 		display: none;
 		opacity: 0;
 		position: absolute;
@@ -69,7 +70,8 @@
 		left: 1324px;
 		margin: 2px;
 		padding: 0px;
-		background-color: #FFF;
+		color: #FFF;
+		//background-color: #FFF;
 	}
 	#betInfo{
 		margin: 2px;
@@ -148,8 +150,10 @@
 		float: left;
 	}
 	.winning{
-		color: green;
+		color: white;
+		background-color: green;
 	}
 	.losing{
-		color: red;
+		color: white;
+		background-color: red;
 	}
