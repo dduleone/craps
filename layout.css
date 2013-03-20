@@ -136,14 +136,14 @@
 	#inPlay{
 		position: relative;
 		top: auto;
-		left: 33%;
+		left: 0%;
 		width: 33%;
 		float: left;
 	}
 	#totBank{
 		position: relative;
 		top: auto;
-		left: 33%;
+		left: 0%;
 		width: 33%;
 		float: left;
 	}
