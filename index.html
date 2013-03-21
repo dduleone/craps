@@ -7,7 +7,6 @@
 	<body>
 		<!-- canvas id="board" height='1024' width='768'></canvas -->
 		<canvas id="board" style="height: 70%; width: 70%;"></canvas>
-		<div id='buffer'></div>
 		
 		<div id='tableInfo'></div>
 		<div id='pointWindow'></div>
@@ -36,12 +35,11 @@
 				<legend>Player Info!</legend>
 				<div id='name'></div>
 				<div id='bank'></div>
-				<div id='playerButtons'>
-					<button id='roll' onclick='roll()'>Roll</button>
-					<button id='reset' onclick='reset()'>Reset Bets</button>
-				</div>
+				<button id='roll' onclick='roll()'>Roll</button>
+				<button id='reset' onclick='reset()'>Reset Bets</button>
 			</fieldset>
 		</div>
+		<div id='buffer'></div>
 		
 	</body>
 	<footer>

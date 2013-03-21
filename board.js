@@ -414,11 +414,11 @@
             ctx.strokeStyle = this.board.colors.lines;
             ctx.lineWidth = 10;
             ctx.beginPath();
-            ctx.moveTo(1200, 445);
+            ctx.moveTo(1200, 455);
             ctx.lineTo(1200, 500);
             ctx.lineTo(1900, 500);
-            ctx.lineTo(1900, 450);
-            ctx.lineTo(1195, 445);
+            ctx.lineTo(1900, 455);
+            ctx.lineTo(1195, 455);
             ctx.stroke();
             this.drawText();
         },
@@ -431,7 +431,7 @@
             ctx.fillText("SEVEN", 1550, 493);
         },
         isClickedRegion: function(x, y) {
-            if (x > 1200 && x < 1900 && y > 450 && y < 500) {
+            if (x > 1200 && x < 1900 && y > 455 && y < 500) {
                 return true;
             }
             return false;
@@ -947,6 +947,10 @@
             for (var i = 0; i < this.regions.length; i++) {
                 this.regions[i].draw();
             }
+						//var _bets = _CRAPS.dealer.betManager.bets
+						//for(bet in _bets){
+						//	_bets[bet].draw();
+						//}
         },
         drawBackground: function() {
             this.context.fillStyle = this.colors.board;

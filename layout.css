@@ -28,6 +28,9 @@
 		top: -20px;
 		//left: 212px;
 	}
+	#playerButtons{
+		vertical-align: baseline;
+	}
 	#buffer{
 		position: absolute;
 		top: 200px;

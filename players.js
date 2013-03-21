@@ -29,8 +29,8 @@ $.extend(PlayerManager, {
 	},
 	updatePlayerArea: function(){
 		
-		var name = $(document.getElementById('name'));
-		var bank = $(document.getElementById('bank'));
+		var name = $('#name');
+		var bank = $('#bank');
 		bank.empty();
 		name.html(this.players[0].player.name);
 		var bankTitle = $(document.createElement('p'));
@@ -48,10 +48,10 @@ $.extend(PlayerManager, {
 		}
 		avail.attr('id', 'availBank');
 		avail.html('Available Bank:<br />$' + this.players[0].player.bank);
-		inPlay.html('Money In Play:<br />$' + totalBets);
 		inPlay.attr('id', 'inPlay');
-		total.html('Total Worth:<br />$' + (this.players[0].player.bank + totalBets));
+		inPlay.html('Money In Play:<br />$' + totalBets);
 		total.attr('id', 'totBank');
+		total.html('Total Worth:<br />$' + (this.players[0].player.bank + totalBets));
 		if(this.players[0].player.bank + totalBets < 10000){
 			total.attr('class','losing');
 		}else if(this.players[0].player.bank + totalBets == 10000){
@@ -62,6 +62,8 @@ $.extend(PlayerManager, {
 		bank.append(avail);
 		bank.append(inPlay);
 		bank.append(total);
+		$('#playerArea').height($('#playerInfo').height());
+		$('#buffer').css('top', $('#playerArea').height());
 		//bank.append(avail).append(inPlay).append(total);
 	}
 });
