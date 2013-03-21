@@ -943,17 +943,10 @@
     Board.prototype = {
         draw: function() {
             this.drawBackground();
+						this.drawTableInfo();
             for (var i = 0; i < this.regions.length; i++) {
                 this.regions[i].draw();
             }
-						var ctx = this.context;
-						ctx.fillStyle = this.colors.specialText;
-						ctx.strokeStyle = this.colors.specialText;
-						ctx.font = "20pt Calibri";
-						ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
-						ctx.fillText('3x-4x-5x Odds', 1200, 100); 
-						ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
-						ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150); 
         },
         drawBackground: function() {
             this.context.fillStyle = this.colors.board;
@@ -968,6 +961,16 @@
             this.context.lineTo(0, 0);
             this.context.stroke();
         },
+				drawTableInfo: function() {
+						var ctx = this.context;
+						ctx.fillStyle = this.colors.specialText;
+						ctx.strokeStyle = this.colors.specialText;
+						ctx.font = "20pt Calibri";
+						ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
+						ctx.fillText('3x-4x-5x Odds', 1200, 100); 
+						ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
+						ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150); 
+				},
         processClick: function(x, y) {
             var x = (x / this.canvas.clientWidth) * 2000;
             var y = (y / this.canvas.clientHeight) * 1000;

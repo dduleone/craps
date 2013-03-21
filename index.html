@@ -75,6 +75,12 @@
 			
 					canvas.onclick = function(e) {
 							//console.log(board.processClick(e.x - canvas.offsetLeft, e.y - canvas.offsetTop));
+							//ctx = board.context;
+							//ctx.beginPath();
+							//ctx.lineWidth = 5;
+							//ctx.arc(((e.x - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
+							//				((e.y - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000, 30, 2 * Math.PI, false);
+							//ctx.stroke();
 							boardArea = board.processClick(e.x - canvas.offsetLeft, e.y - canvas.offsetTop);
 							if(boardArea){
 								clickAreaPlaceBet(boardArea);
@@ -580,7 +586,7 @@
 			
 			function place(){
 				$('#betInfo').width($('#board').width() * (1/4));
-				$('#betForm').show()
+				$('#betForm').show();
 				$('#betForm').height($('#betInfo').height() + 8 + 4);
 				$('#betForm').width($('#betInfo').width() + 8 + 4);
 				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - 5), opacity: 1}, 1000);
