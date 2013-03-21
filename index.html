@@ -74,14 +74,14 @@
 					board.draw();
 			
 					canvas.onclick = function(e) {
-							//console.log(board.processClick(e.x - canvas.offsetLeft, e.y - canvas.offsetTop));
+							//console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
 							//ctx = board.context;
 							//ctx.beginPath();
 							//ctx.lineWidth = 5;
-							//ctx.arc(((e.x - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
-							//				((e.y - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000, 30, 2 * Math.PI, false);
+							//ctx.arc(((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
+							//				((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000, 30, 2 * Math.PI, false);
 							//ctx.stroke();
-							boardArea = board.processClick(e.x - canvas.offsetLeft, e.y - canvas.offsetTop);
+							boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 							if(boardArea){
 								clickAreaPlaceBet(boardArea);
 							}
