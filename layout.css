@@ -11,30 +11,21 @@
 		height: 30px;
 	}
 	button#roll{
-		width: 75px;
+		position: relative;
+		width: 33%;
 		margin: 0px;
 		padding: 0px;
 		float: left;
 		top: -20px;
-		position: relative;
 		//left: 12px;
 	}
-	button#place{
-		width: 75px;
-		margin: 0 auto;
-		padding: 0px;
-		//float: left;
-		top: 150px;
-		position: absolute;
-		left: 112px;
-	}
 	button#reset{
-		width: 75px;
+		position: relative;
+		width: 33%;
 		margin: 0px;
 		padding: 0px;
 		float: right;
 		top: -20px;
-		position: relative;
 		//left: 212px;
 	}
 	#buffer{

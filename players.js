@@ -59,7 +59,9 @@ $.extend(PlayerManager, {
 		}else{
 			total.attr('class', 'winning');
 		}
-		bank.append(avail).append(inPlay).append(total);		
+		bank.append(avail);
+		bank.append(inPlay);
+		bank.append(total);
 		//bank.append(avail).append(inPlay).append(total);
 	}
 });
