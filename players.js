@@ -13,6 +13,10 @@ var Player = function(name, bank){
 	player.subFromBank = function(amt){
 		this.bank -= amt;
 	}
+	
+	player.changeName = function(newName){
+		this.name = newName;
+	}
 }
 
 $.extend(PlayerManager, {
@@ -31,6 +35,7 @@ $.extend(PlayerManager, {
 		
 		var name = $('#name');
 		var bank = $('#bank');
+		name.empty();
 		bank.empty();
 		name.html(this.players[0].player.name);
 		var bankTitle = $(document.createElement('p'));

@@ -943,10 +943,10 @@
     Board.prototype = {
         draw: function() {
             this.drawBackground();
-						this.drawTableInfo();
             for (var i = 0; i < this.regions.length; i++) {
                 this.regions[i].draw();
             }
+						this.drawTableInfo();
 						//var _bets = _CRAPS.dealer.betManager.bets
 						//for(bet in _bets){
 						//	_bets[bet].draw();
@@ -970,10 +970,129 @@
 						ctx.fillStyle = this.colors.specialText;
 						ctx.strokeStyle = this.colors.specialText;
 						ctx.font = "20pt Calibri";
-						ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
 						ctx.fillText('3x-4x-5x Odds', 1200, 100); 
 						ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
-						ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150); 
+						ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
+						this.drawPoint(ctx, GameState.point);
+				},
+				drawPoint: function(ctx, point){
+					if(!GameState.point){
+						ctx.beginPath();
+						ctx.lineWidth = 5;
+						ctx.arc(1130, 60, 30, 2 * Math.PI, false);
+						ctx.fillStyle = this.colors.pointOff;
+						ctx.fill();
+						ctx.strokeStyle = this.colors.pointOff;
+						ctx.stroke();
+						ctx.closePath();
+						ctx.beginPath();
+						ctx.fillStyle = this.colors.text;
+						ctx.font = "25pt Calibri";
+						ctx.fillText('OFF', 1103, 70);
+						ctx.stroke();
+						ctx.closePath();
+					}
+					switch(GameState.point){
+					case 4:
+						ctx.beginPath();
+						ctx.lineWidth = 5;
+						ctx.arc(550, 162.5, 30, 2 * Math.PI, false);
+						ctx.fillStyle = this.colors.pointOn;
+						ctx.fill();
+						ctx.strokeStyle = this.colors.pointOn;
+						ctx.stroke();
+						ctx.closePath();
+						ctx.beginPath();
+						ctx.fillStyle = this.colors.buttonText;
+						ctx.font = "25pt Calibri";
+						ctx.fillText('ON', 528, 172.5);
+						ctx.stroke();
+						ctx.closePath();
+						break;
+					case 5:
+						ctx.beginPath();
+						ctx.lineWidth = 5;
+						ctx.arc(650, 162.5, 30, 2 * Math.PI, false);
+						ctx.fillStyle = this.colors.pointOn;
+						ctx.fill();
+						ctx.strokeStyle = this.colors.pointOn;
+						ctx.stroke();
+						ctx.closePath();
+						ctx.beginPath();
+						ctx.fillStyle = this.colors.buttonText;
+						ctx.font = "25pt Calibri";
+						ctx.fillText('ON', 628, 172.5);
+						ctx.stroke();
+						ctx.closePath();
+						break;
+					case 6:
+						ctx.beginPath();
+						ctx.lineWidth = 5;
+						ctx.arc(750, 162.5, 30, 2 * Math.PI, false);
+						ctx.fillStyle = this.colors.pointOn;
+						ctx.fill();
+						ctx.strokeStyle = this.colors.pointOn;
+						ctx.stroke();
+						ctx.closePath();
+						ctx.beginPath();
+						ctx.fillStyle = this.colors.buttonText;
+						ctx.font = "25pt Calibri";
+						ctx.fillText('ON', 728, 172.5);
+						ctx.stroke();
+						ctx.closePath();
+						break;
+					case 8:
+						ctx.beginPath();
+						ctx.lineWidth = 5;
+						ctx.arc(850, 162.5, 30, 2 * Math.PI, false);
+						ctx.fillStyle = this.colors.pointOn;
+						ctx.fill();
+						ctx.strokeStyle = this.colors.pointOn;
+						ctx.stroke();
+						ctx.closePath();
+						ctx.beginPath();
+						ctx.fillStyle = this.colors.buttonText;
+						ctx.font = "25pt Calibri";
+						ctx.fillText('ON', 828, 172.5);
+						ctx.stroke();
+						ctx.closePath();
+						break;
+					case 9:
+						ctx.beginPath();
+						ctx.lineWidth = 5;
+						ctx.arc(950, 162.5, 30, 2 * Math.PI, false);
+						ctx.fillStyle = this.colors.pointOn;
+						ctx.fill();
+						ctx.strokeStyle = this.colors.pointOn;
+						ctx.stroke();
+						ctx.closePath();
+						ctx.beginPath();
+						ctx.fillStyle = this.colors.buttonText;
+						ctx.font = "25pt Calibri";
+						ctx.fillText('ON', 928, 172.5);
+						ctx.stroke();
+						ctx.closePath();
+						break;
+					case 10:
+						ctx.beginPath();
+						ctx.lineWidth = 5;
+						ctx.arc(1050, 162.5, 30, 2 * Math.PI, false);
+						ctx.fillStyle = this.colors.pointOn;
+						ctx.fill();
+						ctx.strokeStyle = this.colors.pointOn;
+						ctx.stroke();
+						ctx.closePath();
+						ctx.beginPath();
+						ctx.fillStyle = this.colors.buttonText;
+						ctx.font = "25pt Calibri";
+						ctx.fillText('ON', 1028, 172.5);
+						ctx.stroke();
+						ctx.closePath();
+						break;
+					default:
+						return;
+					}
+					//ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
 				},
         processClick: function(x, y) {
             var x = (x / this.canvas.clientWidth) * 2000;

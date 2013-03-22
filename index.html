@@ -33,7 +33,7 @@
 		<div id='playerArea'>
 			<fieldset id='playerInfo'>
 				<legend>Player Info!</legend>
-				<div id='name'></div>
+				<div id='name' class='name' onclick='updatePlayerName()'></div>
 				<div id='bank'></div>
 				<button id='roll' onclick='roll()'>Roll</button>
 				<button id='reset' onclick='reset()'>Reset Bets</button>
@@ -63,8 +63,11 @@
 							colors = {
 									board: "#090",
 									border: "#000",
+									pointOff: "#000",
+									pointOn: "#fff",
 									lines: "#fff",
 									text: "#fff",
+									buttonText: '#000',
 									specialText: "#ff0",
 									finalText: "#f00"
 							};
@@ -73,6 +76,7 @@
 					board.draw();
 			
 					canvas.onclick = function(e) {
+								console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
 							//console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
 							//ctx = board.context;
 							//ctx.beginPath();
@@ -80,6 +84,7 @@
 							//ctx.arc(((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
 							//				((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000, 15, 2 * Math.PI, false);
 							//ctx.fill();
+							//ctx.closePath();
 							//ctx.stroke();
 							boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 							if(boardArea){
@@ -609,6 +614,27 @@
 			function cancel(){
 				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
 			}
+			
+			function updatePlayerName(){
+				var player = PlayerManager.players[0];
+				var nameDiv = $('#name');
+				nameDiv.empty();
+				var input = $(document.createElement('input'));
+				input.attr('type', 'text');
+				input.attr('id', 'nameInput');
+				input.css({width: $('#name').width()});
+				input.attr('value', player.player.name);
+				input.focus(function(){
+					input.select();
+				});
+				input.change(function(){
+					player.changeName(input.val());
+					PlayerManager.updatePlayerArea();
+				});
+				nameDiv.append(input);
+				input.focus();
+			}
+			
 			
 			(function() {
 				$('#betValue').attr('value', _CRAPS.minBet);

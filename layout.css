@@ -110,12 +110,21 @@
 	#playerInfo{
 		border-style: none;
 		width: 100%;
+		margin: 0px;
+		padding: 0px;
 	}
 	#name{
 		position: relative;
 		text-align: center;
 		top: -10px;
-		font-size: 3em;
+		font-size: 35pt;
+	}
+	#nameInput{
+		position: relative;
+		text-align: center;
+		top: -10px;
+		font-family: 'serif';
+		font-size: 30pt;
 	}
 	#bank{
 		position: relative;
