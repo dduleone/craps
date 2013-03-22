@@ -7,6 +7,12 @@
 		-khtml-border-radius: 20px;
 		border-radius: 20px;
 	}
+	.roundButtons{
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		-khtml-border-radius: 10px;
+		border-radius: 10px;
+	}
 	button{
 		height: 30px;
 	}
