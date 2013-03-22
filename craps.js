@@ -464,7 +464,7 @@ var BetChecker = function(point, betArray, dice){
 		var _bet = bet.bet;
 		var _player = _bet.player.player;
 
-		if(_bet.on == false){
+		if(!_bet.on){
 			newBetArray.push(bet);
 			continue;
 		}
@@ -511,6 +511,7 @@ var BetChecker = function(point, betArray, dice){
 		case "come":
 			if(bet.point){
 				if(dice.getSum() == bet.point){
+					bet.point = false;
 					$('window').trigger(onWin(bet, _bet.value));
 					if(bet.repeat){
 						newBetArray.push(bet);
@@ -558,6 +559,7 @@ var BetChecker = function(point, betArray, dice){
 					$('window').trigger(onLose(bet));
 					continue;
 				}else if(dice.getSum() == 7){
+					bet.point = false;
 					$('window').trigger(onWin(bet, _bet.value));
 					if(bet.repeat){
 						newBetArray.push(bet);
