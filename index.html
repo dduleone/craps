@@ -592,7 +592,7 @@
 				$('#betForm').show();
 				$('#betForm').height($('#betInfo').height() + 8 + 4);
 				$('#betForm').width($('#betInfo').width() + 8 + 4);
-				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - 5), opacity: 1}, 1000);
+				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - ($('#betForm').css('padding') * 2 + $('#betForm').css('margin') * 2) - 5), opacity: 1}, 1000);
 			}
 			
 			function create(){
@@ -628,6 +628,10 @@
 					input.select();
 				});
 				input.change(function(){
+					player.changeName(input.val());
+					PlayerManager.updatePlayerArea();
+				});
+				input.blur(function(){
 					player.changeName(input.val());
 					PlayerManager.updatePlayerArea();
 				});
