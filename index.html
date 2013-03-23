@@ -3,6 +3,7 @@
 	<head>
 		<title>DuLeone Craps</title>
 		<link href="layout.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="css3-gmail-style.css" media="all" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<!-- canvas id="board" height='1024' width='768'></canvas -->
@@ -24,8 +25,8 @@
 				</p>
 				<p id='origBet'></p>
 				<p>
-					<button id='create' class='roundButtons' onclick='create()'>Create Bet!</button>
-					<button id='cancel' class='roundButtons' onclick='cancel()'>Cancel</button>
+					<div id='create' class='bttn blue' onclick='create()'>Create Bet!</div>
+					<div id='cancel' class='bttn blue' onclick='cancel()'>Cancel</div>
 				</p>
 			</fieldset>
 		</div>
@@ -35,8 +36,8 @@
 				<legend>Player Info!</legend>
 				<div id='name' class='name' onclick='updatePlayerName()'></div>
 				<div id='bank'></div>
-				<button id='roll' onclick='roll()'>Roll</button>
-				<button id='reset' onclick='reset()'>Reset Bets</button>
+				<div id='roll' class='bttn red' onclick='roll()'>Roll</div>
+				<div id='reset' class='bttn red' onclick='reset()'>Reset Bets</div>
 			</fieldset>
 		</div>
 		<div id='buffer'></div>
