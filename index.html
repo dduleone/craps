@@ -683,10 +683,12 @@
         input.change(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
+          $('#buffer').height($('#board').height() - $('#playerArea').height());
         });
         input.blur(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
+          $('#buffer').height($('#board').height() - $('#playerArea').height());
         });
         nameDiv.append(input);
         input.focus();
