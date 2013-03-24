@@ -844,16 +844,16 @@
             ctx.strokeStyle = this.board.colors.text;
             ctx.font = "40pt Calibri";
 
-						ctx.strokeStyle = this.board.colors.lines;
-						ctx.beginPath();
-						ctx.arc(930, 900, 30, 2 * Math.PI, false);
-						ctx.textAlign = "left";
-						ctx.font = "14pt Calibri";
-						//ctx.rotate(Math.PI * -0.2);
-						ctx.fillText("Horn", 910, 905);
-						ctx.stroke();
-						ctx.restore();
-						
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            ctx.arc(930, 900, 30, 2 * Math.PI, false);
+            ctx.textAlign = "left";
+            ctx.font = "14pt Calibri";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Horn", 910, 905);
+            ctx.stroke();
+            ctx.restore();
+            
         },
         isClickedRegion: function(x, y) {
             if (x > 900 && x < 960 && y > 870 && y < 930) {
@@ -877,16 +877,16 @@
             ctx.strokeStyle = this.board.colors.text;
             ctx.font = "40pt Calibri";
 
-						ctx.strokeStyle = this.board.colors.lines;
-						ctx.beginPath();
-						ctx.arc(1000, 900, 30, 2 * Math.PI, false);
-						ctx.textAlign = "left";
-						ctx.font = "14pt Calibri";
-						//ctx.rotate(Math.PI * -0.2);
-						ctx.fillText("World", 975, 905);
-						ctx.stroke();
-						ctx.restore();
-						
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            ctx.arc(1000, 900, 30, 2 * Math.PI, false);
+            ctx.textAlign = "left";
+            ctx.font = "14pt Calibri";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("World", 975, 905);
+            ctx.stroke();
+            ctx.restore();
+            
         },
         isClickedRegion: function(x, y) {
             if (x > 970 && x < 1030 && y > 870 && y < 930) {
@@ -923,8 +923,8 @@
         Eleven2,
         Craps,
         EAndC,
-				Horn,
-				World
+        Horn,
+        World
     ];
 
     var Board = function(canvas, colors) {
@@ -946,12 +946,12 @@
             for (var i = 0; i < this.regions.length; i++) {
                 this.regions[i].draw();
             }
-						this.drawTableInfo();
-						this.drawDice();
-						//var _bets = _CRAPS.dealer.betManager.bets
-						//for(bet in _bets){
-						//	_bets[bet].draw();
-						//}
+            this.drawTableInfo();
+            this.drawDice();
+            //var _bets = _CRAPS.dealer.betManager.bets
+            //for(bet in _bets){
+            //  _bets[bet].draw();
+            //}
         },
         drawBackground: function() {
             this.context.fillStyle = this.colors.board;
@@ -966,206 +966,206 @@
             this.context.lineTo(0, 0);
             this.context.stroke();
         },
-				drawTableInfo: function() {
-						var ctx = this.context;
-						ctx.fillStyle = this.colors.specialText;
-						ctx.strokeStyle = this.colors.specialText;
-						ctx.font = "20pt Calibri";
-						ctx.fillText('3x-4x-5x Odds', 1200, 100); 
-						ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
-						ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
-						this.drawPoint(ctx, GameState.point);
-				},
-				drawPoint: function(ctx, point){
-					if(!GameState.point){
-						ctx.beginPath();
-						ctx.lineWidth = 5;
-						ctx.arc(1130, 60, 30, 2 * Math.PI, false);
-						ctx.fillStyle = this.colors.pointOff;
-						ctx.fill();
-						ctx.strokeStyle = this.colors.pointOff;
-						ctx.stroke();
-						ctx.closePath();
-						ctx.beginPath();
-						ctx.fillStyle = this.colors.text;
-						ctx.font = "25pt Calibri";
-						ctx.fillText('OFF', 1103, 70);
-						ctx.stroke();
-						ctx.closePath();
-					}
-					switch(GameState.point){
-					case 4:
-						ctx.beginPath();
-						ctx.lineWidth = 5;
-						ctx.arc(550, 162.5, 30, 2 * Math.PI, false);
-						ctx.fillStyle = this.colors.pointOn;
-						ctx.fill();
-						ctx.strokeStyle = this.colors.pointOn;
-						ctx.stroke();
-						ctx.closePath();
-						ctx.beginPath();
-						ctx.fillStyle = this.colors.buttonText;
-						ctx.font = "25pt Calibri";
-						ctx.fillText('ON', 528, 172.5);
-						ctx.stroke();
-						ctx.closePath();
-						break;
-					case 5:
-						ctx.beginPath();
-						ctx.lineWidth = 5;
-						ctx.arc(650, 162.5, 30, 2 * Math.PI, false);
-						ctx.fillStyle = this.colors.pointOn;
-						ctx.fill();
-						ctx.strokeStyle = this.colors.pointOn;
-						ctx.stroke();
-						ctx.closePath();
-						ctx.beginPath();
-						ctx.fillStyle = this.colors.buttonText;
-						ctx.font = "25pt Calibri";
-						ctx.fillText('ON', 628, 172.5);
-						ctx.stroke();
-						ctx.closePath();
-						break;
-					case 6:
-						ctx.beginPath();
-						ctx.lineWidth = 5;
-						ctx.arc(750, 162.5, 30, 2 * Math.PI, false);
-						ctx.fillStyle = this.colors.pointOn;
-						ctx.fill();
-						ctx.strokeStyle = this.colors.pointOn;
-						ctx.stroke();
-						ctx.closePath();
-						ctx.beginPath();
-						ctx.fillStyle = this.colors.buttonText;
-						ctx.font = "25pt Calibri";
-						ctx.fillText('ON', 728, 172.5);
-						ctx.stroke();
-						ctx.closePath();
-						break;
-					case 8:
-						ctx.beginPath();
-						ctx.lineWidth = 5;
-						ctx.arc(850, 162.5, 30, 2 * Math.PI, false);
-						ctx.fillStyle = this.colors.pointOn;
-						ctx.fill();
-						ctx.strokeStyle = this.colors.pointOn;
-						ctx.stroke();
-						ctx.closePath();
-						ctx.beginPath();
-						ctx.fillStyle = this.colors.buttonText;
-						ctx.font = "25pt Calibri";
-						ctx.fillText('ON', 828, 172.5);
-						ctx.stroke();
-						ctx.closePath();
-						break;
-					case 9:
-						ctx.beginPath();
-						ctx.lineWidth = 5;
-						ctx.arc(950, 162.5, 30, 2 * Math.PI, false);
-						ctx.fillStyle = this.colors.pointOn;
-						ctx.fill();
-						ctx.strokeStyle = this.colors.pointOn;
-						ctx.stroke();
-						ctx.closePath();
-						ctx.beginPath();
-						ctx.fillStyle = this.colors.buttonText;
-						ctx.font = "25pt Calibri";
-						ctx.fillText('ON', 928, 172.5);
-						ctx.stroke();
-						ctx.closePath();
-						break;
-					case 10:
-						ctx.beginPath();
-						ctx.lineWidth = 5;
-						ctx.arc(1050, 162.5, 30, 2 * Math.PI, false);
-						ctx.fillStyle = this.colors.pointOn;
-						ctx.fill();
-						ctx.strokeStyle = this.colors.pointOn;
-						ctx.stroke();
-						ctx.closePath();
-						ctx.beginPath();
-						ctx.fillStyle = this.colors.buttonText;
-						ctx.font = "25pt Calibri";
-						ctx.fillText('ON', 1028, 172.5);
-						ctx.stroke();
-						ctx.closePath();
-						break;
-					default:
-						return;
-					}
-					//ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
-				},
-				drawDice: function(){
-					var ctx = this.context;
-					ctx.beginPath();
-					ctx.rect(1200, 200, 75, 75);
-					ctx.rect(1300, 200, 75, 75);
-					ctx.fillStyle = 'red';
-					ctx.fill();
-					ctx.lineWidth = 5;
-					ctx.strokeStyle = 'red';
-					ctx.stroke();
-					this.drawDots();
-				},
-				drawDots: function(){
-					var dice = diceToNum(_CRAPS.dice);
-					var offset = [0, 100];
-					for(die in dice){
-						switch(dice[die]){
-						case false:
-							this.drawDot(1262.5 + offset[die], 262.5);
-							this.drawDot(1262.5 + offset[die], 212.5);
-							this.drawDot(1212.5 + offset[die], 262.5);
-							this.drawDot(1212.5 + offset[die], 212.5);
-							break;
-						case 1:
-							this.drawDot(1237.5 + offset[die], 237.5);
-							break;
-						case 2:
-							this.drawDot(1212.5 + offset[die], 262.5);
-							this.drawDot(1262.5 + offset[die], 212.5);
-							break;
-						case 3:
-							this.drawDot(1212.5 + offset[die], 262.5);
-							this.drawDot(1237.5 + offset[die], 237.5);
-							this.drawDot(1262.5 + offset[die], 212.5);
-							break;
-						case 4:
-							this.drawDot(1262.5 + offset[die], 262.5);
-							this.drawDot(1262.5 + offset[die], 212.5);
-							this.drawDot(1212.5 + offset[die], 262.5);
-							this.drawDot(1212.5 + offset[die], 212.5);
-							break;
-						case 5:
-							this.drawDot(1237.5 + offset[die], 237.5);
-							this.drawDot(1262.5 + offset[die], 262.5);
-							this.drawDot(1262.5 + offset[die], 212.5);
-							this.drawDot(1212.5 + offset[die], 262.5);
-							this.drawDot(1212.5 + offset[die], 212.5);
-							break;
-						case 6:
-							this.drawDot(1262.5 + offset[die], 262.5);
-							this.drawDot(1262.5 + offset[die], 237.5);
-							this.drawDot(1212.5 + offset[die], 237.5);
-							this.drawDot(1262.5 + offset[die], 212.5);
-							this.drawDot(1212.5 + offset[die], 262.5);
-							this.drawDot(1212.5 + offset[die], 212.5);
-							break;
-						default:
-							return;
-						}
-					}
-				},
-				drawDot: function(x, y){
-					var ctx = this.context;
-					ctx.beginPath();
-					ctx.arc(x, y, 5, 0, 2*Math.PI, false);
-					ctx.lineWidth = 5;
-					ctx.fillStyle = 'white';
-					ctx.fill();
-					ctx.strokeStyle = 'white';
-					ctx.stroke();
-				},
+        drawTableInfo: function() {
+            var ctx = this.context;
+            ctx.fillStyle = this.colors.specialText;
+            ctx.strokeStyle = this.colors.specialText;
+            ctx.font = "20pt Calibri";
+            ctx.fillText('3x-4x-5x Odds', 1200, 100); 
+            ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
+            ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
+            this.drawPoint(ctx, GameState.point);
+        },
+        drawPoint: function(ctx, point){
+          if(!GameState.point){
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(1130, 60, 30, 2 * Math.PI, false);
+            ctx.fillStyle = this.colors.pointOff;
+            ctx.fill();
+            ctx.strokeStyle = this.colors.pointOff;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.text;
+            ctx.font = "25pt Calibri";
+            ctx.fillText('OFF', 1103, 70);
+            ctx.stroke();
+            ctx.closePath();
+          }
+          switch(GameState.point){
+          case 4:
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(550, 162.5, 30, 2 * Math.PI, false);
+            ctx.fillStyle = this.colors.pointOn;
+            ctx.fill();
+            ctx.strokeStyle = this.colors.pointOn;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.buttonText;
+            ctx.font = "25pt Calibri";
+            ctx.fillText('ON', 528, 172.5);
+            ctx.stroke();
+            ctx.closePath();
+            break;
+          case 5:
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(650, 162.5, 30, 2 * Math.PI, false);
+            ctx.fillStyle = this.colors.pointOn;
+            ctx.fill();
+            ctx.strokeStyle = this.colors.pointOn;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.buttonText;
+            ctx.font = "25pt Calibri";
+            ctx.fillText('ON', 628, 172.5);
+            ctx.stroke();
+            ctx.closePath();
+            break;
+          case 6:
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(750, 162.5, 30, 2 * Math.PI, false);
+            ctx.fillStyle = this.colors.pointOn;
+            ctx.fill();
+            ctx.strokeStyle = this.colors.pointOn;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.buttonText;
+            ctx.font = "25pt Calibri";
+            ctx.fillText('ON', 728, 172.5);
+            ctx.stroke();
+            ctx.closePath();
+            break;
+          case 8:
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(850, 162.5, 30, 2 * Math.PI, false);
+            ctx.fillStyle = this.colors.pointOn;
+            ctx.fill();
+            ctx.strokeStyle = this.colors.pointOn;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.buttonText;
+            ctx.font = "25pt Calibri";
+            ctx.fillText('ON', 828, 172.5);
+            ctx.stroke();
+            ctx.closePath();
+            break;
+          case 9:
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(950, 162.5, 30, 2 * Math.PI, false);
+            ctx.fillStyle = this.colors.pointOn;
+            ctx.fill();
+            ctx.strokeStyle = this.colors.pointOn;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.buttonText;
+            ctx.font = "25pt Calibri";
+            ctx.fillText('ON', 928, 172.5);
+            ctx.stroke();
+            ctx.closePath();
+            break;
+          case 10:
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.arc(1050, 162.5, 30, 2 * Math.PI, false);
+            ctx.fillStyle = this.colors.pointOn;
+            ctx.fill();
+            ctx.strokeStyle = this.colors.pointOn;
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.buttonText;
+            ctx.font = "25pt Calibri";
+            ctx.fillText('ON', 1028, 172.5);
+            ctx.stroke();
+            ctx.closePath();
+            break;
+          default:
+            return;
+          }
+          //ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
+        },
+        drawDice: function(){
+          var ctx = this.context;
+          ctx.beginPath();
+          ctx.rect(1200, 200, 75, 75);
+          ctx.rect(1300, 200, 75, 75);
+          ctx.fillStyle = 'red';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'red';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          var dice = diceToNum(_CRAPS.dice);
+          var offset = [0, 100];
+          for(die in dice){
+            switch(dice[die]){
+            case false:
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            case 1:
+              this.drawDot(1237.5 + offset[die], 237.5);
+              break;
+            case 2:
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              break;
+            case 3:
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1237.5 + offset[die], 237.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              break;
+            case 4:
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            case 5:
+              this.drawDot(1237.5 + offset[die], 237.5);
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            case 6:
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 237.5);
+              this.drawDot(1212.5 + offset[die], 237.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            default:
+              return;
+            }
+          }
+        },
+        drawDot: function(x, y){
+          var ctx = this.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'white';
+          ctx.fill();
+          ctx.strokeStyle = 'white';
+          ctx.stroke();
+        },
         processClick: function(x, y) {
             var x = (x / this.canvas.clientWidth) * 2000;
             var y = (y / this.canvas.clientHeight) * 1000;
@@ -1181,223 +1181,3 @@
 
     window.Board = Board;
 })();
-/*
-var DrawCanvas = function(board, l, t, w, h, c){
-	//var _h = 1024, _w = 768;
-	var _h = h, _w = w;
-	var _l = l, _r = _w;
-	var _t = t, _b = _h;
-
-	var colors = c;
-
-	return {
-		tmpContext: {},
-		preserveContext: function(){
-			for(var i in board){
-				this.tmpContext[i] = board[i];
-			}
-		},
-		restoreContext: function(){
-			for(var i in this.tmpContext){
-				board[i] = this.tmpContext[i];
-			}
-		},
-		perimeterThicknessAdjust: {
-			l: (_l + thick.boardframe/2),
-			t: (_t + thick.boardframe/2),
-			w: (_w - thick.boardframe),
-			h: (_h - thick.boardframe)
-		},
-		perimeterAdjust: {
-			l: function(n){
-				return n + thick.boardframe;
-			},
-			t: function(n){
-				return n + thick.boardframe;
-			},
-			w: function(n){
-				return n - thick.boardframe;
-			},
-			h: function(n){
-				return n - thick.boardframe;
-			},
-			r: function(n){
-				return this.w(n);
-			},
-			b: function(n){
-				return this.h(n);
-			}
-		},
-		buildPoints: function(n, i){
-			var _u = i/n;
-			var _d = (n-i)/n;
-			var _T = _b * _u;
-			var _L = _r * _u;
-			var _R = _r * _d;
-			var _B = _b * _d;
-			var p = {
-				u: _u,
-				d: _d,
-				t: _t,
-				l: _l,
-				r: _r,
-				b: _b,
-				T: _T,
-				L: _L,
-				R: _R,
-				B: _B
-			};
-			//console.log(p);
-			return p;
-		},
-		line: function(x1, y1, x2, y2, etc){
-			this.preserveContext();
-			board.beginPath();
-			board.moveTo(x1, y1);
-			board.lineTo(x2, y2);
-			etc = $.extend({
-				color: '#000',
-				t: 1 // thickness
-			}, etc);
-			board.lineWidth = etc.t;
-			board.strokeStyle = etc.color;
-			board.lineCap = "butt";
-			board.stroke();
-			this.restoreContext();
-		},
-		curve: function(x1, y1, x2, y2, xc, yc, etc){ // Starting X, Starting Y, Ending X, Ending Y, Control Point X Control Point Y
-			this.preserveContext();
-			board.beginPath();
-			board.moveTo(x1, y1);
-			board.quadraticCurveTo(xc, yc, x2, y2);
-			etc = $.extend({
-				color: '#000',
-				t: 1 // thickness
-			}, etc);
-			board.lineWidth = etc.t;
-			board.strokeStyle = etc.color;
-			board.lineCap = "butt";
-			board.stroke();
-			this.restoreContext();
-		},
-		fillRect: function(x, y, w, h, color){
-			this.preserveContext();
-			board.fillStyle = color;
-			board.fillRect(x, y, w, h);
-			this.restoreContext();
-		},
-		strokeRect: function(x, y, w, h, etc){
-			// Assumes etc.t is type int.
-
-			etc = $.extend({
-				color: '#000',
-				t: 1 // thickness
-			}, etc);
-
-			this.preserveContext();
-			board.lineWidth = etc.t;
-			board.strokeStyle = etc.color;
-			board.strokeRect(x, y, w, h);
-			this.restoreContext();
-		},
-		fullGrid: function(n){
-			for(var j = 0; j <= n; j++){
-				var p = this.buildPoints(n,j);
-				this.grid(n, j, p);
-			}
-		},
-		grid: function(n, i, p){
-			this.line(p.L, p.t, p.L, p.b);
-			this.line(p.l, p.T, p.r, p.T);
-		},
-		fullStar: function(n){
-			for(var j = 0; j <= n; j++){
-				var p = this.buildPoints(n,j);
-				this.star(n, j, p);
-			}
-		},
-		star: function(n, i, p){
-			this.line(p.L, p.t, p.R, p.b);
-			this.line(p.l, p.T, p.r, p.B);
-		},
-		fullDiagGrid: function(n){
-			for(var j = 0; j <= n; j++){
-				var p = this.buildPoints(n,j);
-				this.diagGrid(n, j, p);
-			}
-		},
-		diagGrid: function(n, i, p){
-			this.line(p.l, p.T, p.L, p.t); // Congruent: this.line(_l, _B, _R, _t);
-			this.line(p.L, p.b, p.r, p.T); // Congruent: this.line(_R, _b, _r, _B); this.line(_r, _T, _L, _b);
-			this.line(p.L, p.t, p.r, p.B); // Congruent: this.line(_R, _t, _r, _T);
-			this.line(p.R, p.b, p.l, p.T); // Congruent: this.line(_L, _b, _l, _B);
-		},
-		fullConcaveArcs: function(n){
-			for(var j = 0; j <= n; j++){
-				var p = this.buildPoints(n,j);
-				this.concaveArcs(n, j, p);
-			}
-		},
-		concaveArcs: function(n, i, p){
-			this.line(p.l, p.T, p.R, p.t); // Top Left | Congruent: this.line(_l, _B, _L, _t); this.line(_L, _t, _l, _B);
-			this.line(p.R, p.t, p.r, p.B); // Top Right | Congruent: this.line(_L, _t, _r, _T);
-			this.line(p.L, p.b, p.l, p.T); // Bottom Left | Congruent: this.line(_R, _b, _l, _B);
-			this.line(p.r, p.B, p.L, p.b); // Bottom Right | Congruent: this.line(_r, _T, _R, _b); this.line(_R, _b, _r, _T); this.line(_L, _b, _r, _B);
-		},
-		fullPyramid: function(n){
-			for(var j = 0; j <= n; j++){
-				var p = this.buildPoints(n,j);
-				this.pyramid(n, j, p);
-			}
-		},
-		pyramid: function(n, i, p){
-			this.line(p.r, p.t, p.L, p.T);
-			this.line(p.l, p.t, p.R, p.T);
-			this.line(p.r, p.b, p.L, p.B);
-			this.line(p.l, p.b, p.R, p.B);
-		},
-		fullFromCorners: function(n){
-			for(var j = 0; j <= n; j++){
-				var p = this.buildPoints(n,j);
-				this.fromCorners(n, j, p);
-			}
-		},
-		fromCorners: function(n, i, p){
-			this.line(p.l, p.t, p.r, p.T); // Top Left Top
-			this.line(p.l, p.t, p.L, p.b); // Top Left Bottom
-			this.line(p.r, p.t, p.l, p.T); // Top Right Top
-			this.line(p.r, p.t, p.L, p.b); // Top Right Bottom
-			this.line(p.l, p.b, p.L, p.t); // Bottm Left Top
-			this.line(p.l, p.b, p.r, p.T); // Bottom Left Bottom
-			this.line(p.r, p.b, p.L, p.t); // Bottom Right Top
-			this.line(p.r, p.b, p.l, p.T); // Bottom Right Bottom
-		},
-		demo: function(n){
-			for(var i = 0; i <= n; i++){
-				var p = this.buildPoints(n, i);
-				this.grid(n, i, p);
-				this.star(n, i, p);
-				this.diagGrid(n, i, p);
-				this.concaveArcs(n, i, p);
-				// FIGURE THIS OUT? this.convexArcs
-				this.pyramid(n, i, p);
-				//this.fromCorners(n, i, p);
-			}
-			//this.fullGrid(n);
-			//this.fullStar(n);
-			//this.fullDiagGrid(n);
-			//this.fullConcaveArcs(n);
-			// FIGURE THIS OUT? this.fullConvexArcs(n);
-			//this.fullPyramid(n);
-			//this.fullFromCorners(n);
-		},
-		resetBoard: function(){
-			board.clearRect(_l, _t, _w, _h);
-			d.fillRect(_l, _t, _w, _h, colors.board);
-			pta = this.perimeterThicknessAdjust;
-			d.strokeRect(pta.l, pta.t, pta.w, pta.h, {color: colors.black, t: thick.boardframe});
-			//d.strokeRect(_l, _t, _w, _h, {color: colors.black, t: thick.boardframe});
-		}
-	}
-}
-*/

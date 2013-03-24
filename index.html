@@ -1,727 +1,727 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>DuLeone Craps</title>
-		<link href="layout.css" media="all" rel="stylesheet" type="text/css" />
-		<link href="css3-gmail-style.css" media="all" rel="stylesheet" type="text/css" />
-	</head>
-	<body>
-		<!-- canvas id="board" height='1024' width='768'></canvas -->
-		<canvas id="board" style="height: 70%; width: 70%;"></canvas>
-		
-		<div id='tableInfo'></div>
-		<div id='pointWindow'></div>
-		<div id='betForm' class='round'>
-			<fieldset id='betInfo' class='round'>
-				<legend>Create a Bet!</legend>
-				<p>
-					<label for='betType'>Bet Type</label>
-					<select id='betType' name='betType'></select><br />
-					<p id='betName'></p>
-					<p id='betDesc'></p>
-					<label id='betValLabel' for='betValue'>Bet Value</label>
-					<input id='betValue' name='betValue' type='text'><br />
-					<label for='repeat'>Repeat Bet on Win?</label>
-					<input id='betRepeat' name='betRepeat' type='checkbox'>
-				</p>
-				<p id='origBet'></p>
-				<p>
-					<div id='create' unselectable='on' class='bttn blue' onclick='create()'>Create Bet!</div>
-					<div id='cancel' unselectable='on' class='bttn blue' onclick='cancel()'>Cancel</div>
-				</p>
-			</fieldset>
-		</div>
-		<div id='betListing'></div>
-		<div id='playerArea'>
-			<fieldset id='playerInfo'>
-				<legend>Player Info!</legend>
-				<div id='name' class='name' onclick='updatePlayerName()'></div>
-				<div id='bank'></div>
-				<div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div>
-				<div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div>
-			</fieldset>
-		</div>
-		<div id='buffer'></div>
-		
-	</body>
-	<footer>
+  <head>
+    <title>DuLeone Craps</title>
+    <link href="layout.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css3-gmail-style.css" media="all" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- canvas id="board" height='1024' width='768'></canvas -->
+    <canvas id="board" style="height: 70%; width: 70%;"></canvas>
+    
+    <div id='tableInfo'></div>
+    <div id='pointWindow'></div>
+    <div id='betForm' class='round'>
+      <fieldset id='betInfo' class='round'>
+        <legend>Create a Bet!</legend>
+        <p>
+          <label for='betType'>Bet Type</label>
+          <select id='betType' name='betType'></select><br />
+          <p id='betName'></p>
+          <p id='betDesc'></p>
+          <label id='betValLabel' for='betValue'>Bet Value</label>
+          <input id='betValue' name='betValue' type='text'><br />
+          <label for='repeat'>Repeat Bet on Win?</label>
+          <input id='betRepeat' name='betRepeat' type='checkbox'>
+        </p>
+        <p id='origBet'></p>
+        <p>
+          <div id='create' unselectable='on' class='bttn blue' onclick='create()'>Create Bet!</div>
+          <div id='cancel' unselectable='on' class='bttn blue' onclick='cancel()'>Cancel</div>
+        </p>
+      </fieldset>
+    </div>
+    <div id='betListing'></div>
+    <div id='playerArea'>
+      <fieldset id='playerInfo'>
+        <legend>Player Info!</legend>
+        <div id='name' class='name' onclick='updatePlayerName()'></div>
+        <div id='bank'></div>
+        <div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div>
+        <div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div>
+      </fieldset>
+    </div>
+    <div id='buffer'></div>
+    
+  </body>
+  <footer>
 
-		<script src="jquery.min.js" lang='javascript' type='text/javascript'></script>
-		<script src="jquery.color.js" lang='javascript' type='text/javascript'></script>
-		<script type='text/javascript' language='javascript' src='utils.js'></script>
-		<script type='text/javascript' language='javascript' src='dice.js'></script>
-		<script type='text/javascript' language='javascript' src='crapsDice.js'></script>
-		<script type='text/javascript' language='javascript' src='bets.js'></script>
-		<script type='text/javascript' language='javascript' src='crapsBets.js'></script>
-		<script type='text/javascript' language='javascript' src='players.js'></script>
-		<script type='text/javascript' language='javascript' src='crapsPlayers.js'></script>
-		<script type='text/javascript' language='javascript' src='craps.js'></script>
-		<script type='text/javascript' language='javascript' src='board.js'></script>
+    <script src="jquery.min.js" lang='javascript' type='text/javascript'></script>
+    <script src="jquery.color.js" lang='javascript' type='text/javascript'></script>
+    <script type='text/javascript' language='javascript' src='utils.js'></script>
+    <script type='text/javascript' language='javascript' src='dice.js'></script>
+    <script type='text/javascript' language='javascript' src='crapsDice.js'></script>
+    <script type='text/javascript' language='javascript' src='bets.js'></script>
+    <script type='text/javascript' language='javascript' src='crapsBets.js'></script>
+    <script type='text/javascript' language='javascript' src='players.js'></script>
+    <script type='text/javascript' language='javascript' src='crapsPlayers.js'></script>
+    <script type='text/javascript' language='javascript' src='craps.js'></script>
+    <script type='text/javascript' language='javascript' src='board.js'></script>
 
-		<script type='text/javascript' language='javascript'>
-			
-			function draw(Board) {
-					var canvas = document.getElementById("board"),
-							colors = {
-									board: "#090",
-									border: "#000",
-									pointOff: "#000",
-									pointOn: "#fff",
-									lines: "#fff",
-									text: "#fff",
-									buttonText: '#000',
-									specialText: "#ff0",
-									finalText: "#f00"
-							};
-			
-					var board = new Board(canvas, colors);
-					board.draw();
-			
-					canvas.onclick = function(e) {
-								console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
-							//console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
-							//ctx = board.context;
-							//ctx.beginPath();
-							//ctx.lineWidth = 5;
-							//ctx.arc(((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
-							//				((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000, 15, 2 * Math.PI, false);
-							//ctx.fill();
-							//ctx.closePath();
-							//ctx.stroke();
-							boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-							if(boardArea){
-								clickAreaPlaceBet(boardArea, ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
-																						 ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000);
-							}
-					};
-			
-			}
-			draw(Board);
-						
-			function updateBetDesc(){
-				switch($('#betType').val()){
-				case "passline":
-					$('#betDesc').html('Payout:<br /> 1 pays 1');
-					break;
-				case "passlineOdds":
-					$('#betDesc').html('Payout:<br />Point 4, 10: 1 pays 2<br />Point 5, 9: 2 pays 3 <br />Point 6, 8: 5 pays 6');
-					break;
-				case "dontPass":
-					$('#betDesc').html('Payout:<br /> 1 pays 1');
-					break;
-				case "dontPassOdds":
-					$('#betDesc').html('Payout:<br />Point 4, 10: 2 pays 1<br />Point 5, 9: 3 pays 2 <br />Point 6, 8: 6 pays 5');
-					break;
-				case "come":
-					$('#betDesc').html('Payout:<br /> 1 pays 1');
-					break;
-				case "comeOdds":
-					$('#betDesc').html('Payout:<br />Point 4, 10: 1 pays 2<br />Point 5, 9: 2 pays 3 <br />Point 6, 8: 5 pays 6');
-					break;
-				case "dontCome":
-					$('#betDesc').html('Payout:<br /> 1 pays 1');
-					break;
-				case "dontComeOdds":
-					$('#betDesc').html('Payout:<br />Point 4, 10: 2 pays 1<br />Point 5, 9: 3 pays 2 <br />Point 6, 8: 6 pays 5');
-					break;
-				case "place4":
-					$('#betDesc').html('Payout:<br /> 5 pays 9');
-					break;
-				case "place5":
-					$('#betDesc').html('Payout:<br /> 5 pays 7');
-					break;
-				case "place6":
-					$('#betDesc').html('Payout:<br /> 6 pays 7');
-					break;
-				case "place8":
-					$('#betDesc').html('Payout:<br /> 6 pays 7');
-					break;
-				case "place9":
-					$('#betDesc').html('Payout:<br /> 5 pays 7');
-					break;
-				case "place10":
-					$('#betDesc').html('Payout:<br /> 5 pays 9');
-					break;
-				case "big6":
-					$('#betDesc').html('Payout:<br /> 1 pays 1');
-					break;
-				case "big8":
-					$('#betDesc').html('Payout:<br /> 1 pays 1');
-					break;
-				case "field":
-					$('#betDesc').html('Payout:<br />Roll 3, 4, 9, 10, 11: 1 pays 1<br />Roll 2, 12: 1 pays 2');
-					break;
-				case "cAndE":
-					$('#betDesc').html('Payout:<br />Craps: 1 pays 3<br />Yo-leven: 1 pays 7<br />No Minimum Bet');
-					break;
-				case "any7":
-					$('#betDesc').html('Payout:<br />1 pays 4<br />No Minimum Bet<br />Increments of 3');
-					break;
-				case "hard4":
-					$('#betDesc').html('Payout:<br /> 1 pays 7');
-					break;
-				case "hard6":
-					$('#betDesc').html('Payout:<br /> 1 pays 9');
-					break;
-				case "hard8":
-					$('#betDesc').html('Payout:<br /> 1 pays 9');
-					break;
-				case "hard10":
-					$('#betDesc').html('Payout:<br /> 1 pays 7');
-					break;
-				case "aceTwo":
-					$('#betDesc').html('Payout:<br /> 1 pays 15');
-					break;
-				case "snakeEyes":
-					$('#betDesc').html('Payout:<br /> 1 pays 30');
-					break;
-				case "midnight":
-					$('#betDesc').html('Payout:<br /> 1 pays 30');
-					break;
-				case "yoleven":
-					$('#betDesc').html('Payout:<br /> 1 pays 15');
-					break;
-				case "anyCraps":
-					$('#betDesc').html('Payout: 1 pays 7<br />No Minimum Bet<br />Increments of 4');
-					break;
-				case "horn":
-					$('#betDesc').html('Payout:<br />Roll 2, 12: 4 pays 27<br />Roll 3, 11: 1 pays 3<br />No Minimum Bet<br />Increments of 4');
-					break;
-				case "world":
-					$('#betDesc').html('Payout:<br />Roll 2, 12: 5 pays 26<br />Roll 3, 11: 5 pays 11<br />Roll 7: Push<br />No Minimum Bet<br />Increments of 5');
-					break;
-				default:
-					return false;
-				}
-			};
-			
-			function clickAreaPlaceBet(area, x, y){
-				$('#betRepeat').removeAttr('disabled');
-				$('#betType').show();
-				$('#betName').show();
-				
-				switch(area.name){
-				case "Pass Line":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'passline');
-					opt.html(area.name);
-					var opt2 = $(document.createElement('option'));
-					opt2.attr('value', 'passlineOdds');
-					opt2.html('Pass Line Odds');
-					$('#betRepeat').attr('checked','');
-					$('#origBet').empty();
-					if($('#betType').val() == 'passlineOdds'){
-						var origBet = $('#origBet');
-						var origLabel = $(document.createElement('label'));
-						var orig = $(document.createElement('input'));
-						orig.attr('type', 'text');
-						orig.css({width: '50px'});
-						orig.attr('id', 'orig');
-						origLabel.html('Original Bet ID: ');
-						origBet.append(origLabel).append(orig);
-						$('#betRepeat').removeAttr('checked');
-					}
-					$('#betType').append(opt).append(opt2).attr('disabled', false);
-					$('#betName').hide();
-					updateBetDesc();
-					break;
-				case "Don't Pass":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'dontPass');
-					opt.html('Don\'t Pass Line');
-					var opt2 = $(document.createElement('option'));
-					opt2.attr('value', 'dontPassOdds');
-					opt2.html('Don\'t Pass Odds');
-					$('#betRepeat').attr('checked','');
-					$('#origBet').empty();
-					if($('#betType').val() == 'dontPassOdds'){
-						var origBet = $('#origBet');
-						var origLabel = $(document.createElement('label'));
-						var orig = $(document.createElement('input'));
-						orig.attr('type', 'text');
-						orig.css({width: '50px'});
-						orig.attr('id', 'orig');
-						origLabel.html('Original Bet ID: ');
-						origBet.append(origLabel).append(orig);
-						$('#betRepeat').removeAttr('checked');
-					}
-					$('#betType').append(opt).append(opt2).attr('disabled', false);
-					$('#betName').hide();
-					updateBetDesc();
-					break;
-				case "Come":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'come');
-					opt.html('Come Line');
-					var opt2 = $(document.createElement('option'));
-					opt2.attr('value', 'comeOdds');
-					opt2.html('Come Line Odds');
-					$('#betRepeat').attr('checked','');
-					$('#origBet').empty();
-					if($('#betType').val() == 'comeOdds'){
-						var origBet = $('#origBet');
-						var origLabel = $(document.createElement('label'));
-						var orig = $(document.createElement('input'));
-						orig.attr('type', 'text');
-						orig.css({width: '50px'});
-						orig.attr('id', 'orig');
-						origLabel.html('Original Bet ID: ');
-						origBet.append(origLabel).append(orig);
-						$('#betRepeat').removeAttr('checked');
-					}
-					$('#betType').append(opt).append(opt2).attr('disabled', false);
-					$('#betName').hide();
-					updateBetDesc();
-					break;
-				case "Don't Come":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'dontCome');
-					opt.html('Don\'t Come Line');
-					var opt2 = $(document.createElement('option'));
-					opt2.attr('value', 'dontComeOdds');
-					opt2.html('Don\'t Come Odds');
-					$('#betRepeat').attr('checked'), '';
-					$('#origBet').empty();
-					if($('#betType').val() == 'dontComeOdds'){
-						var origBet = $('#origBet');
-						var origLabel = $(document.createElement('label'));
-						var orig = $(document.createElement('input'));
-						orig.attr('type', 'text');
-						orig.css({width: '50px'});
-						orig.attr('id', 'orig');
-						origLabel.html('Original Bet ID: ');
-						origBet.append(origLabel).append(orig);
-						$('#betRepeat').removeAttr('checked');
-					}
-					$('#betType').append(opt).append(opt2).attr('disabled', false);
-					$('#betName').hide();
-					updateBetDesc();
-					break;
-				case "Place 4":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'place4');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Place 4');
-					$('#betType').attr('disabled', 'true');
-					$('#betRepeat').attr('checked', '');
-					$('#origBet').empty();
-					updateBetDesc();
-					break;
-				case "Place 5":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'place5');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Place 5');
-					$('#betType').attr('disabled', 'true');
-					$('#betRepeat').attr('checked', '');
-					$('#origBet').empty();
-					updateBetDesc();
-					break;
-				case "Place 6":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'place6');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Place 6');
-					$('#betType').attr('disabled', 'true');
-					$('#betRepeat').attr('checked', '');
-					$('#origBet').empty();
-					updateBetDesc();
-					break;
-				case "Place 8":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'place8');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Place 8');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Place 9":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'place9');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Place 9');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Place 10":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'place10');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Place 10');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Big 6":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'big6');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Big 6');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Big 8":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'big8');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Big 8');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Field":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'field');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Field');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "C and E":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'cAndE');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('C and E');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "Seven":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'any7');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Any 7');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "Hard 4":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'hard4');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Hard 4');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Hard 6":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'hard6');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Hard 6');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Hard 8":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'hard8');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Hard 8');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Hard 10":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'hard10');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Hard 10');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').attr('checked', '');
-					updateBetDesc();
-					break;
-				case "Ace Two":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'aceTwo');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Ace Two');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "Snake Eyes":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'snakeEyes');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Snake Eyes');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "Midnight":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'midnight');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Midnight');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "Yo-leven":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'yoleven');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Yo-leven');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "Craps":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'anyCraps');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Any Craps');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "Horn":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'horn');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('Horn');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				case "World":
-					$('#betType').empty();
-					var opt = $(document.createElement('option'));
-					opt.attr('value', 'world');
-					opt.html(area.name);
-					$('#betType').append(opt);
-					$('#betType').hide();
-					$('#betName').html('World');
-					$('#betType').attr('disabled', 'true');
-					$('#origBet').empty();
-					$('#betRepeat').removeAttr('checked');
-					updateBetDesc();
-					break;
-				default:
-					return false;
-				}
-				
-				place();
-			}
-			
-			makeCrapsPlayer("Matt", 10000);
-			//_CRAPS.players = [p];
+    <script type='text/javascript' language='javascript'>
+      
+      function draw(Board) {
+          var canvas = document.getElementById("board"),
+              colors = {
+                  board: "#090",
+                  border: "#000",
+                  pointOff: "#000",
+                  pointOn: "#fff",
+                  lines: "#fff",
+                  text: "#fff",
+                  buttonText: '#000',
+                  specialText: "#ff0",
+                  finalText: "#f00"
+              };
+      
+          var board = new Board(canvas, colors);
+          board.draw();
+      
+          canvas.onclick = function(e) {
+                console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
+              //console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
+              //ctx = board.context;
+              //ctx.beginPath();
+              //ctx.lineWidth = 5;
+              //ctx.arc(((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
+              //        ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000, 15, 2 * Math.PI, false);
+              //ctx.fill();
+              //ctx.closePath();
+              //ctx.stroke();
+              boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+              if(boardArea){
+                clickAreaPlaceBet(boardArea, ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
+                                             ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000);
+              }
+          };
+      
+      }
+      draw(Board);
+            
+      function updateBetDesc(){
+        switch($('#betType').val()){
+        case "passline":
+          $('#betDesc').html('Payout:<br /> 1 pays 1');
+          break;
+        case "passlineOdds":
+          $('#betDesc').html('Payout:<br />Point 4, 10: 1 pays 2<br />Point 5, 9: 2 pays 3 <br />Point 6, 8: 5 pays 6');
+          break;
+        case "dontPass":
+          $('#betDesc').html('Payout:<br /> 1 pays 1');
+          break;
+        case "dontPassOdds":
+          $('#betDesc').html('Payout:<br />Point 4, 10: 2 pays 1<br />Point 5, 9: 3 pays 2 <br />Point 6, 8: 6 pays 5');
+          break;
+        case "come":
+          $('#betDesc').html('Payout:<br /> 1 pays 1');
+          break;
+        case "comeOdds":
+          $('#betDesc').html('Payout:<br />Point 4, 10: 1 pays 2<br />Point 5, 9: 2 pays 3 <br />Point 6, 8: 5 pays 6');
+          break;
+        case "dontCome":
+          $('#betDesc').html('Payout:<br /> 1 pays 1');
+          break;
+        case "dontComeOdds":
+          $('#betDesc').html('Payout:<br />Point 4, 10: 2 pays 1<br />Point 5, 9: 3 pays 2 <br />Point 6, 8: 6 pays 5');
+          break;
+        case "place4":
+          $('#betDesc').html('Payout:<br /> 5 pays 9');
+          break;
+        case "place5":
+          $('#betDesc').html('Payout:<br /> 5 pays 7');
+          break;
+        case "place6":
+          $('#betDesc').html('Payout:<br /> 6 pays 7');
+          break;
+        case "place8":
+          $('#betDesc').html('Payout:<br /> 6 pays 7');
+          break;
+        case "place9":
+          $('#betDesc').html('Payout:<br /> 5 pays 7');
+          break;
+        case "place10":
+          $('#betDesc').html('Payout:<br /> 5 pays 9');
+          break;
+        case "big6":
+          $('#betDesc').html('Payout:<br /> 1 pays 1');
+          break;
+        case "big8":
+          $('#betDesc').html('Payout:<br /> 1 pays 1');
+          break;
+        case "field":
+          $('#betDesc').html('Payout:<br />Roll 3, 4, 9, 10, 11: 1 pays 1<br />Roll 2, 12: 1 pays 2');
+          break;
+        case "cAndE":
+          $('#betDesc').html('Payout:<br />Craps: 1 pays 3<br />Yo-leven: 1 pays 7<br />No Minimum Bet');
+          break;
+        case "any7":
+          $('#betDesc').html('Payout:<br />1 pays 4<br />No Minimum Bet<br />Increments of 3');
+          break;
+        case "hard4":
+          $('#betDesc').html('Payout:<br /> 1 pays 7');
+          break;
+        case "hard6":
+          $('#betDesc').html('Payout:<br /> 1 pays 9');
+          break;
+        case "hard8":
+          $('#betDesc').html('Payout:<br /> 1 pays 9');
+          break;
+        case "hard10":
+          $('#betDesc').html('Payout:<br /> 1 pays 7');
+          break;
+        case "aceTwo":
+          $('#betDesc').html('Payout:<br /> 1 pays 15');
+          break;
+        case "snakeEyes":
+          $('#betDesc').html('Payout:<br /> 1 pays 30');
+          break;
+        case "midnight":
+          $('#betDesc').html('Payout:<br /> 1 pays 30');
+          break;
+        case "yoleven":
+          $('#betDesc').html('Payout:<br /> 1 pays 15');
+          break;
+        case "anyCraps":
+          $('#betDesc').html('Payout: 1 pays 7<br />No Minimum Bet<br />Increments of 4');
+          break;
+        case "horn":
+          $('#betDesc').html('Payout:<br />Roll 2, 12: 4 pays 27<br />Roll 3, 11: 1 pays 3<br />No Minimum Bet<br />Increments of 4');
+          break;
+        case "world":
+          $('#betDesc').html('Payout:<br />Roll 2, 12: 5 pays 26<br />Roll 3, 11: 5 pays 11<br />Roll 7: Push<br />No Minimum Bet<br />Increments of 5');
+          break;
+        default:
+          return false;
+        }
+      };
+      
+      function clickAreaPlaceBet(area, x, y){
+        $('#betRepeat').removeAttr('disabled');
+        $('#betType').show();
+        $('#betName').show();
+        
+        switch(area.name){
+        case "Pass Line":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'passline');
+          opt.html(area.name);
+          var opt2 = $(document.createElement('option'));
+          opt2.attr('value', 'passlineOdds');
+          opt2.html('Pass Line Odds');
+          $('#betRepeat').attr('checked','');
+          $('#origBet').empty();
+          if($('#betType').val() == 'passlineOdds'){
+            var origBet = $('#origBet');
+            var origLabel = $(document.createElement('label'));
+            var orig = $(document.createElement('input'));
+            orig.attr('type', 'text');
+            orig.css({width: '50px'});
+            orig.attr('id', 'orig');
+            origLabel.html('Original Bet ID: ');
+            origBet.append(origLabel).append(orig);
+            $('#betRepeat').removeAttr('checked');
+          }
+          $('#betType').append(opt).append(opt2).attr('disabled', false);
+          $('#betName').hide();
+          updateBetDesc();
+          break;
+        case "Don't Pass":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontPass');
+          opt.html('Don\'t Pass Line');
+          var opt2 = $(document.createElement('option'));
+          opt2.attr('value', 'dontPassOdds');
+          opt2.html('Don\'t Pass Odds');
+          $('#betRepeat').attr('checked','');
+          $('#origBet').empty();
+          if($('#betType').val() == 'dontPassOdds'){
+            var origBet = $('#origBet');
+            var origLabel = $(document.createElement('label'));
+            var orig = $(document.createElement('input'));
+            orig.attr('type', 'text');
+            orig.css({width: '50px'});
+            orig.attr('id', 'orig');
+            origLabel.html('Original Bet ID: ');
+            origBet.append(origLabel).append(orig);
+            $('#betRepeat').removeAttr('checked');
+          }
+          $('#betType').append(opt).append(opt2).attr('disabled', false);
+          $('#betName').hide();
+          updateBetDesc();
+          break;
+        case "Come":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'come');
+          opt.html('Come Line');
+          var opt2 = $(document.createElement('option'));
+          opt2.attr('value', 'comeOdds');
+          opt2.html('Come Line Odds');
+          $('#betRepeat').attr('checked','');
+          $('#origBet').empty();
+          if($('#betType').val() == 'comeOdds'){
+            var origBet = $('#origBet');
+            var origLabel = $(document.createElement('label'));
+            var orig = $(document.createElement('input'));
+            orig.attr('type', 'text');
+            orig.css({width: '50px'});
+            orig.attr('id', 'orig');
+            origLabel.html('Original Bet ID: ');
+            origBet.append(origLabel).append(orig);
+            $('#betRepeat').removeAttr('checked');
+          }
+          $('#betType').append(opt).append(opt2).attr('disabled', false);
+          $('#betName').hide();
+          updateBetDesc();
+          break;
+        case "Don't Come":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontCome');
+          opt.html('Don\'t Come Line');
+          var opt2 = $(document.createElement('option'));
+          opt2.attr('value', 'dontComeOdds');
+          opt2.html('Don\'t Come Odds');
+          $('#betRepeat').attr('checked'), '';
+          $('#origBet').empty();
+          if($('#betType').val() == 'dontComeOdds'){
+            var origBet = $('#origBet');
+            var origLabel = $(document.createElement('label'));
+            var orig = $(document.createElement('input'));
+            orig.attr('type', 'text');
+            orig.css({width: '50px'});
+            orig.attr('id', 'orig');
+            origLabel.html('Original Bet ID: ');
+            origBet.append(origLabel).append(orig);
+            $('#betRepeat').removeAttr('checked');
+          }
+          $('#betType').append(opt).append(opt2).attr('disabled', false);
+          $('#betName').hide();
+          updateBetDesc();
+          break;
+        case "Place 4":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'place4');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Place 4');
+          $('#betType').attr('disabled', 'true');
+          $('#betRepeat').attr('checked', '');
+          $('#origBet').empty();
+          updateBetDesc();
+          break;
+        case "Place 5":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'place5');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Place 5');
+          $('#betType').attr('disabled', 'true');
+          $('#betRepeat').attr('checked', '');
+          $('#origBet').empty();
+          updateBetDesc();
+          break;
+        case "Place 6":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'place6');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Place 6');
+          $('#betType').attr('disabled', 'true');
+          $('#betRepeat').attr('checked', '');
+          $('#origBet').empty();
+          updateBetDesc();
+          break;
+        case "Place 8":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'place8');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Place 8');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Place 9":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'place9');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Place 9');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Place 10":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'place10');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Place 10');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Big 6":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'big6');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Big 6');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Big 8":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'big8');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Big 8');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Field":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'field');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Field');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "C and E":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'cAndE');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('C and E');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "Seven":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'any7');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Any 7');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "Hard 4":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'hard4');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Hard 4');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Hard 6":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'hard6');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Hard 6');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Hard 8":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'hard8');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Hard 8');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Hard 10":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'hard10');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Hard 10');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').attr('checked', '');
+          updateBetDesc();
+          break;
+        case "Ace Two":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'aceTwo');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Ace Two');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "Snake Eyes":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'snakeEyes');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Snake Eyes');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "Midnight":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'midnight');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Midnight');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "Yo-leven":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'yoleven');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Yo-leven');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "Craps":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'anyCraps');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Any Craps');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "Horn":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'horn');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Horn');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        case "World":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'world');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('World');
+          $('#betType').attr('disabled', 'true');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
+        default:
+          return false;
+        }
+        
+        place();
+      }
+      
+      makeCrapsPlayer("Matt", 10000);
+      //_CRAPS.players = [p];
 
-			var p = PlayerManager.players[0];
-			PlayerManager.updatePlayerArea();
-			
-			var BET_FADE_INTERVAL = 2000;
+      var p = PlayerManager.players[0];
+      PlayerManager.updatePlayerArea();
+      
+      var BET_FADE_INTERVAL = 2000;
 
-			function roll(){
-				_CRAPS.output("---Rolling---");
-				_CRAPS.roll();
-				draw(Board);
-				//$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
-				if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
-					var animateTimeout = setInterval(
-						function(){
-							_CRAPS.dealer.betManager.displayBets();
-							clearInterval(animateTimeout);
-						}, BET_FADE_INTERVAL);
-				}else{
-					_CRAPS.dealer.betManager.displayBets();
-				}
-			}
-			
-			function reset(){
-				var _bets = _CRAPS.dealer.betManager.bets
-				for(x in _bets){
-					if(_bets[x].type == 'passline'){
-						if(GameState.point > 0){
-							continue;
-						}else{
-							_CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
-						}
-					}
-					if(_bets[x].type == 'come'){
-						if(_bets[x].point > 0){
-							continue;
-						}else{
-							_CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
-						}
-					}
-					_CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
-				}
-			}
-			
-			function place(){
-				$('#betInfo').width($('#board').width() * (1/4));
-				$('#betForm').show();
-				$('#betForm').height($('#betInfo').height() + 8 + 4);
-				$('#betForm').width($('#betInfo').width() + 8 + 4);
-				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - (parseInt($('#betForm').css('padding')) * 2 + parseInt($('#betForm').css('margin')) * 2)), opacity: 1}, 1000);
-			}
-			
-			function create(){
-				//console.log($('#betType').val());
-				//console.log($('#betValue').val());
-				//console.log($('#betRepeat').is(':checked'));
-				//console.log(parseInt($('#betValue').val()));
-				var origBet = null;
-				if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
-					origBet = _CRAPS.dealer.betManager.getBetById($('#orig').val());
-				}
-				var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
-				//console.log('Placing bet:', newBet.toString());
-				_CRAPS.placeBet(newBet);
-				PlayerManager.updatePlayerArea();
-				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
-			}
-			
-			function cancel(){
-				$('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
-			}
-			
-			function updatePlayerName(){
-				var player = PlayerManager.players[0];
-				var nameDiv = $('#name');
-				nameDiv.empty();
-				var input = $(document.createElement('input'));
-				input.attr('type', 'text');
-				input.attr('id', 'nameInput');
-				input.css({width: $('#name').width()});
-				input.attr('value', player.player.name);
-				input.focus(function(){
-					input.select();
-				});
-				input.change(function(){
-					player.changeName(input.val());
-					PlayerManager.updatePlayerArea();
-				});
-				input.blur(function(){
-					player.changeName(input.val());
-					PlayerManager.updatePlayerArea();
-				});
-				nameDiv.append(input);
-				input.focus();
-			}
-			
-			
-			(function() {
-				$('#betValue').attr('value', _CRAPS.minBet);
-				$('#betValue').css({width: '50px'});
-				$('#betListing').css({top: ($('#board').height() + 4)});
-				$('#betListing').css({left: ($('#buffer').width() + 4), float: 'left'});
-				$('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
-				$('#buffer').height($('#board').height() - $('#playerArea').height());
-				$('#betType').change(function(){
-					$('#origBet').empty();
-					$('#betRepeat').attr('disabled', 'false');
-					$('#betRepeat').attr('checked', 'true');
-					if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
-						var origBet = $('#origBet');
-						var origLabel = $(document.createElement('label'));
-						var orig = $(document.createElement('input'));
-						orig.attr('type', 'text');
-						orig.css({width: '50px'});
-						orig.attr('id', 'orig');
-						origLabel.html('Original Bet ID: ');
-						origBet.append(origLabel).append(orig);
-						$('#betRepeat').removeAttr('checked');
-						$('#betRepeat').attr('disabled', 'true');
-					}
-					updateBetDesc();
-					var _height = $('#betInfo').height() + 8 + 3;
-					$('#betForm').css({height: _height});
-				});
-			})();
-			
+      function roll(){
+        _CRAPS.output("---Rolling---");
+        _CRAPS.roll();
+        draw(Board);
+        //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
+        if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
+          var animateTimeout = setInterval(
+            function(){
+              _CRAPS.dealer.betManager.displayBets();
+              clearInterval(animateTimeout);
+            }, BET_FADE_INTERVAL);
+        }else{
+          _CRAPS.dealer.betManager.displayBets();
+        }
+      }
+      
+      function reset(){
+        var _bets = _CRAPS.dealer.betManager.bets
+        for(x in _bets){
+          if(_bets[x].type == 'passline'){
+            if(GameState.point > 0){
+              continue;
+            }else{
+              _CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
+            }
+          }
+          if(_bets[x].type == 'come'){
+            if(_bets[x].point > 0){
+              continue;
+            }else{
+              _CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
+            }
+          }
+          _CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
+        }
+      }
+      
+      function place(){
+        $('#betInfo').width($('#board').width() * (1/4));
+        $('#betForm').show();
+        $('#betForm').height($('#betInfo').height() + 8 + 4);
+        $('#betForm').width($('#betInfo').width() + 8 + 4);
+        $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - (parseInt($('#betForm').css('padding')) * 2 + parseInt($('#betForm').css('margin')) * 2)), opacity: 1}, 1000);
+      }
+      
+      function create(){
+        //console.log($('#betType').val());
+        //console.log($('#betValue').val());
+        //console.log($('#betRepeat').is(':checked'));
+        //console.log(parseInt($('#betValue').val()));
+        var origBet = null;
+        if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
+          origBet = _CRAPS.dealer.betManager.getBetById($('#orig').val());
+        }
+        var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
+        //console.log('Placing bet:', newBet.toString());
+        _CRAPS.placeBet(newBet);
+        PlayerManager.updatePlayerArea();
+        $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
+      }
+      
+      function cancel(){
+        $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
+      }
+      
+      function updatePlayerName(){
+        var player = PlayerManager.players[0];
+        var nameDiv = $('#name');
+        nameDiv.empty();
+        var input = $(document.createElement('input'));
+        input.attr('type', 'text');
+        input.attr('id', 'nameInput');
+        input.css({width: $('#name').width()});
+        input.attr('value', player.player.name);
+        input.focus(function(){
+          input.select();
+        });
+        input.change(function(){
+          player.changeName(input.val());
+          PlayerManager.updatePlayerArea();
+        });
+        input.blur(function(){
+          player.changeName(input.val());
+          PlayerManager.updatePlayerArea();
+        });
+        nameDiv.append(input);
+        input.focus();
+      }
+      
+      
+      (function() {
+        $('#betValue').attr('value', _CRAPS.minBet);
+        $('#betValue').css({width: '50px'});
+        $('#betListing').css({top: ($('#board').height() + 4)});
+        $('#betListing').css({left: ($('#buffer').width() + 4), float: 'left'});
+        $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
+        $('#buffer').height($('#board').height() - $('#playerArea').height());
+        $('#betType').change(function(){
+          $('#origBet').empty();
+          $('#betRepeat').attr('disabled', 'false');
+          $('#betRepeat').attr('checked', 'true');
+          if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
+            var origBet = $('#origBet');
+            var origLabel = $(document.createElement('label'));
+            var orig = $(document.createElement('input'));
+            orig.attr('type', 'text');
+            orig.css({width: '50px'});
+            orig.attr('id', 'orig');
+            origLabel.html('Original Bet ID: ');
+            origBet.append(origLabel).append(orig);
+            $('#betRepeat').removeAttr('checked');
+            $('#betRepeat').attr('disabled', 'true');
+          }
+          updateBetDesc();
+          var _height = $('#betInfo').height() + 8 + 3;
+          $('#betForm').css({height: _height});
+        });
+      })();
+      
 
-		</script>
-		</footer>
+    </script>
+    </footer>
 </html>
