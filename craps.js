@@ -58,6 +58,13 @@ BetManager.prototype = {
       this.bets[i].bet.on = true;
     }
   },
+  turnBetsOff: function(){
+    for(var i in this.bets){
+      if(['passline', 'passlineOdds', 'come', 'comeOdds', 'dontPass', 'dontPassOdds', 'dontCome', 'dontComeOdds'].indexOf(this.bets[i].type) == -1){
+        this.bets[i].bet.on = false;
+      }
+    }
+  },
   validateBet: function(bet){
     var _bet = bet.bet;
     if(bet.origBet){
@@ -424,6 +431,8 @@ $.extend(_CRAPS, {
         GameState.point = false;
         _CRAPS.output("Shooter made the point!");
         _CRAPS.output("All Pass Line bets win!");
+        _CRAPS.output("All Single- and Multi-roll bets are off!");
+        this.dealer.betManager.turnBetsOff();
         //_CRAPS.output("All bets will be resolved!");
         // Resolve Bets
         return;
