@@ -406,9 +406,9 @@ $.extend(_CRAPS, {
 	},
 	roll: function(){
 	// Roll the dice.
-		_CRAPS.output("Before Roll - The point is: " + GameState.point);	
+		//_CRAPS.output("Before Roll - The point is: " + GameState.point);	
 		var roll = _CRAPS.dice.roll();
-		_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
+		//_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
 		_CRAPS.checkBets();
 		PlayerManager.updatePlayerArea();
 	// Set & unset the point, as appropriate.
@@ -449,7 +449,7 @@ $.extend(_CRAPS, {
 			this.dealer.betManager.turnBetsOn();
 			GameState.point = roll;
 		}
-		_CRAPS.output("After Roll - The point is: " + GameState.point);
+		//_CRAPS.output("After Roll - The point is: " + GameState.point);
 	},
 	init: function(){
 		_CRAPS.dice = new CrapsDice();
@@ -991,11 +991,7 @@ var BetChecker = function(point, betArray, dice){
 }
 
 function diceToNum(dice){
-	diceArray = dice.getDiceAsArray();
-	if(diceArray[0].value <= diceArray[1].value){
-		return [diceArray[0].value, diceArray[1].value];
-	} else {
-		return [diceArray[1].value, diceArray[0].value];
-	}
+	var diceArray = dice.getDiceAsArray();
+	return diceArray;
 }
 

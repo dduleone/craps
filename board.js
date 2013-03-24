@@ -947,6 +947,7 @@
                 this.regions[i].draw();
             }
 						this.drawTableInfo();
+						this.drawDice();
 						//var _bets = _CRAPS.dealer.betManager.bets
 						//for(bet in _bets){
 						//	_bets[bet].draw();
@@ -1093,6 +1094,77 @@
 						return;
 					}
 					//ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
+				},
+				drawDice: function(){
+					var ctx = this.context;
+					ctx.beginPath();
+					ctx.rect(1200, 200, 75, 75);
+					ctx.rect(1300, 200, 75, 75);
+					ctx.fillStyle = 'red';
+					ctx.fill();
+					ctx.lineWidth = 5;
+					ctx.strokeStyle = 'red';
+					ctx.stroke();
+					this.drawDots();
+				},
+				drawDots: function(){
+					var dice = diceToNum(_CRAPS.dice);
+					var offset = [0, 100];
+					for(die in dice){
+						switch(dice[die]){
+						case false:
+							this.drawDot(1262.5 + offset[die], 262.5);
+							this.drawDot(1262.5 + offset[die], 212.5);
+							this.drawDot(1212.5 + offset[die], 262.5);
+							this.drawDot(1212.5 + offset[die], 212.5);
+							break;
+						case 1:
+							this.drawDot(1237.5 + offset[die], 237.5);
+							break;
+						case 2:
+							this.drawDot(1212.5 + offset[die], 262.5);
+							this.drawDot(1262.5 + offset[die], 212.5);
+							break;
+						case 3:
+							this.drawDot(1212.5 + offset[die], 262.5);
+							this.drawDot(1237.5 + offset[die], 237.5);
+							this.drawDot(1262.5 + offset[die], 212.5);
+							break;
+						case 4:
+							this.drawDot(1262.5 + offset[die], 262.5);
+							this.drawDot(1262.5 + offset[die], 212.5);
+							this.drawDot(1212.5 + offset[die], 262.5);
+							this.drawDot(1212.5 + offset[die], 212.5);
+							break;
+						case 5:
+							this.drawDot(1237.5 + offset[die], 237.5);
+							this.drawDot(1262.5 + offset[die], 262.5);
+							this.drawDot(1262.5 + offset[die], 212.5);
+							this.drawDot(1212.5 + offset[die], 262.5);
+							this.drawDot(1212.5 + offset[die], 212.5);
+							break;
+						case 6:
+							this.drawDot(1262.5 + offset[die], 262.5);
+							this.drawDot(1262.5 + offset[die], 237.5);
+							this.drawDot(1212.5 + offset[die], 237.5);
+							this.drawDot(1262.5 + offset[die], 212.5);
+							this.drawDot(1212.5 + offset[die], 262.5);
+							this.drawDot(1212.5 + offset[die], 212.5);
+							break;
+						default:
+							return;
+						}
+					}
+				},
+				drawDot: function(x, y){
+					var ctx = this.context;
+					ctx.beginPath();
+					ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+					ctx.lineWidth = 5;
+					ctx.fillStyle = 'white';
+					ctx.fill();
+					ctx.strokeStyle = 'white';
+					ctx.stroke();
 				},
         processClick: function(x, y) {
             var x = (x / this.canvas.clientWidth) * 2000;

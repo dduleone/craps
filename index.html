@@ -17,16 +17,17 @@
 				<p>
 					<label for='betType'>Bet Type</label>
 					<select id='betType' name='betType'></select><br />
+					<p id='betName'></p>
 					<p id='betDesc'></p>
-					<label for='betValue'>Bet Value</label>
+					<label id='betValLabel' for='betValue'>Bet Value</label>
 					<input id='betValue' name='betValue' type='text'><br />
 					<label for='repeat'>Repeat Bet on Win?</label>
 					<input id='betRepeat' name='betRepeat' type='checkbox'>
 				</p>
 				<p id='origBet'></p>
 				<p>
-					<div id='create' class='bttn blue' onclick='create()'>Create Bet!</div>
-					<div id='cancel' class='bttn blue' onclick='cancel()'>Cancel</div>
+					<div id='create' unselectable='on' class='bttn blue' onclick='create()'>Create Bet!</div>
+					<div id='cancel' unselectable='on' class='bttn blue' onclick='cancel()'>Cancel</div>
 				</p>
 			</fieldset>
 		</div>
@@ -36,8 +37,8 @@
 				<legend>Player Info!</legend>
 				<div id='name' class='name' onclick='updatePlayerName()'></div>
 				<div id='bank'></div>
-				<div id='roll' class='bttn red' onclick='roll()'>Roll</div>
-				<div id='reset' class='bttn red' onclick='reset()'>Reset Bets</div>
+				<div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div>
+				<div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div>
 			</fieldset>
 		</div>
 		<div id='buffer'></div>
@@ -196,6 +197,8 @@
 			
 			function clickAreaPlaceBet(area, x, y){
 				$('#betRepeat').removeAttr('disabled');
+				$('#betType').show();
+				$('#betName').show();
 				
 				switch(area.name){
 				case "Pass Line":
@@ -220,6 +223,7 @@
 						$('#betRepeat').removeAttr('checked');
 					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
+					$('#betName').hide();
 					updateBetDesc();
 					break;
 				case "Don't Pass":
@@ -244,6 +248,7 @@
 						$('#betRepeat').removeAttr('checked');
 					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
+					$('#betName').hide();
 					updateBetDesc();
 					break;
 				case "Come":
@@ -268,6 +273,7 @@
 						$('#betRepeat').removeAttr('checked');
 					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
+					$('#betName').hide();
 					updateBetDesc();
 					break;
 				case "Don't Come":
@@ -292,6 +298,7 @@
 						$('#betRepeat').removeAttr('checked');
 					}
 					$('#betType').append(opt).append(opt2).attr('disabled', false);
+					$('#betName').hide();
 					updateBetDesc();
 					break;
 				case "Place 4":
@@ -300,6 +307,8 @@
 					opt.attr('value', 'place4');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Place 4');
 					$('#betType').attr('disabled', 'true');
 					$('#betRepeat').attr('checked', '');
 					$('#origBet').empty();
@@ -311,6 +320,8 @@
 					opt.attr('value', 'place5');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Place 5');
 					$('#betType').attr('disabled', 'true');
 					$('#betRepeat').attr('checked', '');
 					$('#origBet').empty();
@@ -322,6 +333,8 @@
 					opt.attr('value', 'place6');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Place 6');
 					$('#betType').attr('disabled', 'true');
 					$('#betRepeat').attr('checked', '');
 					$('#origBet').empty();
@@ -333,6 +346,8 @@
 					opt.attr('value', 'place8');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Place 8');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -344,6 +359,8 @@
 					opt.attr('value', 'place9');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Place 9');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -355,6 +372,8 @@
 					opt.attr('value', 'place10');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Place 10');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -366,6 +385,8 @@
 					opt.attr('value', 'big6');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Big 6');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -377,6 +398,8 @@
 					opt.attr('value', 'big8');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Big 8');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -388,6 +411,8 @@
 					opt.attr('value', 'field');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Field');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -399,6 +424,8 @@
 					opt.attr('value', 'cAndE');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('C and E');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -410,6 +437,8 @@
 					opt.attr('value', 'any7');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Any 7');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -421,6 +450,8 @@
 					opt.attr('value', 'hard4');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Hard 4');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -432,6 +463,8 @@
 					opt.attr('value', 'hard6');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Hard 6');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -443,6 +476,8 @@
 					opt.attr('value', 'hard8');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Hard 8');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -454,6 +489,8 @@
 					opt.attr('value', 'hard10');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Hard 10');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').attr('checked', '');
@@ -465,6 +502,8 @@
 					opt.attr('value', 'aceTwo');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Ace Two');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -476,6 +515,8 @@
 					opt.attr('value', 'snakeEyes');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Snake Eyes');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -487,6 +528,8 @@
 					opt.attr('value', 'midnight');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Midnight');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -498,6 +541,8 @@
 					opt.attr('value', 'yoleven');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Yo-leven');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -509,6 +554,8 @@
 					opt.attr('value', 'anyCraps');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Any Craps');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -520,6 +567,8 @@
 					opt.attr('value', 'horn');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('Horn');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');
@@ -531,6 +580,8 @@
 					opt.attr('value', 'world');
 					opt.html(area.name);
 					$('#betType').append(opt);
+					$('#betType').hide();
+					$('#betName').html('World');
 					$('#betType').attr('disabled', 'true');
 					$('#origBet').empty();
 					$('#betRepeat').removeAttr('checked');

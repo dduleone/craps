@@ -30,11 +30,11 @@ function makeDice(n){
 		dice: d,
 		total: 0,
 		roll: function(){
-			_CRAPS.output("Rolling...");
+			//_CRAPS.output("Rolling...");
 			this.total = 0;
 			for(var i in this.dice){
 				var roll = this.dice[i].roll();
-				_CRAPS.output("Die #" + i + ": " + roll);
+				//_CRAPS.output("Die #" + i + ": " + roll);
 				this.total += roll;
 			}
 			return this.total;
