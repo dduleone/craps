@@ -245,7 +245,7 @@
             ctx.fillStyle = this.board.colors.specialText;
             ctx.strokeStyle = this.board.colors.specialText;
             ctx.font = "45pt Calibri";
-            ctx.fillText("FIELD", 660, 600);
+            ctx.fillText("FIELD", 660, 620);
             ctx.font = "35pt Calibri";
             ctx.fillText("2", 470, 585);
             ctx.fillText("3", 540, 560);
@@ -442,7 +442,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "40pt Calibri";
+            ctx.font = "38pt Calibri";
             ctx.fillText("SEVEN", 1550, 493);
         },
         isClickedRegion: function(x, y) {
@@ -1107,8 +1107,8 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "40pt Calibri";
-            ctx.fillText("CRAPS", 1550, 943);
+            ctx.font = "38pt Calibri";
+            ctx.fillText("CRAPS", 1550, 940);
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1900 && y > 900 && y < 950) {
