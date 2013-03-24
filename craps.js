@@ -52,6 +52,7 @@ BetManager.prototype = {
     this.bets = newBetArray;
     this.displayBets();
     PlayerManager.updatePlayerArea();
+    draw(Board);
   },
   turnBetsOn: function(){
     for(var i in this.bets){
@@ -388,6 +389,7 @@ $.extend(_CRAPS, {
       if(betResponse[0] == 2){
         betResponse[1]();
       }
+      draw(Board);
     }
     else{
       if(!isNaN(bet.bet.value)){
