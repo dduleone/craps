@@ -470,16 +470,49 @@
             ctx.lineTo(1550, 500);
             ctx.lineTo(1200, 500);
             ctx.stroke();
-            this.drawText();
+            this.drawDice();
+            //this.drawText();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Hard", 1375, 545);
-            ctx.fillText("SIX", 1375, 590); 
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Hard", 1375, 545);
+        //    ctx.fillText("SIX", 1375, 590); 
+        //},
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1287.5, 512.5, 75, 75);
+          ctx.rect(1387.5 , 512.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          //first
+          this.drawDot(1300, 575);
+          this.drawDot(1325, 550);
+          this.drawDot(1350, 525);
+          //second
+          this.drawDot(1400, 575);
+          this.drawDot(1425, 550);
+          this.drawDot(1450, 525);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1550 && y > 500 && y < 600) {
@@ -505,17 +538,54 @@
             ctx.lineTo(1900, 500);
             ctx.lineTo(1550, 500);
             ctx.stroke();
-            this.drawText();
+            //this.drawText();
+            this.drawDice();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Hard", 1725, 545);
-            ctx.fillText("10", 1725, 590); 
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1637.5, 512.5, 75, 75);
+          ctx.rect(1737.5 , 512.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
         },
+        drawDots: function(){
+          //first
+          this.drawDot(1650, 525);
+          this.drawDot(1650, 575);
+          this.drawDot(1675, 550);
+          this.drawDot(1700, 525);
+          this.drawDot(1700, 575);
+          //second
+          this.drawDot(1750, 575);
+          this.drawDot(1750, 525);
+          this.drawDot(1775, 550);
+          this.drawDot(1800, 525);
+          this.drawDot(1800, 575);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
+        },
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Hard", 1725, 545);
+        //    ctx.fillText("10", 1725, 590); 
+        //},
         isClickedRegion: function(x, y) {
             if (x > 1550 && x < 1900 && y > 500 && y < 600) {
                 return true;
@@ -540,16 +610,51 @@
             ctx.lineTo(1550, 600);
             ctx.lineTo(1200, 600);
             ctx.stroke();
-            this.drawText();
+            this.drawDice();
+            //this.drawText();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Hard", 1375, 645);
-            ctx.fillText("8", 1375, 690); 
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Hard", 1375, 645);
+        //    ctx.fillText("8", 1375, 690); 
+        //},
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1287.5, 612.5, 75, 75);
+          ctx.rect(1387.5 , 612.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          //first
+          this.drawDot(1300, 675);
+          this.drawDot(1300, 625);
+          this.drawDot(1350, 625);
+          this.drawDot(1350, 675);
+          //second
+          this.drawDot(1400, 675);
+          this.drawDot(1400, 625);
+          this.drawDot(1450, 625);
+          this.drawDot(1450, 675);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1550 && y > 600 && y < 700) {
@@ -575,17 +680,48 @@
             ctx.lineTo(1900, 600);
             ctx.lineTo(1550, 600);
             ctx.stroke();
-            this.drawText();
+            //this.drawText();
+            this.drawDice();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Hard", 1725, 645);
-            ctx.fillText("4", 1725, 690); 
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1637.5, 612.5, 75, 75);
+          ctx.rect(1737.5 , 612.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
         },
+        drawDots: function(){
+          //first
+          this.drawDot(1650, 625);
+          this.drawDot(1700, 675);
+          //second
+          this.drawDot(1750, 625);
+          this.drawDot(1800, 675);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
+        },
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Hard", 1725, 645);
+        //    ctx.fillText("4", 1725, 690); 
+        //},
         isClickedRegion: function(x, y) {
             if (x > 1550 && x < 1900 && y > 600 && y < 700) {
                 return true;
@@ -611,16 +747,46 @@
             ctx.lineTo(1430, 700);
             ctx.lineTo(1200, 700);
             ctx.stroke();
-            this.drawText();
+            //this.drawText();
+            this.drawDice();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Ace", 1325, 745);
-            ctx.fillText("Two", 1325, 790); 
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Ace", 1325, 745);
+        //    ctx.fillText("Two", 1325, 790); 
+        //},
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1227.5, 712.5, 75, 75);
+          ctx.rect(1327.5 , 712.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          //first
+          this.drawDot(1265, 750);
+          //second
+          this.drawDot(1340, 725);
+          this.drawDot(1390, 775);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1430 && y > 700 && y < 800) {
@@ -647,16 +813,45 @@
             ctx.lineTo(1670, 700);
             ctx.lineTo(1430, 700);
             ctx.stroke();
-            this.drawText();
+            //this.drawText();
+            this.drawDice();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Snake", 1550, 745);
-            ctx.fillText("Eyes", 1550, 790); 
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Snake", 1550, 745);
+        //    ctx.fillText("Eyes", 1550, 790); 
+        //},
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1462.5, 712.5, 75, 75);
+          ctx.rect(1562.5 , 712.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          //first
+          this.drawDot(1500, 750);
+          //second
+          this.drawDot(1600, 750);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 1430 && x < 1670 && y > 700 && y < 800) {
@@ -683,16 +878,55 @@
             ctx.lineTo(1900, 700);
             ctx.lineTo(1670, 700);
             ctx.stroke();
-            this.drawText();
+            //this.drawText();
+            this.drawDice();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Six", 1775, 745);
-            ctx.fillText("Six", 1775, 790); 
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Six", 1775, 745);
+        //    ctx.fillText("Six", 1775, 790); 
+        //},
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1697.5, 712.5, 75, 75);
+          ctx.rect(1797.5 , 712.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          //first
+          this.drawDot(1710, 725);
+          this.drawDot(1710, 750);
+          this.drawDot(1710, 775);
+          this.drawDot(1760, 725);
+          this.drawDot(1760, 750);
+          this.drawDot(1760, 775);
+          //second
+          this.drawDot(1810, 725);
+          this.drawDot(1810, 750);
+          this.drawDot(1810, 775);
+          this.drawDot(1860, 725);
+          this.drawDot(1860, 750);
+          this.drawDot(1860, 775);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 1670 && x < 1900 && y > 700 && y < 800) {
@@ -719,16 +953,54 @@
             ctx.lineTo(1550, 800);
             ctx.lineTo(1200, 800);
             ctx.stroke();
-            this.drawText();
+            //this.drawText();
+            this.drawDice();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Five", 1375, 845);
-            ctx.fillText("Six", 1375, 890); 
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Five", 1375, 845);
+        //    ctx.fillText("Six", 1375, 890); 
+        //},
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1287.5, 812.5, 75, 75);
+          ctx.rect(1387.5 , 812.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          //first
+          this.drawDot(1350, 825);
+          this.drawDot(1300, 825);
+          this.drawDot(1325, 850);
+          this.drawDot(1300, 875);
+          this.drawDot(1350, 875);
+          //second
+          this.drawDot(1450, 825);
+          this.drawDot(1400, 825);
+          this.drawDot(1400, 850);
+          this.drawDot(1450, 850);
+          this.drawDot(1400, 875);
+          this.drawDot(1450, 875);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1550 && y > 800 && y < 900) {
@@ -754,16 +1026,54 @@
             ctx.lineTo(1900, 800);
             ctx.lineTo(1550, 800);
             ctx.stroke();
-            this.drawText();
+            //this.drawText();
+            this.drawDice();
         },
-        drawText: function() {
-            var ctx = this.board.context;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.specialText;
-            ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "35pt Calibri";
-            ctx.fillText("Five", 1725, 845);
-            ctx.fillText("Six", 1725, 890); 
+        //drawText: function() {
+        //    var ctx = this.board.context;
+        //    ctx.textAlign = "center";
+        //    ctx.fillStyle = this.board.colors.specialText;
+        //    ctx.strokeStyle = this.board.colors.specialText;
+        //    ctx.font = "35pt Calibri";
+        //    ctx.fillText("Five", 1725, 845);
+        //    ctx.fillText("Six", 1725, 890); 
+        //},
+        drawDice: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1637.5, 812.5, 75, 75);
+          ctx.rect(1737.5 , 812.5, 75, 75);
+          ctx.fillStyle = 'yellow';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'yellow';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          //first
+          this.drawDot(1700, 825);
+          this.drawDot(1650, 825);
+          this.drawDot(1675, 850);
+          this.drawDot(1650, 875);
+          this.drawDot(1700, 875);
+          //second
+          this.drawDot(1800, 825);
+          this.drawDot(1750, 825);
+          this.drawDot(1750, 850);
+          this.drawDot(1800, 850);
+          this.drawDot(1750, 875);
+          this.drawDot(1800, 875);
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.strokeStyle = 'green';
+          ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 1550 && x < 1900 && y > 800 && y < 900) {
@@ -1108,7 +1418,6 @@
           default:
             return;
           }
-          //ctx.fillText('Point: ' + ((GameState.point>0)?GameState.point:'None'), 1200, 75);
         },
         drawDice: function(){
           var ctx = this.context;
