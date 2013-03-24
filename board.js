@@ -245,7 +245,22 @@
             ctx.fillStyle = this.board.colors.specialText;
             ctx.strokeStyle = this.board.colors.specialText;
             ctx.font = "45pt Calibri";
-            ctx.fillText("FIELD", 700, 600);
+            ctx.fillText("FIELD", 660, 600);
+            ctx.font = "35pt Calibri";
+            ctx.fillText("2", 470, 585);
+            ctx.fillText("3", 540, 560);
+            ctx.fillText("4", 600, 555);
+            ctx.fillText("9", 660, 550);
+            ctx.fillText("10", 720, 555);
+            ctx.fillText("11", 790, 560);
+            ctx.fillText("12", 870, 585);
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(470, 572, 30, 0, 2* Math.PI, false);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(870, 572, 30, 0, 2* Math.PI, false);
+            ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 400 && x < 1000 && y > 500 && y < 650) {
@@ -1122,8 +1137,8 @@
               this.drawDot(1237.5 + offset[die], 237.5);
               break;
             case 2:
-              this.drawDot(1212.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              this.drawDot(1262.5 + offset[die], 262.5);
               break;
             case 3:
               this.drawDot(1212.5 + offset[die], 262.5);
