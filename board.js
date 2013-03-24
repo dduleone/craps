@@ -1493,7 +1493,6 @@
           for(bet in bets){
             switch(bets[bet].type){
             case 'passline':
-            case 'passlineOdds':
               ctx.beginPath();
               ctx.arc(540, 800, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
@@ -1502,8 +1501,16 @@
               ctx.strokeStyle = 'navy';
               ctx.stroke();
               break;
+            case 'passlineOdds':
+              ctx.beginPath();
+              ctx.arc(540, 810, 20, 0, 2 * Math.PI, false);
+              ctx.lineWidth = 2;
+              ctx.fillStyle = 'maroon';
+              ctx.fill()
+              ctx.strokeStyle = 'navy';
+              ctx.stroke();
+              break;
             case 'dontPass':
-            case 'dontPassOdds':
               ctx.beginPath();
               ctx.arc(485, 695, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
@@ -1512,8 +1519,16 @@
               ctx.strokeStyle = 'navy';
               ctx.stroke();
               break;
+            case 'dontPassOdds':
+              ctx.beginPath();
+              ctx.arc(485, 705, 20, 0, 2 * Math.PI, false);
+              ctx.lineWidth = 2;
+              ctx.fillStyle = 'maroon';
+              ctx.fill()
+              ctx.strokeStyle = 'navy';
+              ctx.stroke();
+              break;
             case 'come':
-            case 'comeOdds':
               ctx.beginPath();
               ctx.arc(425, 415, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
@@ -1522,10 +1537,27 @@
               ctx.strokeStyle = 'navy';
               ctx.stroke();
               break;
+            case 'comeOdds':
+              ctx.beginPath();
+              ctx.arc(425, 425, 20, 0, 2 * Math.PI, false);
+              ctx.lineWidth = 2;
+              ctx.fillStyle = 'maroon';
+              ctx.fill()
+              ctx.strokeStyle = 'navy';
+              ctx.stroke();
+              break;
             case 'dontCome':
-            case 'dontComeOdds':
               ctx.beginPath();
               ctx.arc(400, 305, 20, 0, 2 * Math.PI, false);
+              ctx.lineWidth = 2;
+              ctx.fillStyle = 'maroon';
+              ctx.fill()
+              ctx.strokeStyle = 'navy';
+              ctx.stroke();
+              break;
+            case 'dontComeOdds':
+              ctx.beginPath();
+              ctx.arc(400, 315, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
               ctx.fillStyle = 'maroon';
               ctx.fill()

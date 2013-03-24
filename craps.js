@@ -148,7 +148,7 @@ BetManager.prototype = {
       }
       else if(bet.origBet.point == 6 || bet.origBet.point == 8){
         if(_bet.value <= 5 * _origBet.value){
-          return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
+          return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
         } else {
           return [0 , function(){alert('Bet value must be 5 times the Come Line bet or less. Bet has not been placed.')}];
         }
@@ -156,11 +156,11 @@ BetManager.prototype = {
     case "dontPass":
       return [1, ''];
     case "dontPassOdds":
-      if(bet.origBet == null){
+      if(GameState == null){
         return[0, function(){alert('There must be a Don\' Pass Line Bet on the table.')}];
       }
-      if(!bet.origBet.point){
-        return[0, function(){alert('The associated Don\'t Come bet must have a point on. Bet has not been placed')}];
+      if(!GameState.point){
+        return[0, function(){alert('The associated Don\'t Pass bet must have a point on. Bet has not been placed')}];
       }
       if(GameState.point == 4 || GameState.point == 10){
         if(_bet.value <= 6 * _origBet.value){
