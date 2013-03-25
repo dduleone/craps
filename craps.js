@@ -287,6 +287,7 @@ BetManager.prototype = {
       betOnLabel.html('<br />Bet On: ');
       betOn.attr('type', 'checkbox');
       betOn.attr('checked', this.bets[betNum].bet.on);
+      betOn.attr('id', 'on' + this.bets[betNum].bet.betId);
       betOn.change(function(){_CRAPS.dealer.betManager.bets[betNum].bet.on = betOn.is(':checked');});
       if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds'].indexOf(this.bets[betNum].type) != -1 && GameState.point > 0){
         betOn.attr('disabled', 'true');
@@ -297,6 +298,7 @@ BetManager.prototype = {
       repeatWinLabel.html('<br />Repeat On Win: ');
       repeatWin.attr('type', 'checkbox');
       repeatWin.attr('checked', this.bets[betNum].repeat);
+      repeatWin.attr('id', 'rep' + this.bets[betNum].bet.betId);
       repeatWin.change(function(){_CRAPS.dealer.betManager.bets[betNum].repeat = repeatWin.is(':checked');});
       if(['passline', 'dontPass'].indexOf(this.bets[betNum].type) != -1){
         repeatWin.attr('disabled', 'true');
