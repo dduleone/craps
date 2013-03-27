@@ -698,7 +698,7 @@
       function roll(){
         _CRAPS.output("---Rolling---");
         _CRAPS.roll();
-        //draw(Board);
+        draw(Board);
         //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
         if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
           var animateTimeout = setInterval(
