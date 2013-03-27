@@ -11,6 +11,7 @@
     
     <div id='tableInfo'></div>
     <div id='pointWindow'></div>
+    <div id='betList' class='round'></div>
     <div id='betForm' class='round'>
       <fieldset id='betInfo' class='round'>
         <legend>Create a Bet!</legend>
@@ -90,13 +91,13 @@
               //ctx.stroke();
               boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
               if(boardArea){
-                clickAreaPlaceBet(boardArea, ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000,
-                                             ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000);
+                clickAreaPlaceBet(boardArea);
               }
           };
       
       }
-      draw(Board);
+      var drawer = window.setInterval(draw(Board), 30);
+      //draw(Board);
             
       function updateBetDesc(){
         switch($('#betType').val()){
@@ -195,7 +196,100 @@
         }
       };
       
-      function clickAreaPlaceBet(area, x, y){
+      function clickAreaPlaceBet(area){
+        //var type;
+        //switch(area.name){
+        //  case "Pass Line":
+        //    type = 'passline'
+        //    break;
+        //  case "Don't Pass":
+        //    type = 'dontPass'
+        //    break;
+        //  case "Come":
+        //    type = 'come'
+        //    break;
+        //  case "Don't Come":
+        //    type = 'dontCome'
+        //    break;
+        //  case "Place 4":
+        //    type = 'place4'
+        //    break;
+        //  case "Place 5":
+        //    type = 'place5'
+        //    break;
+        //  case "Place 6":
+        //    type = 'place6'
+        //    break;
+        //  case "Place 8":
+        //    type = 'place8'
+        //    break;
+        //  case "Place 9":
+        //    type = 'place9'
+        //    break;
+        //  case "Place 10":
+        //    type = 'place10'
+        //    break;
+        //  case "Big 6":
+        //    type = 'big6'
+        //    break;
+        //  case "Big 8":
+        //    type = 'big8'
+        //    break;
+        //  case "Field":
+        //    type = 'field'
+        //    break;
+        //  case "C and E":
+        //    type = 'cAndE'
+        //    break;
+        //  case "Seven":
+        //    type = 'any7'
+        //    break;
+        //  case "Hard 4":
+        //    type = 'hard4'
+        //    break;
+        //  case "Hard 6":
+        //    type = 'hard6'
+        //    break;
+        //  case "Hard 8":
+        //    type = 'hard8'
+        //    break;
+        //  case "Hard 10":
+        //    type = 'hard10'
+        //    break;
+        //  case "AceTwo":
+        //    type = 'aceTwo'
+        //    break;
+        //  case "Snake Eyes":
+        //    type = 'snakeEyes'
+        //    break;
+        //  case "Midnight":
+        //    type = 'midnight'
+        //    break;
+        //  case "Yo-leven":
+        //    type = 'yoleven'
+        //    break;
+        //  case "Craps":
+        //    type = 'anyCraps'
+        //    break;
+        //  case "Horn":
+        //    type = 'horn'
+        //    break;
+        //  case "World":
+        //    type = 'world'
+        //    break;
+        //  default:
+        //    break;
+        //}
+        //
+        //var betsArray = getBetsOfType(type);
+        //
+        //if(betsArray.length == 0){
+        //  addBet(area);
+        //}
+        addBet(area);
+      }
+
+      function addBet(area){
         $('#betRepeat').removeAttr('disabled');
         $('#betType').show();
         $('#betName').show();
@@ -593,7 +687,6 @@
         
         place();
       }
-      
       makeCrapsPlayer("Set your name!", 10000);
       //_CRAPS.players = [p];
 
@@ -605,7 +698,7 @@
       function roll(){
         _CRAPS.output("---Rolling---");
         _CRAPS.roll();
-        draw(Board);
+        //draw(Board);
         //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
         if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
           var animateTimeout = setInterval(
@@ -677,6 +770,9 @@
         input.attr('id', 'nameInput');
         input.css({width: $('#name').width()});
         input.attr('value', player.player.name);
+        if(input.attr('value') == 'Set your name!'){
+          input.attr('value', 'Your Name');
+        }
         input.focus(function(){
           input.select();
         });
@@ -694,6 +790,28 @@
         input.focus();
       }
       
+      function getBetsOfType(type){
+        var bets = _CRAPS.dealer.betManager.bets;
+        var validBets = []
+        for(i in bets){
+          if(bets[i].type == type){
+            validBets.push(bets[i]);
+          }
+          if(type == 'passline' && bet[i].type == 'passlineOdds'){
+            validBets.push(bets[i]);
+          }
+          if(type == 'come' && bet[i].type == 'comeOdds'){
+            validBets.push(bets[i]);
+          }
+          if(type == 'dontPass' && bet[i].type == 'dontPassOdds'){
+            validBets.push(bets[i]);
+          }
+          if(type == 'dontCome' && bet[i].type == 'dontComeOdds'){
+            validBets.push(bets[i]);
+          }
+        }
+        return validBets;
+      }
       
       (function() {
         $('#betValue').attr('value', _CRAPS.minBet);
@@ -724,6 +842,7 @@
         });
       })();
       
+      //function 
 
     </script>
     </footer>
