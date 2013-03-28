@@ -7,11 +7,8 @@
   </head>
   <body>
     <!-- canvas id="board" height='1024' width='768'></canvas -->
-    <canvas id="board" style="height: 70%; width: 70%;"></canvas>
+    <canvas id="board" style="height: 79.5%; width: 79.5%;"></canvas>
     
-    <div id='tableInfo'></div>
-    <div id='pointWindow'></div>
-    <div id='betList' class='round'></div>
     <div id='betForm' class='round'>
       <fieldset id='betInfo' class='round'>
         <legend>Create a Bet!</legend>
@@ -34,13 +31,10 @@
     </div>
     <div id='betListing'></div>
     <div id='playerArea'>
-      <fieldset id='playerInfo'>
-        <legend>Player Info!</legend>
-        <div id='name' class='name' onclick='updatePlayerName()'></div>
-        <div id='bank'></div>
-        <div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div>
-        <div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div>
-      </fieldset>
+      <div id='name' class='name' onclick='updatePlayerName()'></div>
+      <div id='bank'></div>
+      <!--div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div -->
+      <div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div>
     </div>
     <div id='buffer'></div>
     
@@ -91,12 +85,16 @@
               //ctx.stroke();
               boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
               if(boardArea){
+                if(boardArea.name == "Dice"){
+                  roll();
+                  return;
+                }
                 clickAreaPlaceBet(boardArea);
               }
           };
       
       }
-      var drawer = window.setInterval(draw(Board), 30);
+      var drawer = setInterval(function(){draw(Board);}, 30);
       //draw(Board);
             
       function updateBetDesc(){
@@ -197,95 +195,6 @@
       };
       
       function clickAreaPlaceBet(area){
-        //var type;
-        //switch(area.name){
-        //  case "Pass Line":
-        //    type = 'passline'
-        //    break;
-        //  case "Don't Pass":
-        //    type = 'dontPass'
-        //    break;
-        //  case "Come":
-        //    type = 'come'
-        //    break;
-        //  case "Don't Come":
-        //    type = 'dontCome'
-        //    break;
-        //  case "Place 4":
-        //    type = 'place4'
-        //    break;
-        //  case "Place 5":
-        //    type = 'place5'
-        //    break;
-        //  case "Place 6":
-        //    type = 'place6'
-        //    break;
-        //  case "Place 8":
-        //    type = 'place8'
-        //    break;
-        //  case "Place 9":
-        //    type = 'place9'
-        //    break;
-        //  case "Place 10":
-        //    type = 'place10'
-        //    break;
-        //  case "Big 6":
-        //    type = 'big6'
-        //    break;
-        //  case "Big 8":
-        //    type = 'big8'
-        //    break;
-        //  case "Field":
-        //    type = 'field'
-        //    break;
-        //  case "C and E":
-        //    type = 'cAndE'
-        //    break;
-        //  case "Seven":
-        //    type = 'any7'
-        //    break;
-        //  case "Hard 4":
-        //    type = 'hard4'
-        //    break;
-        //  case "Hard 6":
-        //    type = 'hard6'
-        //    break;
-        //  case "Hard 8":
-        //    type = 'hard8'
-        //    break;
-        //  case "Hard 10":
-        //    type = 'hard10'
-        //    break;
-        //  case "AceTwo":
-        //    type = 'aceTwo'
-        //    break;
-        //  case "Snake Eyes":
-        //    type = 'snakeEyes'
-        //    break;
-        //  case "Midnight":
-        //    type = 'midnight'
-        //    break;
-        //  case "Yo-leven":
-        //    type = 'yoleven'
-        //    break;
-        //  case "Craps":
-        //    type = 'anyCraps'
-        //    break;
-        //  case "Horn":
-        //    type = 'horn'
-        //    break;
-        //  case "World":
-        //    type = 'world'
-        //    break;
-        //  default:
-        //    break;
-        //}
-        //
-        //var betsArray = getBetsOfType(type);
-        //
-        //if(betsArray.length == 0){
-        //  addBet(area);
-        //}
         addBet(area);
       }
 
@@ -698,7 +607,7 @@
       function roll(){
         _CRAPS.output("---Rolling---");
         _CRAPS.roll();
-        draw(Board);
+        //draw(Board);
         //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
         if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
           var animateTimeout = setInterval(
@@ -779,12 +688,14 @@
         input.change(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
-          $('#buffer').height($('#board').height() - $('#playerArea').height());
+          $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
         });
         input.blur(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
-          $('#buffer').height($('#board').height() - $('#playerArea').height());
+          $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
         });
         nameDiv.append(input);
         input.focus();
@@ -816,10 +727,10 @@
       (function() {
         $('#betValue').attr('value', _CRAPS.minBet);
         $('#betValue').css({width: '50px'});
-        $('#betListing').css({top: ($('#board').height() + 4)});
-        $('#betListing').css({left: ($('#buffer').width() + 4), float: 'left'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
-        $('#buffer').height($('#board').height() - $('#playerArea').height());
+        $('#buffer').css({top: $('#playerArea').height()});
+        $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+        $('#betListing').css({left: '0px', float: 'left', top: ($('#playerArea').height() + $('#buffer').height() + 4)});
         $('#betType').change(function(){
           $('#origBet').empty();
           $('#betRepeat').attr('disabled', 'false');
@@ -842,7 +753,199 @@
         });
       })();
       
-      //function 
+      function prettyToName(betType){
+        switch(betType){
+        case "Pass Line":
+          return 'passline';
+          break;
+        case "Pass Line Odds":
+          return 'passlineOdds';
+          break;
+        case "Don't Pass":
+          return 'dontPass';
+          break;
+        case "Don't Pass Odds":
+          return 'dontPassOdds';
+          break;
+        case "Come":
+          return 'come';
+          break;
+        case "Come Odds":
+          return 'comeOdds';
+          break;
+        case "Don't Come":
+          return 'dontCome';
+          break;
+        case "Don't Come Odds":
+          return 'dontComeOdds';
+          break;
+        case "Place 4":
+          return 'place4';
+          break;
+        case "Place 5":
+          return 'place5';
+          break;
+        case "Place 6":
+          return 'place6';
+          break;
+        case "Place 8":
+          return 'palce8';
+          break;
+        case "Place 9":
+          return 'place9';
+          break;
+        case "Place 10":
+          return 'place10';
+          break;
+        case "Big 6":
+          return 'big6';
+          break;
+        case "Big 8":
+          return 'big8';
+          break;
+        case "Field":
+          return 'field';
+          break;
+        case "C and E":
+          return 'cAndE';
+          break;
+        case "Seven":
+          return 'any7';
+          break;
+        case "Hard 4":
+          return 'hard4';
+          break;
+        case "Hard 6":
+          return 'hard6';
+          break;
+        case "Hard 8":
+          return 'hard8';
+          break;
+        case "Hard 10":
+          return 'hard10';
+          break;
+        case "Ace Two":
+          return 'aceTwo';
+          break;
+        case "Snake Eyes":
+          return 'snakeEyes';
+          break;
+        case "Midnight":
+          return 'midnight';
+          break;
+        case "Yo-leven":
+          return 'yoleven';
+          break;
+        case "Craps":
+          return 'anyCraps';
+          break;
+        case "Horn":
+          return 'horn';
+          break;
+        case "World":
+          return 'world';
+          break;
+        default:
+          return;
+        }
+      }
+      
+      function nameToPretty(betType){
+        switch(betType){
+        case 'passline':
+          return "Pass Line";
+          break;
+        case 'passlineOdds':
+          return "Pass Line Odds";
+          break;
+        case 'dontPass':
+          return "Don't Pass";
+          break;
+        case 'dontPassOdds':
+          return "Don't Pass Odds";
+          break;
+        case 'come':
+          return "Come";
+          break;
+        case 'comeOdds':
+          return "Come Odds";
+          break;
+        case 'dontCome':
+          return "Don't Come";
+          break;
+        case 'dontComeOdds':
+          return "Don't Come Odds";
+          break;
+        case 'place4':
+          return "Place 4";
+          break;
+        case 'place5':
+          return "Place 5";
+          break;
+        case 'place6':
+          return "Place 6";
+          break;
+        case 'palce8':
+          return "Place 8";
+          break;
+        case 'place9':
+          return "Place 9";
+          break;
+        case 'place10':
+          return "Place 10";
+          break;
+        case 'big6':
+          return "Big 6";
+          break;
+        case 'big8':
+          return "Big 8";
+          break;
+        case 'field':
+          return "Field";
+          break;
+        case 'cAndE':
+          return "C and E";
+          break;
+        case 'any7':
+          return "Seven";
+          break;
+        case 'hard4':
+          return "Hard 4";
+          break;
+        case 'hard6':
+          return "Hard 6";
+          break;
+        case 'hard8':
+          return "Hard 8";
+          break;
+        case 'hard10':
+          return "Hard 10";
+          break;
+        case 'aceTwo':
+          return "Ace Two";
+          break;
+        case 'snakeEyes':
+          return "Snake Eyes";
+          break;
+        case 'midnight':
+          return "Midnight";
+          break;
+        case 'yoleven':
+          return "Yo-leven";
+          break;
+        case 'anyCraps':
+          return "Craps";
+          break;
+        case 'horn':
+          return "Horn";
+          break;
+        case 'world':
+          return "World";
+          break;
+        default:
+          return;
+        }
+      }
 
     </script>
     </footer>

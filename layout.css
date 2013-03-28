@@ -22,7 +22,7 @@
     width: 33%;
     margin: 0px;
     padding: 0px;
-    float: right;
+    left: 33%;
     top: -20px;
     text-align: center;
     /* left: 212px; */
@@ -32,15 +32,13 @@
   }
   #buffer{
     position: absolute;
-    top: 200px;
-    left: 0px;
-    font-family: monospace;
-    height: 498px;
+    left: 1px;
     width: 20%;
-    border: 1px solid black;
     overflow: auto;
     margin: 0px;
     padding: 0px;
+    font-family: monospace;
+    border: 1px solid black;
   }
   #buffer span{
     padding-left: 5px;
@@ -48,7 +46,7 @@
   #board{
     position: absolute;
     top: 0px;
-    left: 22%;
+    left: 20.5%;
     margin: 0px;
     padding: 0px;
   }
@@ -76,12 +74,15 @@
   }
   #betListing{
     position: absolute;
-    top: 71%;
-    left: 22%;
-    margin: 2px;
+    left: 1px;
+    width: 20%;
+    overflow: auto;
+    margin-left: 5px;
     padding: 0px;
+    padding-right: 10px;
+    float: left;
   }
-  #bttn{
+  .bttn{
     height: 30px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -98,7 +99,7 @@
   }
   #playerArea{
     position: absolute;
-    height: 150px;
+    height: 18%;
     width: 20%;
     top: 0px;
     left: 0px;
@@ -116,12 +117,6 @@
     top: 30px;
     left: 75%;
     font-size: 15pt;
-  }
-  #playerInfo{
-    border-style: none;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
   }
   #name{
     position: relative;
@@ -170,3 +165,6 @@
     color: white;
     background-color: red;
   }
+  table, td, th {
+    border: 1px solid black;
+  } 

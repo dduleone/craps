@@ -27,8 +27,8 @@ var BetManager = function() {
 
 BetManager.prototype = {
   bets: [],
-    winningBetIds: [],
-    losingBetIds: [],
+  winningBetIds: [],
+  losingBetIds: [],
   placeBet: function(bet) {
     this.bets.push(bet);
     this.displayBets();
@@ -52,7 +52,7 @@ BetManager.prototype = {
     this.bets = newBetArray;
     this.displayBets();
     PlayerManager.updatePlayerArea();
-    draw(Board);
+    //draw(Board);
   },
   turnBetsOn: function(){
     for(var i in this.bets){
@@ -68,6 +68,14 @@ BetManager.prototype = {
   },
   validateBet: function(bet){
     var _bet = bet.bet;
+    if(bet.type != 'come' && bet.type != 'dontCome' && bet.type != 'comeOdds' && bet.type != 'dontComeOdds'){
+      for(i in this.bets){
+        if(bet.type == this.bets[i].type){
+          return [0, function(){alert('You may only place one ' + bet.type + ' bet at a time. Bet has not been placed.');}];
+        }
+      }
+    }
+    
     if(bet.origBet){
       var _origBet = bet.origBet.bet;
     }
@@ -90,138 +98,138 @@ BetManager.prototype = {
           'field',
           'big6',
           'big8'].indexOf(bet.type) != -1){
-        return [0, function(){alert('Bet must be bigger than the Table Minimum. Bet has not been placed.')}];
+        return [0, function(){alert('Bet must be bigger than the Table Minimum. Bet has not been placed.');}];
       }
     }
     if(_bet.value > _CRAPS['maxBet']){
-      return [0, function(){alert('Bet must be smaller than the Table Maximum. Bet has not been placed.')}];
+      return [0, function(){alert('Bet must be smaller than the Table Maximum. Bet has not been placed.');}];
     }
     if(_bet.value % 1 != 0){
-      return [0, function(){alert('Bet must be an integer. Bet has not been placed.')}];
+      return [0, function(){alert('Bet must be an integer. Bet has not been placed.');}];
     }
     
     switch(bet.type){
     case "passline":
       if(GameState.point){
-        return [0, function(){alert('Cannot place a Pass Line bet while there is a point on. Bet has not been placed.')}];
+        return [0, function(){alert('Cannot place a Pass Line bet while there is a point on. Bet has not been placed.');}];
       }
       return [1, '']
     case "passlineOdds":
       if(bet.origBet == null){
-        return[0, function(){alert('There must be a Pass Line Bet on the table. Bet has not been placed.')}];
+        return[0, function(){alert('There must be a Pass Line Bet on the table. Bet has not been placed.');}];
       }
       if(GameState.point == 4 || GameState.point == 10){
-        return [(_bet.value <= 3 * _origBet.value) ? 1 : 0, function(){alert('Bet must be 3 times the Pass Line bet or less. Bet has not been placed.')}];
+        return [(_bet.value <= 3 * _origBet.value) ? 1 : 0, function(){alert('Bet must be 3 times the Pass Line bet or less. Bet has not been placed.');}];
       }
       else if(GameState.point == 5 || GameState.point == 9){
         if(_bet.value <= 4 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be even and 4 times the Pass Line bet or less. Consider adjusting.')}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be even and 4 times the Pass Line bet or less. Consider adjusting.');}];
         } else {
-          return [0, function(){alert('Bet value must be 4 times the Pass Line bet or less. Bet has not been placed.')}];
+          return [0, function(){alert('Bet value must be 4 times the Pass Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(GameState.point == 6 || GameState.point == 8){
         if(_bet.value <= 5 * _origBet.value){
-          return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+          return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
         } else {
-          return [0, function(){alert('Bet value must be 5 times the Pass Line bet or less. Bet has not been placed.')}];
+          return [0, function(){alert('Bet value must be 5 times the Pass Line bet or less. Bet has not been placed.');}];
         }
       }
     case "come":
       return [1, '']
     case "comeOdds":
       if(bet.origBet == null){
-        return[0, function(){alert('There must be a Come bet on the table. Bet has not been placed.')}];
+        return[0, function(){alert('There must be a Come bet on the table. Bet has not been placed.');}];
       }
       if(!bet.origBet.point){
-        return[0, function(){alert('The associated Come bet must have a point on. Bet has not been placed')}];
+        return[0, function(){alert('The associated Come bet must have a point on. Bet has not been placed');}];
       }
       if(bet.origBet.point == 4 || bet.origBet.point == 10){
-        return [(_bet.value <= 3 * _origBet.value) ? 1 : 0, function(){alert('Bet value must be 3 times the Come Line bet or less. Bet has not been placed.')}];
+        return [(_bet.value <= 3 * _origBet.value) ? 1 : 0, function(){alert('Bet value must be 3 times the Come Line bet or less. Bet has not been placed.');}];
       }
       else if(bet.origBet.point == 5 || bet.origBet.point == 9){
         if (_bet.value <= 4 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be even. Consider adjusting.')}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be even. Consider adjusting.');}];
         } else {
-          return [0 , function(){alert('Bet value must be 4 times the Come Line bet or less. Bet has not been placed.')}];
+          return [0 , function(){alert('Bet value must be 4 times the Come Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(bet.origBet.point == 6 || bet.origBet.point == 8){
         if(_bet.value <= 5 * _origBet.value){
-          return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+          return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
         } else {
-          return [0 , function(){alert('Bet value must be 5 times the Come Line bet or less. Bet has not been placed.')}];
+          return [0 , function(){alert('Bet value must be 5 times the Come Line bet or less. Bet has not been placed.');}];
         }
       }
     case "dontPass":
       return [1, ''];
     case "dontPassOdds":
       if(GameState == null){
-        return[0, function(){alert('There must be a Don\' Pass Line Bet on the table.')}];
+        return[0, function(){alert('There must be a Don\' Pass Line Bet on the table.');}];
       }
       if(!GameState.point){
-        return[0, function(){alert('The associated Don\'t Pass bet must have a point on. Bet has not been placed')}];
+        return[0, function(){alert('The associated Don\'t Pass bet must have a point on. Bet has not been placed');}];
       }
       if(GameState.point == 4 || GameState.point == 10){
         if(_bet.value <= 6 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet should be even. Consider adjusting.')}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet should be even. Consider adjusting.');}];
         } else {
-          return [0, function(){alert('Bet must be 6 times the Don\'t Pass Line bet or less. Bet has not been placed.')}];
+          return [0, function(){alert('Bet must be 6 times the Don\'t Pass Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(GameState.point == 5 || GameState.point == 9){
         if(_bet.value <= 8 * _origBet.value){
-          return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.')}];
+          return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.');}];
         } else {
-          return [0 , function(){alert('Bet value must 8 times the Don\'t Pass Line bet or less. Bet has not been placed.')}];
+          return [0 , function(){alert('Bet value must 8 times the Don\'t Pass Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(GameState.point == 6 || GameState.point == 8){
         if(_bet.value <= 10 * _origBet.value){
-        return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
+        return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
         } else {
-          return [0 , function(){alert('Bet value must be 10 times the Don\'t Pass Line bet or less. Bet has not been placed.')}];
+          return [0 , function(){alert('Bet value must be 10 times the Don\'t Pass Line bet or less. Bet has not been placed.');}];
         }
       }
     case "dontCome":
       return [1, ''];
     case "dontComeOdds":
       if(bet.origBet == null){
-        return[0, function(){alert('There must be a Don\'t Pass Line Bet on the table.')}];
+        return[0, function(){alert('There must be a Don\'t Pass Line Bet on the table.');}];
       }
       if(bet.origBet.point == 4 || bet.origBet.point == 10){
         if(_bet.value <= 6 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet should be even. Consider adjusting.')}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet should be even. Consider adjusting.');}];
         } else {
-          return [0, function(){alert('Bet must be 6 times the Don\'t Come bet or less. Bet has not been placed.')}];
+          return [0, function(){alert('Bet must be 6 times the Don\'t Come bet or less. Bet has not been placed.');}];
         }
       }
       else if(bet.origBet.point == 5 || bet.origBet.point == 9){
         if(_bet.value <= 8 * _origBet.value){
-          return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.')}];
+          return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.');}];
         } else {
-          return [0 , function(){alert('Bet value must 8 times the Don\'t Come bet or less. Bet has not been placed.')}];
+          return [0 , function(){alert('Bet value must 8 times the Don\'t Come bet or less. Bet has not been placed.');}];
         }
       }
       else if(bet.origBet.point == 6 || bet.origBet.point == 8){
         if(_bet.value <= 10 * _origBet.value){
-        return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
+        return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
         } else {
-          return [0 , function(){alert('Bet value must be 10 times the Don\'t Come bet or less. Bet has not been placed.')}];
+          return [0 , function(){alert('Bet value must be 10 times the Don\'t Come bet or less. Bet has not been placed.');}];
         }
       }
     case "place4":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
     case "place5":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
     case "place6":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
+      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
     case "place8":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
+      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
     case "place9":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
     case "place10":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
     case "hard4":
       return [1, ''];
     case "hard6":
@@ -233,13 +241,13 @@ BetManager.prototype = {
     case "field":
       return [1, ''];
     case "cAndE":
-      return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 2. Consider adjusting.')}];
+      return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 2. Consider adjusting.');}];
     case "any7":
-      return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.')}];
+      return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.');}];
     case "anyCraps":
       return [1, ''];
     case "horn":
-      return [(_bet.value % 4 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 4. Consider adjusting.')}];
+      return [(_bet.value % 4 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 4. Consider adjusting.');}];
     case "aceTwo":
       return [1, ''];
     case "snakeEyes":
@@ -249,42 +257,48 @@ BetManager.prototype = {
     case "yoleven":
       return [1, ''];
     case "big6":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
+      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
     case "big8":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.')}];
+      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
     case "world":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.')}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
     default:
       return;
     }
   },
   displayBets: function(){
     var betListing = $('#betListing');
-    betListing.css({top: '71%', left: '22%'});
+    //betListing.css({top: '71%', left: '22%'});
     if(betListing.children().length > 0){
       betListing.empty();
     }
+    var betTable = $(document.createElement('table'));
+    var headers = $(document.createElement('tr'));
+    headers.append($(document.createElement('th')).html('Bet Id'))
+    headers.append($(document.createElement('th')).html('Bet Type'))
+           .append($(document.createElement('th')).html('Value'))
+           .append($(document.createElement('th')).html('Bet On'))
+           .append($(document.createElement('th')).html('Repeat?'))
+           .append($(document.createElement('th')).html('Point'))
+           .append($(document.createElement('th')).html('Orig'))
+           .append($(document.createElement('th')).html('    '));
+    betTable.append(headers);
+    betListing.append(betTable);
+
     for(var betNum in this.bets){
-      var newBetDisp = $(document.createElement('fieldset'));
-      newBetDisp.attr('id', 'bet' + this.bets[betNum].bet.betId);
-      newBetDisp.css({float: 'left'});
-      newBetDisp.css('width','225px');
-      var legend = $(document.createElement('legend'));
-      var pTag = $(document.createElement('p'));
-      legend.html('Bet: ' + this.bets[betNum].type);
-      var comePoint = '';
-      if(['come', 'dontCome'].indexOf(this.bets[betNum].type) != -1){
-        comePoint = '<br />Come Point: ' + this.bets[betNum].point;
-      }
-      var orig = '';
-      if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
-        orig = '<br />Original Bet Id: ' + this.bets[betNum].origBet.bet.betId;
-      }
-      pTag.html('Bet Id: ' + this.bets[betNum].bet.betId + '<br />Value: $' + this.bets[betNum].bet.value +
-                comePoint + orig);
-      var betOnLabel = $(document.createElement('label'));
+      var newBetRow = $(document.createElement('tr'));
+      newBetRow.css('backgroundColor', (betNum%2)?'#c0c0c0':'#fff');
+      newBetRow.attr('id', 'bet' + this.bets[betNum].bet.betId);
+      newBetRow.css({float: 'left', left: '0px'});
+      var id = $(document.createElement('td'));
+      id.html(this.bets[betNum].bet.betId);
+      var type = $(document.createElement('td'));
+      type.html(nameToPretty(this.bets[betNum].type));
+      var val = $(document.createElement('td'));
+      val.html('$' + this.bets[betNum].bet.value);
       var betOn = $(document.createElement('input'));
-      betOnLabel.html('<br />Bet On: ');
+      //betOnLabel.html('<br />Bet On: ');
+      var on = $(document.createElement('td'));
       betOn.attr('type', 'checkbox');
       betOn.attr('checked', this.bets[betNum].bet.on);
       betOn.attr('id', 'on' + this.bets[betNum].bet.betId);
@@ -294,16 +308,9 @@ BetManager.prototype = {
         _CRAPS.dealer.betManager.bets[betNumber].bet.on = $(this).is(':checked');
       }
       betOn.change(toggleBet);
-      //betOn.change(function(){_CRAPS.dealer.betManager.bets[betNum].bet.on = betOn.is(':checked');});
-      //betOn.change((function(num){_CRAPS.dealer.betManager.bets[num].bet.on = ($('#on' + _CRAPS.dealer.betManager.bets[num].bet.betId).prop('checked'))?true:false;})(betNum));
-      //console.log(betOn);
-      if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds'].indexOf(this.bets[betNum].type) != -1 && GameState.point > 0){
-        betOn.attr('disabled', 'true');
-      }
-      pTag.append(betOnLabel).append(betOn);
-      var repeatWinLabel = $(document.createElement('label'));
+      on.append(betOn);
+      var repeat = $(document.createElement('td'));
       var repeatWin = $(document.createElement('input'));
-      repeatWinLabel.html('<br />Repeat On Win: ');
       repeatWin.attr('type', 'checkbox');
       repeatWin.attr('checked', this.bets[betNum].repeat);
       repeatWin.attr('id', 'rep' + this.bets[betNum].bet.betId);
@@ -313,18 +320,23 @@ BetManager.prototype = {
         _CRAPS.dealer.betManager.bets[betNumber].repeat = $(this).is(':checked');
       }
       repeatWin.change(toggleRepeat);
-      //repeatWin.change(function(){_CRAPS.dealer.betManager.bets[betNum].repeat = repeatWin.is(':checked');});
-      //repeatWin.change((function(num){_CRAPS.dealer.betManager.bets[num].repeat = ($('#rep' + _CRAPS.dealer.betManager.bets[num].bet.betId).prop('checked'))?true:false;})(betNum));
-      //console.log(repeatWin);
-      if(['passline', 'dontPass'].indexOf(this.bets[betNum].type) != -1){
-        repeatWin.attr('disabled', 'true');
+      repeat.append(repeatWin);
+      var point = $(document.createElement('td'));
+      if(['come', 'dontCome'].indexOf(this.bets[betNum].type) != -1){
+        point.html(this.bets[betNum].point);
+      } else {
+        point.html('   ');
       }
-      if(['passlineOdds', 'dontPassOdds', 'comeOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
-        repeatWin.attr('disabled', 'true');
+      var orig = $(document.createElement('td'));
+      if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
+        orig.html(this.bets[betNum].origBet.bet.betId);
+      } else {
+        orig.html('   ');
       }
-      pTag.append(repeatWinLabel).append(repeatWin).append('<br />');
-      var button = $(document.createElement('button'));
-      button.html('Remove Bet');
+      
+      var button = $(document.createElement('td'));
+      button.html('Rem');
+      button.attr({class: 'bttn red'});
       if(this.bets[betNum].type == 'passline'){
         if(GameState.point > 0){
           button.attr('onclick', 'alert("You cannot take down a Pass Line bet when a point is on.")');
@@ -343,21 +355,28 @@ BetManager.prototype = {
       }else{
         button.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
       }
-      pTag.append(button);
-      newBetDisp.append(legend);
-      newBetDisp.append(pTag);
-      betListing.append(newBetDisp);
+      //pTag.append(button);
+      //newBetRow.append(legend);
+      betTable.append(newBetRow);
+      newBetRow.append(id)
+              .append(type)
+              .append(val)
+              .append(on)
+              .append(repeat)
+              .append(point)
+              .append(orig)
+              .append(button);
     }
   },
   animateBets: function(){
     for(x in this.winningBetIds){
       $('#bet' + this.winningBetIds[x]).attr('class', 'winningBet');
-        }
+    }
     for(x in this.losingBetIds){
       $('#bet' + this.losingBetIds[x]).attr('class', 'losingBet');
     }
-        $('.winningBet').animate({backgroundColor: 'green', borderColor: 'green'}, BET_FADE_INTERVAL/2, function(){$('.winningBet').animate({backgroundColor: 'none', borderColor: 'none'}, BET_FADE_INTERVAL/2)});
-        $('.losingBet').animate({backgroundColor: 'red', borderColor: 'red', opacity: 0}, BET_FADE_INTERVAL);
+    $('.winningBet').animate({backgroundColor: 'green', borderColor: 'green'}, BET_FADE_INTERVAL/2, function(){$('.winningBet').animate({backgroundColor: 'none', borderColor: 'none'}, BET_FADE_INTERVAL/2);});
+    $('.losingBet').animate({backgroundColor: 'red', borderColor: 'red', opacity: 0}, BET_FADE_INTERVAL);
     var animateTimeout = setInterval(function(){
             $('.winningBet').removeClass('winningBet');
             $('.losingBet').removeClass('losingBet');
@@ -407,7 +426,7 @@ $.extend(_CRAPS, {
       if(betResponse[0] == 2){
         betResponse[1]();
       }
-      draw(Board);
+      //draw(Board);
     }
     else{
       if(!isNaN(bet.bet.value)){

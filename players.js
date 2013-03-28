@@ -38,6 +38,7 @@ $.extend(PlayerManager, {
     name.empty();
     bank.empty();
     name.html(this.players[0].player.name);
+    //name.attr('class', 'bttn');
     var bankTitle = $(document.createElement('p'));
     bankTitle.html('<center>Bank</center>');
     if(bank.children().length == 0){

@@ -1221,6 +1221,91 @@
         }
     };
 
+    var Dice = function(board) {
+        this.board = board;
+        return this;
+    }
+    Dice.prototype = {
+        name: "Dice",
+        draw: function(){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.rect(1200, 200, 75, 75);
+          ctx.rect(1300, 200, 75, 75);
+          ctx.fillStyle = 'red';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = 'red';
+          ctx.stroke();
+          this.drawDots();
+        },
+        drawDots: function(){
+          var dice = diceToNum(_CRAPS.dice);
+          var offset = [0, 100];
+          for(die in dice){
+            switch(dice[die]){
+            case false:
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            case 1:
+              this.drawDot(1237.5 + offset[die], 237.5);
+              break;
+            case 2:
+              this.drawDot(1212.5 + offset[die], 212.5);
+              this.drawDot(1262.5 + offset[die], 262.5);
+              break;
+            case 3:
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1237.5 + offset[die], 237.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              break;
+            case 4:
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            case 5:
+              this.drawDot(1237.5 + offset[die], 237.5);
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            case 6:
+              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1262.5 + offset[die], 237.5);
+              this.drawDot(1212.5 + offset[die], 237.5);
+              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
+              break;
+            default:
+              return;
+            }
+          }
+        },
+        drawDot: function(x, y){
+          var ctx = this.board.context;
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = 'white';
+          ctx.fill();
+          ctx.strokeStyle = 'white';
+          ctx.stroke();
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 1200 && x < 1375 && y > 200 && y < 275) {
+                return true;
+            }
+            return false;
+        }
+    };
+
     var regions = [
         PassLine,
         DontPass,
@@ -1249,7 +1334,8 @@
         Craps,
         EAndC,
         Horn,
-        World
+        World,
+        Dice
     ];
 
     var Board = function(canvas, colors) {
@@ -1272,7 +1358,6 @@
                 this.regions[i].draw();
             }
             this.drawTableInfo();
-            this.drawDice();
             this.drawBets();
         },
         drawBackground: function() {
@@ -1415,77 +1500,6 @@
           default:
             return;
           }
-        },
-        drawDice: function(){
-          var ctx = this.context;
-          ctx.beginPath();
-          ctx.rect(1200, 200, 75, 75);
-          ctx.rect(1300, 200, 75, 75);
-          ctx.fillStyle = 'red';
-          ctx.fill();
-          ctx.lineWidth = 5;
-          ctx.strokeStyle = 'red';
-          ctx.stroke();
-          this.drawDots();
-        },
-        drawDots: function(){
-          var dice = diceToNum(_CRAPS.dice);
-          var offset = [0, 100];
-          for(die in dice){
-            switch(dice[die]){
-            case false:
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
-              this.drawDot(1212.5 + offset[die], 262.5);
-              this.drawDot(1212.5 + offset[die], 212.5);
-              break;
-            case 1:
-              this.drawDot(1237.5 + offset[die], 237.5);
-              break;
-            case 2:
-              this.drawDot(1212.5 + offset[die], 212.5);
-              this.drawDot(1262.5 + offset[die], 262.5);
-              break;
-            case 3:
-              this.drawDot(1212.5 + offset[die], 262.5);
-              this.drawDot(1237.5 + offset[die], 237.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
-              break;
-            case 4:
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
-              this.drawDot(1212.5 + offset[die], 262.5);
-              this.drawDot(1212.5 + offset[die], 212.5);
-              break;
-            case 5:
-              this.drawDot(1237.5 + offset[die], 237.5);
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
-              this.drawDot(1212.5 + offset[die], 262.5);
-              this.drawDot(1212.5 + offset[die], 212.5);
-              break;
-            case 6:
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 237.5);
-              this.drawDot(1212.5 + offset[die], 237.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
-              this.drawDot(1212.5 + offset[die], 262.5);
-              this.drawDot(1212.5 + offset[die], 212.5);
-              break;
-            default:
-              return;
-            }
-          }
-        },
-        drawDot: function(x, y){
-          var ctx = this.context;
-          ctx.beginPath();
-          ctx.arc(x, y, 5, 0, 2*Math.PI, false);
-          ctx.lineWidth = 5;
-          ctx.fillStyle = 'white';
-          ctx.fill();
-          ctx.strokeStyle = 'white';
-          ctx.stroke();
         },
         drawBets: function(){
           var ctx = this.context;
