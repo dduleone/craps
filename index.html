@@ -733,6 +733,7 @@
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
         $('#betListing').css({left: '0px', float: 'left', top: ($('#playerArea').height() + $('#buffer').height() + 4)});
         $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+        _CRAPS.dealer.betManager.displayBets();
         $('#betType').change(function(){
           $('#origBet').empty();
           $('#betRepeat').attr('disabled', 'false');
