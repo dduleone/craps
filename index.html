@@ -607,7 +607,7 @@
       function roll(){
         _CRAPS.roll();
         var diceArray = diceToNum(_CRAPS.dice);
-        _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArry[0] + diceArray[1]));
+        _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));
         //draw(Board);
         //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
         if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
