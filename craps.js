@@ -311,6 +311,9 @@ BetManager.prototype = {
         _CRAPS.dealer.betManager.bets[betNumber].bet.on = $(this).is(':checked');
       }
       betOn.change(toggleBet);
+      if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds'].indexOf(this.bets[betNum].type) != -1 && GameState.point > 0){
+        betOn.attr('disabled', 'true');
+      }
       on.append(betOn);
       
       var repeat = $(document.createElement('td'));
@@ -324,6 +327,12 @@ BetManager.prototype = {
         _CRAPS.dealer.betManager.bets[betNumber].repeat = $(this).is(':checked');
       }
       repeatWin.change(toggleRepeat);
+      if(['passline', 'dontPass'].indexOf(this.bets[betNum].type) != -1){
+        repeatWin.attr('disabled', 'true');
+      }
+      if(['passlineOdds', 'dontPassOdds', 'comeOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
+        repeatWin.attr('disabled', 'true');
+      }
       repeat.append(repeatWin);
       
       var point = $(document.createElement('td'));
