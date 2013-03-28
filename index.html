@@ -34,9 +34,21 @@
       <div id='name' class='name' onclick='updatePlayerName()'></div>
       <div id='bank'></div>
       <!--div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div -->
-      <div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div>
+      <!--div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div -->
     </div>
     <div id='buffer'></div>
+    <div id='help' class='round'>
+      <p>
+        Help:
+        <ul>
+          <li>To set your name, click on/touch the name area!</li>
+          <li>To place a bet, click on/touch the area of the board you want to place a bet!</li>
+          <li>To place an odds bet, click on/touch the area of the board that you're placing odds!</li>
+          <li>To roll, click on/touch the red dice!</li>
+        </ul>
+      </p>
+      <div class='bttn red' style='float: right' onclick='closeHelp()'>Close</div>
+    </div>
     
   </body>
   <footer>
@@ -87,6 +99,10 @@
               if(boardArea){
                 if(boardArea.name == "Dice"){
                   roll();
+                  return;
+                }
+                if(boardArea.name == "Help"){
+                  openHelp();
                   return;
                 }
                 clickAreaPlaceBet(boardArea);
@@ -649,6 +665,14 @@
         $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - (                4                        * 2 +                 2                     * 2)), opacity: 1}, 1000);
       }
       
+      function closeHelp(){
+        $('#help').hide();
+      }
+      
+      function openHelp(){
+        $('#help').show();
+      }
+      
       function create(){
         //console.log($('#betType').val());
         //console.log($('#betValue').val());
@@ -727,7 +751,8 @@
         $('#betValue').attr('value', _CRAPS.minBet);
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
-        $('#playerArea').height($('#reset').offset().top + $('#reset').height() + 4);
+        $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
+        $('#playerArea').height($('#bank').height() + 4);
         $('#buffer').css({top: $('#playerArea').height()});
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
         $('#betListing').css({left: '0px', float: 'left', top: ($('#playerArea').height() + $('#buffer').height() + 4)});
@@ -752,6 +777,7 @@
           updateBetDesc();
           var _height = $('#betInfo').height() + 8 + 3;
           $('#betForm').css({height: _height});
+          $('#help').hide();
         });
       })();
       

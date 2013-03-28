@@ -80,6 +80,31 @@ BetManager.prototype = {
       var _origBet = bet.origBet.bet;
     }
     
+    if(bet.type == 'passlineOdds' && bet.origBet.type != 'passline'){
+      return [0, function(){alert('Original bet must be a Pass Line bet. Bet has not been placed.');}];
+    }
+    if(bet.type == 'dontPassOdds' && bet.origBet.type != 'dontPass'){
+      return [0, function(){alert('Original bet must be a Don\'t Pass bet. Bet has not been placed.');}];
+    }
+    if(bet.type == 'comeOdds' && bet.origBet.type != 'come'){
+      return [0, function(){alert('Original bet must be a Come bet. Bet has not been placed.');}];
+    }
+    if(bet.type == 'dontComeOdds' && bet.origBet.type != 'dontCome'){
+      return [0, function(){alert('Original bet must be a Don\'t Come bet. Bet has not been placed.');}];
+    }
+    
+    if(bet.type == 'passlineOdds' || bet.type == 'dontPassOdds'){
+      if(!GameState.point){
+        return [0, function(){alert('You cannot place a ' + nameToPretty(bet.type) + ' bet when there is no point on. Bet has not been placed.');}];
+      }
+    }
+    
+    if(bet.type == 'comeOdds' || bet.type == 'dontComeOdds'){
+      if(!bet.origBet.point){
+        return [0, function(){alert('You cannot place a ' + nameToPretty(bet.type) + ' bet when there is no ' + nameToPretty(bet.origBet.type) + ' point on. Bet has not been placed.');}];
+      }
+    }
+    
     if(_bet.value < _CRAPS['minBet']){
       if(['passline', 
           'passlineOdds',
@@ -281,7 +306,7 @@ BetManager.prototype = {
            .append($(document.createElement('th')).html('Repeat?'))
            .append($(document.createElement('th')).html('Point'))
            .append($(document.createElement('th')).html('Orig'))
-           .append($(document.createElement('th')).html('    '));
+           .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').html('Rem All'));
     betTable.append(headers);
     betListing.append(betTable);
 

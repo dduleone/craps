@@ -1305,6 +1305,38 @@
             return false;
         }
     };
+    
+    var Help = function(board) {
+        this.board = board;
+        return this;
+    }
+    Help.prototype = {
+        name: "Help",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            ctx.arc(50, 950, 30, 2 * Math.PI, false);
+            ctx.textAlign = "left";
+            ctx.font = "40pt Calibri";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("?", 40, 968);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 20 && x < 80 && y > 920 && y < 980) {
+                return true;
+            }
+            return false;
+        }
+    };
 
     var regions = [
         PassLine,
@@ -1335,7 +1367,8 @@
         EAndC,
         Horn,
         World,
-        Dice
+        Dice,
+        Help
     ];
 
     var Board = function(canvas, colors) {

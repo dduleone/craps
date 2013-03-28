@@ -158,3 +158,13 @@
   table {
     overflow: auto;
   }
+  #help{
+    position: absolute;
+    background: #000 url(bet_bg.jpg) repeat-y;
+    color: #FFF;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    padding: 10px;
+    display: none;
+  }
