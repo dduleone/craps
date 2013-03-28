@@ -274,10 +274,10 @@ BetManager.prototype = {
     }
     var betTable = $(document.createElement('table'));
     var headers = $(document.createElement('tr'));
-    headers.append($(document.createElement('th')).html('Bet Id'))
-    headers.append($(document.createElement('th')).html('Bet Type'))
+    headers.append($(document.createElement('th')).html('Id'))
+    headers.append($(document.createElement('th')).html('Type'))
            .append($(document.createElement('th')).html('Value'))
-           .append($(document.createElement('th')).html('Bet On'))
+           .append($(document.createElement('th')).html('On?'))
            .append($(document.createElement('th')).html('Repeat?'))
            .append($(document.createElement('th')).html('Point'))
            .append($(document.createElement('th')).html('Orig'))
@@ -289,13 +289,16 @@ BetManager.prototype = {
       var newBetRow = $(document.createElement('tr'));
       newBetRow.css('backgroundColor', (betNum%2)?'#c0c0c0':'#fff');
       newBetRow.attr('id', 'bet' + this.bets[betNum].bet.betId);
-      newBetRow.css({float: 'left', left: '0px'});
+      //newBetRow.css({float: 'left', left: '0px'});
       var id = $(document.createElement('td'));
       id.html(this.bets[betNum].bet.betId);
+      
       var type = $(document.createElement('td'));
       type.html(nameToPretty(this.bets[betNum].type));
+      
       var val = $(document.createElement('td'));
       val.html('$' + this.bets[betNum].bet.value);
+      
       var betOn = $(document.createElement('input'));
       //betOnLabel.html('<br />Bet On: ');
       var on = $(document.createElement('td'));
@@ -309,6 +312,7 @@ BetManager.prototype = {
       }
       betOn.change(toggleBet);
       on.append(betOn);
+      
       var repeat = $(document.createElement('td'));
       var repeatWin = $(document.createElement('input'));
       repeatWin.attr('type', 'checkbox');
@@ -321,12 +325,14 @@ BetManager.prototype = {
       }
       repeatWin.change(toggleRepeat);
       repeat.append(repeatWin);
+      
       var point = $(document.createElement('td'));
       if(['come', 'dontCome'].indexOf(this.bets[betNum].type) != -1){
         point.html(this.bets[betNum].point);
       } else {
         point.html('   ');
       }
+      
       var orig = $(document.createElement('td'));
       if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
         orig.html(this.bets[betNum].origBet.bet.betId);
@@ -358,14 +364,14 @@ BetManager.prototype = {
       //pTag.append(button);
       //newBetRow.append(legend);
       betTable.append(newBetRow);
-      newBetRow.append(id)
-              .append(type)
-              .append(val)
-              .append(on)
-              .append(repeat)
-              .append(point)
-              .append(orig)
-              .append(button);
+      newBetRow.append(id);
+      newBetRow.append(type);
+      newBetRow.append(val);
+      newBetRow.append(on);
+      newBetRow.append(repeat);
+      newBetRow.append(point);
+      newBetRow.append(orig);
+      newBetRow.append(button);
     }
   },
   animateBets: function(){
