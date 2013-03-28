@@ -68,7 +68,7 @@ $.extend(PlayerManager, {
     bank.append(avail);
     bank.append(inPlay);
     bank.append(total);
-    $('#playerArea').height($('#playerInfo').height());
+    $('#playerArea').height($('#reset').offset().top + $('#reset').height() + 4);
     $('#buffer').css('top', $('#playerArea').height());
     //bank.append(avail).append(inPlay).append(total);
   }
