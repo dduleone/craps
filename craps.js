@@ -458,8 +458,10 @@ $.extend(_CRAPS, {
   },
   roll: function(){
   // Roll the dice.
-    //_CRAPS.output("Before Roll - The point is: " + GameState.point);  
+    //_CRAPS.output("Before Roll - The point is: " + GameState.point);
     var roll = _CRAPS.dice.roll();
+    var diceArray = diceToNum(_CRAPS.dice);
+    _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));
     //_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
     _CRAPS.checkBets();
     PlayerManager.updatePlayerArea();
