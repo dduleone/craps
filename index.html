@@ -728,6 +728,7 @@
         $('#betValue').attr('value', _CRAPS.minBet);
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
+        $('#playerArea').height($('#reset').offset().top + $('#reset').height() + 4);
         $('#buffer').css({top: $('#playerArea').height()});
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
         $('#betListing').css({left: '0px', float: 'left', top: ($('#playerArea').height() + $('#buffer').height() + 4)});
