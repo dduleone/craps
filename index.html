@@ -731,6 +731,7 @@
         $('#buffer').css({top: $('#playerArea').height()});
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
         $('#betListing').css({left: '0px', float: 'left', top: ($('#playerArea').height() + $('#buffer').height() + 4)});
+        $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
         $('#betType').change(function(){
           $('#origBet').empty();
           $('#betRepeat').attr('disabled', 'false');

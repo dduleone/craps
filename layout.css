@@ -79,7 +79,6 @@
     overflow: auto;
     margin-left: 5px;
     padding: 0px;
-    padding-right: 10px;
     float: left;
   }
   .bttn{
@@ -105,18 +104,6 @@
     left: 0px;
     margin: 2px;
     padding: 0px;
-  }
-  #tableInfo{
-    position: absolute;
-    top: 35px;
-    left: 75%;
-    font-size: 13pt;
-  }
-  #pointWindow{
-    position: absolute;
-    top: 30px;
-    left: 75%;
-    font-size: 15pt;
   }
   #name{
     position: relative;
@@ -167,4 +154,7 @@
   }
   table, td, th {
     text-align: center;
-  } 
+  }
+  table {
+    overflow: auto;
+  }

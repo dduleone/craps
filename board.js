@@ -1704,7 +1704,7 @@
               ctx.strokeStyle = 'navy';
               ctx.stroke();
               break;
-            case 'AceTwo':
+            case 'aceTwo':
               ctx.beginPath();
               ctx.arc(1312.5, 750, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;

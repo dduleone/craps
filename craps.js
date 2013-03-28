@@ -71,7 +71,7 @@ BetManager.prototype = {
     if(bet.type != 'come' && bet.type != 'dontCome' && bet.type != 'comeOdds' && bet.type != 'dontComeOdds'){
       for(i in this.bets){
         if(bet.type == this.bets[i].type){
-          return [0, function(){alert('You may only place one ' + bet.type + ' bet at a time. Bet has not been placed.');}];
+          return [0, function(){alert('You may only place one ' + nameToPretty(bet.type) + ' bet at a time. Bet has not been placed.');}];
         }
       }
     }
