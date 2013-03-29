@@ -1428,8 +1428,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.text;
-            ctx.font = "25pt Times";
-            ctx.fillText('OFF', 1103, 70);
+            ctx.font = "24pt Times";
+            ctx.fillText('OFF', 1100, 70);
             ctx.stroke();
             ctx.closePath();
           }
@@ -1446,7 +1446,7 @@
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
             ctx.font = "25pt Times";
-            ctx.fillText('ON', 528, 172.5);
+            ctx.fillText('ON', 525, 172.5);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1462,7 +1462,7 @@
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
             ctx.font = "25pt Times";
-            ctx.fillText('ON', 628, 172.5);
+            ctx.fillText('ON', 625, 172.5);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1478,7 +1478,7 @@
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
             ctx.font = "25pt Times";
-            ctx.fillText('ON', 728, 172.5);
+            ctx.fillText('ON', 725, 172.5);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1494,7 +1494,7 @@
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
             ctx.font = "25pt Times";
-            ctx.fillText('ON', 828, 172.5);
+            ctx.fillText('ON', 825, 172.5);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1510,7 +1510,7 @@
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
             ctx.font = "25pt Times";
-            ctx.fillText('ON', 928, 172.5);
+            ctx.fillText('ON', 925, 172.5);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1526,7 +1526,7 @@
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
             ctx.font = "25pt Times";
-            ctx.fillText('ON', 1028, 172.5);
+            ctx.fillText('ON', 1025, 172.5);
             ctx.stroke();
             ctx.closePath();
             break;
