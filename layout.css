@@ -103,13 +103,15 @@
     top: 0px;
     left: 0px;
     margin: 2px;
-    padding: 0px;
+    padding: 5px;
   }
   #name{
     position: relative;
     text-align: center;
-    top: -10px;
+    top: 0px;
     font-size: 35pt;
+    margin: 0px;
+    padding: 0px;
   }
   #nameInput{
     position: relative;
@@ -120,7 +122,6 @@
   }
   #bank{
     position: relative;
-    top: -30px;
     text-align: center;
   }
   #availBank{
@@ -156,6 +157,8 @@
     text-align: center;
   }
   table {
+    position: relative;
+    top: 0px;
     overflow: auto;
   }
   #help{

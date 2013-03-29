@@ -737,25 +737,38 @@
         var input = $(document.createElement('input'));
         input.attr('type', 'text');
         input.attr('id', 'nameInput');
-        input.css({width: $('#name').width()});
+        input.css({width: '50%'});
+        $('#name').css({top: '5px'});
+        $('#bank').css({top: ($('#name').offset().top + $('#name').height() - 30)});
+        $('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
+        $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+        $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
         input.attr('value', player.player.name);
         if(input.attr('value') == 'Set your name!'){
           input.attr('value', 'Your Name');
         }
         input.focus(function(){
           input.select();
+          bank.height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
+          $('#playerArea').height($('#bank').height() + 4);
+          $('#buffer').css('top', $('#playerArea').height());
+          $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+          $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
         });
         input.change(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
           $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+          $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
         });
         input.blur(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
           $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+          $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
         });
         nameDiv.append(input);
         input.focus();
@@ -790,10 +803,10 @@
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
         $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
         $('#playerArea').height($('#bank').height() + 4);
-        $('#buffer').css({top: $('#playerArea').height()});
+        $('#buffer').css('top', $('#playerArea').height());
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-        $('#betListing').css({left: '0px', float: 'left', top: ($('#playerArea').height() + $('#buffer').height() + 4)});
         $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+        $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
         _CRAPS.dealer.betManager.displayBets();
         $('#betType').change(function(){
           $('#origBet').empty();

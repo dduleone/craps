@@ -68,9 +68,19 @@ $.extend(PlayerManager, {
     bank.append(avail);
     bank.append(inPlay);
     bank.append(total);
+    //bank.css({top: $('#name').height()});
+    $('#name').css({top: '5px'});
+    //$('#bank').css({top: ($('#name').offset().top + $('#name').height() - 30)});
+    //$('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
+    //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+    //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+    //
     bank.height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
     $('#playerArea').height($('#bank').height() + 4);
     $('#buffer').css('top', $('#playerArea').height());
+    $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+    $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+    $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
     //bank.append(avail).append(inPlay).append(total);
   }
 });
