@@ -290,9 +290,9 @@ BetManager.prototype = {
     case "yoleven":
       return [1, ''];
     case "big6":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
+      return [1, ''];
     case "big8":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
+      return [1, ''];
     case "world":
       return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
     default:
