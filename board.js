@@ -19,13 +19,13 @@
             ctx.textAlign = "left";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "60pt Calibri";
+            ctx.font = "60pt Times";
             ctx.fillText("Pass Line", 0, 0);
             ctx.restore();
 
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "60pt Calibri";
+            ctx.font = "60pt Times";
             ctx.textAlign = "right";
             ctx.fillText("Pass Line", 950, 825);
         },
@@ -97,7 +97,7 @@
             ctx.textAlign = "left";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "45pt Calibri";
+            ctx.font = "45pt Times";
             ctx.fillText("Don't Pass", 0, 0);
             ctx.restore();
 
@@ -134,7 +134,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "45pt Calibri";
+            ctx.font = "45pt Times";
             ctx.fillText("Don't", 400, 175);
             ctx.fillText("Come", 400, 225);
             ctx.fillText("Bar", 400, 275);
@@ -172,7 +172,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "75pt Calibri";
+            ctx.font = "75pt Times";
             ctx.fillText("COME", 650, 450);
 
         },
@@ -208,7 +208,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "45pt Calibri";
+            ctx.font = "45pt Times";
             ctx.fillText("Don't Pass", 700, 725);
 
         },
@@ -244,9 +244,9 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.specialText;
             ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "45pt Calibri";
+            ctx.font = "45pt Times";
             ctx.fillText("FIELD", 660, 620);
-            ctx.font = "35pt Calibri";
+            ctx.font = "35pt Times";
             ctx.fillText("2", 470, 585);
             ctx.fillText("3", 540, 560);
             ctx.fillText("4", 600, 555);
@@ -286,7 +286,7 @@
             ctx.lineWidth = 10;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.lines;
-            ctx.font = "35pt Calibri";
+            ctx.font = "35pt Times";
             ctx.save();
             ctx.translate(350, 575);
             ctx.rotate(Math.PI * 0.25);
@@ -301,7 +301,7 @@
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
-            ctx.font = "70pt Calibri";
+            ctx.font = "70pt Times";
             ctx.save();
             ctx.translate(270, 550);
             ctx.rotate(Math.PI * 0.25);
@@ -333,7 +333,7 @@
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
-            ctx.font = "70pt Calibri";
+            ctx.font = "70pt Times";
             ctx.save();
             ctx.translate(350, 650);
             ctx.rotate(Math.PI * 0.25);
@@ -384,7 +384,7 @@
                     ctx.textAlign = "center";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
-                    ctx.font = "70pt Calibri";
+                    ctx.font = "70pt Times";
                     ctx.fillText(n, 550 + offset[n], 275);
                 } else if (n == 6) {
                     ctx.save();
@@ -393,7 +393,7 @@
                     ctx.textAlign = "left";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
-                    ctx.font = "45pt Calibri";
+                    ctx.font = "45pt Times";
                     ctx.fillText("SIX", 0, 0);
                     ctx.restore();
                 } else if (n == 9) {
@@ -403,7 +403,7 @@
                     ctx.textAlign = "left";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
-                    ctx.font = "30pt Calibri";
+                    ctx.font = "30pt Times";
                     ctx.fillText("NINE", 0, 0);
                     ctx.restore();
                    
@@ -429,11 +429,11 @@
             ctx.strokeStyle = this.board.colors.lines;
             ctx.lineWidth = 10;
             ctx.beginPath();
-            ctx.moveTo(1200, 455);
+            ctx.moveTo(1200, 450);
             ctx.lineTo(1200, 500);
             ctx.lineTo(1900, 500);
-            ctx.lineTo(1900, 455);
-            ctx.lineTo(1195, 455);
+            ctx.lineTo(1900, 450);
+            ctx.lineTo(1195, 450);
             ctx.stroke();
             this.drawText();
         },
@@ -442,11 +442,11 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "38pt Calibri";
+            ctx.font = "38pt Times";
             ctx.fillText("SEVEN", 1550, 493);
         },
         isClickedRegion: function(x, y) {
-            if (x > 1200 && x < 1900 && y > 455 && y < 500) {
+            if (x > 1200 && x < 1900 && y > 450 && y < 500) {
                 return true;
             }
             return false;
@@ -478,7 +478,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Hard", 1375, 545);
         //    ctx.fillText("SIX", 1375, 590); 
         //},
@@ -582,7 +582,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Hard", 1725, 545);
         //    ctx.fillText("10", 1725, 590); 
         //},
@@ -618,7 +618,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Hard", 1375, 645);
         //    ctx.fillText("8", 1375, 690); 
         //},
@@ -718,7 +718,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Hard", 1725, 645);
         //    ctx.fillText("4", 1725, 690); 
         //},
@@ -755,7 +755,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Ace", 1325, 745);
         //    ctx.fillText("Two", 1325, 790); 
         //},
@@ -821,7 +821,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Snake", 1550, 745);
         //    ctx.fillText("Eyes", 1550, 790); 
         //},
@@ -886,7 +886,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Six", 1775, 745);
         //    ctx.fillText("Six", 1775, 790); 
         //},
@@ -961,7 +961,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Five", 1375, 845);
         //    ctx.fillText("Six", 1375, 890); 
         //},
@@ -1034,7 +1034,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Calibri";
+        //    ctx.font = "35pt Times";
         //    ctx.fillText("Five", 1725, 845);
         //    ctx.fillText("Six", 1725, 890); 
         //},
@@ -1107,7 +1107,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "38pt Calibri";
+            ctx.font = "38pt Times";
             ctx.fillText("CRAPS", 1550, 940);
         },
         isClickedRegion: function(x, y) {
@@ -1130,7 +1130,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "40pt Calibri";
+            ctx.font = "40pt Times";
 
             for (var i = 0; i < 6; i++) {
                 ctx.strokeStyle = this.board.colors.lines;
@@ -1167,13 +1167,13 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "40pt Calibri";
+            ctx.font = "40pt Times";
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
             ctx.arc(930, 900, 30, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "14pt Calibri";
+            ctx.font = "14pt Times";
             //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("Horn", 910, 905);
             ctx.stroke();
@@ -1200,13 +1200,13 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "40pt Calibri";
+            ctx.font = "40pt Times";
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
             ctx.arc(1000, 900, 30, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "14pt Calibri";
+            ctx.font = "14pt Times";
             //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("World", 975, 905);
             ctx.stroke();
@@ -1323,7 +1323,7 @@
             ctx.beginPath();
             ctx.arc(50, 950, 30, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "40pt Calibri";
+            ctx.font = "40pt Times";
             //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("?", 40, 968);
             ctx.stroke();
@@ -1410,7 +1410,7 @@
             var ctx = this.context;
             ctx.fillStyle = this.colors.specialText;
             ctx.strokeStyle = this.colors.specialText;
-            ctx.font = "20pt Calibri";
+            ctx.font = "20pt Times";
             ctx.fillText('3x-4x-5x Odds', 1200, 100); 
             ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
             ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
@@ -1428,7 +1428,7 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.text;
-            ctx.font = "25pt Calibri";
+            ctx.font = "25pt Times";
             ctx.fillText('OFF', 1103, 70);
             ctx.stroke();
             ctx.closePath();
@@ -1445,7 +1445,7 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Calibri";
+            ctx.font = "25pt Times";
             ctx.fillText('ON', 528, 172.5);
             ctx.stroke();
             ctx.closePath();
@@ -1461,7 +1461,7 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Calibri";
+            ctx.font = "25pt Times";
             ctx.fillText('ON', 628, 172.5);
             ctx.stroke();
             ctx.closePath();
@@ -1477,7 +1477,7 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Calibri";
+            ctx.font = "25pt Times";
             ctx.fillText('ON', 728, 172.5);
             ctx.stroke();
             ctx.closePath();
@@ -1493,7 +1493,7 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Calibri";
+            ctx.font = "25pt Times";
             ctx.fillText('ON', 828, 172.5);
             ctx.stroke();
             ctx.closePath();
@@ -1509,7 +1509,7 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Calibri";
+            ctx.font = "25pt Times";
             ctx.fillText('ON', 928, 172.5);
             ctx.stroke();
             ctx.closePath();
@@ -1525,7 +1525,7 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Calibri";
+            ctx.font = "25pt Times";
             ctx.fillText('ON', 1028, 172.5);
             ctx.stroke();
             ctx.closePath();
