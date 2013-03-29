@@ -378,7 +378,7 @@ BetManager.prototype = {
       
       var button = $(document.createElement('td'));
       button.append($(document.createElement('img')).attr('src', 'images/red_x_small.png'))//.html('Rem');
-      button.attr({class: 'bttn'});
+      //button.attr({class: 'bttn'});
       if(this.bets[betNum].type == 'passline'){
         if(GameState.point > 0){
           button.attr('onclick', 'alert("You cannot take down a Pass Line bet when a point is on.")');

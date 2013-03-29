@@ -171,3 +171,6 @@
   .imageKey{
     background: #FFF;
   }
+  .keyText{
+    text-align: left;
+  }
