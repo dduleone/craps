@@ -7,7 +7,7 @@ function onWin(bet, amount){
   var _player = _bet.player.player;
   
   _CRAPS.dealer.betManager.winningBetIds.push(_bet.betId);
-  _CRAPS.output("Bet " + bet.type + " wins! Pays out $" + amount);
+  _CRAPS.output(nameToPretty(bet.type) + " bet wins! Pays out $" + amount);
   _player.addToBank(amount);
 }
 
@@ -228,7 +228,7 @@ BetManager.prototype = {
       return [1, ''];
     case "dontComeOdds":
       if(bet.origBet == null){
-        return[0, function(){alert('There must be a Don\'t Pass Line Bet on the table.');}];
+        return[0, function(){alert('There must be a Don\'t Come Bet on the table.');}];
       }
       if(bet.origBet.point == 4 || bet.origBet.point == 10){
         if(_bet.value <= 6 * _origBet.value){
@@ -694,6 +694,7 @@ var BetChecker = function(point, betArray, dice){
           continue
         }else if(dice.getSum() == 7){
           $('window').trigger(onWin(bet, _bet.value));
+          bet.point = false;
           if(bet.repeat){
             newBetArray.push(bet);
           }

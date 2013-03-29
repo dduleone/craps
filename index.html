@@ -253,6 +253,7 @@
 
       function addBet(area){
         $('#betRepeat').removeAttr('disabled');
+        $('#betRepeat').attr('chekced');
         $('#betType').show();
         $('#betName').show();
         
@@ -772,29 +773,6 @@
         });
         nameDiv.append(input);
         input.focus();
-      }
-      
-      function getBetsOfType(type){
-        var bets = _CRAPS.dealer.betManager.bets;
-        var validBets = []
-        for(i in bets){
-          if(bets[i].type == type){
-            validBets.push(bets[i]);
-          }
-          if(type == 'passline' && bet[i].type == 'passlineOdds'){
-            validBets.push(bets[i]);
-          }
-          if(type == 'come' && bet[i].type == 'comeOdds'){
-            validBets.push(bets[i]);
-          }
-          if(type == 'dontPass' && bet[i].type == 'dontPassOdds'){
-            validBets.push(bets[i]);
-          }
-          if(type == 'dontCome' && bet[i].type == 'dontComeOdds'){
-            validBets.push(bets[i]);
-          }
-        }
-        return validBets;
       }
       
       (function() {

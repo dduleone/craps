@@ -141,7 +141,7 @@
 
         },
         isClickedRegion: function(x, y) {
-            if (x > 300 && x < 500 && y > 100 && y < 300) {
+            if (x > 300 && x < 500 && y > 100 && y < 350) {
                 return true;
             }
             return false;
@@ -266,7 +266,7 @@
             if (x > 400 && x < 1000 && y > 500 && y < 650) {
                 return true;
             }
-            if (x > 300 && x < 400 && y < (200 + x)) {
+            if (x > 300 && x < 400 && y > 500 && y < (200 + x)) {
                 return true;
             }
             return false;
