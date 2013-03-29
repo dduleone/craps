@@ -172,6 +172,7 @@
     width: 60%;
     padding: 10px;
     display: none;
+    opacity: 0;
   }
   .imageKey{
     background: #FFF;

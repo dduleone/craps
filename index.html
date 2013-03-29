@@ -704,11 +704,12 @@
       }
       
       function closeHelp(){
-        $('#help').hide();
+        $('#help').animate({opacity: 0}, 1000, function(){$('#help').hide();});
       }
       
       function openHelp(){
         $('#help').show();
+        $('#help').animate({opacity: 1}, 1000); 
       }
       
       function create(){
