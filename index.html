@@ -804,13 +804,18 @@
             retArray[1]();
             return;
           }
-          _betDispVal.empty();
-          _betDispVal.html('$' + newAmount);
-          _bet.bet.value = parseInt(newAmount);
-          var diff = (parseInt(newAmount) - parseInt(oldVal))
-          _bet.bet.player.player.subFromBank(diff);
+          if(retArray[0] == 3){
+            _betDispVal.empty();
+            _betDispVal.html('$' + oldVal);
+          } else {
+            _betDispVal.empty();
+            _betDispVal.html('$' + newAmount);
+            _bet.bet.value = parseInt(newAmount);
+            var diff = (parseInt(newAmount) - parseInt(oldVal))
+            _bet.bet.player.player.subFromBank(diff);
+          }
           PlayerManager.updatePlayerArea();
-          if(retArray[0] == 2){
+          if(retArray[0] == 2 || retArray[0] == 3){
             retArray[1]();
           }
         });

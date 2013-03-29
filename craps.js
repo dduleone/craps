@@ -1127,7 +1127,7 @@ function revalidate(bet, amount){
   switch(bet.type){
   case "passline":
     if(GameState.point){
-      return [0, function(){alert('Cannot adjust a Pass Line bet while there is a point on. Bet has not been changed.');}];
+      return [3, function(){alert('Cannot adjust a Pass Line bet while there is a point on. Bet has not been changed.');}];
     }
     return [1, '']
   case "passlineOdds":
@@ -1149,14 +1149,11 @@ function revalidate(bet, amount){
       }
     }
   case "come":
+    if(bet.point){
+      return [3, function(){alert('Cannot adjust a Come bet while there is a point on. Bet has not been changed.');}];
+    }
     return [1, '']
   case "comeOdds":
-    if(bet.origBet == null){
-      return[0, function(){alert('There must be a Come bet on the table. Bet has not been changed.');}];
-    }
-    if(!bet.origBet.point){
-      return[0, function(){alert('The associated Come bet must have a point on. Bet has not been changed');}];
-    }
     if(bet.origBet.point == 4 || bet.origBet.point == 10){
       return [(amount <= 3 * _origBet.value) ? 1 : 0, function(){alert('Bet value must be 3 times the Come Line bet or less. Bet has not been changed.');}];
     }
@@ -1175,6 +1172,9 @@ function revalidate(bet, amount){
       }
     }
   case "dontPass":
+    if(GameState.point){
+      return [3, function(){alert('Cannot adjust a Don\'t Pass Line bet while there is a point on. Bet has not been changed.');}];
+    }
     return [1, ''];
   case "dontPassOdds":
     if(GameState == null){
@@ -1205,6 +1205,9 @@ function revalidate(bet, amount){
       }
     }
   case "dontCome":
+    if(bet.point){
+      return [3, function(){alert('Cannot adjust a Don\'t Come bet while there is a point on. Bet has not been changed.');}];
+    }
     return [1, ''];
   case "dontComeOdds":
     if(bet.origBet == null){
