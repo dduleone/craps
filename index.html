@@ -44,6 +44,7 @@
           <li>To set your name, click on/touch the name area!</li>
           <li>To place a bet, click on/touch the area of the board you want to place a bet!</li>
           <li>To place an odds bet, click on/touch the area of the board that you're placing odds. Then select Odds from the drop down!</li>
+          <li>To change a bet's amount, click on the amount!</li>
           <li>To roll, click on/touch the red dice!</li>
         </ul>
       </p>
@@ -775,6 +776,69 @@
         nameDiv.append(input);
         input.focus();
       }
+      
+      function updateBet(idNum){
+        var _betDisp = $('#bet' + idNum);
+        var _betDispVal = $('#val' + idNum);
+        var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
+        
+        var oldVal = _betDispVal.html().slice(1);
+        //console.log(oldVal);
+        
+        _betDispVal.empty();
+        var input = $(document.createElement('input'));
+        input.attr('type', 'text');
+        //input.attr('id', 'nameInput');
+        input.css({width: $('#val' + idNum).width()});
+        input.attr('value', oldVal);
+        input.focus(function(){
+          input.select();
+        });
+        input.change(function(){
+          var _betDispVal = $('#val' + idNum);
+          var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
+          var oldVal = _bet.bet.value;
+          var newAmount = input.val();
+          var retArray = revalidate(_bet, newAmount)
+          if(!retArray[0]){
+            retArray[1]();
+            return;
+          }
+          _betDispVal.empty();
+          _betDispVal.html('$' + newAmount);
+          _bet.bet.value = parseInt(newAmount);
+          var diff = (parseInt(newAmount) - parseInt(oldVal))
+          _bet.bet.player.player.subFromBank(diff);
+          PlayerManager.updatePlayerArea();
+          if(retArray[0] == 2){
+            retArray[1]();
+          }
+        });
+        input.blur(function(){
+          var _betDispVal = $('#val' + idNum);
+          var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
+          var oldVal = _bet.bet.value;
+          var newAmount = input.val();
+          var retArray = revalidate(_bet, newAmount)
+          if(!retArray[0]){
+            retArray[1]();
+            return;
+          }
+          _betDispVal.empty();
+          _betDispVal.html('$' + newAmount);
+          _bet.bet.value = parseInt(newAmount);
+          var diff = (parseInt(newAmount) - parseInt(oldVal))
+          _bet.bet.player.player.subFromBank(diff);
+          PlayerManager.updatePlayerArea();
+          if(retArray[0] == 2){
+            retArray[1]();
+          }
+        });
+        _betDispVal.append(input);
+        input.focus();
+      }
+      
+      
       
       (function() {
         $('#betValue').attr('value', _CRAPS.minBet);
