@@ -307,13 +307,13 @@ BetManager.prototype = {
     }
     var betTable = $(document.createElement('table'));
     var headers = $(document.createElement('tr'));
-    headers.append($(document.createElement('th')).html('Id'))
-    headers.append($(document.createElement('th')).html('Type'))
-           .append($(document.createElement('th')).html('Value'))
-           .append($(document.createElement('th')).html('On?'))
-           .append($(document.createElement('th')).html('Repeat?'))
-           .append($(document.createElement('th')).html('Point'))
-           .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').html('Rem All'));
+    headers.append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Id').attr('src', 'images/id-card_green_small.png')))//.html('Id'))
+           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
+           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Amount').attr('src', 'images/chips_small.png')))//.html('Value'))
+           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet On?').attr('src', 'images/power_button_black_small.png')))//.html('On?'))
+           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Repeat On Win?').attr('src', 'images/restart_small.png')))//.html('Repeat?'))
+           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Point').attr('src', 'images/point_small.png')))//.html('Point'))
+           .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').append($(document.createElement('img')).attr('title', 'Remove All Bets').attr('src', 'images/edit-clear_small.png')));//.html('Rem All'));
     betTable.append(headers);
     betListing.append(betTable);
 
@@ -377,8 +377,8 @@ BetManager.prototype = {
       }
       
       var button = $(document.createElement('td'));
-      button.html('Rem');
-      button.attr({class: 'bttn red'});
+      button.append($(document.createElement('img')).attr('src', 'images/red_x_small.png'))//.html('Rem');
+      button.attr({class: 'bttn'});
       if(this.bets[betNum].type == 'passline'){
         if(GameState.point > 0){
           button.attr('onclick', 'alert("You cannot take down a Pass Line bet when a point is on.")');
