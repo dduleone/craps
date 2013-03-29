@@ -105,6 +105,14 @@ BetManager.prototype = {
       }
     }
     
+    if(bet.type == 'comeOdds' || bet.type == 'dontComeOdds'){
+      for(i in this.bets){
+        if(this.bets[i].type == bet.type && this.bets[i].origBet.point == bet.origBet.point){
+          return [0, function(){alert('You cannot place more than one ' + nameToPretty(bet.type) + ' bet on the same ' + nameToPretty(bet.origBet.type) + ' bet. Bet has not been placed.');}];
+        }
+      }
+    }
+    
     if(_bet.value < _CRAPS['minBet']){
       if(['passline', 
           'passlineOdds',
@@ -305,7 +313,6 @@ BetManager.prototype = {
            .append($(document.createElement('th')).html('On?'))
            .append($(document.createElement('th')).html('Repeat?'))
            .append($(document.createElement('th')).html('Point'))
-           .append($(document.createElement('th')).html('Orig'))
            .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').html('Rem All'));
     betTable.append(headers);
     betListing.append(betTable);
@@ -363,15 +370,10 @@ BetManager.prototype = {
       var point = $(document.createElement('td'));
       if(['come', 'dontCome'].indexOf(this.bets[betNum].type) != -1){
         point.html(this.bets[betNum].point);
+      } else if(['comeOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
+        point.html(this.bets[betNum].origBet.point);
       } else {
-        point.html('   ');
-      }
-      
-      var orig = $(document.createElement('td'));
-      if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
-        orig.html(this.bets[betNum].origBet.bet.betId);
-      } else {
-        orig.html('   ');
+        point.html('');
       }
       
       var button = $(document.createElement('td'));
@@ -404,7 +406,6 @@ BetManager.prototype = {
       newBetRow.append(on);
       newBetRow.append(repeat);
       newBetRow.append(point);
-      newBetRow.append(orig);
       newBetRow.append(button);
     }
   },
