@@ -388,8 +388,8 @@
                     ctx.fillText(n, 550 + offset[n], 275);
                 } else if (n == 6) {
                     ctx.save();
-                    ctx.translate(520 + offset[n], 275);
-                    ctx.rotate(Math.PI * -0.1);
+                    ctx.translate(527 + offset[n], 285);
+                    ctx.rotate(Math.PI * -0.25);
                     ctx.textAlign = "left";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
@@ -398,8 +398,8 @@
                     ctx.restore();
                 } else if (n == 9) {
                     ctx.save();
-                    ctx.translate(515 + offset[n], 275);
-                    ctx.rotate(Math.PI * -0.1);
+                    ctx.translate(525 + offset[n], 285);
+                    ctx.rotate(Math.PI * -0.25);
                     ctx.textAlign = "left";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
