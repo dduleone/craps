@@ -79,7 +79,7 @@ $.extend(PlayerManager, {
     $('#playerArea').height($('#bank').height() + 4);
     $('#buffer').css('top', $('#playerArea').height());
     $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-    $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+    //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
     $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
     //bank.append(avail).append(inPlay).append(total);
   }
