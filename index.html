@@ -7,7 +7,7 @@
   </head>
   <body>
     <!-- canvas id="board" height='1024' width='768'></canvas -->
-    <canvas id="board" style="height: 79.5%; width: 79.5%;"></canvas>
+    <canvas id="board" style="height: 69.5%; width: 69.5%;"></canvas>
     
     <div id='betForm' class='round'>
       <fieldset id='betInfo' class='round'>
@@ -799,13 +799,45 @@
           $('#origBet').empty();
           $('#betRepeat').attr('disabled', 'false');
           $('#betRepeat').attr('checked', 'true');
-          if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
+          var type = $('#betType').val();
+          if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf(type) != -1){
             var origBet = $('#origBet');
             var origLabel = $(document.createElement('label'));
             var orig = $(document.createElement('input'));
+            var bets = _CRAPS.dealer.betManager.bets;
             orig.attr('type', 'text');
             orig.css({width: '50px'});
             orig.attr('id', 'orig');
+            if(type == 'passlineOdds' || type == 'dontPassOdds'){
+              var _type = type.slice(0, 8);
+              for(i in bets){
+                if(bets[i].type == _type){
+                  orig.attr('value', bets[i].bet.betId);
+                }
+              }
+            }
+            if(type == 'comeOdds' || type == 'dontComeOdds'){
+              var _type = type.slice(0, -4);
+              var valid = [];
+              var odds = [];
+              var oddsPoints = [];
+              for(i in bets){
+                if(bets[i].type == _type){
+                  valid.push(bets[i]);
+                }
+                if(bets[i].type == type){
+                  odds.push(bets[i]);
+                  oddsPoints.push(bets[i].origBet.point);
+                }
+              }
+              
+              for(i in valid){
+                if(oddsPoints.indexOf(valid[i].point) == -1){
+                  orig.attr('value', valid[i].bet.betId);
+                  break;
+                }
+              }
+            }
             origLabel.html('Original Bet ID: ');
             origBet.append(origLabel).append(orig);
             $('#betRepeat').removeAttr('checked');

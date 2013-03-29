@@ -340,7 +340,7 @@ BetManager.prototype = {
       betOn.attr('betNum', this.bets[betNum].bet.betId);
       var toggleBet = function(e){
         var betNumber = $($(this)[0]).attr("betNum");
-        _CRAPS.dealer.betManager.bets[betNumber].bet.on = $(this).is(':checked');
+        _CRAPS.dealer.betManager.getBetById(betNumber).bet.on = $($(this)[0]).is(':checked');
       }
       betOn.change(toggleBet);
       if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds'].indexOf(this.bets[betNum].type) != -1 && GameState.point > 0){
@@ -356,7 +356,7 @@ BetManager.prototype = {
       repeatWin.attr('betNum', this.bets[betNum].bet.betId);
       var toggleRepeat = function(e){
         var betNumber = $($(this)[0]).attr("betNum");
-        _CRAPS.dealer.betManager.bets[betNumber].repeat = $(this).is(':checked');
+        _CRAPS.dealer.betManager.getBetById(betNumber).repeat = $(this).is(':checked');
       }
       repeatWin.change(toggleRepeat);
       if(['passline', 'dontPass'].indexOf(this.bets[betNum].type) != -1){
