@@ -18,7 +18,8 @@
           <p id='betName'></p>
           <p id='betDesc'></p>
           <label id='betValLabel' for='betValue'>Bet Value</label>
-          <input id='betValue' name='betValue' type='text'><br />
+          <input id='betValue' name='betValue' type='text' onchange='updateSlider(this.value)'><br />
+          <input id='betValSlide' name='betValue' type='range' min='0' max='10000' step='10' value='10' onchange='betValSlide(this.value)'><br />
           <label for='repeat'>Repeat Bet on Win?</label>
           <input id='betRepeat' name='betRepeat' type='checkbox'>
         </p>
@@ -251,12 +252,24 @@
       function clickAreaPlaceBet(area){
         addBet(area);
       }
+      
+      function betValSlide(value){
+        $('#betValue').attr('value', value);
+      }
+      
+      function updateSlider(val){
+        $('#betValSlide').attr('value', val);
+      }
 
       function addBet(area){
         $('#betRepeat').removeAttr('disabled');
         $('#betRepeat').attr('chekced');
         $('#betType').show();
         $('#betName').show();
+        $('#betValSlide').attr('min', '0');
+        $('#betValSlide').attr('max', '10000');
+        $('#betValSlide').attr('step', '100');
+        $('#betValSlide').attr('value', '100');
         
         switch(area.name){
         case "Pass Line":
@@ -395,6 +408,8 @@
           $('#betName').html('Place 6');
           $('#betType').attr('disabled', 'true');
           $('#betRepeat').attr('checked', '');
+          $('#betValSlide').attr('step', '60');
+          $('#betValSlide').attr('value', '120');
           $('#origBet').empty();
           updateBetDesc();
           break;
@@ -407,6 +422,8 @@
           $('#betType').hide();
           $('#betName').html('Place 8');
           $('#betType').attr('disabled', 'true');
+          $('#betValSlide').attr('step', '60');
+          $('#betValSlide').attr('value', '120');
           $('#origBet').empty();
           $('#betRepeat').attr('checked', '');
           updateBetDesc();
@@ -485,6 +502,8 @@
           $('#betType').hide();
           $('#betName').html('C and E');
           $('#betType').attr('disabled', 'true');
+          $('#betValSlide').attr('step', '20');
+          $('#betValSlide').attr('value', '200');
           $('#origBet').empty();
           $('#betRepeat').removeAttr('checked');
           updateBetDesc();
@@ -498,6 +517,8 @@
           $('#betType').hide();
           $('#betName').html('Any 7');
           $('#betType').attr('disabled', 'true');
+          $('#betValSlide').attr('step', '30');
+          $('#betValSlide').attr('value', '300');
           $('#origBet').empty();
           $('#betRepeat').removeAttr('checked');
           updateBetDesc();
@@ -628,6 +649,8 @@
           $('#betType').hide();
           $('#betName').html('Horn');
           $('#betType').attr('disabled', 'true');
+          $('#betValSlide').attr('step', '40');
+          $('#betValSlide').attr('value', '400');
           $('#origBet').empty();
           $('#betRepeat').removeAttr('checked');
           updateBetDesc();
@@ -641,6 +664,8 @@
           $('#betType').hide();
           $('#betName').html('World');
           $('#betType').attr('disabled', 'true');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('value', '500');
           $('#origBet').empty();
           $('#betRepeat').removeAttr('checked');
           updateBetDesc();
@@ -807,6 +832,8 @@
           if(retArray[0] == 3){
             _betDispVal.empty();
             _betDispVal.html('$' + oldVal);
+            retArray[1]();
+            return;
           } else {
             _betDispVal.empty();
             _betDispVal.html('$' + newAmount);
@@ -815,7 +842,7 @@
             _bet.bet.player.player.subFromBank(diff);
           }
           PlayerManager.updatePlayerArea();
-          if(retArray[0] == 2 || retArray[0] == 3){
+          if(retArray[0] == 2){
             retArray[1]();
           }
         });
@@ -846,7 +873,7 @@
       
       
       (function() {
-        $('#betValue').attr('value', _CRAPS.minBet);
+        $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
         $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
@@ -901,8 +928,74 @@
             }
             origLabel.html('Original Bet ID: ');
             origBet.append(origLabel).append(orig);
+            var origVal;
+            for(i in _CRAPS.dealer.betManager.bets){
+              if(_CRAPS.dealer.betManager.bets[i].type == 'passline'){
+                origVal = _CRAPS.dealer.betManager.bets[i].bet.value;
+              }
+            }
+            if(type == 'passlineOdds'){
+              if(GameState.point == 4 || GameState.point == 10){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 3);
+              } else if(GameState.point == 5 || GameState.point == 9){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 4);
+              } else if(GameState.point == 6 || GameState.point == 8){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 5);
+              }
+            } else if(type == 'dontPassOdds'){
+              if(GameState.point == 4 || GameState.point == 10){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 6);
+              } else if(GameState.point == 5 || GameState.point == 9){
+                $('#betValSlide').attr('step', '30');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 8);
+              } else if(GameState.point == 6 || GameState.point == 8){
+                $('#betValSlide').attr('step', '60');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 10);
+              }
+            } else if(type == 'comeOdds'){
+              origVal = _CRAPS.dealer.betManager.getBetById(orig.value).bet.value;
+              if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 10){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 3);
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 9){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 4);
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 8){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 5);
+              }
+            } else if(type == 'dontComeOdds'){
+              origVal = _CRAPS.dealer.betManager.getBetById(orig.value).bet.value;
+              if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 10){
+                $('#betValSlide').attr('step', '50');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 6);
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 9){
+                $('#betValSlide').attr('step', '30');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 8);
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 8){
+                $('#betValSlide').attr('step', '60');
+                $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                $('#betValSlide').attr('max', origVal * 10);
+              }
+            }
             $('#betRepeat').removeAttr('checked');
             $('#betRepeat').attr('disabled', 'true');
+            $('#betForm').height($('#betInfo').height() + 8 + 4);
           }
           updateBetDesc();
           var _height = $('#betInfo').height() + 8 + 3;

@@ -1114,14 +1114,14 @@ function revalidate(bet, amount){
         'field',
         'big6',
         'big8'].indexOf(bet.type) != -1){
-      return [0, function(){alert('Bet amount must be bigger than the Table Minimum. Bet has not been changed.');}];
+      return [3, function(){alert('Bet amount must be bigger than the Table Minimum. Bet has not been changed.');}];
     }
   }
   if(amount > _CRAPS['maxBet']){
-    return [0, function(){alert('Bet amount must be smaller than the Table Maximum. Bet has not been changed.');}];
+    return [3, function(){alert('Bet amount must be smaller than the Table Maximum. Bet has not been changed.');}];
   }
   if(amount % 1 != 0){
-    return [0, function(){alert('Bet must be an integer. Bet has not been changed.');}];
+    return [3, function(){alert('Bet must be an integer. Bet has not been changed.');}];
   }
   
   switch(bet.type){
