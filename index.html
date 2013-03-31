@@ -268,7 +268,7 @@
         $('#betType').show();
         $('#betName').show();
         $('#betValSlide').attr('min', '0');
-        $('#betValSlide').attr('max', _CRAPS.max);
+        $('#betValSlide').attr('max', Math.min(_CRAPS.maxBet, PlayerManager.players[0].player.bank));
         $('#betValSlide').attr('step', '100');
         $('#betValSlide').attr('value', '100');
         
@@ -784,13 +784,15 @@
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
           //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+          $('#betListing').height($(window).height - $('#betListing').offset().top);
         });
         input.change(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+          $('#betListing').height($(window).height - $('#betListing').offset().top);
         });
         input.blur(function(){
           player.changeName(input.val());
@@ -798,6 +800,7 @@
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
           //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+          $('#betListing').height($(window).height - $('#betListing').offset().top);
         });
         nameDiv.append(input);
         input.focus();
@@ -888,6 +891,8 @@
           $('#origBet').empty();
           $('#betRepeat').attr('disabled', 'false');
           $('#betRepeat').attr('checked', 'true');
+          $('#betValSlide').attr('max', Math.min(_CRAPS.maxBet, PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValSide').val());
           var type = $('#betType').val();
           if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf(type) != -1){
             var origBet = $('#origBet');
