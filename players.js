@@ -82,6 +82,6 @@ $.extend(PlayerManager, {
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
     $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
     //bank.append(avail).append(inPlay).append(total);
-    window.location.hash = players[0].player.name + '/' + totalBets;
+    window.location.hash = PlayerManager.players[0].player.name + '/' + totalBets;
   }
 });
