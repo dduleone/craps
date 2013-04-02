@@ -47,6 +47,8 @@
           <li>To place an odds bet, click on/touch the area of the board that you're placing odds. Then select Odds from the drop down!</li>
           <li>To change a bet's amount, click on the amount!</li>
           <li>To roll, click on/touch the red dice!</li>
+          <li> *** If you want to save your session, clear all your bets and copy the URL. <br />
+              When you come back to that URL, your game will pick up where you left off.</li>
         </ul>
       </p>
       <p>
@@ -677,8 +679,20 @@
         
         place();
       }
-      makeCrapsPlayer("Set your name!", 10000);
+      if(window.location.hash == ""){
+        makeCrapsPlayer("Set your name!", 10000);
+      } else {
+        var crapsInfo = parseHash(window.location.hash);
+        makeCrapsPlayer(crapsInfo[0].slice(1), crapsInfo[1]);
+      }
       //_CRAPS.players = [p];
+      
+      function parseHash(str){
+        var retArray = [];
+        retArray.push(str.slice(0, str.indexOf('/')));
+        retArray.push(parseInt(str.slice(str.indexOf('/') + 1), 36));
+        return retArray;
+      }
 
       var p = PlayerManager.players[0];
       PlayerManager.updatePlayerArea();
