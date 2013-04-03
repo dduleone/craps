@@ -690,7 +690,8 @@
       
       function parseHash(str){
         var retArray = [];
-        retArray.push(str.slice(0, str.indexOf('/')));
+        var name = decodeURIComponent(str.slice(0, str.indexOf('/')));
+        retArray.push(name);
         retArray.push(parseInt(str.slice(str.indexOf('/') + 1), 36));
         return retArray;
       }
