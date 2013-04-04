@@ -844,7 +844,7 @@
         var retArray = [];
         var name = decodeURIComponent(str.slice(0, str.lastIndexOf('/')));
         retArray.push(name);
-        retArray.push(parseInt(str.slice(str.indexOf('/') + 1), 36));
+        retArray.push(parseInt(str.slice(str.lastIndexOf('/') + 1), 36));
         return retArray;
       }
 
