@@ -471,7 +471,7 @@ $.extend(_CRAPS, {
         response = betResponse[1]();
         if(response[0]){
           var newVal = bet.bet.value;
-          while(oldVal%response[1] != 0){
+          while(newVal%response[1] != 0){
             newVal++;
           }
           while(newVal > _CRAPS.maxBet){
