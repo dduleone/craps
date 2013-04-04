@@ -9,11 +9,12 @@ var CrapsPlayer = function(name, bank){
   
   $player.createBet = function(betType, value, repeat, origBet){
     if(_player.bank < value){
-      console.log(this.toString());
-      console.log(value);
-      console.log(_player.bank);
-      console.log("Not enough money, bitches");
-      return;
+      //console.log(this.toString());
+      //console.log(value);
+      //console.log(_player.bank);
+      //console.log("Not enough money, bitches");
+      alert('You don\'t have enough money to place that bet.')
+      return false;
     }
     if(!isNaN(value)){
       _player.subFromBank(value);
