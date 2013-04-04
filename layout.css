@@ -185,7 +185,7 @@
     height: 74%;
     padding: 10px;
     overflow: auto;
-    float: left;
+    /*float: left;*/
   }
   #rules{
     position: relative;
