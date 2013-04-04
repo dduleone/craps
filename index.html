@@ -836,13 +836,13 @@
         makeCrapsPlayer("Set your name!", 10000);
       } else {
         var crapsInfo = parseHash(window.location.hash);
-        makeCrapsPlayer(crapsInfo[0].slice(1), crapsInfo[1]);
+        makeCrapsPlayer(crapsInfo[0].slice(3), crapsInfo[1]);
       }
       //_CRAPS.players = [p];
       
       function parseHash(str){
         var retArray = [];
-        var name = decodeURIComponent(str.slice(0, str.indexOf('/')));
+        var name = decodeURIComponent(str.slice(0, str.lastIndexOf('/')));
         retArray.push(name);
         retArray.push(parseInt(str.slice(str.indexOf('/') + 1), 36));
         return retArray;
