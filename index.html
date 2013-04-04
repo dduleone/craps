@@ -38,9 +38,107 @@
       <!--div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div -->
     </div>
     <div id='buffer'></div>
-    <div id='help' class='round'>
-      <p>
-        Help:
+    <div id='modal' class='round'>
+      <div id='modalButtons'>
+        <div id='helpButton' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
+        <div id='rulesButton' class='bttn'onclick='clickModalButton("rules")'>Rules</div>
+        <div id='settingsButton' class='bttn' onclick='clickModalButton("settings")'>Settings</div>
+      </div>
+      <div id='settings'>SETTINGS!<br />Coming Soon!</div>
+      <div id='rules'>
+        <div id='rulesButtons'>
+          <div id='standardButton' class='bttn red' onclick='clickRulesButton("standard")'>Standard Bets</div>
+          <div id='multiButton' class='bttn' onclick='clickRulesButton("multi")'>Multi-Roll Bets</div>
+          <div id='singleButton' class='bttn' onclick='clickRulesButton("single")'>Single-Roll Bets</div>
+        </div>
+        <div id='standard'>
+          <ul>
+            <li>
+              Passline<br />
+              You may only place when the point is Off. If you have a Passline Bet on and a point gets set, you may not remove it.<br />
+              When the point is off:
+              <ul>
+                <li>7 &amp; 11 win</li>
+                <li>2 &amp; 3 lose</li>
+                <li>12 pushes</li>
+                <li>Anything else sets a point</li>
+              </ul>
+              When the point is on:
+              <ul>
+                <li>The point wins</li>
+                <li>7 loses</li>
+                <li>Anything else pushes</li>
+              </ul>
+            </li>
+            <li>
+              Don't Pass<br />
+              You may only place when the point is Off. If you have a Don't Pass Bet on and a point gets set, you may not remove it.<br />
+              When the point is off:
+              <ul>
+                <li>7 &amp; 11 lose</li>
+                <li>2 &amp; 3 win</li>
+                <li>12 pushes</li>
+                <li>Anything else sets a point</li>
+              </ul>
+              When the point is on:
+              <ul>
+                <li>The point loses</li>
+                <li>7 wins</li>
+                <li>Anything else pushes</li>
+              </ul>
+            </li>
+            <li>
+              Come<br />
+              A Passline bet, but on a separate point cycle.
+            </li>
+            <li>
+              Don't Come<br />
+              A Don't Pass bet, but on a separate point cycle.
+            </li>
+            <li>
+              Odds<br />
+              You may only place when you have a bet of the matching type on the table.<br />
+              Same winning conditions as the associated bet.
+            </li>
+          </ul>
+        </div>
+        <div id='multi'>
+          You may place these whenever. Usually off when the point is off.
+          <ul>
+            <li>
+              Place Bets<br />
+              <ul>
+                <li>The place number wins</li>
+                <li>7 loses</li>
+                <li>Anything else pushes</li>
+              </ul>
+            </li>
+            <li>
+              Hardways Bets<br />
+              <ul>
+                <li>Hardways wins</li>
+                <li>Easy loses</li>
+                <li>7 loses</li>
+                <li>Anything else pushes</li>
+              </ul>
+            </li>
+            <li>
+              Big 6/8<br />
+              <ul>
+                <li>6 or 8 wins</li>
+                <li>7 loses</li>
+                <li>Anything else pushes</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div id='single'>
+          You may place these whenever. Usually off when the point is off.<br />
+          See the individual bet for the win conditions.
+        </div>
+      </div>
+      <div id='help'>
+        <h2>Help:</h2>
         <ul>
           <li>To set your name, click on/touch the name area!</li>
           <li>To place a bet, click on/touch the area of the board you want to place a bet!</li>
@@ -49,11 +147,9 @@
           <li>To roll, click on/touch the red dice!</li>
           <li>If you want to save your session, clear all your bets and copy the URL. <br />
               When you come back to that URL, your game will pick up where you left off.<br />
-               *** Any bets left on the table will be lost when you come back! ***</li>
+              *** Any bets left on the table will be lost when you come back! ***</li>
         </ul>
-      </p>
-      <p>
-        Key:
+        <h2>Key:</h2>
         <table>
           <tr>
             <th>Heading</th>
@@ -88,10 +184,9 @@
             <td class='keyText'>Clear All Bets</td>
           </tr>
         </table>
-      </p>
-      <div class='bttn red' style='float: right' onclick='closeHelp()'>Close</div>
+      </div>
+        <div class='bttn red' style='float: right' onclick='closeModal()'>Close</div>
     </div>
-    
   </body>
   <footer>
 
@@ -145,7 +240,7 @@
                   return;
                 }
                 if(boardArea.name == "Help"){
-                  openHelp();
+                  openModal();
                   return;
                 }
                 clickAreaPlaceBet(boardArea);
@@ -279,36 +374,67 @@
         case "Pass Line":
           $('#betType').empty();
           var opt = $(document.createElement('option'));
-          opt.attr('value', 'passline');
-          opt.html(area.name);
-          var opt2 = $(document.createElement('option'));
-          opt2.attr('value', 'passlineOdds');
-          opt2.html('Pass Line Odds');
+          if(!GameState.point){
+            opt.attr('value', 'passline');
+            opt.html('Pass Line');
+          } else {
+            opt.attr('value', 'passlineOdds');
+            opt.html('Pass Line Odds');
+          }
+          $('#betType').append(opt).attr('disabled', 'true');
           $('#betRepeat').attr('checked','');
           $('#origBet').empty();
           if($('#betType').val() == 'passlineOdds'){
             var origBet = $('#origBet');
             var origLabel = $(document.createElement('label'));
             var orig = $(document.createElement('input'));
+            var bets = _CRAPS.dealer.betManager.bets;
             orig.attr('type', 'text');
             orig.css({width: '50px'});
             orig.attr('id', 'orig');
-            origLabel.html('Original Bet ID: ');
+            var _type = $('#betType').val().slice(0, 8);
+            for(i in bets){
+              if(bets[i].type == _type){
+                orig.attr('value', bets[i].bet.betId);
+              }
+            }
             origBet.append(origLabel).append(orig);
             $('#betRepeat').removeAttr('checked');
+            var origVal;
+            for(i in _CRAPS.dealer.betManager.bets){
+              if(_CRAPS.dealer.betManager.bets[i].type == 'passline'){
+                origVal = _CRAPS.dealer.betManager.bets[i].bet.value;
+              }
+            }
+            if(GameState.point == 4 || GameState.point == 10){
+              $('#betValSlide').attr('step', '50');
+              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+              $('#betValSlide').attr('max', origVal * 3);
+            } else if(GameState.point == 5 || GameState.point == 9){
+              $('#betValSlide').attr('step', '50');
+              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+              $('#betValSlide').attr('max', origVal * 4);
+            } else if(GameState.point == 6 || GameState.point == 8){
+              $('#betValSlide').attr('step', '50');
+              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+              $('#betValSlide').attr('max', origVal * 5);
+            }
           }
-          $('#betType').append(opt).append(opt2).attr('disabled', false);
-          $('#betName').hide();
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
           updateBetDesc();
           break;
         case "Don't Pass":
           $('#betType').empty();
           var opt = $(document.createElement('option'));
-          opt.attr('value', 'dontPass');
-          opt.html('Don\'t Pass Line');
-          var opt2 = $(document.createElement('option'));
-          opt2.attr('value', 'dontPassOdds');
-          opt2.html('Don\'t Pass Odds');
+          if(!GameState.point){
+            opt.attr('value', 'dontPass');
+            opt.html('Don\'t Pass Line');
+          } else {
+            opt.attr('value', 'dontPassOdds');
+            opt.html('Don\'t Pass Odds');
+          }
+          $('#betType').append(opt).attr('disabled', 'true');
           $('#betRepeat').attr('checked','');
           $('#origBet').empty();
           if($('#betType').val() == 'dontPassOdds'){
@@ -318,12 +444,36 @@
             orig.attr('type', 'text');
             orig.css({width: '50px'});
             orig.attr('id', 'orig');
-            origLabel.html('Original Bet ID: ');
+            var _type = $('#betType').val().slice(0, 8);
+            for(i in bets){
+              if(bets[i].type == _type){
+                orig.attr('value', bets[i].bet.betId);
+              }
+            }
             origBet.append(origLabel).append(orig);
             $('#betRepeat').removeAttr('checked');
+            var origVal;
+            for(i in _CRAPS.dealer.betManager.bets){
+              if(_CRAPS.dealer.betManager.bets[i].type == 'passline'){
+                origVal = _CRAPS.dealer.betManager.bets[i].bet.value;
+              }
+            }
+            if(GameState.point == 4 || GameState.point == 10){
+              $('#betValSlide').attr('step', '50');
+              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+              $('#betValSlide').attr('max', origVal * 6);
+            } else if(GameState.point == 5 || GameState.point == 9){
+              $('#betValSlide').attr('step', '30');
+              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+              $('#betValSlide').attr('max', origVal * 8);
+            } else if(GameState.point == 6 || GameState.point == 8){
+              $('#betValSlide').attr('step', '60');
+              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+              $('#betValSlide').attr('max', origVal * 10);
+            }
           }
-          $('#betType').append(opt).append(opt2).attr('disabled', false);
-          $('#betName').hide();
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
           updateBetDesc();
           break;
         case "Come":
@@ -746,13 +896,35 @@
         $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() - $('#betForm').width() - (                4                        * 2 +                 2                     * 2)), opacity: 1}, 1000);
       }
       
-      function closeHelp(){
-        $('#help').animate({opacity: 0}, 1000, function(){$('#help').hide();});
+      function openModal(){
+        $('#modal').show();
+        $('#modal').animate({opacity: 1}, 1000); 
       }
       
-      function openHelp(){
-        $('#help').show();
-        $('#help').animate({opacity: 1}, 1000); 
+      function closeModal(){
+        $('#modal').animate({opacity: 0}, 1000, function(){$('#modal').hide();});
+      }
+      
+      function clickModalButton(button){
+        var modals = ['help', 'settings', 'rules'];
+        modals.splice(modals.indexOf(button), modals.indexOf(button));
+        for(i in modals){
+          $('#' + modals[i] + 'Button').removeClass('blue');
+          $('#' + modals[i]).hide();
+        }
+        $('#' + button + 'Button').addClass('blue');
+        $('#' + button).show();
+      }
+      
+      function clickRulesButton(button){
+        var modals = ['standard', 'multi', 'single'];
+        modals.splice(modals.indexOf(button), modals.indexOf(button));
+        for(i in modals){
+          $('#' + modals[i] + 'Button').removeClass('red');
+          $('#' + modals[i]).hide();
+        }
+        $('#' + button + 'Button').addClass('red');
+        $('#' + button).show();
       }
       
       function create(){
@@ -763,6 +935,10 @@
         var origBet = null;
         if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
           origBet = _CRAPS.dealer.betManager.getBetById($('#orig').val());
+          if(!_CRAPS.dealer.betManager.getBetById($('#orig').val())){
+            alert('You may not place a Pass Line Odds Bet when there is no Pass Line Bet on the table.');
+            cancel();
+          }
         }
         var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);
         //console.log('Placing bet:', newBet.toString());
@@ -831,6 +1007,7 @@
         //console.log(oldVal);
         
         _betDispVal.empty();
+        _betDispVal.removeClass('bttn');
         var input = $(document.createElement('input'));
         input.attr('type', 'text');
         //input.attr('id', 'nameInput');
@@ -857,6 +1034,7 @@
           } else {
             _betDispVal.empty();
             _betDispVal.html('$' + newAmount);
+          _betDispVal.attr('class', 'bttn');
             _bet.bet.value = parseInt(newAmount);
             var diff = (parseInt(newAmount) - parseInt(oldVal))
             _bet.bet.player.player.subFromBank(diff);
@@ -878,6 +1056,7 @@
           }
           _betDispVal.empty();
           _betDispVal.html('$' + newAmount);
+          _betDispVal.attr('class', 'bttn');
           _bet.bet.value = parseInt(newAmount);
           var diff = (parseInt(newAmount) - parseInt(oldVal))
           _bet.bet.player.player.subFromBank(diff);
@@ -1225,11 +1404,11 @@
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
+      })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+    
       ga('create', 'UA-1424934-14', 'duleone.com');
       ga('send', 'pageview');
-
+    
     </script>
     </footer>
 </html>

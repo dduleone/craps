@@ -2,7 +2,7 @@
 bets.js
 */
 
-var nextBetId = 0;
+var nextBetId = 1;
 
 var Bet = function(wager, player){
   var bet = this;

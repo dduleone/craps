@@ -332,6 +332,7 @@ BetManager.prototype = {
       val.attr('id', 'val' + this.bets[betNum].bet.betId);
       val.html('$' + this.bets[betNum].bet.value);
       val.attr('onclick', 'updateBet(' + this.bets[betNum].bet.betId + ')');
+      val.attr('class', 'bttn');
       
       var betOn = $(document.createElement('input'));
       //betOnLabel.html('<br />Bet On: ');

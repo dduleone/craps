@@ -163,16 +163,92 @@
     top: 0px;
     overflow: auto;
   }
-  #help{
+  #modal{
     position: absolute;
     background: #000 url(bet_bg.jpg) repeat-y;
     color: #FFF;
     top: 10%;
     left: 20%;
     width: 60%;
+    height: 80%;
     padding: 10px;
     display: none;
     opacity: 0;
+  }
+  #help{
+    position: relative;
+    /* background: #000 url(bet_bg.jpg) repeat-y; */
+    color: #FFF;
+    top: 2%;
+    left: 0;
+    width: 100%;
+    height: 89%;
+    padding: 10px;
+    float: left;
+  }
+  #rules{
+    position: relative;
+    /* background: #000 url(bet_bg.jpg) repeat-y; */
+    color: #FFF;
+    top: 2%;
+    left: 0;
+    width: 100%;
+    height: 89%;
+    padding: 10px;
+    float: left;
+    overflow: auto;
+    display: none;
+  }
+  #standard{
+    position: relative;
+    /* background: #000 url(bet_bg.jpg) repeat-y; */
+    color: #FFF;
+    top: 2%;
+    left: 0;
+    width: 80%;
+    height: 89%;
+    padding: 10px;
+    float: left;
+    overflow: auto;
+  }
+  #multi{
+    position: relative;
+    /* background: #000 url(bet_bg.jpg) repeat-y; */
+    color: #FFF;
+    top: 2%;
+    left: 0;
+    width: 80%;
+    height: 89%;
+    padding: 10px;
+    float: left;
+    overflow: auto;
+    display: none;
+  }
+  #single{
+    position: relative;
+    /* background: #000 url(bet_bg.jpg) repeat-y; */
+    color: #FFF;
+    top: 2%;
+    left: 0;
+    width: 80%;
+    height: 89%;
+    padding: 10px;
+    float: left;
+    overflow: auto;
+    display: none;
+  }
+  #settings{
+    position: relative;
+    /* background: #000 url(bet_bg.jpg) repeat-y; */
+    color: #FFF;
+    top: 2%;
+    left: 0;
+    width: 100%;
+    height: 89%;
+    padding: 10px;
+    float: left;
+    overflow: auto;
+    display: none;
   }
   .imageKey{
     background: #FFF;
