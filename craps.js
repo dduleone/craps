@@ -470,15 +470,28 @@ $.extend(_CRAPS, {
       if(betResponse[0] == 2){
         response = betResponse[1]();
         if(response[0]){
-          var oldVal = bet.bet.value;
+          var newVal = bet.bet.value;
           while(oldVal%response[1] != 0){
-            oldVal++;
+            newVal++;
           }
-          if(bet.bet.player.player.bank - (oldVal - bet.bet.value) < 0){
-            oldVal = oldVal - response[1];
+          while(newVal > _CRAPS.maxBet){
+            newVal = newVal - response[1];
           }
-          bet.bet.player.player.subFromBank((oldVal - bet.bet.value));
-          bet.bet.value = oldVal;
+          if(['passline', 'passlineOdds', 'come', 'comeOdds', 'dontPass', 'dontPassOdds', 'dontCome', 'dontComeOdds', 'place4', 'place5', 'place6', 'place8', 'place9', 'place10', 'field', 'big6', 'big8'].indexOf(bet.type) != -1){
+            while(newVal < _CRAPS.minBet){
+              newVal = newVal + response[1];
+            }
+            if(bet.bet.player.player.bank - (newVal - bet.bet.value) < 0){
+              alert('You don\'t have enough money to place this bet. Bet has not been placed');
+              bet.bet.player.player.addToBank(bet.bet.value);
+              return;
+            }
+          }
+          while(bet.bet.player.player.bank - (newVal - bet.bet.value) < 0){
+            newVal = newVal - response[1];
+          }
+          bet.bet.player.player.subFromBank((newVal - bet.bet.value));
+          bet.bet.value = newVal;
         }
       }
       this.dealer.betManager.placeBet(bet);
