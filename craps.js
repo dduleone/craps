@@ -493,6 +493,11 @@ $.extend(_CRAPS, {
           while(bet.bet.player.player.bank - (newVal - bet.bet.value) < 0){
             newVal = newVal - response[1];
           }
+          if(newVal == 0){
+            alert('You don\'t have enough money to place this bet. Bet has not been placed');
+            bet.bet.player.player.addToBank(bet.bet.value);
+            return;
+          }
           bet.bet.player.player.subFromBank((newVal - bet.bet.value));
           bet.bet.value = newVal;
         }
