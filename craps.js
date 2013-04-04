@@ -469,17 +469,17 @@ $.extend(_CRAPS, {
       var response;
       if(betResponse[0] == 2){
         response = betResponse[1]();
-      }
-      if(response[0]){
-        var oldVal = bet.bet.value;
-        while(oldVal%response[1] != 0){
-          oldVal++;
+        if(response[0]){
+          var oldVal = bet.bet.value;
+          while(oldVal%response[1] != 0){
+            oldVal++;
+          }
+          if(bet.bet.player.player.bank - (oldVal - bet.bet.value) < 0){
+            oldVal = oldVal - response[1];
+          }
+          bet.bet.player.player.subFromBank((oldVal - bet.bet.value));
+          bet.bet.value = oldVal;
         }
-        if(bet.bet.player.player.bank - (oldVal - bet.bet.value) < 0){
-          oldVal = oldVal - response[1];
-        }
-        bet.bet.player.player.subFromBank((oldVal - bet.bet.value));
-        bet.bet.value = oldVal;
       }
       this.dealer.betManager.placeBet(bet);
       //draw(Board);
