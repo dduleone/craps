@@ -41,7 +41,7 @@
     <div id='modal' class='round'>
       <div id='modalButtons'>
         <div id='helpButton' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
-        <div id='rulesButton' class='bttn'onclick='clickModalButton("rules")'>Rules</div>
+        <div id='rulesButton' class='bttn' onclick='clickModalButton("rules")'>Rules</div>
         <div id='settingsButton' class='bttn' onclick='clickModalButton("settings")'>Settings</div>
       </div>
       <div id='settings'>SETTINGS!<br />Coming Soon!</div>
@@ -830,6 +830,7 @@
         
         place();
       }
+      
       if(window.location.hash == ""){
         makeCrapsPlayer("Set your name!", 10000);
       } else {
@@ -898,6 +899,7 @@
       
       function openModal(){
         $('#modal').show();
+        $('#settingsButton').hide()
         $('#modal').animate({opacity: 1}, 1000); 
       }
       

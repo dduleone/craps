@@ -156,14 +156,14 @@ BetManager.prototype = {
       }
       else if(GameState.point == 5 || GameState.point == 9){
         if(_bet.value <= 4 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be even and 4 times the Pass Line bet or less. Consider adjusting.');}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be even. Do you want to adjust to the next even number?');return [ans, 2];}];
         } else {
           return [0, function(){alert('Bet value must be 4 times the Pass Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(GameState.point == 6 || GameState.point == 8){
         if(_bet.value <= 5 * _origBet.value){
-          return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+          return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
         } else {
           return [0, function(){alert('Bet value must be 5 times the Pass Line bet or less. Bet has not been placed.');}];
         }
@@ -182,14 +182,14 @@ BetManager.prototype = {
       }
       else if(bet.origBet.point == 5 || bet.origBet.point == 9){
         if (_bet.value <= 4 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be even. Consider adjusting.');}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be even. Do you want to adjust to the next even number?');return [ans, 2];}];
         } else {
           return [0 , function(){alert('Bet value must be 4 times the Come Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(bet.origBet.point == 6 || bet.origBet.point == 8){
         if(_bet.value <= 5 * _origBet.value){
-          return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+          return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
         } else {
           return [0 , function(){alert('Bet value must be 5 times the Come Line bet or less. Bet has not been placed.');}];
         }
@@ -205,21 +205,21 @@ BetManager.prototype = {
       }
       if(GameState.point == 4 || GameState.point == 10){
         if(_bet.value <= 6 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet should be even. Consider adjusting.');}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){var ans = confirm('Bet should be even. Do you want to adjust to the next even number?');return [ans, 2];}];
         } else {
           return [0, function(){alert('Bet must be 6 times the Don\'t Pass Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(GameState.point == 5 || GameState.point == 9){
         if(_bet.value <= 8 * _origBet.value){
-          return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.');}];
+          return [(_bet.value % 3 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 3. Do you want to adjust to the next number divisible by 3?');return [ans, 3];}];
         } else {
           return [0 , function(){alert('Bet value must 8 times the Don\'t Pass Line bet or less. Bet has not been placed.');}];
         }
       }
       else if(GameState.point == 6 || GameState.point == 8){
         if(_bet.value <= 10 * _origBet.value){
-        return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
+        return [(_bet.value % 6 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 6. Do you want to adjust to the next number divisible by 6?');return [ans, 6];}];
         } else {
           return [0 , function(){alert('Bet value must be 10 times the Don\'t Pass Line bet or less. Bet has not been placed.');}];
         }
@@ -232,37 +232,37 @@ BetManager.prototype = {
       }
       if(bet.origBet.point == 4 || bet.origBet.point == 10){
         if(_bet.value <= 6 * _origBet.value){
-          return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet should be even. Consider adjusting.');}];
+          return [(_bet.value % 2 == 0) ? 1 : 2, function(){var ans = confirm('Bet should be even. Do you want to adjust to the next even number?');return [ans, 2];}];
         } else {
           return [0, function(){alert('Bet must be 6 times the Don\'t Come bet or less. Bet has not been placed.');}];
         }
       }
       else if(bet.origBet.point == 5 || bet.origBet.point == 9){
         if(_bet.value <= 8 * _origBet.value){
-          return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.');}];
+          return [(_bet.value % 3 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 3. Do you want to adjust to the next number divisible by 3?');return [ans, 3];}];
         } else {
           return [0 , function(){alert('Bet value must 8 times the Don\'t Come bet or less. Bet has not been placed.');}];
         }
       }
       else if(bet.origBet.point == 6 || bet.origBet.point == 8){
         if(_bet.value <= 10 * _origBet.value){
-        return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
+        return [(_bet.value % 6 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 6. Do you want to adjust to the next number divisible by 6?');return [ans, 6];}];
         } else {
           return [0 , function(){alert('Bet value must be 10 times the Don\'t Come bet or less. Bet has not been placed.');}];
         }
       }
     case "place4":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
     case "place5":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
     case "place6":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
+      return [(_bet.value % 6 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 6. Do you want to adjust to the next number divisible by 6?');return [ans, 6];}];
     case "place8":
-      return [(_bet.value % 6 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 6. Consider adjusting.');}];
+      return [(_bet.value % 6 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 6. Do you want to adjust to the next number divisible by 6?');return [ans, 6];}];
     case "place9":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
     case "place10":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
     case "hard4":
       return [1, ''];
     case "hard6":
@@ -274,13 +274,13 @@ BetManager.prototype = {
     case "field":
       return [1, ''];
     case "cAndE":
-      return [(_bet.value % 2 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 2. Consider adjusting.');}];
+      return [(_bet.value % 2 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 2. Do you want to adjust to the next even number?');return [ans, 2];}];
     case "any7":
-      return [(_bet.value % 3 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 3. Consider adjusting.');}];
+      return [(_bet.value % 3 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 3. Do you want to adjust to the next number divisible by 3?');return [ans, 3];}];
     case "anyCraps":
       return [1, ''];
     case "horn":
-      return [(_bet.value % 4 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 4. Consider adjusting.');}];
+      return [(_bet.value % 4 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 4. Do you want to adjust to the next number divisible by 4?');return [ans, 4];}];
     case "aceTwo":
       return [1, ''];
     case "snakeEyes":
@@ -294,7 +294,7 @@ BetManager.prototype = {
     case "big8":
       return [1, ''];
     case "world":
-      return [(_bet.value % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+      return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
     default:
       return;
     }
@@ -466,10 +466,22 @@ $.extend(_CRAPS, {
   placeBet: function(bet){
     betResponse = this.dealer.betManager.validateBet(bet);
     if(betResponse[0] > 0){
-      this.dealer.betManager.placeBet(bet);
+      var response;
       if(betResponse[0] == 2){
-        betResponse[1]();
+        response = betResponse[1]();
       }
+      if(response[0]){
+        var oldVal = bet.bet.value;
+        while(oldVal%response[1] != 0){
+          oldVal++;
+        }
+        if(bet.bet.player.player.bank - (oldVal - bet.bet.value) < 0){
+          oldVal = oldVal - response[1];
+        }
+        bet.bet.player.player.subFromBank((oldVal - bet.bet.value));
+        bet.bet.value = oldVal;
+      }
+      this.dealer.betManager.placeBet(bet);
       //draw(Board);
     }
     else{
