@@ -308,7 +308,7 @@ BetManager.prototype = {
     var betTable = $(document.createElement('table'));
     var headers = $(document.createElement('tr'));
     headers.append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Id').attr('src', 'images/id-card_green_small.png')))//.html('Id'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.30)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
            .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Amount').attr('src', 'images/chips_small.png')))//.html('Value'))
            .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet On?').attr('src', 'images/power_button_black_small.png')))//.html('On?'))
            .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Repeat On Win?').attr('src', 'images/restart_small.png')))//.html('Repeat?'))
