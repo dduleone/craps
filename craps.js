@@ -341,14 +341,17 @@ BetManager.prototype = {
       betOn.attr('checked', this.bets[betNum].bet.on);
       betOn.attr('id', 'on' + this.bets[betNum].bet.betId);
       betOn.attr('betNum', this.bets[betNum].bet.betId);
+      if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds', 'come', 'dontCome', 'comeOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
+        betOn.attr('disabled', 'true');
+      }
       var toggleBet = function(e){
         var betNumber = $($(this)[0]).attr("betNum");
         _CRAPS.dealer.betManager.getBetById(betNumber).bet.on = $($(this)[0]).is(':checked');
       }
       betOn.change(toggleBet);
-      if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds'].indexOf(this.bets[betNum].type) != -1 && GameState.point > 0){
-        betOn.attr('disabled', 'true');
-      }
+      //if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds'].indexOf(this.bets[betNum].type) != -1 && GameState.point > 0){
+      //  betOn.attr('disabled', 'true');
+      //}
       on.append(betOn);
       
       var repeat = $(document.createElement('td'));
@@ -389,8 +392,7 @@ BetManager.prototype = {
         }else{
           remove.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
         }
-      }
-      if(this.bets[betNum].type == 'come'){
+      }else if(this.bets[betNum].type == 'come'){
         if(this.bets[betNum].point > 0){
           remove.attr('onclick', 'alert("You cannot take down a Come bet when it has a point.")');
           remove.attr('disabled', 'true');
@@ -699,7 +701,7 @@ var BetChecker = function(point, betArray, dice){
         if(bet.repeat){
           newBetArray.push(bet);
         }
-      }else if(dice.getSum() == 7 || dice.getSum == 11){
+      }else if(dice.getSum() == 7 || dice.getSum() == 11){
         $('window').trigger(onLose(bet));
         _player.subFromBank(_bet.value);
         newBetArray.push(bet);

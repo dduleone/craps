@@ -141,11 +141,12 @@
       <div id='help'>
         <h2>Help:</h2>
         <ul>
-          <li>To set your name, click on/touch the name area!</li>
-          <li>To place a bet, click on/touch the area of the board you want to place a bet!</li>
-          <li>To place an odds bet, click on/touch the area of the board that you're placing odds. Then select Odds from the drop down!</li>
-          <li>To change a bet's amount, click on the amount!</li>
-          <li>To roll, click on/touch the red dice!</li>
+          <li>To set your name, click on/touch the name area.</li>
+          <li>To place a bet, click on/touch the area of the board you want to place a bet.</li>
+          <li>To place a Passline/Don't Pass odds bet, click on/touch the Passline/Don't Pass area when there is a point on.</li>
+          <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come standard areas, then select Come/Don't Come Odds from the drop down, and make sure the correct Original Bet Id is in the box.</li>
+          <li>To change a bet's amount, click on the amount.</li>
+          <li>To roll, click on/touch the red dice.</li>
           <li>If you want to save your session, clear all your bets and copy the URL. <br />
               When you come back to that URL, your game will pick up where you left off.<br />
               *** Any bets left on the table will be lost when you come back! ***</li>
@@ -212,6 +213,7 @@
                   board: "#090",
                   border: "#000",
                   pointOff: "#000",
+                  pointBorder: "#000",
                   pointOn: "#fff",
                   lines: "#fff",
                   text: "#fff",
@@ -224,7 +226,7 @@
           board.draw();
       
           canvas.onclick = function(e) {
-              //console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
+              console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
               //console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
               //ctx = board.context;
               //ctx.beginPath();
@@ -442,6 +444,7 @@
             var origBet = $('#origBet');
             var origLabel = $(document.createElement('label'));
             var orig = $(document.createElement('input'));
+            var bets = _CRAPS.dealer.betManager.bets;
             orig.attr('type', 'text');
             orig.css({width: '50px'});
             orig.attr('id', 'orig');
@@ -1167,31 +1170,31 @@
                 $('#betValSlide').attr('max', origVal * 10);
               }
             } else if(type == 'comeOdds'){
-              origVal = _CRAPS.dealer.betManager.getBetById(orig.value).bet.value;
-              if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 10){
+              origVal = _CRAPS.dealer.betManager.getBetById(orig.val()).bet.value;
+              if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 10){
                 $('#betValSlide').attr('step', '50');
                 $('#betValSlide').attr('value', $('#betValue').attr('value'));
                 $('#betValSlide').attr('max', origVal * 3);
-              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 9){
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 9){
                 $('#betValSlide').attr('step', '50');
                 $('#betValSlide').attr('value', $('#betValue').attr('value'));
                 $('#betValSlide').attr('max', origVal * 4);
-              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 8){
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 8){
                 $('#betValSlide').attr('step', '50');
                 $('#betValSlide').attr('value', $('#betValue').attr('value'));
                 $('#betValSlide').attr('max', origVal * 5);
               }
             } else if(type == 'dontComeOdds'){
-              origVal = _CRAPS.dealer.betManager.getBetById(orig.value).bet.value;
-              if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 10){
+              origVal = _CRAPS.dealer.betManager.getBetById(orig.val()).bet.value;
+              if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 10){
                 $('#betValSlide').attr('step', '50');
                 $('#betValSlide').attr('value', $('#betValue').attr('value'));
                 $('#betValSlide').attr('max', origVal * 6);
-              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 9){
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 9){
                 $('#betValSlide').attr('step', '30');
                 $('#betValSlide').attr('value', $('#betValue').attr('value'));
                 $('#betValSlide').attr('max', origVal * 8);
-              } else if(_CRAPS.dealer.betManager.getBetById(orig.value).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.value).point == 8){
+              } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 8){
                 $('#betValSlide').attr('step', '60');
                 $('#betValSlide').attr('value', $('#betValue').attr('value'));
                 $('#betValSlide').attr('max', origVal * 10);

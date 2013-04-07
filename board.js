@@ -1423,7 +1423,7 @@
             ctx.arc(1130, 60, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOff;
             ctx.fill();
-            ctx.strokeStyle = this.colors.pointOff;
+            ctx.strokeStyle = this.colors.pointBorder;
             ctx.stroke();
             ctx.closePath();
             ctx.beginPath();
@@ -1436,11 +1436,11 @@
           switch(GameState.point){
           case 4:
             ctx.beginPath();
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 1;
             ctx.arc(550, 162.5, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOn;
             ctx.fill();
-            ctx.strokeStyle = this.colors.pointOn;
+            ctx.strokeStyle = this.colors.pointBorder;
             ctx.stroke();
             ctx.closePath();
             ctx.beginPath();
@@ -1452,11 +1452,11 @@
             break;
           case 5:
             ctx.beginPath();
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 1;
             ctx.arc(650, 162.5, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOn;
             ctx.fill();
-            ctx.strokeStyle = this.colors.pointOn;
+            ctx.strokeStyle = this.colors.pointBorder;
             ctx.stroke();
             ctx.closePath();
             ctx.beginPath();
@@ -1468,11 +1468,11 @@
             break;
           case 6:
             ctx.beginPath();
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 1;
             ctx.arc(750, 162.5, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOn;
             ctx.fill();
-            ctx.strokeStyle = this.colors.pointOn;
+            ctx.strokeStyle = this.colors.pointBorder;
             ctx.stroke();
             ctx.closePath();
             ctx.beginPath();
@@ -1484,11 +1484,11 @@
             break;
           case 8:
             ctx.beginPath();
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 1;
             ctx.arc(850, 162.5, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOn;
             ctx.fill();
-            ctx.strokeStyle = this.colors.pointOn;
+            ctx.strokeStyle = this.colors.pointBorder;
             ctx.stroke();
             ctx.closePath();
             ctx.beginPath();
@@ -1500,11 +1500,11 @@
             break;
           case 9:
             ctx.beginPath();
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 1;
             ctx.arc(950, 162.5, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOn;
             ctx.fill();
-            ctx.strokeStyle = this.colors.pointOn;
+            ctx.strokeStyle = this.colors.pointBorder;
             ctx.stroke();
             ctx.closePath();
             ctx.beginPath();
@@ -1516,11 +1516,11 @@
             break;
           case 10:
             ctx.beginPath();
-            ctx.lineWidth = 5;
+            ctx.lineWidth = 1;
             ctx.arc(1050, 162.5, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOn;
             ctx.fill();
-            ctx.strokeStyle = this.colors.pointOn;
+            ctx.strokeStyle = this.colors.pointBorder;
             ctx.stroke();
             ctx.closePath();
             ctx.beginPath();
@@ -1550,7 +1550,7 @@
               break;
             case 'passlineOdds':
               ctx.beginPath();
-              ctx.arc(540, 810, 20, 0, 2 * Math.PI, false);
+              ctx.arc(540, 880, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
               ctx.fillStyle = 'maroon';
               ctx.fill()
@@ -1576,40 +1576,372 @@
               ctx.stroke();
               break;
             case 'come':
-              ctx.beginPath();
-              ctx.arc(425, 415, 20, 0, 2 * Math.PI, false);
-              ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
-              ctx.fill()
-              ctx.strokeStyle = 'navy';
-              ctx.stroke();
+              if(bets[bet].point == 4){
+                ctx.beginPath();
+                ctx.arc(575, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 564, 135);
+                ctx.stroke();
+                ctx.closePath();
+              }else if(bets[bet].point == 5){
+                ctx.beginPath();
+                ctx.arc(675, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 664, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 6){
+                ctx.beginPath();
+                ctx.arc(775, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 764, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 8){
+                ctx.beginPath();
+                ctx.arc(875, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 864, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 9){
+                ctx.beginPath();
+                ctx.arc(975, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 964, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 10){
+                ctx.beginPath();
+                ctx.arc(1075, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 1064, 135);
+                ctx.stroke();
+              }else{
+                ctx.beginPath();
+                ctx.arc(425, 415, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+              }
               break;
             case 'comeOdds':
-              ctx.beginPath();
-              ctx.arc(425, 425, 20, 0, 2 * Math.PI, false);
-              ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
-              ctx.fill()
-              ctx.strokeStyle = 'navy';
-              ctx.stroke();
+              if(bets[bet].point == 4){
+                ctx.beginPath();
+                ctx.arc(575, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 564, 125);
+                ctx.stroke();
+                ctx.closePath();
+              }else if(bets[bet].point == 5){
+                ctx.beginPath();
+                ctx.arc(675, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 664, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 6){
+                ctx.beginPath();
+                ctx.arc(775, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 764, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 8){
+                ctx.beginPath();
+                ctx.arc(875, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 864, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 9){
+                ctx.beginPath();
+                ctx.arc(975, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 964, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 10){
+                ctx.beginPath();
+                ctx.arc(1075, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('C', 1064, 125);
+                ctx.stroke();
+              }
               break;
             case 'dontCome':
-              ctx.beginPath();
-              ctx.arc(400, 305, 20, 0, 2 * Math.PI, false);
-              ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
-              ctx.fill()
-              ctx.strokeStyle = 'navy';
-              ctx.stroke();
+              if(bets[bet].point == 4){
+                ctx.beginPath();
+                ctx.arc(525, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 514, 135);
+                ctx.stroke();
+                ctx.closePath();
+              }else if(bets[bet].point == 5){
+                ctx.beginPath();
+                ctx.arc(625, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 614, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 6){
+                ctx.beginPath();
+                ctx.arc(725, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 714, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 8){
+                ctx.beginPath();
+                ctx.arc(825, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 814, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 9){
+                ctx.beginPath();
+                ctx.arc(925, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 914, 135);
+                ctx.stroke();
+              }else if(bets[bet].point == 10){
+                ctx.beginPath();
+                ctx.arc(1025, 125, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 1014, 135);
+                ctx.stroke();
+              }else{
+                ctx.beginPath();
+                ctx.arc(400, 305, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+              }
               break;
             case 'dontComeOdds':
-              ctx.beginPath();
-              ctx.arc(400, 315, 20, 0, 2 * Math.PI, false);
-              ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
-              ctx.fill()
-              ctx.strokeStyle = 'navy';
-              ctx.stroke();
+              if(bets[bet].point == 4){
+                ctx.beginPath();
+                ctx.arc(525, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 514, 125);
+                ctx.stroke();
+                ctx.closePath();
+              }else if(bets[bet].point == 5){
+                ctx.beginPath();
+                ctx.arc(625, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 614, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 6){
+                ctx.beginPath();
+                ctx.arc(725, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 714, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 8){
+                ctx.beginPath();
+                ctx.arc(825, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 814, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 9){
+                ctx.beginPath();
+                ctx.arc(925, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 914, 125);
+                ctx.stroke();
+              }else if(bets[bet].point == 10){
+                ctx.beginPath();
+                ctx.arc(1025, 115, 20, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 2;
+                ctx.fillStyle = 'maroon';
+                ctx.fill()
+                ctx.strokeStyle = 'navy';
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "20pt Verdana";
+                ctx.fillText('D', 1014, 125);
+                ctx.stroke();
+              }
               break;
             case 'field':
               ctx.beginPath();
@@ -1619,6 +1951,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(545, 600, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 538, 607);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'place4':
               ctx.beginPath();
@@ -1628,6 +1976,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(545, 290, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 538, 297);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'place5':
               ctx.beginPath();
@@ -1637,6 +2001,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(650, 290, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 643, 297);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'place6':
               ctx.beginPath();
@@ -1646,6 +2026,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(745, 290, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 738, 297);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'place8':
               ctx.beginPath();
@@ -1655,6 +2051,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(850, 290, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 843, 297);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'place9':
               ctx.beginPath();
@@ -1664,6 +2076,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(950, 290, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 943, 297);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'place10':
               ctx.beginPath();
@@ -1673,6 +2101,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1050, 290, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1043, 297);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'big6':
               ctx.beginPath();
@@ -1682,6 +2126,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(255, 560, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 247, 567);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'big8':
               ctx.beginPath();
@@ -1691,6 +2151,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(340, 667, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 333, 674);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'any7':
               ctx.beginPath();
@@ -1700,6 +2176,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1425, 477, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1418, 484);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'hard6':
               ctx.beginPath();
@@ -1709,6 +2201,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1375, 550, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1368, 557);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'hard10':
               ctx.beginPath();
@@ -1718,6 +2226,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1725, 550, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1718, 557);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'hard8':
               ctx.beginPath();
@@ -1727,6 +2251,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1375, 650, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1368, 657);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'hard4':
               ctx.beginPath();
@@ -1736,6 +2276,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1725, 650, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1718, 657);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'aceTwo':
               ctx.beginPath();
@@ -1745,6 +2301,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1312.5, 750, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1305.5, 757);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'snakeEyes':
               ctx.beginPath();
@@ -1754,6 +2326,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1550, 750, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1543, 757);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'midnight':
               ctx.beginPath();
@@ -1763,6 +2351,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1782.5, 750, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1775.5, 757);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'yoleven':
               ctx.beginPath();
@@ -1772,6 +2376,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1550, 850, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1543, 857);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'anyCraps':
               ctx.beginPath();
@@ -1781,6 +2401,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1435, 925, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1428, 932);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'cAndE':
               ctx.beginPath();
@@ -1790,6 +2426,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1110, 700, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 1103, 707);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'horn':
               ctx.beginPath();
@@ -1799,6 +2451,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(930, 900, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 923, 907);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             case 'world':
               ctx.beginPath();
@@ -1808,6 +2476,22 @@
               ctx.fill()
               ctx.strokeStyle = 'navy';
               ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(1000, 900, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 993, 907);
+                ctx.stroke();
+                ctx.closePath();
+              }
               break;
             default:
               return;
