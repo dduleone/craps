@@ -763,7 +763,7 @@ var BetChecker = function(point, betArray, dice){
         }else if(bet.point == 6 || bet.point == 8){
           $('window').trigger(onWin(bet, Math.floor(5*_bet.value/6 + _bet.value)));
         }
-      }else if(dice.getSum() == point){
+      }else if(dice.getSum() == bet.point){
         $('window').trigger(onLose(bet));
         continue;
       }else{
