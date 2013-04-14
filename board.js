@@ -1238,6 +1238,14 @@
           ctx.strokeStyle = 'red';
           ctx.stroke();
           this.drawDots();
+
+          ctx.beginPath();
+          ctx.fillStyle = 'red';
+          //ctx.textAlign = "left";
+          ctx.font = "35pt Times";
+          //ctx.rotate(Math.PI * -0.2);
+          ctx.fillText("Roll", 1250, 315);
+          ctx.stroke();
         },
         drawDots: function(){
           var dice = diceToNum(_CRAPS.dice);
@@ -1299,7 +1307,7 @@
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
-            if (x > 1200 && x < 1375 && y > 200 && y < 275) {
+            if (x > 1200 && x < 1375 && y > 200 && y < 315) {
                 return true;
             }
             return false;
