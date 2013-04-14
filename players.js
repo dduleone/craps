@@ -58,9 +58,9 @@ $.extend(PlayerManager, {
     inPlay.html('Money In Play:<br />$' + totalBets);
     total.attr('id', 'totBank');
     total.html('Total Worth:<br />$' + (this.players[0].player.bank + totalBets));
-    if(this.players[0].player.bank + totalBets < 10000){
+    if(this.players[0].player.bank + totalBets < initBank){
       total.attr('class','losing');
-    }else if(this.players[0].player.bank + totalBets == 10000){
+    }else if(this.players[0].player.bank + totalBets == initBank){
       total.attr('class', '');
     }else{
       total.attr('class', 'winning');
@@ -82,6 +82,8 @@ $.extend(PlayerManager, {
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
     $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
     //bank.append(avail).append(inPlay).append(total);
-    window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
+    localStorage['name'] = PlayerManager.players[0].player.name;
+    localStorage['bank'] = PlayerManager.players[0].player.bank;
+    //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
   }
 });

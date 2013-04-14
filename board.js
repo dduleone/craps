@@ -1321,23 +1321,89 @@
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
-            ctx.arc(50, 950, 30, 2 * Math.PI, false);
+            ctx.arc(50, 950, 35, 2 * Math.PI, false);
             ctx.textAlign = "left";
             ctx.font = "40pt Times";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("?", 40, 968);
+            ctx.fillText("?", 40, 970);
             ctx.stroke();
             ctx.restore();
             
         },
         isClickedRegion: function(x, y) {
-            if (x > 20 && x < 80 && y > 920 && y < 980) {
+            if (x > 15 && x < 85 && y > 915 && y < 985) {
+                return true;
+            }
+            return false;
+        }
+    };
+    
+    var Reset = function(board) {
+        this.board = board;
+        return this;
+    }
+    Reset.prototype = {
+        name: "Reset",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            ctx.arc(150, 950, 35, 2 * Math.PI, false);
+            ctx.textAlign = "left";
+            ctx.font = "18pt Times";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Reset", 123, 950);
+            ctx.fillText("Bank",  125, 970);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 115 && x < 185 && y > 915 && y < 985) {
                 return true;
             }
             return false;
         }
     };
 
+    var SaveGame = function(board) {
+        this.board = board;
+        return this;
+    }
+    SaveGame.prototype = {
+        name: "Save Game",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            ctx.arc(250, 950, 35, 2 * Math.PI, false);
+            ctx.textAlign = "left";
+            ctx.font = "18pt Times";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Save", 228, 950);
+            ctx.fillText("Game", 220, 970);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 215 && x < 285 && y > 915 && y < 985) {
+                return true;
+            }
+            return false;
+        }
+    };
+    
     var regions = [
         PassLine,
         DontPass,
@@ -1368,7 +1434,9 @@
         Horn,
         World,
         Dice,
-        Help
+        Help,
+        Reset,
+        SaveGame
     ];
 
     var Board = function(canvas, colors) {

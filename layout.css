@@ -247,7 +247,7 @@
     width: 80%;
     height: 74%;
     padding: 10px;
-    float: left;
+    /*float: left;*/
     overflow: auto;
     display: none;
   }

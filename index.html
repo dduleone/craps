@@ -45,7 +45,11 @@
         <div id='rulesButton' class='bttn' onclick='clickModalButton("rules")'>Rules</div>
         <div id='settingsButton' class='bttn' onclick='clickModalButton("settings")'>Settings</div>
       </div>
-      <div id='settings'>SETTINGS!<br />Coming Soon!</div>
+      <div id='settings'>
+        <label for='startingBank'>Starting Bank: </label>
+        <input id='startingBank' type='text'><br />
+        <div id='save' class='bttn yellow' onclick='saveSettings()'>Save</div>
+      </div>
       <div id='rules'>
         <div id='rulesButtons'>
           <div id='standardButton' class='bttn red' onclick='clickRulesButton("standard")'>Standard Bets</div>
@@ -147,9 +151,14 @@
           <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come standard areas, then select Come/Don't Come Odds from the drop down, and make sure the correct Original Bet Id is in the box.</li>
           <li>To change a bet's amount, click on the amount.</li>
           <li>To roll, click on/touch the red dice.</li>
-          <li>If you want to save your session, clear all your bets and copy the URL. <br />
+          <li>Your session will automatically save after every roll. Any bets on the table are not saved<br />
+              when the game saves (coming soon!). If you want to take the game to another device,<br />
+              click "Save Game", and copy the URL in the pop up. Open that URL on your other device,<br />
+              and your game will pick up where this one left off!<br />
+              *** Important! When transfering to another device, any bets on the table will be lost! ***
+         <!-- If you want to save your session, clear all your bets and copy the URL. <br />
               When you come back to that URL, your game will pick up where you left off.<br />
-              *** Any bets left on the table will be lost when you come back! ***</li>
+              *** Any bets left on the table will be lost when you come back! ***</li> -->
         </ul>
         <h2>Key:</h2>
         <table>
@@ -226,7 +235,7 @@
           board.draw();
       
           canvas.onclick = function(e) {
-              console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
+              //console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
               //console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
               //ctx = board.context;
               //ctx.beginPath();
@@ -244,6 +253,19 @@
                 }
                 if(boardArea.name == "Help"){
                   openModal();
+                  return;
+                }
+                if(boardArea.name == "Reset"){
+                  if(_CRAPS.dealer.betManager.bets.length > 0){
+                    alert("You cannot reset your bankroll when you have bets on the table.");
+                  } else {
+                    PlayerManager.players[0].player.bank = initBank;
+                    PlayerManager.updatePlayerArea();
+                  }
+                  return;
+                }
+                if(boardArea.name == "Save Game"){
+                  saveGameState();
                   return;
                 }
                 clickAreaPlaceBet(boardArea);
@@ -835,13 +857,49 @@
         place();
       }
       
-      if(window.location.hash == ""){
-        makeCrapsPlayer("Set your name!", 10000);
+      var name;
+      var bank;
+      var initBank;
+      if(localStorage["initBank"]){
+        initBank = parseInt(localStorage["initBank"]);
       } else {
-        var crapsInfo = parseHash(window.location.hash);
-        makeCrapsPlayer(crapsInfo[0].slice(3), crapsInfo[1]);
+        initBank = 10000;
       }
+      $('#startingBank').val(initBank);
+      if(window.location.hash != ""){
+        var crapsInfo = parseHash(window.location.hash);
+        window.location.hash = "";
+        makeCrapsPlayer(crapsInfo[0].slice(3), crapsInfo[1]);
+      } else {
+        if(localStorage["name"]){
+          name = localStorage["name"];
+        } else {
+          name = "Set your name!";
+        }
+        if(localStorage["bank"]){
+          bank = parseInt(localStorage["bank"]);
+        } else {
+          bank = initBank;
+        }
+      }
+      makeCrapsPlayer(name, bank);
+      
       //_CRAPS.players = [p];
+      
+      function saveSettings(){
+        if(!isNaN(parseInt($('#startingBank').val()))){
+          initBank = parseInt($('#startingBank').val());
+          PlayerManager.updatePlayerArea();
+        } else {
+          alert('Please enter a number as the initial bank!');
+        }
+        closeModal();
+      }
+      
+      function saveGameState(){
+        prompt("Copy URL to take game to another device!", "http://duleone.com/craps/#!/" + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36));
+        //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
+      }
       
       function parseHash(str){
         var retArray = [];
@@ -903,7 +961,7 @@
       
       function openModal(){
         $('#modal').show();
-        $('#settingsButton').hide()
+        //$('#settingsButton').hide()
         $('#modal').animate({opacity: 1}, 1000); 
       }
       
@@ -1074,8 +1132,6 @@
         _betDispVal.append(input);
         input.focus();
       }
-      
-      
       
       (function() {
         $('#betValue').attr('value', '100');

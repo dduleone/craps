@@ -446,12 +446,12 @@ var Dealer = function(){
   dealer.betManager = new BetManager();
 }
 
-var _CRAPS = {};
-
 var GameState = {
   pointOn: false,
   point: 0
 };
+
+var _CRAPS = {};
 
 $.extend(_CRAPS, {
   debug: function(msg){
@@ -518,17 +518,6 @@ $.extend(_CRAPS, {
     this.dealer.betManager.checkBets(_CRAPS.dice);
   },
   dice: null,
-  point: false,
-  pointOn: function(dice){
-    if (dice.validate() && !dice.isCraps() && !dice.isComeOutWinner()){
-      GameState.point = dice.getSum();
-      _CRAPS.output("Setting point: " + dice.getSum());
-    }
-  },
-  pointOff: function(){
-    _CRAPS.output("Killing point: " + this.point);
-    GameState.point = false;
-  },
   roll: function(){
   // Roll the dice.
     //_CRAPS.output("Before Roll - The point is: " + GameState.point);
