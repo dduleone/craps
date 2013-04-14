@@ -12,7 +12,7 @@ var CrapsPlayer = function(name, bank){
       //console.log(this.toString());
       //console.log(value);
       //console.log(_player.bank);
-      //console.log("Not enough money, bitches");
+      //console.log("Not enough money");
       alert('You don\'t have enough money to place that bet.')
       return false;
     }

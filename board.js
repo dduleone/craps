@@ -1240,7 +1240,7 @@
           this.drawDots();
 
           ctx.beginPath();
-          ctx.fillStyle = 'red';
+          ctx.fillStyle = 'white';
           //ctx.textAlign = "left";
           ctx.font = "35pt Times";
           //ctx.rotate(Math.PI * -0.2);
