@@ -146,9 +146,14 @@
         <h2>Help:</h2>
         <ul>
           <li>To set your name, click on/touch the name area.</li>
-          <li>To place a bet, click on/touch the area of the board you want to place a bet.</li>
-          <li>To place a Passline/Don't Pass odds bet, click on/touch the Passline/Don't Pass area when there is a point on.</li>
-          <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come standard areas, then select Come/Don't Come Odds from the drop down, and make sure the correct Original Bet Id is in the box.</li>
+          <li>To place a bet, click on/touch the area of the board you want to place a bet.
+            <ul>
+              <li>Once you are satisfied with the bet, click "Create Bet!" or hit the "Enter" key.</li>
+              <li>If you decide you don't want to create the bet, click "Cancel" or hit the "Esc" key.</li>
+              <li>To place a Passline/Don't Pass odds bet, click on/touch the Passline/Don't Pass<br />area when there is a point on.</li>
+              <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come<br />standard areas, then select Come/Don't Come Odds from the drop down and<br />make sure the correct Original Bet Id is in the box.</li>
+            </ul>
+          </li>
           <li>To change a bet's amount, click on the amount.</li>
           <li>To roll, click on/touch the red dice.</li>
           <li>To reset your game and bankroll, click "Reset Game"</li>
@@ -398,6 +403,9 @@
           if(code == 27) {
             if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
               cancel();
+            }
+            if($('#modal').css('visibility')!= 'hidden' && $('#modal').css('display') != 'none'){
+              closeModal();
             }
           }
         }
