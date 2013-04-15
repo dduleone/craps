@@ -265,6 +265,7 @@
                     alert("You cannot reset your bankroll when you have bets on the table.");
                   } else {
                     nextBetId = 1;
+                    GameState.point = null;
                     PlayerManager.players[0].player.bank = initBank;
                     PlayerManager.updatePlayerArea();
                   }
