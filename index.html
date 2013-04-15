@@ -1072,7 +1072,7 @@
         $('#bank').css({top: ($('#name').offset().top + $('#name').height() - 30)});
         $('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-        //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
+        $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
         input.attr('value', player.player.name);
         if(input.attr('value') == 'Set your name!'){
           input.attr('value', 'Your Name');
@@ -1083,25 +1083,22 @@
           $('#playerArea').height($('#bank').height() + 4);
           $('#buffer').css('top', $('#playerArea').height());
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          $('#betListing').height($(window).height - $('#betListing').offset().top);
+          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
         });
         input.change(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          $('#betListing').height($(window).height - $('#betListing').offset().top);
+          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
         });
         input.blur(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          $('#betListing').height($(window).height - $('#betListing').offset().top);
+          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
         });
         nameDiv.append(input);
         input.focus();

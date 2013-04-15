@@ -84,6 +84,7 @@ $.extend(PlayerManager, {
     $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
     $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+    $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
     //bank.append(avail).append(inPlay).append(total);
     localStorage.clear();
     localStorage['name'] = PlayerManager.players[0].player.name;
