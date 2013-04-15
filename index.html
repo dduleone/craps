@@ -1145,7 +1145,7 @@
           _betDispVal.attr('class', 'bttn');
             _bet.bet.value = parseInt(newAmount);
             var diff = (parseInt(newAmount) - parseInt(oldVal))
-            _bet.bet.player.player.subFromBank(diff);
+            PlayerManager.getPlayerById(_bet.bet.playerId).player.subFromBank(diff);
           }
           PlayerManager.updatePlayerArea();
           if(retArray[0] == 2){
