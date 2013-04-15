@@ -4,7 +4,7 @@ craps.js
 
 function onWin(bet, amount){
   var _bet = bet.bet;
-  var _player = PlayerManager.getPlayerById(_bet.playerId);
+  var _player = PlayerManager.getPlayerById(_bet.playerId).player;
   
   _CRAPS.dealer.betManager.winningBetIds.push(_bet.betId);
   _CRAPS.output(nameToPretty(bet.type) + " bet wins! Pays out $" + amount);
