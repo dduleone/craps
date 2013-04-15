@@ -395,6 +395,11 @@
               create();
             }
           }
+          if(code == 27) {
+            if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
+              cancel();
+            }
+          }
         }
       );
 
