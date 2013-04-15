@@ -385,6 +385,17 @@
       function updateSlider(val){
         $('#betValSlide').attr('value', val);
       }
+      
+      $('#betValue').bind('keyup', function(e) {updateSlider(($('#betValue').val()?$('#betValue').val():0))});
+      
+      $(window).bind('keyup',
+        function(e) { var code = (e.keyCode ? e.keyCode : e.which);
+        if(code == 13) {
+          if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
+            create();
+          }
+        }}
+      );
 
       function addBet(area){
         $('#betRepeat').removeAttr('disabled');
