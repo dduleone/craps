@@ -390,11 +390,12 @@
       
       $(window).bind('keyup',
         function(e) { var code = (e.keyCode ? e.keyCode : e.which);
-        if(code == 13) {
-          if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
-            create();
+          if(code == 13) {
+            if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
+              create();
+            }
           }
-        }}
+        }
       );
 
       function addBet(area){
