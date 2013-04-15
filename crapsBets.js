@@ -5,7 +5,8 @@ crapsBets.js
 var CrapsBet = function(betType, value, player, repeat, attachedBet){
   var $bet = this;
   $bet.type = betType;
-  $bet.bet = new Bet(value, player);
+  //$bet.bet = new Bet(value, player);
+  $bet.bet = new Bet(value, player.player.id);
   $bet.origBet = null;
   $bet.point = false;
   if(betType == 'passline'){

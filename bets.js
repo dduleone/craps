@@ -4,12 +4,12 @@ bets.js
 
 var nextBetId = 1;
 
-var Bet = function(wager, player){
+var Bet = function(wager, playerId){
   var bet = this;
   
   bet.value = wager;
   
-  bet.player = player;
+  bet.playerId = playerId;
   
   bet.on = true;
   

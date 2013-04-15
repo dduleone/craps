@@ -4,7 +4,7 @@ craps.js
 
 function onWin(bet, amount){
   var _bet = bet.bet;
-  var _player = _bet.player.player;
+  var _player = PlayerManager.getPlayerById(_bet.playerId);
   
   _CRAPS.dealer.betManager.winningBetIds.push(_bet.betId);
   _CRAPS.output(nameToPretty(bet.type) + " bet wins! Pays out $" + amount);
@@ -46,7 +46,7 @@ BetManager.prototype = {
       if(betId != _bets[x].bet.betId){
         newBetArray.push(_bets[x]);
       } else {
-        _bets[x].bet.player.player.addToBank(_bets[x].bet.value);
+        PlayerManager.getPlayerById(_bets[x].bet.playerId).player.addToBank(_bets[x].bet.value);
       }
     }
     this.bets = newBetArray;
@@ -486,21 +486,21 @@ $.extend(_CRAPS, {
             while(newVal < _CRAPS.minBet){
               newVal = newVal + response[1];
             }
-            if(bet.bet.player.player.bank - (newVal - bet.bet.value) < 0){
+            if(PlayerManager.getPlayerById(bet.bet.playerId).player.bank - (newVal - bet.bet.value) < 0){
               alert('You don\'t have enough money to place this bet. Bet has not been placed');
-              bet.bet.player.player.addToBank(bet.bet.value);
+              PlayerManager.getPlayerById(bet.bet.playerId).player.addToBank(bet.bet.value);
               return;
             }
           }
-          while(bet.bet.player.player.bank - (newVal - bet.bet.value) < 0){
+          while(PlayerManager.getPlayerById(bet.bet.playerId).player.bank - (newVal - bet.bet.value) < 0){
             newVal = newVal - response[1];
           }
           if(newVal == 0){
             alert('You don\'t have enough money to place this bet. Bet has not been placed');
-            bet.bet.player.player.addToBank(bet.bet.value);
+            PlayerManager.getPlayerById(bet.bet.playerId).player.addToBank(bet.bet.value);
             return;
           }
-          bet.bet.player.player.subFromBank((newVal - bet.bet.value));
+          PlayerManager.getPlayerById(bet.bet.playerId).player.subFromBank((newVal - bet.bet.value));
           bet.bet.value = newVal;
         }
       }
@@ -509,7 +509,7 @@ $.extend(_CRAPS, {
     }
     else{
       if(!isNaN(bet.bet.value)){
-        bet.bet.player.player.addToBank(bet.bet.value);
+        PlayerManager.getPlayerById(bet.bet.playerId).player.addToBank(bet.bet.value);
       }
       betResponse[1]();
     }
@@ -580,7 +580,7 @@ var BetChecker = function(point, betArray, dice){
   for(var i in betArray){
     var bet = betArray[i];
     var _bet = bet.bet;
-    var _player = _bet.player.player;
+    var _player = PlayerManager.getPlayerById(_bet.playerId).player;
 
     if(!_bet.on){
       newBetArray.push(bet);

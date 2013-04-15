@@ -28,6 +28,9 @@ $.extend(PlayerManager, {
   getPlayerName: function(id){
     return this.players[id].name;
   },
+  getPlayerById: function(id){
+    return this.players[id];
+  },
   addPlayer: function(player){
     this.players.push(player);
   },
@@ -82,8 +85,16 @@ $.extend(PlayerManager, {
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
     $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
     //bank.append(avail).append(inPlay).append(total);
+    localStorage.clear();
     localStorage['name'] = PlayerManager.players[0].player.name;
     localStorage['bank'] = PlayerManager.players[0].player.bank;
+    
+    localStorage['point'] = GameState.point;
+    _bets = _CRAPS.dealer.betManager.bets
+    for(i in _bets){
+      localStorage['bet' + i] = JSON.stringify(_bets[i]);
+    }
+    
     //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
   }
 });

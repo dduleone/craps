@@ -151,10 +151,10 @@
           <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come standard areas, then select Come/Don't Come Odds from the drop down, and make sure the correct Original Bet Id is in the box.</li>
           <li>To change a bet's amount, click on the amount.</li>
           <li>To roll, click on/touch the red dice.</li>
-          <li>Your session will automatically save after every roll. Any bets on the table are not saved<br />
-              when the game saves (coming soon!). If you want to take the game to another device,<br />
-              click "Save Game", and copy the URL in the pop up. Open that URL on your other device,<br />
-              and your game will pick up where this one left off!<br />
+          <li>To reset your game and bankroll, click "Reset Game"</li>
+          <li>Your session will automatically save after every roll. If you want to take<br />
+              the game to another device, click "Save Game", and copy the URL in the pop up.<br />
+              Open that URL on your other device, and your game will pick up where this one left off!<br />
               *** Important! When transfering to another device, any bets on the table will be lost! ***
          <!-- If you want to save your session, clear all your bets and copy the URL. <br />
               When you come back to that URL, your game will pick up where you left off.<br />
@@ -259,6 +259,7 @@
                   if(_CRAPS.dealer.betManager.bets.length > 0){
                     alert("You cannot reset your bankroll when you have bets on the table.");
                   } else {
+                    nextBetId = 1;
                     PlayerManager.players[0].player.bank = initBank;
                     PlayerManager.updatePlayerArea();
                   }
@@ -865,6 +866,13 @@
       } else {
         initBank = 10000;
       }
+      if(localStorage['point']){
+        if(localStorage['point'] == "null"){
+          GameState.point = null;
+        } else {
+          GameState.point = parseInt(localStorage['point']);
+        }
+      }
       $('#startingBank').val(initBank);
       if(window.location.hash != ""){
         var crapsInfo = parseHash(window.location.hash);
@@ -883,6 +891,15 @@
         }
       }
       makeCrapsPlayer(name, bank);
+      if(localStorage['bet0']){
+        var betNum = 0;
+        while(localStorage['bet' + betNum]){
+          var bet = JSON.parse(localStorage['bet' + betNum]);
+          _CRAPS.dealer.betManager.bets.push(bet);
+          betNum++;
+        }
+        nextBetId = _CRAPS.dealer.betManager.bets[_CRAPS.dealer.betManager.bets.length - 1].bet.betId + 1;
+      }
       
       //_CRAPS.players = [p];
       
@@ -917,6 +934,7 @@
 
       function roll(){
         _CRAPS.roll();
+        localStorage['point'] = GameState.point;
         //draw(Board);
         //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
         if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){

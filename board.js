@@ -1333,7 +1333,7 @@
             ctx.textAlign = "left";
             ctx.font = "40pt Times";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("?", 40, 970);
+            ctx.fillText("?", 40, 965);
             ctx.stroke();
             ctx.restore();
             
@@ -1365,8 +1365,8 @@
             ctx.textAlign = "left";
             ctx.font = "18pt Times";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Reset", 123, 950);
-            ctx.fillText("Bank",  125, 970);
+            ctx.fillText("Reset", 123, 945);
+            ctx.fillText("Game",  120, 965);
             ctx.stroke();
             ctx.restore();
             
@@ -1398,8 +1398,8 @@
             ctx.textAlign = "left";
             ctx.font = "18pt Times";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Save", 228, 950);
-            ctx.fillText("Game", 220, 970);
+            ctx.fillText("Save", 228, 945);
+            ctx.fillText("Game", 220, 965);
             ctx.stroke();
             ctx.restore();
             
