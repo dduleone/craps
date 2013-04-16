@@ -931,7 +931,7 @@
           $('#betType').attr('disabled', 'true');
           $('#betValSlide').attr('step', '1');
           $('#betValSlide').attr('max', '10');
-          if($('#betValue').attr('value') > 10){
+          if(parseInt($('#betValue').attr('value')) > 10){
             $('#betValSlide').attr('value', '5');
             $('#betValue').attr('value', '5');
           }
