@@ -95,6 +95,7 @@ $.extend(PlayerManager, {
     for(i in _bets){
       localStorage['bet' + i] = JSON.stringify(_bets[i]);
     }
+    localStorage['fireArray'] = JSON.stringify(GameState.fireArray);
     
     //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
   }

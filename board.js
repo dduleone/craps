@@ -1,3 +1,5 @@
+var fireImg = new Image();
+fireImg.src = 'images/fire.png';
 
 (function() {
 
@@ -1226,6 +1228,39 @@
         }
     };
 
+    var Fire = function(board) {
+        this.board = board;
+        return this;
+    }
+    Fire.prototype = {
+        name: "Fire",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+            ctx.font = "40pt Verdana";
+
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            ctx.arc(860, 900, 30, 2 * Math.PI, false);
+            ctx.drawImage(fireImg, 830, 870, 60, 60);
+            //ctx.textAlign = "left";
+            //ctx.font = "14pt Verdana";
+            //ctx.fillText("Fire", 842, 907);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 830 && x < 890 && y > 870 && y < 930) {
+                return true;
+            }
+            return false;
+        }
+    };
+
     var Dice = function(board) {
         this.board = board;
         return this;
@@ -1249,7 +1284,8 @@
           //ctx.textAlign = "left";
           ctx.font = "35pt Verdana";
           //ctx.rotate(Math.PI * -0.2);
-          ctx.fillText("Roll", 1250, 315);
+          ctx.textAlign = "left";
+          ctx.fillText("Roll", 1245, 320);
           ctx.stroke();
         },
         drawDots: function(){
@@ -1312,7 +1348,7 @@
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
-            if (x > 1200 && x < 1375 && y > 200 && y < 315) {
+            if (x > 1200 && x < 1375 && y > 200 && y < 320) {
                 return true;
             }
             return false;
@@ -1446,6 +1482,7 @@
         EAndC,
         Horn,
         World,
+        Fire,
         Dice,
         Help,
         Reset,
@@ -1496,6 +1533,119 @@
             ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
             ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
             this.drawPoint(ctx, GameState.point);
+            this.drawFire(ctx, GameState.fireArray);
+        },
+        drawFire: function(ctx, fireArray){
+          for(i in fireArray){
+            if(fireArray[i]){
+              switch(i){
+               case "4":
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.arc(550, 336, 15, 2 * Math.PI, false);
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill();
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.drawImage(fireImg, 535, 321, 30, 30);
+                ctx.closePath();
+                //ctx.beginPath();
+                //ctx.fillStyle = this.colors.text;
+                //ctx.font = "15pt Verdana";
+                //ctx.fillText('F', 545, 343);
+                //ctx.stroke();
+                //ctx.closePath();
+                break;
+               case "5":
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.arc(650, 336, 15, 2 * Math.PI, false);
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill();
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.drawImage(fireImg, 635, 321, 30, 30);
+                ctx.closePath();
+                //ctx.beginPath();
+                //ctx.fillStyle = this.colors.text;
+                //ctx.font = "15pt Verdana";
+                //ctx.fillText('F', 645, 343);
+                //ctx.stroke();
+                //ctx.closePath();
+                break;
+               case "6":
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.arc(750, 336, 15, 2 * Math.PI, false);
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill();
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.drawImage(fireImg, 735, 321, 30, 30);
+                ctx.closePath();
+                //ctx.beginPath();
+                //ctx.fillStyle = this.colors.text;
+                //ctx.font = "15pt Verdana";
+                //ctx.fillText('F', 745, 343);
+                //ctx.stroke();
+                //ctx.closePath();
+                break;
+               case "8":
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.arc(850, 336, 15, 2 * Math.PI, false);
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill();
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.drawImage(fireImg, 835, 321, 30, 30);
+                ctx.closePath();
+                //ctx.beginPath();
+                //ctx.fillStyle = this.colors.text;
+                //ctx.font = "15pt Verdana";
+                //ctx.fillText('F', 845, 343);
+                //ctx.stroke();
+                //ctx.closePath();
+                break;
+               case "9":
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.arc(950, 336, 15, 2 * Math.PI, false);
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill();
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.drawImage(fireImg, 935, 321, 30, 30);
+                ctx.closePath();
+                //ctx.beginPath();
+                //ctx.fillStyle = this.colors.text;
+                //ctx.font = "15pt Verdana";
+                //ctx.fillText('F', 945, 343);
+                //ctx.stroke();
+                //ctx.closePath();
+                break;
+               case "10":
+                ctx.beginPath();
+                ctx.lineWidth = 1;
+                ctx.arc(1050, 336, 15, 2 * Math.PI, false);
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill();
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.drawImage(fireImg, 1035, 321, 30, 30);
+                ctx.closePath();
+                //ctx.beginPath();
+                //ctx.fillStyle = this.colors.text;
+                //ctx.font = "15pt Verdana";
+                //ctx.fillText('F', 1045, 343);
+                //ctx.stroke();
+                //ctx.closePath();
+                break;
+              default:
+                return;
+              }
+            }
+          }
         },
         drawPoint: function(ctx, point){
           if(!GameState.point){
@@ -2560,6 +2710,31 @@
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
                 ctx.arc(1000, 900, 15, 0, 2 * Math.PI, false);
+                ctx.lineWidth = 1;
+                ctx.fillStyle = this.colors.pointOff;
+                ctx.fill()
+                ctx.strokeStyle = this.colors.pointBorder;
+                ctx.stroke();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.fillStyle = this.colors.text;
+                ctx.font = "15pt Verdana";
+                ctx.fillText('X', 993, 907);
+                ctx.stroke();
+                ctx.closePath();
+              }
+              break;
+            case 'fire':
+              ctx.beginPath();
+              ctx.arc(860, 900, 20, 0, 2 * Math.PI, false);
+              ctx.lineWidth = 2;
+              ctx.fillStyle = 'maroon';
+              ctx.fill()
+              ctx.strokeStyle = 'navy';
+              ctx.stroke();
+              if(bets[bet].bet.on == false){
+                ctx.beginPath();
+                ctx.arc(860, 900, 15, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 1;
                 ctx.fillStyle = this.colors.pointOff;
                 ctx.fill()

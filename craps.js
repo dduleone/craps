@@ -61,7 +61,7 @@ BetManager.prototype = {
   },
   turnBetsOff: function(){
     for(var i in this.bets){
-      if(['passline', 'passlineOdds', 'come', 'comeOdds', 'dontPass', 'dontPassOdds', 'dontCome', 'dontComeOdds'].indexOf(this.bets[i].type) == -1){
+      if(['passline', 'passlineOdds', 'come', 'comeOdds', 'dontPass', 'dontPassOdds', 'dontCome', 'dontComeOdds', 'fire'].indexOf(this.bets[i].type) == -1){
         this.bets[i].bet.on = false;
       }
     }
@@ -295,6 +295,20 @@ BetManager.prototype = {
       return [1, ''];
     case "world":
       return [(_bet.value % 5 == 0) ? 1 : 2, function(){var ans = confirm('Bet value should be divisible by 5. Do you want to adjust to the next number divisible by 5?');return [ans, 5];}];
+    case "fire":
+      if(_bet.value > 10){
+        return [0, function(){alert('Maximum Fire bet is $10. Bet has not been placed.');}];
+      }
+      if(GameState.fireArray[4] ||
+         GameState.fireArray[5] ||
+         GameState.fireArray[6] ||
+         GameState.fireArray[8] ||
+         GameState.fireArray[9] ||
+         GameState.fireArray[10] ||
+         GameState.point){
+        return [0, function(){alert('You may only place a Fire bet during the initial Come Out Roll. Bet has not been placed.');}];
+      }
+      return [1, ''];
     default:
       return;
     }
@@ -344,7 +358,7 @@ BetManager.prototype = {
       betOn.attr('checked', this.bets[betNum].bet.on);
       betOn.attr('id', 'on' + this.bets[betNum].bet.betId);
       betOn.attr('betNum', this.bets[betNum].bet.betId);
-      if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds', 'come', 'dontCome', 'comeOdds', 'dontComeOdds'].indexOf(this.bets[betNum].type) != -1){
+      if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds', 'come', 'dontCome', 'comeOdds', 'dontComeOdds', 'fire'].indexOf(this.bets[betNum].type) != -1){
         betOn.attr('disabled', 'true');
       }
       var toggleBet = function(e){
@@ -451,7 +465,16 @@ var Dealer = function(){
 
 var GameState = {
   pointOn: false,
-  point: 0
+  point: 0,
+  fireArray: {
+    4: false,
+    5: false,
+    6: false,
+    8: false,
+    9: false,
+    10: false
+  },
+  numFire: 0
 };
 
 var _CRAPS = {};
@@ -534,12 +557,21 @@ $.extend(_CRAPS, {
     if (GameState.point > 0){
       if (roll == 7){
         GameState.point = false;
+        GameState.numFire = 0;
+        for(i in GameState.fireArray){
+          if(GameState.fireArray[i]){
+            GameState.numFire++;
+          }
+          GameState.fireArray[i] = false;
+        }
+        
         _CRAPS.output("Seven Out! Pay all Don't Come and Don't Pass! All other bets lose.");
         // Resolve Bets.
         return;
       }
 
       if (roll == GameState.point){
+        GameState.fireArray[GameState.point] = true;
         GameState.point = false;
         _CRAPS.output("Shooter made the point!");
         _CRAPS.output("All Pass Line bets win!");
@@ -1098,10 +1130,45 @@ var BetChecker = function(point, betArray, dice){
       }else{
         $('window').trigger(onLose(bet));
         continue;
-      }if(bet.repeat){
+      }
+      if(bet.repeat){
         newBetArray.push(bet);
       }else{
         _player.addToBank(_bet.value);
+      }
+      break;
+    case "fire":
+      if(GameState.point > 0){
+        if(dice.getSum() == 7){
+          if(GameState.numFire < 4){
+            $('window').trigger(onLose(bet));
+          } else if(GameState.numFire == 4){
+            $('window').trigger(onWin(bet, 24*_bet.value));
+            if(bet.repeat){
+              newBetArray.push(bet);
+            }else{
+              _player.addToBank(_bet.value);
+            }
+          } else if(GameState.numFire == 5){
+            $('window').trigger(onWin(bet, 249*_bet.value));
+            if(bet.repeat){
+              newBetArray.push(bet);
+            }else{
+              _player.addToBank(_bet.value);
+            }
+          } else if(GameState.numFire == 6){
+            $('window').trigger(onWin(bet, 999*_bet.value));
+            if(bet.repeat){
+              newBetArray.push(bet);
+            }else{
+              _player.addToBank(_bet.value);
+            }
+          }
+        } else {
+          newBetArray.push(bet);
+        }
+      } else {
+        newBetArray.push(bet);
       }
       break;
     default:
@@ -1306,6 +1373,11 @@ function revalidate(bet, amount){
     return [1, ''];
   case "world":
     return [(amount % 5 == 0) ? 1 : 2, function(){alert('Bet value should be divisible by 5. Consider adjusting.');}];
+  case "fire":
+    if(_bet.value > 10){
+      return [0, function(){alert('Maximum Fire bet is $10. Bet has not been placed.');}];
+    }
+    return [1, ''];
   default:
     return;
   }

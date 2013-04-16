@@ -262,10 +262,13 @@
                 }
                 if(boardArea.name == "Reset"){
                   if(_CRAPS.dealer.betManager.bets.length > 0){
-                    alert("You cannot reset your bankroll when you have bets on the table.");
+                    alert("You cannot reset your game when you have bets on the table.");
                   } else {
                     nextBetId = 1;
                     GameState.point = null;
+                    for(i in GameState.fireArray){
+                      GameState.fireArray[i] = false;
+                    }
                     PlayerManager.players[0].player.bank = initBank;
                     PlayerManager.updatePlayerArea();
                   }
@@ -374,6 +377,9 @@
           break;
         case "world":
           $('#betDesc').html('Payout:<br />Roll 2, 12: 5 pays 26<br />Roll 3, 11: 5 pays 11<br />Roll 7: Push<br />No Minimum Bet<br />Increments of 5');
+          break;
+        case "fire":
+          $('#betDesc').html('Payout:<br />4 points in a row: 1 pays 24<br />5 points in a row: 1 pays 249<br />6 points in a row: 1 pays 999<br />$10 maximum bet');
           break;
         default:
           return false;
@@ -909,6 +915,23 @@
           $('#betRepeat').removeAttr('checked');
           updateBetDesc();
           break;
+        case "Fire":
+          $('#betType').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'fire');
+          opt.html(area.name);
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html('Fire');
+          $('#betType').attr('disabled', 'true');
+          $('#betValSlide').attr('step', '1');
+          $('#betValSlide').attr('max', '10');
+          $('#betValSlide').attr('value', '5');
+          $('#betValue').attr('value', '5');
+          $('#origBet').empty();
+          $('#betRepeat').removeAttr('checked');
+          updateBetDesc();
+          break;
         default:
           return false;
         }
@@ -930,6 +953,9 @@
         } else {
           GameState.point = parseInt(localStorage['point']);
         }
+      }
+      if(localStorage['fireArray']){
+        GameState.fireArray = JSON.parse(localStorage['fireArray']);
       }
       $('#startingBank').val(initBank);
       if(window.location.hash != ""){
@@ -1468,6 +1494,9 @@
         case "World":
           return 'world';
           break;
+        case "Fire":
+          return 'fire';
+          break;
         default:
           return;
         }
@@ -1563,7 +1592,10 @@
           return "Horn";
           break;
         case 'world':
-          return "World";
+          return "World"
+          break;
+        case 'fire':
+          return "Fire";
           break;
         default:
           return;
