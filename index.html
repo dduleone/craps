@@ -55,6 +55,7 @@
           <div id='standardButton' class='bttn red' onclick='clickRulesButton("standard")'>Standard Bets</div>
           <div id='multiButton' class='bttn' onclick='clickRulesButton("multi")'>Multi-Roll Bets</div>
           <div id='singleButton' class='bttn' onclick='clickRulesButton("single")'>Single-Roll Bets</div>
+          <div id='fireButton' class='bttn' onclick='clickRulesButton("fire")'>Fire Bets</div>
         </div>
         <div id='standard'>
           <ul>
@@ -140,6 +141,10 @@
         <div id='single'>
           You may place these whenever. Usually off when the point is off.<br />
           See the individual bet for the win conditions.
+        </div>
+        <div id='fire'>
+          A Fire Bet may only be placed during the initial Come out roll, when there is no point established, and no fire markers on the table.<br />
+          A Fire bet pays out only when four or more unique points are made before Seven Outting.
         </div>
       </div>
       <div id='help'>
@@ -240,7 +245,7 @@
           board.draw();
       
           canvas.onclick = function(e) {
-              console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
+              //console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
               //console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
               //ctx = board.context;
               //ctx.beginPath();
@@ -1074,7 +1079,7 @@
       
       function clickModalButton(button){
         var modals = ['help', 'settings', 'rules'];
-        modals.splice(modals.indexOf(button), modals.indexOf(button));
+        modals.splice(modals.indexOf(button), 1);
         for(i in modals){
           $('#' + modals[i] + 'Button').removeClass('blue');
           $('#' + modals[i]).hide();
@@ -1084,8 +1089,8 @@
       }
       
       function clickRulesButton(button){
-        var modals = ['standard', 'multi', 'single'];
-        modals.splice(modals.indexOf(button), modals.indexOf(button));
+        var modals = ['standard', 'multi', 'single', 'fire'];
+        modals.splice(modals.indexOf(button), 1);
         for(i in modals){
           $('#' + modals[i] + 'Button').removeClass('red');
           $('#' + modals[i]).hide();

@@ -242,6 +242,19 @@
     overflow: auto;
     display: none;
   }
+  #fire{
+    position: relative;
+    /* background: #000 url(bet_bg.jpg) repeat-y; */
+    color: #FFF;
+    top: 2%;
+    left: 0;
+    width: 80%;
+    height: 74%;
+    padding: 10px;
+    float: left;
+    overflow: auto;
+    display: none;
+  }
   #settings{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
