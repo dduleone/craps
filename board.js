@@ -19,13 +19,13 @@
             ctx.textAlign = "left";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "60pt Times";
+            ctx.font = "60pt Verdana";
             ctx.fillText("Pass Line", 0, 0);
             ctx.restore();
 
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "60pt Times";
+            ctx.font = "60pt Verdana";
             ctx.textAlign = "right";
             ctx.fillText("Pass Line", 950, 825);
         },
@@ -97,7 +97,7 @@
             ctx.textAlign = "left";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "45pt Times";
+            ctx.font = "45pt Verdana";
             ctx.fillText("Don't Pass", 0, 0);
             ctx.restore();
 
@@ -134,7 +134,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "45pt Times";
+            ctx.font = "45pt Verdana";
             ctx.fillText("Don't", 400, 175);
             ctx.fillText("Come", 400, 225);
             ctx.fillText("Bar", 400, 275);
@@ -172,7 +172,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "75pt Times";
+            ctx.font = "75pt Verdana";
             ctx.fillText("COME", 650, 450);
 
         },
@@ -208,7 +208,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "45pt Times";
+            ctx.font = "45pt Verdana";
             ctx.fillText("Don't Pass", 700, 725);
 
         },
@@ -244,29 +244,29 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.specialText;
             ctx.strokeStyle = this.board.colors.specialText;
-            ctx.font = "45pt Times";
+            ctx.font = "45pt Verdana";
             ctx.fillText("FIELD", 660, 620);
-            ctx.font = "35pt Times";
-            ctx.fillText("2", 470, 585);
+            ctx.font = "35pt Verdana";
+            ctx.fillText("2", 472, 587);
             ctx.fillText("3", 540, 560);
             ctx.fillText("4", 600, 555);
             ctx.fillText("9", 660, 550);
             ctx.fillText("10", 720, 555);
             ctx.fillText("11", 790, 560);
-            ctx.fillText("12", 870, 585);
+            ctx.fillText("12", 868, 587);
             ctx.lineWidth = 5;
             ctx.beginPath();
-            ctx.arc(470, 572, 30, 0, 2* Math.PI, false);
+            ctx.arc(470, 572, 32, 0, 2* Math.PI, false);
             ctx.stroke();
             ctx.beginPath();
-            ctx.arc(870, 572, 30, 0, 2* Math.PI, false);
+            ctx.arc(870, 572, 32, 0, 2* Math.PI, false);
             ctx.stroke();
         },
         isClickedRegion: function(x, y) {
             if (x > 400 && x < 1000 && y > 500 && y < 650) {
                 return true;
             }
-            if (x > 300 && x < 400 && y > 500 && y < (200 + x)) {
+            if (x > 300 && x < 400 && 500 < y && y < ((3/2) * x + 50)) {
                 return true;
             }
             return false;
@@ -286,7 +286,7 @@
             ctx.lineWidth = 10;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.lines;
-            ctx.font = "35pt Times";
+            ctx.font = "35pt Verdana";
             ctx.save();
             ctx.translate(350, 575);
             ctx.rotate(Math.PI * 0.25);
@@ -301,7 +301,7 @@
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
-            ctx.font = "70pt Times";
+            ctx.font = "70pt Verdana";
             ctx.save();
             ctx.translate(270, 550);
             ctx.rotate(Math.PI * 0.25);
@@ -309,13 +309,10 @@
             ctx.restore();
         },
         isClickedRegion: function(x, y) {
-            if (x < 300 && x > 200 && y > 500 && y < 600) {
+            if (200 < x && x < 300 && 500 < y && y < ((-7/6)*x + 933.33)) {
                 return true;
             }
-            if (x < 300 && x > 200 && y > 600 && y < (900 - x)) {
-                return true;
-            }
-            if (x < 350 && x > 300 && y > 400 && y < (900 - x)) {
+            if (300 < x && x < 350 && ((3/2) * x + 50) <  y && y < ((-7/6) * x + 933.33)) {
                 return true;
             }
             return false;
@@ -333,7 +330,7 @@
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
-            ctx.font = "70pt Times";
+            ctx.font = "70pt Verdana";
             ctx.save();
             ctx.translate(350, 650);
             ctx.rotate(Math.PI * 0.25);
@@ -341,7 +338,8 @@
             ctx.restore();
         },
         isClickedRegion: function(x, y) {
-            if (x > 200 && x < 400 && y > 450 && y < 750) {
+            if (200 < x && x < 350 && (-7/6 * x + 983.33) < y && y < 750 ||
+                350 <= x && x < 400 && (3/2 * x + 50) < y && y < 750) {
                 return true;
             }
             return false;
@@ -380,33 +378,40 @@
             },
             drawText: function() {
                 var ctx = this.board.context;
-                if (n != 6 && n != 9) {
+                if (n != 6 && n != 9 && n != 10) {
                     ctx.textAlign = "center";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
-                    ctx.font = "70pt Times";
-                    ctx.fillText(n, 550 + offset[n], 275);
+                    ctx.font = "70pt Verdana";
+                    ctx.fillText(n, 550 + offset[n], 285);
                 } else if (n == 6) {
                     ctx.save();
-                    ctx.translate(527 + offset[n], 285);
-                    ctx.rotate(Math.PI * -0.25);
+                    ctx.translate(537 + offset[n], 295);
+                    ctx.rotate(Math.PI * -0.3);
                     ctx.textAlign = "left";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
-                    ctx.font = "45pt Times";
+                    ctx.font = "45pt Verdana";
                     ctx.fillText("SIX", 0, 0);
                     ctx.restore();
                 } else if (n == 9) {
                     ctx.save();
-                    ctx.translate(525 + offset[n], 285);
-                    ctx.rotate(Math.PI * -0.25);
+                    ctx.translate(535 + offset[n], 295);
+                    ctx.rotate(Math.PI * -0.3);
                     ctx.textAlign = "left";
                     ctx.fillStyle = this.board.colors.specialText;
                     ctx.strokeStyle = this.board.colors.specialText;
-                    ctx.font = "30pt Times";
+                    ctx.font = "30pt Verdana";
                     ctx.fillText("NINE", 0, 0);
                     ctx.restore();
                    
+                } else if (n == 10){
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = this.board.colors.specialText;
+                    ctx.strokeStyle = this.board.colors.specialText;
+                    ctx.font = "70pt Verdana";
+                    ctx.fillText(1, 525 + offset[n], 285);
+                    ctx.fillText(0, 570 + offset[n], 285);
                 }
             },
             isClickedRegion: function(x, y) {
@@ -442,7 +447,7 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "38pt Times";
+            ctx.font = "38pt Verdana";
             ctx.fillText("SEVEN", 1550, 493);
         },
         isClickedRegion: function(x, y) {
@@ -478,7 +483,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Hard", 1375, 545);
         //    ctx.fillText("SIX", 1375, 590); 
         //},
@@ -582,7 +587,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Hard", 1725, 545);
         //    ctx.fillText("10", 1725, 590); 
         //},
@@ -618,7 +623,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Hard", 1375, 645);
         //    ctx.fillText("8", 1375, 690); 
         //},
@@ -718,7 +723,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Hard", 1725, 645);
         //    ctx.fillText("4", 1725, 690); 
         //},
@@ -755,7 +760,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Ace", 1325, 745);
         //    ctx.fillText("Two", 1325, 790); 
         //},
@@ -821,7 +826,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Snake", 1550, 745);
         //    ctx.fillText("Eyes", 1550, 790); 
         //},
@@ -886,7 +891,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Six", 1775, 745);
         //    ctx.fillText("Six", 1775, 790); 
         //},
@@ -961,7 +966,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Five", 1375, 845);
         //    ctx.fillText("Six", 1375, 890); 
         //},
@@ -1034,7 +1039,7 @@
         //    ctx.textAlign = "center";
         //    ctx.fillStyle = this.board.colors.specialText;
         //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Times";
+        //    ctx.font = "35pt Verdana";
         //    ctx.fillText("Five", 1725, 845);
         //    ctx.fillText("Six", 1725, 890); 
         //},
@@ -1107,8 +1112,8 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = this.board.colors.finalText;
-            ctx.font = "38pt Times";
-            ctx.fillText("CRAPS", 1550, 940);
+            ctx.font = "38pt Verdana";
+            ctx.fillText("CRAPS", 1550, 944);
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1900 && y > 900 && y < 950) {
@@ -1130,20 +1135,20 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "40pt Times";
+            ctx.font = "40pt Verdana";
 
             for (var i = 0; i < 6; i++) {
                 ctx.strokeStyle = this.board.colors.lines;
                 ctx.beginPath();
                 ctx.arc(1145, 525 + (75 * i), 30, 2 * Math.PI, false);
-                ctx.fillText("C", 1142, 542 + (75 * i));
+                ctx.fillText("C", 1141, 544 + (75 * i));
                 ctx.stroke();
             }
             for (var i = 0; i < 7; i++) {
                 ctx.strokeStyle = this.board.colors.lines;
                 ctx.beginPath();
                 ctx.arc(1075, 490 + (75 * i), 30, 2 * Math.PI, false);
-                ctx.fillText("E", 1073, 507 + (75 * i));
+                ctx.fillText("E", 1074, 509 + (75 * i));
                 ctx.stroke();
             }
         },
@@ -1167,15 +1172,15 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "40pt Times";
+            ctx.font = "40pt Verdana";
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
             ctx.arc(930, 900, 30, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "14pt Times";
+            ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Horn", 910, 905);
+            ctx.fillText("Horn", 907, 907);
             ctx.stroke();
             ctx.restore();
             
@@ -1200,15 +1205,15 @@
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-            ctx.font = "40pt Times";
+            ctx.font = "40pt Verdana";
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
             ctx.arc(1000, 900, 30, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "14pt Times";
+            ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("World", 975, 905);
+            ctx.fillText("World", 970, 907);
             ctx.stroke();
             ctx.restore();
             
@@ -1242,7 +1247,7 @@
           ctx.beginPath();
           ctx.fillStyle = 'white';
           //ctx.textAlign = "left";
-          ctx.font = "35pt Times";
+          ctx.font = "35pt Verdana";
           //ctx.rotate(Math.PI * -0.2);
           ctx.fillText("Roll", 1250, 315);
           ctx.stroke();
@@ -1331,9 +1336,9 @@
             ctx.beginPath();
             ctx.arc(50, 950, 35, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "40pt Times";
+            ctx.font = "40pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("?", 40, 965);
+            ctx.fillText("?", 37, 970);
             ctx.stroke();
             ctx.restore();
             
@@ -1363,10 +1368,10 @@
             ctx.beginPath();
             ctx.arc(150, 950, 35, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "18pt Times";
+            ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Reset", 123, 945);
-            ctx.fillText("Game",  120, 965);
+            ctx.fillText("Reset", 123, 948);
+            ctx.fillText("Game",  121, 968);
             ctx.stroke();
             ctx.restore();
             
@@ -1396,10 +1401,10 @@
             ctx.beginPath();
             ctx.arc(250, 950, 35, 2 * Math.PI, false);
             ctx.textAlign = "left";
-            ctx.font = "18pt Times";
+            ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Save", 228, 945);
-            ctx.fillText("Game", 220, 965);
+            ctx.fillText("Save", 226, 948);
+            ctx.fillText("Game", 221, 968);
             ctx.stroke();
             ctx.restore();
             
@@ -1486,7 +1491,7 @@
             var ctx = this.context;
             ctx.fillStyle = this.colors.specialText;
             ctx.strokeStyle = this.colors.specialText;
-            ctx.font = "20pt Times";
+            ctx.font = "20pt Verdana";
             ctx.fillText('3x-4x-5x Odds', 1200, 100); 
             ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
             ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
@@ -1504,8 +1509,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.text;
-            ctx.font = "24pt Times";
-            ctx.fillText('OFF', 1100, 70);
+            ctx.font = "24pt Verdana";
+            ctx.fillText('OFF', 1098, 73);
             ctx.stroke();
             ctx.closePath();
           }
@@ -1521,8 +1526,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Times";
-            ctx.fillText('ON', 525, 172.5);
+            ctx.font = "25pt Verdana";
+            ctx.fillText('ON', 524, 175);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1537,8 +1542,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Times";
-            ctx.fillText('ON', 625, 172.5);
+            ctx.font = "25pt Verdana";
+            ctx.fillText('ON', 624, 175);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1553,8 +1558,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Times";
-            ctx.fillText('ON', 725, 172.5);
+            ctx.font = "25pt Verdana";
+            ctx.fillText('ON', 724, 175);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1569,8 +1574,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Times";
-            ctx.fillText('ON', 825, 172.5);
+            ctx.font = "25pt Verdana";
+            ctx.fillText('ON', 824, 175);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1585,8 +1590,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Times";
-            ctx.fillText('ON', 925, 172.5);
+            ctx.font = "25pt Verdana";
+            ctx.fillText('ON', 924, 175);
             ctx.stroke();
             ctx.closePath();
             break;
@@ -1601,8 +1606,8 @@
             ctx.closePath();
             ctx.beginPath();
             ctx.fillStyle = this.colors.buttonText;
-            ctx.font = "25pt Times";
-            ctx.fillText('ON', 1025, 172.5);
+            ctx.font = "25pt Verdana";
+            ctx.fillText('ON', 1024, 175);
             ctx.stroke();
             ctx.closePath();
             break;
