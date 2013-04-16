@@ -155,13 +155,17 @@
     color: white;
     background-color: red;
   }
-  table, td, th {
+  table, td, th{
     text-align: center;
   }
-  table {
+  table{
     position: relative;
     top: 0px;
     overflow: auto;
+  }
+  table#betTable{
+    border-spacing:0;
+    border-collapse:collapse;
   }
   #modal{
     position: absolute;
