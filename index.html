@@ -931,8 +931,10 @@
           $('#betType').attr('disabled', 'true');
           $('#betValSlide').attr('step', '1');
           $('#betValSlide').attr('max', '10');
-          $('#betValSlide').attr('value', '5');
-          $('#betValue').attr('value', '5');
+          if($('#betValue').attr('value') > 10){
+            $('#betValSlide').attr('value', '5');
+            $('#betValue').attr('value', '5');
+          }
           $('#origBet').empty();
           $('#betRepeat').removeAttr('checked');
           updateBetDesc();
