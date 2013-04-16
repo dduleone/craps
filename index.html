@@ -1026,6 +1026,7 @@
       function roll(){
         _CRAPS.roll();
         localStorage['point'] = GameState.point;
+        localStorage['fireArray'] = JSON.stringify(GameState.fireArray);
         //draw(Board);
         //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
         if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
