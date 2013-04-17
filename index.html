@@ -53,6 +53,7 @@
           <option value = "0">Standard Board</option>
           <option value = "1">Rutgers Edition</option>
           <option value = "2">Boise State Edition</option>
+          <option value = "3">Purple Board Orange Dice</option>
         </select><br />
         <div id='save' class='bttn yellow' onclick='saveSettings()'>Save</div>
       </div>
@@ -245,6 +246,9 @@
             break;
           case "2":
             board = new Board(canvas, colors2);
+            break;
+          case "3":
+            board = new Board(canvas, colors3);
             break;
           default:
             board = new Board(canvas, colors0);

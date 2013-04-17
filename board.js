@@ -56,6 +56,25 @@ var colors2 = {
   text: "#fff"
 };
 
+var colors3 = {
+  betBorder: "#0f0",
+  betFill: "#080",
+  betborder: "#000080",
+  board: "#4b0082",
+  border: "#000",
+  buttonText: "#000",
+  dice: "#ffa500",
+  dicePip: "#00f",
+  dicePips: "#000",
+  finalText: "#0f0",
+  lines: "#fff",
+  pointBorder: "#000",
+  pointOff: "#000",
+  pointOn: "#fff",
+  specialText: "#ff0",
+  text: "#fff"
+};
+
 (function() {
 
     var PassLine = function(board) {
