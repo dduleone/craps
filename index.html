@@ -234,6 +234,7 @@
     <script type='text/javascript' language='javascript'>
       
       function draw(Board) {
+          console.log('drawing');
           var canvas = document.getElementById("board");
       
           var board;
@@ -299,7 +300,24 @@
           };
       
       }
-      var drawer = setInterval(function(){draw(Board);}, 200);
+      var savePoint;
+      var saveBets;
+      var saveFireArray;
+      var saveDice;
+      var drawer = setInterval(function(){
+                            if(((!isNaN(savePoint) && !isNaN(GameState.point)) &&
+                               savePoint != GameState.point) ||
+                               saveBets != _CRAPS.dealer.betManager.bets.length ||
+                               saveFireArray != GameState.fireArray ||
+                               saveDice[0] != _CRAPS.dice.getDiceAsArray()[0] ||
+                               saveDice[1] != _CRAPS.dice.getDiceAsArray()[1]){
+                              draw(Board);
+                            }
+                            savePoint = GameState.point;
+                            saveBets = _CRAPS.dealer.betManager.bets.length;
+                            saveFireArray = GameState.fireArray;
+                            saveDice = _CRAPS.dice.getDiceAsArray();
+                          }, 200);
       //draw(Board);
             
       function updateBetDesc(){
