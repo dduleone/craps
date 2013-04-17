@@ -19,13 +19,13 @@ var colors0 = {
 
 var colors1 = {
   betBorder: "#0f0",
-  betFill: "#800000",
+  betFill: "#080",
   betborder: "#000080",
   board: "#00f",
   border: "#000",
   buttonText: "#000",
   dice: "#080",
-  finalText: "#f00",
+  finalText: "#0f0",
   lines: "#fff",
   pointBorder: "#000",
   pointOff: "#000",
