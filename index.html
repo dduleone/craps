@@ -48,6 +48,11 @@
       <div id='settings'>
         <label for='startingBank'>Starting Bank: </label>
         <input id='startingBank' type='text'><br />
+        <label for='colorScheme'>Color Scheme: </label>
+        <select id='colorScheme'>
+          <option value = "0">Green Background</option>
+          <option value = "1">Blue Background</option>
+        </select><br />
         <div id='save' class='bttn yellow' onclick='saveSettings()'>Save</div>
       </div>
       <div id='rules'>
@@ -227,21 +232,19 @@
     <script type='text/javascript' language='javascript'>
       
       function draw(Board) {
-          var canvas = document.getElementById("board"),
-              colors = {
-                  board: "#090",
-                  border: "#000",
-                  pointOff: "#000",
-                  pointBorder: "#000",
-                  pointOn: "#fff",
-                  lines: "#fff",
-                  text: "#fff",
-                  buttonText: '#000',
-                  specialText: "#ff0",
-                  finalText: "#f00"
-              };
+          var canvas = document.getElementById("board");
       
-          var board = new Board(canvas, colors);
+          var board;
+          switch(localStorage['colors']){
+          case "0":
+            board = new Board(canvas, colors0);
+            break;
+          case "1":
+            board = new Board(canvas, colors1);
+            break;
+          default:
+            board = new Board(canvas, colors0);
+          }
           board.draw();
       
           canvas.onclick = function(e) {
@@ -964,6 +967,9 @@
       if(localStorage['fireArray']){
         GameState.fireArray = JSON.parse(localStorage['fireArray']);
       }
+      if(localStorage['colors']){
+        $('#colorScheme').val(localStorage['colors']);
+      }
       $('#startingBank').val(initBank);
       if(window.location.hash != ""){
         var crapsInfo = parseHash(window.location.hash);
@@ -1077,6 +1083,7 @@
       }
       
       function closeModal(){
+        $('#colorScheme').val(localStorage['colors']);
         $('#modal').animate({opacity: 0}, 1000, function(){$('#modal').hide();});
       }
       

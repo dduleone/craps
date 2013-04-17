@@ -96,7 +96,7 @@ $.extend(PlayerManager, {
       localStorage['bet' + i] = JSON.stringify(_bets[i]);
     }
     localStorage['fireArray'] = JSON.stringify(GameState.fireArray);
-    
+    localStorage['colors'] = $('#colorScheme').val();
     //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
   }
 });

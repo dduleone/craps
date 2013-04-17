@@ -1,6 +1,39 @@
 var fireImg = new Image();
 fireImg.src = 'images/fire.png';
 
+var colors0 = {
+  board: "#090",
+  border: "#000",
+  pointOff: "#000",
+  pointBorder: "#000",
+  pointOn: "#fff",
+  lines: "#fff",
+  text: "#fff",
+  buttonText: '#000',
+  specialText: "#ff0",
+  finalText: "#f00",
+  dice: "#f00",
+  betFill:  "#800000",
+  betborder: "#000080"
+};
+
+var colors1 = {
+  betBorder: "#0f0",
+  betFill: "#800000",
+  betborder: "#000080",
+  board: "#00f",
+  border: "#000",
+  buttonText: "#000",
+  dice: "#080",
+  finalText: "#f00",
+  lines: "#fff",
+  pointBorder: "#000",
+  pointOff: "#000",
+  pointOn: "#fff",
+  specialText: "#ff0",
+  text: "#fff"
+};
+
 (function() {
 
     var PassLine = function(board) {
@@ -478,17 +511,7 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1200, 500);
             ctx.stroke();
             this.drawDice();
-            //this.drawText();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Hard", 1375, 545);
-        //    ctx.fillText("SIX", 1375, 590); 
-        //},
         drawDice: function(){
           var ctx = this.board.context;
           ctx.beginPath();
@@ -516,9 +539,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -545,7 +568,6 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1900, 500);
             ctx.lineTo(1550, 500);
             ctx.stroke();
-            //this.drawText();
             this.drawDice();
         },
         drawDice: function(){
@@ -579,20 +601,11 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Hard", 1725, 545);
-        //    ctx.fillText("10", 1725, 590); 
-        //},
         isClickedRegion: function(x, y) {
             if (x > 1550 && x < 1900 && y > 500 && y < 600) {
                 return true;
@@ -618,17 +631,7 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1200, 600);
             ctx.stroke();
             this.drawDice();
-            //this.drawText();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Hard", 1375, 645);
-        //    ctx.fillText("8", 1375, 690); 
-        //},
         drawDice: function(){
           var ctx = this.board.context;
           ctx.beginPath();
@@ -658,9 +661,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -687,7 +690,6 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1900, 600);
             ctx.lineTo(1550, 600);
             ctx.stroke();
-            //this.drawText();
             this.drawDice();
         },
         drawDice: function(){
@@ -715,20 +717,11 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Hard", 1725, 645);
-        //    ctx.fillText("4", 1725, 690); 
-        //},
         isClickedRegion: function(x, y) {
             if (x > 1550 && x < 1900 && y > 600 && y < 700) {
                 return true;
@@ -754,18 +747,8 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1430, 700);
             ctx.lineTo(1200, 700);
             ctx.stroke();
-            //this.drawText();
             this.drawDice();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Ace", 1325, 745);
-        //    ctx.fillText("Two", 1325, 790); 
-        //},
         drawDice: function(){
           var ctx = this.board.context;
           ctx.beginPath();
@@ -790,9 +773,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -820,18 +803,8 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1670, 700);
             ctx.lineTo(1430, 700);
             ctx.stroke();
-            //this.drawText();
             this.drawDice();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Snake", 1550, 745);
-        //    ctx.fillText("Eyes", 1550, 790); 
-        //},
         drawDice: function(){
           var ctx = this.board.context;
           ctx.beginPath();
@@ -855,9 +828,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -885,18 +858,8 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1900, 700);
             ctx.lineTo(1670, 700);
             ctx.stroke();
-            //this.drawText();
             this.drawDice();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Six", 1775, 745);
-        //    ctx.fillText("Six", 1775, 790); 
-        //},
         drawDice: function(){
           var ctx = this.board.context;
           ctx.beginPath();
@@ -930,9 +893,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -960,18 +923,8 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1550, 800);
             ctx.lineTo(1200, 800);
             ctx.stroke();
-            //this.drawText();
             this.drawDice();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Five", 1375, 845);
-        //    ctx.fillText("Six", 1375, 890); 
-        //},
         drawDice: function(){
           var ctx = this.board.context;
           ctx.beginPath();
@@ -1004,9 +957,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -1033,18 +986,8 @@ fireImg.src = 'images/fire.png';
             ctx.lineTo(1900, 800);
             ctx.lineTo(1550, 800);
             ctx.stroke();
-            //this.drawText();
             this.drawDice();
         },
-        //drawText: function() {
-        //    var ctx = this.board.context;
-        //    ctx.textAlign = "center";
-        //    ctx.fillStyle = this.board.colors.specialText;
-        //    ctx.strokeStyle = this.board.colors.specialText;
-        //    ctx.font = "35pt Verdana";
-        //    ctx.fillText("Five", 1725, 845);
-        //    ctx.fillText("Six", 1725, 890); 
-        //},
         drawDice: function(){
           var ctx = this.board.context;
           ctx.beginPath();
@@ -1077,9 +1020,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'green';
+          ctx.fillStyle = this.board.colors.board;
           ctx.fill();
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = this.board.colors.board;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -1181,7 +1124,6 @@ fireImg.src = 'images/fire.png';
             ctx.arc(930, 900, 30, 2 * Math.PI, false);
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
-            //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("Horn", 907, 907);
             ctx.stroke();
             ctx.restore();
@@ -1214,7 +1156,6 @@ fireImg.src = 'images/fire.png';
             ctx.arc(1000, 900, 30, 2 * Math.PI, false);
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
-            //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("World", 970, 907);
             ctx.stroke();
             ctx.restore();
@@ -1246,9 +1187,6 @@ fireImg.src = 'images/fire.png';
             ctx.beginPath();
             ctx.arc(860, 900, 30, 2 * Math.PI, false);
             ctx.drawImage(fireImg, 830, 870, 60, 60);
-            //ctx.textAlign = "left";
-            //ctx.font = "14pt Verdana";
-            //ctx.fillText("Fire", 842, 907);
             ctx.stroke();
             ctx.restore();
             
@@ -1272,18 +1210,16 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.rect(1200, 200, 75, 75);
           ctx.rect(1300, 200, 75, 75);
-          ctx.fillStyle = 'red';
+          ctx.fillStyle = this.board.colors.dice;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'red';
+          ctx.strokeStyle = this.board.colors.dice;
           ctx.stroke();
           this.drawDots();
 
           ctx.beginPath();
-          ctx.fillStyle = 'white';
-          //ctx.textAlign = "left";
+          ctx.fillStyle = this.board.colors.text;
           ctx.font = "35pt Verdana";
-          //ctx.rotate(Math.PI * -0.2);
           ctx.textAlign = "left";
           ctx.fillText("Roll", 1245, 320);
           ctx.stroke();
@@ -1342,9 +1278,9 @@ fireImg.src = 'images/fire.png';
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = 'white';
+          ctx.fillStyle = this.board.colors.text;
           ctx.fill();
-          ctx.strokeStyle = 'white';
+          ctx.strokeStyle = this.board.colors.text;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -1549,12 +1485,6 @@ fireImg.src = 'images/fire.png';
                 ctx.stroke();
                 ctx.drawImage(fireImg, 535, 321, 30, 30);
                 ctx.closePath();
-                //ctx.beginPath();
-                //ctx.fillStyle = this.colors.text;
-                //ctx.font = "15pt Verdana";
-                //ctx.fillText('F', 545, 343);
-                //ctx.stroke();
-                //ctx.closePath();
                 break;
                case "5":
                 ctx.beginPath();
@@ -1566,12 +1496,6 @@ fireImg.src = 'images/fire.png';
                 ctx.stroke();
                 ctx.drawImage(fireImg, 635, 321, 30, 30);
                 ctx.closePath();
-                //ctx.beginPath();
-                //ctx.fillStyle = this.colors.text;
-                //ctx.font = "15pt Verdana";
-                //ctx.fillText('F', 645, 343);
-                //ctx.stroke();
-                //ctx.closePath();
                 break;
                case "6":
                 ctx.beginPath();
@@ -1583,12 +1507,6 @@ fireImg.src = 'images/fire.png';
                 ctx.stroke();
                 ctx.drawImage(fireImg, 735, 321, 30, 30);
                 ctx.closePath();
-                //ctx.beginPath();
-                //ctx.fillStyle = this.colors.text;
-                //ctx.font = "15pt Verdana";
-                //ctx.fillText('F', 745, 343);
-                //ctx.stroke();
-                //ctx.closePath();
                 break;
                case "8":
                 ctx.beginPath();
@@ -1600,12 +1518,6 @@ fireImg.src = 'images/fire.png';
                 ctx.stroke();
                 ctx.drawImage(fireImg, 835, 321, 30, 30);
                 ctx.closePath();
-                //ctx.beginPath();
-                //ctx.fillStyle = this.colors.text;
-                //ctx.font = "15pt Verdana";
-                //ctx.fillText('F', 845, 343);
-                //ctx.stroke();
-                //ctx.closePath();
                 break;
                case "9":
                 ctx.beginPath();
@@ -1617,12 +1529,6 @@ fireImg.src = 'images/fire.png';
                 ctx.stroke();
                 ctx.drawImage(fireImg, 935, 321, 30, 30);
                 ctx.closePath();
-                //ctx.beginPath();
-                //ctx.fillStyle = this.colors.text;
-                //ctx.font = "15pt Verdana";
-                //ctx.fillText('F', 945, 343);
-                //ctx.stroke();
-                //ctx.closePath();
                 break;
                case "10":
                 ctx.beginPath();
@@ -1634,12 +1540,6 @@ fireImg.src = 'images/fire.png';
                 ctx.stroke();
                 ctx.drawImage(fireImg, 1035, 321, 30, 30);
                 ctx.closePath();
-                //ctx.beginPath();
-                //ctx.fillStyle = this.colors.text;
-                //ctx.font = "15pt Verdana";
-                //ctx.fillText('F', 1045, 343);
-                //ctx.stroke();
-                //ctx.closePath();
                 break;
               default:
                 return;
@@ -1774,36 +1674,36 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(540, 800, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               break;
             case 'passlineOdds':
               ctx.beginPath();
               ctx.arc(540, 880, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               break;
             case 'dontPass':
               ctx.beginPath();
               ctx.arc(485, 695, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               break;
             case 'dontPassOdds':
               ctx.beginPath();
               ctx.arc(485, 705, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               break;
             case 'come':
@@ -1811,9 +1711,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(575, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1826,9 +1726,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(675, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1840,9 +1740,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(775, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1854,9 +1754,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(875, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1868,9 +1768,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(975, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1882,9 +1782,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(1075, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1896,9 +1796,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(425, 415, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
               }
               break;
@@ -1907,9 +1807,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(575, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1922,9 +1822,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(675, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1936,9 +1836,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(775, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1950,9 +1850,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(875, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1964,9 +1864,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(975, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1978,9 +1878,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(1075, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -1995,9 +1895,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(525, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2010,9 +1910,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(625, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2024,9 +1924,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(725, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2038,9 +1938,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(825, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2052,9 +1952,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(925, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2066,9 +1966,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(1025, 125, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2080,9 +1980,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(400, 305, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
               }
               break;
@@ -2091,9 +1991,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(525, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2106,9 +2006,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(625, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2120,9 +2020,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(725, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2134,9 +2034,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(825, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2148,9 +2048,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(925, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2162,9 +2062,9 @@ fireImg.src = 'images/fire.png';
                 ctx.beginPath();
                 ctx.arc(1025, 115, 20, 0, 2 * Math.PI, false);
                 ctx.lineWidth = 2;
-                ctx.fillStyle = 'maroon';
+                ctx.fillStyle = this.colors.betFill;
                 ctx.fill()
-                ctx.strokeStyle = 'navy';
+                ctx.strokeStyle = this.colors.betBorder;
                 ctx.stroke();
                 ctx.closePath();
                 ctx.beginPath();
@@ -2178,9 +2078,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(545, 600, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2203,9 +2103,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(545, 290, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2228,9 +2128,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(650, 290, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2253,9 +2153,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(745, 290, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2278,9 +2178,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(850, 290, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2303,9 +2203,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(950, 290, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2328,9 +2228,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1050, 290, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2353,9 +2253,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(255, 560, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2378,9 +2278,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(340, 667, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2403,9 +2303,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1425, 477, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2428,9 +2328,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1375, 550, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2453,9 +2353,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1725, 550, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2478,9 +2378,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1375, 650, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2503,9 +2403,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1725, 650, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2528,9 +2428,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1312.5, 750, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2553,9 +2453,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1550, 750, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2578,9 +2478,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1782.5, 750, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2603,9 +2503,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1550, 850, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2628,9 +2528,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1435, 925, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2653,9 +2553,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1110, 700, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2678,9 +2578,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(930, 900, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2703,9 +2603,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(1000, 900, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
@@ -2728,9 +2628,9 @@ fireImg.src = 'images/fire.png';
               ctx.beginPath();
               ctx.arc(860, 900, 20, 0, 2 * Math.PI, false);
               ctx.lineWidth = 2;
-              ctx.fillStyle = 'maroon';
+              ctx.fillStyle = this.colors.betFill;
               ctx.fill()
-              ctx.strokeStyle = 'navy';
+              ctx.strokeStyle = this.colors.betBorder;
               ctx.stroke();
               if(bets[bet].bet.on == false){
                 ctx.beginPath();
