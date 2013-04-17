@@ -51,7 +51,8 @@
         <label for='colorScheme'>Color Scheme: </label>
         <select id='colorScheme'>
           <option value = "0">Standard Board</option>
-          <option value = "1">Boise State Edition</option>
+          <option value = "1">Rutgers Edition</option>
+          <option value = "2">Boise State Edition</option>
         </select><br />
         <div id='save' class='bttn yellow' onclick='saveSettings()'>Save</div>
       </div>
@@ -241,6 +242,9 @@
             break;
           case "1":
             board = new Board(canvas, colors1);
+            break;
+          case "2":
+            board = new Board(canvas, colors2);
             break;
           default:
             board = new Board(canvas, colors0);
