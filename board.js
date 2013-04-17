@@ -13,6 +13,7 @@ var colors0 = {
   specialText: "#ff0",
   finalText: "#f00",
   dice: "#f00",
+  dicePips: "#fff",
   betFill:  "#800000",
   betborder: "#000080"
 };
@@ -25,6 +26,7 @@ var colors1 = {
   border: "#000",
   buttonText: "#000",
   dice: "#000",
+  dicePips: "#fff",
   finalText: "#f00",
   lines: "#fff",
   pointBorder: "#000",
@@ -42,6 +44,7 @@ var colors2 = {
   border: "#000",
   buttonText: "#000",
   dice: "#080",
+  dicePips: "#fff",
   finalText: "#0f0",
   lines: "#fff",
   pointBorder: "#000",
@@ -1295,9 +1298,9 @@ var colors2 = {
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, 2*Math.PI, false);
           ctx.lineWidth = 5;
-          ctx.fillStyle = this.board.colors.text;
+          ctx.fillStyle = this.board.colors.dicePips;
           ctx.fill();
-          ctx.strokeStyle = this.board.colors.text;
+          ctx.strokeStyle = this.board.colors.dicePips;
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
