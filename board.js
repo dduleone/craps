@@ -24,7 +24,7 @@ var colors1 = {
   board: "#8b0000",
   border: "#000",
   buttonText: "#000",
-  dice: "#080",
+  dice: "#000",
   finalText: "#f00",
   lines: "#fff",
   pointBorder: "#000",
