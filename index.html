@@ -305,18 +305,18 @@
       var saveFireArray;
       var saveDice;
       var drawer = setInterval(function(){
-                            if(((!isNaN(savePoint) && !isNaN(GameState.point)) &&
-                               savePoint != GameState.point) ||
-                               saveBets != _CRAPS.dealer.betManager.bets.length ||
-                               saveFireArray != GameState.fireArray ||
-                               saveDice[0] != _CRAPS.dice.getDiceAsArray()[0] ||
-                               saveDice[1] != _CRAPS.dice.getDiceAsArray()[1]){
+         //                   if(((!isNaN(savePoint) && !isNaN(GameState.point)) &&
+         //                      savePoint != GameState.point) ||
+         //                      saveBets != _CRAPS.dealer.betManager.bets.length ||
+         //                      saveFireArray != GameState.fireArray ||
+         //                      saveDice[0] != _CRAPS.dice.getDiceAsArray()[0] ||
+         //                      saveDice[1] != _CRAPS.dice.getDiceAsArray()[1]){
                               draw(Board);
-                            }
-                            savePoint = GameState.point;
-                            saveBets = _CRAPS.dealer.betManager.bets.length;
-                            saveFireArray = GameState.fireArray;
-                            saveDice = _CRAPS.dice.getDiceAsArray();
+         //                   }
+         //                   savePoint = GameState.point;
+         //                   saveBets = _CRAPS.dealer.betManager.bets.length;
+         //                   saveFireArray = GameState.fireArray;
+         //                   saveDice = _CRAPS.dice.getDiceAsArray();
                           }, 200);
       //draw(Board);
             
