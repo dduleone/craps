@@ -4,6 +4,7 @@ var settings = new Image();
 settings.src = 'images/wrench-white-small.png';
 
 var colors0 = {
+  betBorder: "#000080"
   board: "#090",
   border: "#000",
   pointOff: "#000",
@@ -17,13 +18,11 @@ var colors0 = {
   dice: "#f00",
   dicePips: "#fff",
   betFill:  "#800000",
-  betborder: "#000080"
 };
 
 var colors1 = {
   betBorder: "#0f0",
   betFill: "#080",
-  betborder: "#000080",
   board: "#8b0000",
   border: "#000",
   buttonText: "#000",
@@ -41,7 +40,6 @@ var colors1 = {
 var colors2 = {
   betBorder: "#0f0",
   betFill: "#080",
-  betborder: "#000080",
   board: "#00f",
   border: "#000",
   buttonText: "#000",
@@ -59,7 +57,6 @@ var colors2 = {
 var colors3 = {
   betBorder: "#0f0",
   betFill: "#080",
-  betborder: "#000080",
   board: "#4b0082",
   border: "#000",
   buttonText: "#000",
