@@ -217,7 +217,7 @@
         </table>
       </div>
       <br />
-      <div class='bttn red' style='float: left' onclick='closeModal()'>Close</div>
+      <div id='closeModal' class='bttn red' onclick='closeModal()'>Close</div>
     </div>
   </body>
   <footer>
@@ -1142,13 +1142,13 @@
         mod.width('auto');
         if(mod.width() > $(window).width() * 0.8){
           mod.width($(window).width() * 0.7);
-          $('#help').width(mod.width() * 0.7);
-          $('#rules').width($('#rules').width() * 0.7);
-          $('#standard').width($('#rules').width() * 0.7);
-          $('#multi').width($('#rules').width() * 0.7);
-          $('#single').width($('#rules').width() * 0.7);
-          $('#fire').width($('#rules').width() * 0.7);
-          $('#settings').width(mod.width() * 0.7);
+          $('#help').width('auto');
+          $('#rules').width('auto');
+          $('#standard').width('auto');
+          $('#multi').width('auto');
+          $('#single').width('auto');
+          $('#fire').width('auto');
+          $('#settings').width('auto');
         } else {
           $('#help').width('auto');
           $('#rules').width('auto');
@@ -1216,14 +1216,13 @@
         mod.width('auto');
         if(mod.width() > $(window).width() * 0.8){
           mod.width($(window).width() * 0.7);
-          $('#help').width(mod.width() * 0.7);
-          $('#rules').width(mod.width() * 0.7);
-          $('#standard').width($('#rules').width() * 0.7);
-          $('#multi').width($('#rules').width() * 0.7);
-          $('#single').width($('#rules').width() * 0.7);
-          $('#fire').width($('#rules').width() * 0.7);
-          $('#settings').width(mod.width() * 0.7);
-          $('#settings').width(mod.width() * 0.7);
+          $('#help').width('auto');
+          $('#rules').width('auto');
+          $('#standard').width('auto');
+          $('#multi').width('auto');
+          $('#single').width('auto');
+          $('#fire').width('auto');
+          $('#settings').width('auto');
         } else {
           $('#help').width('auto');
           $('#rules').width('auto');
@@ -1287,11 +1286,11 @@
         if(mod.width() > $(window).width() * 0.8){
           mod.width($(window).width() * 0.7);
           $('#help').width(mod.width() * 0.7);
-          $('#rules').width(mod.width() * 0.7);
-          $('#standard').width($('#rules').width() * 0.7);
-          $('#multi').width($('#rules').width() * 0.7);
-          $('#single').width($('#rules').width() * 0.7);
-          $('#fire').width($('#rules').width() * 0.7);
+          $('#rules').width('auto');
+          $('#standard').width('auto');
+          $('#multi').width('auto');
+          $('#single').width('auto');
+          $('#fire').width('auto');
           $('#settings').width(mod.width() * 0.7);
         } else {
           $('#help').width('auto');
