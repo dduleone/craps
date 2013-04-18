@@ -4,7 +4,7 @@ var settings = new Image();
 settings.src = 'images/wrench-white-small.png';
 
 var colors0 = {
-  betBorder: "#000080"
+  betBorder: "#000080",
   board: "#090",
   border: "#000",
   pointOff: "#000",
