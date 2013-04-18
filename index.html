@@ -1102,9 +1102,19 @@
       
       function openModal(){
         $('#modalScreen').show();
-        $('#modal').show();
-        //$('#settingsButton').hide()
-        $('#modal').animate({opacity: 1}, MODAL_FADE_INTERVAL); 
+        var mod = $('#modal');
+        mod.show();
+        mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+        if(mod.height() > $(window).height() * 0.8){
+          mod.height($(window).height() * 0.8);
+        } else {
+          mod.height('auto');
+        }
+        if(mod.width() > $(window).width() * 0.8){
+          mod.width($(window).width() * 0.8);
+        } else {
+          mod.width('auto');
+        }
       }
       
       function closeModal(){
@@ -1114,6 +1124,7 @@
       
       function clickModalButton(button){
         var modals = ['help', 'settings', 'rules'];
+        var mod = $('#modal');
         modals.splice(modals.indexOf(button), 1);
         for(i in modals){
           $('#' + modals[i] + 'Button').removeClass('blue');
@@ -1121,12 +1132,23 @@
         }
         $('#' + button + 'Button').addClass('blue');
         $('#' + button).show();
+        if(mod.height() > $(window).height() * 0.8){
+          mod.height($(window).height() * 0.8);
+        } else {
+          mod.height('auto');
+        }
+        if(mod.width() > $(window).width() * 0.8){
+          mod.width($(window).width() * 0.8);
+        } else {
+          mod.width('auto');
+        }
         $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
         $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
       }
       
       function clickRulesButton(button){
         var modals = ['standard', 'multi', 'single', 'fire'];
+        var mod = $('#modal');
         modals.splice(modals.indexOf(button), 1);
         for(i in modals){
           $('#' + modals[i] + 'Button').removeClass('red');
@@ -1134,6 +1156,16 @@
         }
         $('#' + button + 'Button').addClass('red');
         $('#' + button).show();
+        if(mod.height() > $(window).height() * 0.8){
+          mod.height($(window).height() * 0.8);
+        } else {
+          mod.height('auto');
+        }
+        if(mod.width() > $(window).width() * 0.8){
+          mod.width($(window).width() * 0.8);
+        } else {
+          mod.width('auto');
+        }
         $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
         $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
       }
