@@ -558,10 +558,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1287.5, 512.5, 75, 75);
           ctx.rect(1387.5 , 512.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -616,10 +616,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1637.5, 512.5, 75, 75);
           ctx.rect(1737.5 , 512.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -678,10 +678,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1287.5, 612.5, 75, 75);
           ctx.rect(1387.5 , 612.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -738,10 +738,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1637.5, 612.5, 75, 75);
           ctx.rect(1737.5 , 612.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -795,10 +795,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1227.5, 712.5, 75, 75);
           ctx.rect(1327.5 , 712.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -851,10 +851,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1462.5, 712.5, 75, 75);
           ctx.rect(1562.5 , 712.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -906,10 +906,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1697.5, 712.5, 75, 75);
           ctx.rect(1797.5 , 712.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -971,10 +971,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1287.5, 812.5, 75, 75);
           ctx.rect(1387.5 , 812.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
@@ -1034,10 +1034,10 @@ var colors3 = {
           ctx.beginPath();
           ctx.rect(1637.5, 812.5, 75, 75);
           ctx.rect(1737.5 , 812.5, 75, 75);
-          ctx.fillStyle = 'yellow';
+          ctx.fillStyle = this.board.colors.specialText;
           ctx.fill();
           ctx.lineWidth = 5;
-          ctx.strokeStyle = 'yellow';
+          ctx.strokeStyle = this.board.colors.specialText;
           ctx.stroke();
           this.drawDots();
         },
