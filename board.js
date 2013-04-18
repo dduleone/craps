@@ -74,6 +74,23 @@ var colors3 = {
   text: "#fff"
 };
 
+var colors4 = {
+  betBorder: "#000080",
+  board: "#090",
+  border: "#000",
+  pointOff: "#000",
+  pointBorder: "#000",
+  pointOn: "#fff",
+  lines: "#fff",
+  text: "#fff",
+  buttonText: '#000',
+  specialText: "#ff0",
+  finalText: "#f00",
+  dice: "#f00",
+  dicePips: "#fff",
+  betFill:  "#800000",
+};
+
 (function() {
 
     var PassLine = function(board) {

@@ -52,12 +52,30 @@
         <label for='modalTiming'>Help Fade Out Time (milliseconds): </label>
         <input id='modalTiming' type='text'><br />
         <label for='colorScheme'>Color Scheme: </label>
-        <select id='colorScheme'>
+        <select id='colorScheme' onchange='updateColors()'>
           <option value = "0">Standard Board</option>
-          <option value = "1">Rutgers Edition</option>
-          <option value = "2">Boise State Edition</option>
-          <option value = "3">Purple Board Orange Dice</option>
+          <option value = "1">Red Board</option>
+          <option value = "2">Blue Board</option>
+          <option value = "3">Purple Board</option>
+          <option value = "4">Customize Your Own Scheme!</option>
         </select><br />
+        <div id='customColors'>
+          <label for='boardColor'>Board: #</label><input id='boardColor' class='color'><br />
+          <label for='border'>Board Border: #</label><input id='border' class='color'><br />
+          <label for='betBorder'>Bet Border: #</label><input id='betBorder' class='color'><br />
+          <label for='betFill'>Bet Fill: #</label><input id='betFill' class='color'><br />
+          <label for='lines'>Lines: #</label><input id='lines' class='color'><br />
+          <label for='text'>Text: #</label><input id='text' class='color'><br />
+          <label for='specialText'>Special 1: #</label><input id='specialText' class='color'><br />
+          <label for='finalText'>Special 2: #</label><input id='finalText' class='color'><br />
+          <label for='dice'>Dice: #</label><input id='dice' class='color'><br />
+          <label for='dicePips'>Dice Pips: #</label><input id='dicePips' class='color'><br />
+          <label for='pointBorder'>Point Border: #</label><input id='pointBorder' class='color'><br />
+          <label for='pointOff'>Point Off: #</label><input id='pointOff' class='color'><br />
+          <label for='pointOn'>Point On: #</label><input id='pointOn' class='color'><br />
+          <label for='buttonText'>Point Text: #</label><input id='buttonText' class='color'><br />
+          <div id='resetColors' class='bttn yellow' onclick='resetColors()'>Reset Custom Colors</div>
+        </div>
         <div id='save' class='bttn yellow' onclick='saveSettings()'>Save</div>
       </div>
       <div id='rules'>
@@ -224,6 +242,7 @@
 
     <script src="jquery.min.js" lang='javascript' type='text/javascript'></script>
     <script src="jquery.color.js" lang='javascript' type='text/javascript'></script>
+    <script src='jscolor.js' lang='javascript' type='text/javascript'></script>
     <script type='text/javascript' language='javascript' src='utils.js'></script>
     <script type='text/javascript' language='javascript' src='html5slider.js'></script>
     <script type='text/javascript' language='javascript' src='dice.js'></script>
@@ -242,7 +261,7 @@
           var canvas = document.getElementById("board");
       
           var board;
-          colors = eval("colors" + localStorage['colors']);
+          colors = eval("colors" + $('#colorScheme').val());
           
           board = new Board(canvas, colors);
           board.draw();
@@ -289,7 +308,6 @@
                 clickAreaPlaceBet(boardArea);
               }
           };
-      
       }
       var savePoint;
       var saveBets;
@@ -993,6 +1011,9 @@
       } else {
         MODAL_FADE_INTERVAL = 1000;
       }
+      if(localStorage['colors4']){
+        colors4 = JSON.parse(localStorage['colors4']);
+      }
       $('#modalTiming').val(MODAL_FADE_INTERVAL);
       $('#startingBank').val(initBank);
       if(window.location.hash != ""){
@@ -1024,10 +1045,67 @@
       
       //_CRAPS.players = [p];
       
+      function updateColors(){
+        if($('#colorScheme').val() == 4){
+          $('#boardColor').attr('value', (colors4.board.slice(1,1) == "#")?colors4.board.slice(1):colors4.board);
+          $('#border').attr('value', (colors4.border.slice(1,1) == "#")?colors4.border.slice(1):colors4.border);
+          $('#pointOff').attr('value', (colors4.pointOff.slice(1,1) == "#")?colors4.pointOff.slice(1):colors4.pointOff);
+          $('#pointBorder').attr('value', (colors4.pointBorder.slice(1,1) == "#")?colors4.pointBorder.slice(1):colors4.pointBorder);
+          $('#pointOn').attr('value', (colors4.pointOn.slice(1,1) == "#")?colors4.pointOn.slice(1):colors4.pointOn);
+          $('#lines').attr('value', (colors4.lines.slice(1,1) == "#")?colors4.lines.slice(1):colors4.lines);
+          $('#text').attr('value', (colors4.text.slice(1,1) == "#")?colors4.text.slice(1):colors4.text);
+          $('#buttonText').attr('value', (colors4.buttonText.slice(1,1) == "#")?colors4.buttonText.slice(1):colors4.buttonText);
+          $('#specialText').attr('value', (colors4.specialText.slice(1,1) == "#")?colors4.specialText.slice(1):colors4.specialText);
+          $('#finalText').attr('value', (colors4.finalText.slice(1,1) == "#")?colors4.finalText.slice(1):colors4.finalText);
+          $('#dice').attr('value', (colors4.dice.slice(1,1) == "#")?colors4.dice.slice(1):colors4.dice);
+          $('#dicePips').attr('value', (colors4.dicePips.slice(1,1) == "#")?colors4.dicePips.slice(1):colors4.dicePips);
+          $('#betBorder').attr('value', (colors4.betBorder.slice(1,1) == "#")?colors4.betBorder.slice(1):colors4.betBorder);
+          $('#betFill').attr('value', (colors4.betFill.slice(1,1) == "#")?colors4.betFill.slice(1):colors4.betFill);
+          $('#customColors').show()
+        } else {
+          $('#customColors').hide()
+        }
+        resizeModal();
+        colors = eval("colors" + $('#colorScheme').val());
+        draw(Board);
+      }
+      
+      function resetColors(){
+        $.extend(colors4, colors0);
+        $('#betBorder').attr('value', colors4.betBorder.slice(1));
+        $('#boardColor').attr('value', colors4.board.slice(1));
+        $('#border').attr('value', colors4.border.slice(1));
+        $('#pointOff').attr('value', colors4.pointOff.slice(1));
+        $('#pointBorder').attr('value', colors4.pointBorder.slice(1));
+        $('#pointOn').attr('value', colors4.pointOn.slice(1));
+        $('#lines').attr('value', colors4.lines.slice(1));
+        $('#text').attr('value', colors4.text.slice(1));
+        $('#buttonText').attr('value', colors4.buttonText.slice(1));
+        $('#specialText').attr('value', colors4.specialText.slice(1));
+        $('#finalText').attr('value', colors4.finalText.slice(1));
+        $('#dice').attr('value', colors4.dice.slice(1));
+        $('#dicePips').attr('value', colors4.dicePips.slice(1));
+        $('#betFill').attr('value', colors4.betFill.slice(1));
+      }
+      
       function saveSettings(){
         if(!isNaN(parseInt($('#startingBank').val()))){
           initBank = parseInt($('#startingBank').val());
           MODAL_FADE_INTERVAL = parseInt($('#modalTiming').val());
+          colors4.betBorder = $('#betBorder').attr('value');
+          colors4.board = $('#boardColor').attr('value');
+          colors4.border = $('#border').attr('value');
+          colors4.pointOff = $('#pointOff').attr('value');
+          colors4.pointBorder = $('#pointBorder').attr('value');
+          colors4.pointOn = $('#pointOn').attr('value');
+          colors4.lines = $('#lines').attr('value');
+          colors4.text = $('#text').attr('value');
+          colors4.buttonText = $('#buttonText').attr('value');
+          colors4.specialText = $('#specialText').attr('value');
+          colors4.finalText = $('#finalText').attr('value');
+          colors4.dice = $('#dice').attr('value');
+          colors4.dicePips = $('#dicePips').attr('value');
+          colors4.betFill = $('#betFill').attr('value');
           PlayerManager.updatePlayerArea();
         } else {
           alert('Please enter a number as the initial bank!');
@@ -1105,66 +1183,17 @@
         var mod = $('#modal');
         mod.show();
         mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
-        $('#help').height('auto');
-        $('#rules').height('auto');
-        $('#standard').height('auto');
-        $('#multi').height('auto');
-        $('#single').height('auto');
-        $('#fire').height('auto');
-        $('#settings').height('auto');
-        mod.height('auto');
-        if(mod.height() > $(window).height() * 0.8){
-          mod.height($(window).height() * 0.7);
-          $('#help').height(mod.height() * 0.7);
-          $('#rules').height(mod.height() * 0.7);
-          $('#standard').height($('#rules').height() * 0.7);
-          $('#multi').height($('#rules').height() * 0.7);
-          $('#single').height($('#rules').height() * 0.7);
-          $('#fire').height($('#rules').height() * 0.7);
-          $('#settings').height(mod.height() * 0.7);
+        resizeModal();
+        if($('#colorScheme').val() == 4){
+          $('#customColors').show()
         } else {
-          $('#help').height('auto');
-          $('#rules').height('auto');
-          $('#standard').height('auto');
-          $('#multi').height('auto');
-          $('#single').height('auto');
-          $('#fire').height('auto');
-          $('#settings').height('auto');
-          mod.height('auto');
+          $('#customColors').hide()
         }
-        $('#help').width('auto');
-        $('#rules').width('auto');
-        $('#standard').width('auto');
-        $('#multi').width('auto');
-        $('#single').width('auto');
-        $('#fire').width('auto');
-        $('#settings').width('auto');
-        mod.width('auto');
-        if(mod.width() > $(window).width() * 0.8){
-          mod.width($(window).width() * 0.7);
-          $('#help').width('auto');
-          $('#rules').width('auto');
-          $('#standard').width('auto');
-          $('#multi').width('auto');
-          $('#single').width('auto');
-          $('#fire').width('auto');
-          $('#settings').width('auto');
-        } else {
-          $('#help').width('auto');
-          $('#rules').width('auto');
-          $('#standard').width('auto');
-          $('#multi').width('auto');
-          $('#single').width('auto');
-          $('#fire').width('auto');
-          $('#settings').width('auto');
-          mod.width('auto');
-        }
-        $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
-        $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
       }
       
       function closeModal(){
         $('#colorScheme').val(localStorage['colors']);
+        colors = eval("colors" + localStorage['colors']);
         $('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
       }
       
@@ -1178,63 +1207,12 @@
         }
         $('#' + button + 'Button').addClass('blue');
         $('#' + button).show();
-        $('#help').height('auto');
-        $('#rules').height('auto');
-        $('#standard').height('auto');
-        $('#multi').height('auto');
-        $('#single').height('auto');
-        $('#fire').height('auto');
-        $('#settings').height('auto');
-        mod.height('auto');
-        if(mod.height() > $(window).height() * 0.8){
-          mod.height($(window).height() * 0.7);
-          $('#help').height(mod.height() * 0.7);
-          $('#rules').height(mod.height() * 0.7);
-          $('#rules').height(mod.height() * 0.7);
-          $('#standard').height($('#rules').height() * 0.7);
-          $('#multi').height($('#rules').height() * 0.7);
-          $('#single').height($('#rules').height() * 0.7);
-          $('#fire').height($('#rules').height() * 0.7);
-          $('#settings').height(mod.height() * 0.7);
+        resizeModal();
+        if($('#colorScheme').val() == 4){
+          $('#customColors').show()
         } else {
-          $('#help').height('auto');
-          $('#rules').height('auto');
-          $('#standard').height('auto');
-          $('#multi').height('auto');
-          $('#single').height('auto');
-          $('#fire').height('auto');
-          $('#settings').height('auto');
-          mod.height('auto');
+          $('#customColors').hide()
         }
-        $('#help').width('auto');
-        $('#rules').width('auto');
-        $('#standard').width('auto');
-        $('#multi').width('auto');
-        $('#single').width('auto');
-        $('#fire').width('auto');
-        $('#settings').width('auto');
-        mod.width('auto');
-        if(mod.width() > $(window).width() * 0.8){
-          mod.width($(window).width() * 0.7);
-          $('#help').width('auto');
-          $('#rules').width('auto');
-          $('#standard').width('auto');
-          $('#multi').width('auto');
-          $('#single').width('auto');
-          $('#fire').width('auto');
-          $('#settings').width('auto');
-        } else {
-          $('#help').width('auto');
-          $('#rules').width('auto');
-          $('#standard').width('auto');
-          $('#multi').width('auto');
-          $('#single').width('auto');
-          $('#fire').width('auto');
-          $('#settings').width('auto');
-          mod.width('auto');
-        }
-        $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
-        $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
       }
       
       function clickRulesButton(button){
@@ -1247,6 +1225,15 @@
         }
         $('#' + button + 'Button').addClass('red');
         $('#' + button).show();
+        resizeModal();
+        if($('#colorScheme').val() == 4){
+          $('#customColors').show()
+        } else {
+          $('#customColors').hide()
+        }
+      }
+      
+      function resizeModal(){
         $('#help').height('auto');
         $('#rules').height('auto');
         $('#standard').height('auto');
@@ -1254,17 +1241,17 @@
         $('#single').height('auto');
         $('#fire').height('auto');
         $('#settings').height('auto');
-        mod.height('auto');
-        if(mod.height() > $(window).height() * 0.8){
-          mod.height($(window).height() * 0.7);
-          $('#help').height(mod.height() * 0.7);
-          $('#rules').height(mod.height() * 0.7);
-          $('#rules').height(mod.height() * 0.7);
+        $('#modal').height('auto');
+        if($('#modal').height() > $(window).height() * 0.8){
+          $('#modal').height($(window).height() * 0.7);
+          $('#help').height($('#modal').height() * 0.7);
+          $('#rules').height($('#modal').height() * 0.7);
+          $('#rules').height($('#modal').height() * 0.7);
           $('#standard').height($('#rules').height() * 0.7);
           $('#multi').height($('#rules').height() * 0.7);
           $('#single').height($('#rules').height() * 0.7);
           $('#fire').height($('#rules').height() * 0.7);
-          $('#settings').height(mod.height() * 0.7);
+          $('#settings').height($('#modal').height() * 0.7);
         } else {
           $('#help').height('auto');
           $('#rules').height('auto');
@@ -1273,7 +1260,7 @@
           $('#single').height('auto');
           $('#fire').height('auto');
           $('#settings').height('auto');
-          mod.height('auto');
+          $('#modal').height('auto');
         }
         $('#help').width('auto');
         $('#rules').width('auto');
@@ -1282,9 +1269,9 @@
         $('#single').width('auto');
         $('#fire').width('auto');
         $('#settings').width('auto');
-        mod.width('auto');
-        if(mod.width() > $(window).width() * 0.8){
-          mod.width($(window).width() * 0.7);
+        $('#modal').width('auto');
+        if($('#modal').width() > $(window).width() * 0.8){
+          $('#modal').width($(window).width() * 0.7);
           $('#help').width('auto');
           $('#rules').width('auto');
           $('#standard').width('auto');
@@ -1300,7 +1287,7 @@
           $('#single').width('auto');
           $('#fire').width('auto');
           $('#settings').width('auto');
-          mod.width('auto');
+          $('#modal').width('auto');
         }
         $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
         $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
