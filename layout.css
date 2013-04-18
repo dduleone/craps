@@ -1,5 +1,6 @@
   body{
     overflow-x: hidden;
+    overflow-y: hidden;
     font-family: "verdana"
   }
   .round{
@@ -112,15 +113,16 @@
     position: relative;
     text-align: center;
     top: 0px;
-    font-size: 35pt;
-    margin: 0px;
-    padding: 0px;
+    font-size: 30pt;
+    /*height: 30%;
+    /*margin: 0px;
+    padding: 0px;*/
   }
   #nameInput{
     position: relative;
     text-align: center;
     top: -10px;
-    font-family: 'serif';
+    font-family: 'Verdana';
     font-size: 30pt;
   }
   #bank{
@@ -168,6 +170,16 @@
     border-spacing:0;
     border-collapse:collapse;
   }
+  #modalScreen{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    display: none;
+    background-color: #000;
+    opacity: 0.5;
+  }
   #modal{
     position: absolute;
     background: #000 url(bet_bg.jpg) repeat-y;
@@ -179,6 +191,7 @@
     padding: 10px;
     display: none;
     opacity: 0;
+    float: left;
   }
   #help{
     position: relative;

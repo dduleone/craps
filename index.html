@@ -33,12 +33,13 @@
     </div>
     <div id='betListing'></div>
     <div id='playerArea'>
-      <div id='name' class='name' onclick='updatePlayerName()'></div>
+      <div id='name' class='name bttn' onclick='updatePlayerName()' align='center'></div>
       <div id='bank'></div>
       <!--div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div -->
       <!--div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div -->
     </div>
     <div id='buffer'></div>
+    <div id='modalScreen' onclick="closeModal()"></div>
     <div id='modal' class='round'>
       <div id='modalButtons'>
         <div id='helpButton' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
@@ -48,6 +49,8 @@
       <div id='settings'>
         <label for='startingBank'>Starting Bank: </label>
         <input id='startingBank' type='text'><br />
+        <label for='modalTiming'>Help Fade Out Time (milliseconds): </label>
+        <input id='modalTiming' type='text'><br />
         <label for='colorScheme'>Color Scheme: </label>
         <select id='colorScheme'>
           <option value = "0">Standard Board</option>
@@ -213,7 +216,8 @@
           </tr>
         </table>
       </div>
-        <div class='bttn red' style='float: right' onclick='closeModal()'>Close</div>
+      <br />
+      <div class='bttn red' onclick='closeModal()'>Close</div>
     </div>
   </body>
   <footer>
@@ -238,22 +242,9 @@
           var canvas = document.getElementById("board");
       
           var board;
-          switch(localStorage['colors']){
-          case "0":
-            board = new Board(canvas, colors0);
-            break;
-          case "1":
-            board = new Board(canvas, colors1);
-            break;
-          case "2":
-            board = new Board(canvas, colors2);
-            break;
-          case "3":
-            board = new Board(canvas, colors3);
-            break;
-          default:
-            board = new Board(canvas, colors0);
-          }
+          colors = eval("colors" + localStorage['colors']);
+          
+          board = new Board(canvas, colors);
           board.draw();
       
           canvas.onclick = function(e) {
@@ -978,6 +969,7 @@
       var name;
       var bank;
       var initBank;
+      var MODAL_FADE_INTERVAL;
       if(localStorage["initBank"]){
         initBank = parseInt(localStorage["initBank"]);
       } else {
@@ -996,6 +988,12 @@
       if(localStorage['colors']){
         $('#colorScheme').val(localStorage['colors']);
       }
+      if(localStorage["modalTiming"]){
+        MODAL_FADE_INTERVAL = parseInt(localStorage["modalTiming"]);
+      } else {
+        MODAL_FADE_INTERVAL = 1000;
+      }
+      $('#modalTiming').val(MODAL_FADE_INTERVAL);
       $('#startingBank').val(initBank);
       if(window.location.hash != ""){
         var crapsInfo = parseHash(window.location.hash);
@@ -1029,6 +1027,7 @@
       function saveSettings(){
         if(!isNaN(parseInt($('#startingBank').val()))){
           initBank = parseInt($('#startingBank').val());
+          MODAL_FADE_INTERVAL = parseInt($('#modalTiming').val());
           PlayerManager.updatePlayerArea();
         } else {
           alert('Please enter a number as the initial bank!');
@@ -1102,14 +1101,15 @@
       }
       
       function openModal(){
+        $('#modalScreen').show();
         $('#modal').show();
         //$('#settingsButton').hide()
-        $('#modal').animate({opacity: 1}, 1000); 
+        $('#modal').animate({opacity: 1}, MODAL_FADE_INTERVAL); 
       }
       
       function closeModal(){
         $('#colorScheme').val(localStorage['colors']);
-        $('#modal').animate({opacity: 0}, 1000, function(){$('#modal').hide();});
+        $('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
       }
       
       function clickModalButton(button){
@@ -1172,6 +1172,7 @@
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
         $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
         input.attr('value', player.player.name);
+        nameDiv.css('left', 0);
         if(input.attr('value') == 'Set your name!'){
           input.attr('value', 'Your Name');
         }

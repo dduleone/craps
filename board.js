@@ -3,6 +3,8 @@ fireImg.src = 'images/fire.png';
 var settings = new Image();
 settings.src = 'images/wrench-white-small.png';
 
+var colors;
+
 var colors0 = {
   betBorder: "#000080",
   board: "#090",

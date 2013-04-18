@@ -41,6 +41,7 @@ $.extend(PlayerManager, {
     name.empty();
     bank.empty();
     name.html(this.players[0].player.name);
+    name.css('left', (($('#buffer').width() - name.width())/2));
     //name.attr('class', 'bttn');
     var bankTitle = $(document.createElement('p'));
     bankTitle.html('<center>Bank</center>');
@@ -97,6 +98,7 @@ $.extend(PlayerManager, {
     }
     localStorage['fireArray'] = JSON.stringify(GameState.fireArray);
     localStorage['colors'] = $('#colorScheme').val();
+    localStorage['modalTiming'] = $('#modalTiming').val();
     //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
   }
 });
