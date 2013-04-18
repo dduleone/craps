@@ -1105,6 +1105,7 @@
         var mod = $('#modal');
         mod.show();
         mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+        mod.height('auto')
         if(mod.height() > $(window).height() * 0.8){
           mod.height($(window).height() * 0.7);
           $('#help').height(mod.height() * 0.7);
@@ -1124,6 +1125,7 @@
           $('#fire').height('auto');
           $('#settings').height('auto');
         }
+        mod.width('auto')
         if(mod.width() > $(window).width() * 0.8){
           mod.width($(window).width() * 0.7);
           $('#help').width(mod.width() * 0.7);
@@ -1162,6 +1164,7 @@
         }
         $('#' + button + 'Button').addClass('blue');
         $('#' + button).show();
+        mod.height('auto')
         if(mod.height() > $(window).height() * 0.8){
           mod.height($(window).height() * 0.7);
           $('#help').height(mod.height() * 0.7);
@@ -1182,6 +1185,7 @@
           $('#fire').height('auto');
           $('#settings').height('auto');
         }
+        mod.width('auto')
         if(mod.width() > $(window).width() * 0.8){
           mod.width($(window).width() * 0.7);
           $('#help').width(mod.width() * 0.7);
@@ -1216,6 +1220,7 @@
         }
         $('#' + button + 'Button').addClass('red');
         $('#' + button).show();
+        mod.height('auto')
         if(mod.height() > $(window).height() * 0.8){
           mod.height($(window).height() * 0.7);
           $('#help').height(mod.height() * 0.7);
@@ -1236,6 +1241,7 @@
           $('#fire').height('auto');
           $('#settings').height('auto');
         }
+        mod.width('auto')
         if(mod.width() > $(window).width() * 0.8){
           mod.width($(window).width() * 0.7);
           $('#help').width(mod.width() * 0.7);
