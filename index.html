@@ -1121,6 +1121,8 @@
         }
         $('#' + button + 'Button').addClass('blue');
         $('#' + button).show();
+        $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
+        $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
       }
       
       function clickRulesButton(button){
@@ -1132,6 +1134,8 @@
         }
         $('#' + button + 'Button').addClass('red');
         $('#' + button).show();
+        $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
+        $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
       }
       
       function create(){

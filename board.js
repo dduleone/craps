@@ -29,14 +29,14 @@ var colors1 = {
   border: "#000",
   buttonText: "#000",
   dice: "#000",
-  dicePips: "#fff",
-  finalText: "#f00",
-  lines: "#fff",
+  dicePips: "#c0c0c0",
+  finalText: "#8bc030",
+  lines: "#c0c0c0",
   pointBorder: "#000",
   pointOff: "#000",
-  pointOn: "#fff",
-  specialText: "#ff0",
-  text: "#fff"
+  pointOn: "#c0c0c0",
+  specialText: "#2bab9d",
+  text: "#c0c0c0"
 };
 
 var colors2 = {
