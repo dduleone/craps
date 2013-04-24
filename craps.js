@@ -349,7 +349,7 @@ BetManager.prototype = {
       val.attr('id', 'val' + this.bets[betNum].bet.betId);
       val.html('$' + this.bets[betNum].bet.value);
       val.attr('onclick', 'updateBet(' + this.bets[betNum].bet.betId + ')');
-      val.attr('class', 'bttn');
+      val.attr('class', 'clickable');
       
       var betOn = $(document.createElement('input'));
       //betOnLabel.html('<br />Bet On: ');
@@ -437,6 +437,7 @@ BetManager.prototype = {
     }
     for(x in this.losingBetIds){
       $('#bet' + this.losingBetIds[x]).attr('class', 'losingBet');
+      $('#val' + this.losingBetIds[x]).css({borderStyle: 'none'});
     }
     $('.winningBet').animate({backgroundColor: 'green', borderColor: 'green'}, BET_FADE_INTERVAL/2, function(){$('.winningBet').animate({backgroundColor: 'none', borderColor: 'none'}, BET_FADE_INTERVAL/2);});
     $('.losingBet').animate({backgroundColor: 'red', borderColor: 'red', opacity: 0}, BET_FADE_INTERVAL);

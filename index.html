@@ -33,7 +33,7 @@
     </div>
     <div id='betListing'></div>
     <div id='playerArea'>
-      <div id='name' class='name bttn' onclick='updatePlayerName()' align='center'></div>
+      <div id='name' class='name clickable' onclick='updatePlayerName()' align='center'></div>
       <div id='bank'></div>
       <!--div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div -->
       <!--div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div -->
@@ -57,7 +57,8 @@
           <option value = "1">Red Board</option>
           <option value = "2">Blue Board</option>
           <option value = "3">Purple Board</option>
-          <option value = "4">Customize Your Own Scheme!</option>
+          <option value = "4">Charcoal Board</option>
+          <option value = "5">Customize Your Own Scheme!</option>
         </select><br />
         <div id='customColors'>
           <label for='boardColor'>Board: #</label><input id='boardColor' class='color'><br />
@@ -267,7 +268,7 @@
           board.draw();
       
           canvas.onclick = function(e) {
-              //console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
+              console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
               //console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
               //ctx = board.context;
               //ctx.beginPath();
@@ -1011,8 +1012,8 @@
       } else {
         MODAL_FADE_INTERVAL = 1000;
       }
-      if(localStorage['colors4']){
-        colors4 = JSON.parse(localStorage['colors4']);
+      if(localStorage['colors5']){
+        colors5 = JSON.parse(localStorage['colors5']);
       }
       $('#modalTiming').val(MODAL_FADE_INTERVAL);
       $('#startingBank').val(initBank);
@@ -1046,21 +1047,21 @@
       //_CRAPS.players = [p];
       
       function updateColors(){
-        if($('#colorScheme').val() == 4){
-          $('#boardColor').attr('value', (colors4.board.slice(1,1) == "#")?colors4.board.slice(1):colors4.board);
-          $('#border').attr('value', (colors4.border.slice(1,1) == "#")?colors4.border.slice(1):colors4.border);
-          $('#pointOff').attr('value', (colors4.pointOff.slice(1,1) == "#")?colors4.pointOff.slice(1):colors4.pointOff);
-          $('#pointBorder').attr('value', (colors4.pointBorder.slice(1,1) == "#")?colors4.pointBorder.slice(1):colors4.pointBorder);
-          $('#pointOn').attr('value', (colors4.pointOn.slice(1,1) == "#")?colors4.pointOn.slice(1):colors4.pointOn);
-          $('#lines').attr('value', (colors4.lines.slice(1,1) == "#")?colors4.lines.slice(1):colors4.lines);
-          $('#text').attr('value', (colors4.text.slice(1,1) == "#")?colors4.text.slice(1):colors4.text);
-          $('#buttonText').attr('value', (colors4.buttonText.slice(1,1) == "#")?colors4.buttonText.slice(1):colors4.buttonText);
-          $('#specialText').attr('value', (colors4.specialText.slice(1,1) == "#")?colors4.specialText.slice(1):colors4.specialText);
-          $('#finalText').attr('value', (colors4.finalText.slice(1,1) == "#")?colors4.finalText.slice(1):colors4.finalText);
-          $('#dice').attr('value', (colors4.dice.slice(1,1) == "#")?colors4.dice.slice(1):colors4.dice);
-          $('#dicePips').attr('value', (colors4.dicePips.slice(1,1) == "#")?colors4.dicePips.slice(1):colors4.dicePips);
-          $('#betBorder').attr('value', (colors4.betBorder.slice(1,1) == "#")?colors4.betBorder.slice(1):colors4.betBorder);
-          $('#betFill').attr('value', (colors4.betFill.slice(1,1) == "#")?colors4.betFill.slice(1):colors4.betFill);
+        if($('#colorScheme').val() == 5){
+          $('#boardColor').attr('value', (colors5.board.slice(1,1) == "#")?colors5.board.slice(1):colors5.board);
+          $('#border').attr('value', (colors5.border.slice(1,1) == "#")?colors5.border.slice(1):colors5.border);
+          $('#pointOff').attr('value', (colors5.pointOff.slice(1,1) == "#")?colors5.pointOff.slice(1):colors5.pointOff);
+          $('#pointBorder').attr('value', (colors5.pointBorder.slice(1,1) == "#")?colors5.pointBorder.slice(1):colors5.pointBorder);
+          $('#pointOn').attr('value', (colors5.pointOn.slice(1,1) == "#")?colors5.pointOn.slice(1):colors5.pointOn);
+          $('#lines').attr('value', (colors5.lines.slice(1,1) == "#")?colors5.lines.slice(1):colors5.lines);
+          $('#text').attr('value', (colors5.text.slice(1,1) == "#")?colors5.text.slice(1):colors5.text);
+          $('#buttonText').attr('value', (colors5.buttonText.slice(1,1) == "#")?colors5.buttonText.slice(1):colors5.buttonText);
+          $('#specialText').attr('value', (colors5.specialText.slice(1,1) == "#")?colors5.specialText.slice(1):colors5.specialText);
+          $('#finalText').attr('value', (colors5.finalText.slice(1,1) == "#")?colors5.finalText.slice(1):colors5.finalText);
+          $('#dice').attr('value', (colors5.dice.slice(1,1) == "#")?colors5.dice.slice(1):colors5.dice);
+          $('#dicePips').attr('value', (colors5.dicePips.slice(1,1) == "#")?colors5.dicePips.slice(1):colors5.dicePips);
+          $('#betBorder').attr('value', (colors5.betBorder.slice(1,1) == "#")?colors5.betBorder.slice(1):colors5.betBorder);
+          $('#betFill').attr('value', (colors5.betFill.slice(1,1) == "#")?colors5.betFill.slice(1):colors5.betFill);
           $('#customColors').show()
         } else {
           $('#customColors').hide()
@@ -1071,41 +1072,41 @@
       }
       
       function resetColors(){
-        $.extend(colors4, colors0);
-        $('#betBorder').attr('value', colors4.betBorder.slice(1));
-        $('#boardColor').attr('value', colors4.board.slice(1));
-        $('#border').attr('value', colors4.border.slice(1));
-        $('#pointOff').attr('value', colors4.pointOff.slice(1));
-        $('#pointBorder').attr('value', colors4.pointBorder.slice(1));
-        $('#pointOn').attr('value', colors4.pointOn.slice(1));
-        $('#lines').attr('value', colors4.lines.slice(1));
-        $('#text').attr('value', colors4.text.slice(1));
-        $('#buttonText').attr('value', colors4.buttonText.slice(1));
-        $('#specialText').attr('value', colors4.specialText.slice(1));
-        $('#finalText').attr('value', colors4.finalText.slice(1));
-        $('#dice').attr('value', colors4.dice.slice(1));
-        $('#dicePips').attr('value', colors4.dicePips.slice(1));
-        $('#betFill').attr('value', colors4.betFill.slice(1));
+        $.extend(colors5, colors0);
+        $('#betBorder').attr('value', colors5.betBorder.slice(1));
+        $('#boardColor').attr('value', colors5.board.slice(1));
+        $('#border').attr('value', colors5.border.slice(1));
+        $('#pointOff').attr('value', colors5.pointOff.slice(1));
+        $('#pointBorder').attr('value', colors5.pointBorder.slice(1));
+        $('#pointOn').attr('value', colors5.pointOn.slice(1));
+        $('#lines').attr('value', colors5.lines.slice(1));
+        $('#text').attr('value', colors5.text.slice(1));
+        $('#buttonText').attr('value', colors5.buttonText.slice(1));
+        $('#specialText').attr('value', colors5.specialText.slice(1));
+        $('#finalText').attr('value', colors5.finalText.slice(1));
+        $('#dice').attr('value', colors5.dice.slice(1));
+        $('#dicePips').attr('value', colors5.dicePips.slice(1));
+        $('#betFill').attr('value', colors5.betFill.slice(1));
       }
       
       function saveSettings(){
         if(!isNaN(parseInt($('#startingBank').val()))){
           initBank = parseInt($('#startingBank').val());
           MODAL_FADE_INTERVAL = parseInt($('#modalTiming').val());
-          colors4.betBorder = $('#betBorder').attr('value');
-          colors4.board = $('#boardColor').attr('value');
-          colors4.border = $('#border').attr('value');
-          colors4.pointOff = $('#pointOff').attr('value');
-          colors4.pointBorder = $('#pointBorder').attr('value');
-          colors4.pointOn = $('#pointOn').attr('value');
-          colors4.lines = $('#lines').attr('value');
-          colors4.text = $('#text').attr('value');
-          colors4.buttonText = $('#buttonText').attr('value');
-          colors4.specialText = $('#specialText').attr('value');
-          colors4.finalText = $('#finalText').attr('value');
-          colors4.dice = $('#dice').attr('value');
-          colors4.dicePips = $('#dicePips').attr('value');
-          colors4.betFill = $('#betFill').attr('value');
+          colors5.betBorder = $('#betBorder').attr('value');
+          colors5.board = $('#boardColor').attr('value');
+          colors5.border = $('#border').attr('value');
+          colors5.pointOff = $('#pointOff').attr('value');
+          colors5.pointBorder = $('#pointBorder').attr('value');
+          colors5.pointOn = $('#pointOn').attr('value');
+          colors5.lines = $('#lines').attr('value');
+          colors5.text = $('#text').attr('value');
+          colors5.buttonText = $('#buttonText').attr('value');
+          colors5.specialText = $('#specialText').attr('value');
+          colors5.finalText = $('#finalText').attr('value');
+          colors5.dice = $('#dice').attr('value');
+          colors5.dicePips = $('#dicePips').attr('value');
+          colors5.betFill = $('#betFill').attr('value');
           PlayerManager.updatePlayerArea();
         } else {
           alert('Please enter a number as the initial bank!');
@@ -1184,7 +1185,7 @@
         mod.show();
         mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
         resizeModal();
-        if($('#colorScheme').val() == 4){
+        if($('#colorScheme').val() == 5){
           $('#customColors').show()
         } else {
           $('#customColors').hide()
@@ -1192,6 +1193,9 @@
       }
       
       function closeModal(){
+        if($('#colorScheme').val() != 5){
+          saveSettings();
+        }
         $('#colorScheme').val(localStorage['colors']);
         colors = eval("colors" + localStorage['colors']);
         $('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
@@ -1208,7 +1212,7 @@
         $('#' + button + 'Button').addClass('blue');
         $('#' + button).show();
         resizeModal();
-        if($('#colorScheme').val() == 4){
+        if($('#colorScheme').val() == 5){
           $('#customColors').show()
         } else {
           $('#customColors').hide()
@@ -1226,7 +1230,7 @@
         $('#' + button + 'Button').addClass('red');
         $('#' + button).show();
         resizeModal();
-        if($('#colorScheme').val() == 4){
+        if($('#colorScheme').val() == 5){
           $('#customColors').show()
         } else {
           $('#customColors').hide()
@@ -1325,8 +1329,9 @@
         input.attr('type', 'text');
         input.attr('id', 'nameInput');
         input.css({width: '50%'});
-        $('#name').css({top: '5px'});
-        $('#bank').css({top: ($('#name').offset().top + $('#name').height() - 30)});
+        $('#name').css({top: '05px'});
+        $('#name').removeClass('clickable');
+        $('#bank').css({top: 0});
         $('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
         $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
@@ -1347,6 +1352,7 @@
         input.change(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
+          $('#name').attr('class', 'clickable');
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
           $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
@@ -1354,6 +1360,7 @@
         input.blur(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
+          $('#name').attr('class', 'clickable');
           $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
           $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
           $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
@@ -1398,7 +1405,7 @@
           } else {
             _betDispVal.empty();
             _betDispVal.html('$' + newAmount);
-          _betDispVal.attr('class', 'bttn');
+          _betDispVal.attr('class', 'clickable');
             _bet.bet.value = parseInt(newAmount);
             var diff = (parseInt(newAmount) - parseInt(oldVal))
             PlayerManager.getPlayerById(_bet.bet.playerId).player.subFromBank(diff);
@@ -1420,7 +1427,7 @@
           }
           _betDispVal.empty();
           _betDispVal.html('$' + newAmount);
-          _betDispVal.attr('class', 'bttn');
+          _betDispVal.attr('class', 'clickable');
           _bet.bet.value = parseInt(newAmount);
           var diff = (parseInt(newAmount) - parseInt(oldVal))
           _bet.bet.player.player.subFromBank(diff);

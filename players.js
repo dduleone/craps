@@ -74,7 +74,9 @@ $.extend(PlayerManager, {
     bank.append(total);
     //bank.css({top: $('#name').height()});
     $('#name').css({top: '5px'});
-    //$('#bank').css({top: ($('#name').offset().top + $('#name').height() - 30)});
+    //$('#bank').css({top: ($('#name').offset().top + $('#name').height()), margin: '0px', border: '0px'});
+    $('#bank').css({top: 0, margin: '0px', border: '0px'});
+    $('#bankTitle').css({top: ($('#bank').offset().top), margin: '0px', border: '0px'});
     //$('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
     //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());

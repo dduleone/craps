@@ -75,6 +75,23 @@ var colors3 = {
 };
 
 var colors4 = {
+  "betBorder":"888899",
+  "board":"333333",
+  "border":"CCCCCC",
+  "pointOff":"000",
+  "pointBorder":"000000",
+  "pointOn":"fff",
+  "lines":"FFFFFF",
+  "text":"EEEEEE",
+  "buttonText":"000",
+  "specialText":"0066FF",
+  "finalText":"CCCC00",
+  "dice":"CC0000",
+  "dicePips":"FFFFFF",
+  "betFill":"666677"
+};
+
+var colors5 = {
   betBorder: "#000080",
   board: "#090",
   border: "#000",
@@ -1278,8 +1295,28 @@ var colors4 = {
           ctx.fillStyle = this.board.colors.text;
           ctx.font = "35pt Verdana";
           ctx.textAlign = "left";
-          ctx.fillText("Roll", 1245, 320);
+          ctx.fillText("Roll", 1243, 320);
           ctx.stroke();
+          ctx.closePath();
+          
+          ctx.beginPath();
+          ctx.lineWidth = 5;
+          ctx.moveTo(1238, 310);
+          ctx.lineCap = 'round'
+          ctx.strokeStyle = this.board.colors.lines;
+          ctx.quadraticCurveTo(1216, 312, 1218, 290);
+          ctx.stroke();
+          ctx.closePath();
+          
+          ctx.beginPath();
+          ctx.lineWidth = 5;
+          ctx.moveTo(1337, 310);
+          ctx.lineCap = 'round'
+          ctx.strokeStyle = this.board.colors.lines;
+          ctx.quadraticCurveTo(1359, 312, 1357, 290);
+          ctx.stroke();
+          ctx.closePath();
+          
         },
         drawDots: function(){
           var dice = diceToNum(_CRAPS.dice);
