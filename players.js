@@ -41,7 +41,11 @@ $.extend(PlayerManager, {
     name.empty();
     bank.empty();
     name.html(this.players[0].player.name);
-    name.css('left', (($('#buffer').width() - name.width())/2));
+    name.css('left', '0px');
+    name.width($('#buffer').width());
+    $('#playerArea').css({left: '0px'});
+    name.css({top: '5px', left: '0px'});
+    //name.css('left', (($('#buffer').width() - name.width())/2));
     //name.attr('class', 'bttn');
     var bankTitle = $(document.createElement('p'));
     bankTitle.html('<center>Bank</center>');
@@ -73,7 +77,6 @@ $.extend(PlayerManager, {
     bank.append(inPlay);
     bank.append(total);
     //bank.css({top: $('#name').height()});
-    $('#name').css({top: '5px'});
     //$('#bank').css({top: ($('#name').offset().top + $('#name').height()), margin: '0px', border: '0px'});
     $('#bank').css({top: 0, margin: '0px', border: '0px'});
     $('#bankTitle').css({top: ($('#bank').offset().top), margin: '0px', border: '0px'});

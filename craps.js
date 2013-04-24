@@ -332,6 +332,7 @@ BetManager.prototype = {
            .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').append($(document.createElement('img')).attr('title', 'Remove All Bets').attr('src', 'images/edit-clear_small.png')));//.html('Rem All'));
     heading.append(headers);
     betTable.append(heading);
+    betListing.html('<center>Click the Board to Place a Bet!</center>');
     betListing.append(betTable);
 
     for(var betNum in this.bets){
