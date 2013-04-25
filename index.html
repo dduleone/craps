@@ -1637,6 +1637,8 @@
         });
       })();
       
+      $(window).resize(function(){PlayerManager.updatePlayerArea();});
+      
       function prettyToName(betType){
         switch(betType){
         case "Pass Line":
