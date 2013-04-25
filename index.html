@@ -287,6 +287,12 @@
               boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
               if(boardArea){
                 if(boardArea.name == "Dice"){
+                  if(GameState.tutorial){
+                    if((!GameState.tutorialStateArray[0] && _CRAPS.dealer.betManager.bets.length == 0) ||
+                        (GameState.tutorialStateArray[0] && GameState.tutorialStateArray[1] && GameState.tutorialStateArray[2] && _CRAPS.dealer.betManager.bets.length == 1 && !GameState.tutorialStateArray[3])){
+                      return;
+                    }
+                  }
                   roll();
                   return;
                 }
@@ -470,13 +476,76 @@
 
       function addBet(area){
         $('#betRepeat').removeAttr('disabled');
-        $('#betRepeat').attr('chekced');
+        $('#betRepeat').attr('checked');
         $('#betType').show();
         $('#betName').show();
         $('#betValSlide').attr('min', '0');
         $('#betValSlide').attr('max', Math.min(_CRAPS.maxBet, PlayerManager.players[0].player.bank));
         $('#betValSlide').attr('step', '100');
         $('#betValSlide').attr('value', '100');
+        
+        if(GameState.tutorial){
+          if(area.name == "Pass Line"){
+            if((!GameState.tutorialStateArray[0] && _CRAPS.dealer.betManager.bets.length == 0) ||
+               (GameState.tutorialStateArray[0] && GameState.tutorialStateArray[1] && GameState.tutorialStateArray[2] && !GameState.tutorialStateArray[3] && _CRAPS.dealer.betManager.bets.length == 1)){
+              $('#betType').empty();
+              var opt = $(document.createElement('option'));
+              if(!GameState.point){
+                opt.attr('value', 'passline');
+                opt.html('Pass Line');
+              } else {
+                opt.attr('value', 'passlineOdds');
+                opt.html('Pass Line Odds');
+              }
+              $('#betType').append(opt).attr('disabled', 'true');
+              $('#betRepeat').attr('checked','');
+              $('#origBet').empty();
+              if($('#betType').val() == 'passlineOdds'){
+                var origBet = $('#origBet');
+                var origLabel = $(document.createElement('label'));
+                var orig = $(document.createElement('input'));
+                var bets = _CRAPS.dealer.betManager.bets;
+                orig.attr('type', 'text');
+                orig.css({width: '50px'});
+                orig.attr('id', 'orig');
+                var _type = $('#betType').val().slice(0, 8);
+                for(i in bets){
+                  if(bets[i].type == _type){
+                    orig.attr('value', bets[i].bet.betId);
+                  }
+                }
+                origBet.append(origLabel).append(orig);
+                origBet.hide();
+                $('#betRepeat').removeAttr('checked');
+                var origVal;
+                for(i in _CRAPS.dealer.betManager.bets){
+                  if(_CRAPS.dealer.betManager.bets[i].type == 'passline'){
+                    origVal = _CRAPS.dealer.betManager.bets[i].bet.value;
+                  }
+                }
+                if(GameState.point == 4 || GameState.point == 10){
+                  $('#betValSlide').attr('step', '50');
+                  $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                  $('#betValSlide').attr('max', origVal * 3);
+                } else if(GameState.point == 5 || GameState.point == 9){
+                  $('#betValSlide').attr('step', '50');
+                  $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                  $('#betValSlide').attr('max', origVal * 4);
+                } else if(GameState.point == 6 || GameState.point == 8){
+                  $('#betValSlide').attr('step', '50');
+                  $('#betValSlide').attr('value', $('#betValue').attr('value'));
+                  $('#betValSlide').attr('max', origVal * 5);
+                }
+              }
+              $('#betType').hide();
+              $('#betName').html(nameToPretty($('#betType').val()));
+              updateBetDesc();
+              place();
+            }
+          }
+              $('#betType').hide();
+          return;
+        }
         
         switch(area.name){
         case "Pass Line":

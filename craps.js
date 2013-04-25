@@ -476,7 +476,9 @@ var GameState = {
     9: false,
     10: false
   },
-  numFire: 0
+  numFire: 0,
+  tutorial: false,
+  tutorialStateArray: [false, false, false, false, false]
 };
 
 var _CRAPS = {};
@@ -550,6 +552,48 @@ $.extend(_CRAPS, {
   // Roll the dice.
     //_CRAPS.output("Before Roll - The point is: " + GameState.point);
     var roll = _CRAPS.dice.roll();
+    if(GameState.tutorial){
+      var die0 = _CRAPS.dice.dice.dice[0];
+      var die1 = _CRAPS.dice.dice.dice[1];
+      var theseDice = _CRAPS.dice.dice
+      if(!GameState.tutorialStateArray[0]){
+        die0.value = 3;
+        die1.value = 4;
+        roll = 7;
+        theseDice.total = 7;
+        GameState.tutorialStateArray[0] = true;
+      } else if(!GameState.tutorialStateArray[1]){
+        die0.value = 1;
+        die1.value = 2;
+        roll = 3;
+        theseDice.total = 3;
+        GameState.tutorialStateArray[1] = true;
+      } else if(!GameState.tutorialStateArray[2]){
+        die0.value = 5;
+        die1.value = 3;
+        roll = 8;
+        theseDice.total = 8;
+        GameState.tutorialStateArray[2] = true
+      } else if(!GameState.tutorialStateArray[3]){
+        die0.value = 4;
+        die1.value = 4;
+        roll = 8;
+        theseDice.total = 8;
+        GameState.tutorialStateArray[3] = true;
+      } else if(!GameState.tutorialStateArray[4]){
+        die0.value = 4;
+        die1.value = 1;
+        roll = 5;
+        theseDice.total = 5;
+        GameState.tutorialStateArray[4] = true;
+      } else if(!GameState.tutorialStateArray[5]){
+        die0.value = 5;
+        die1.value = 2;
+        roll = 7;
+        theseDice.total = 7;
+        GameState.tutorialStateArray[5] = true;
+      }
+    }
     var diceArray = diceToNum(_CRAPS.dice);
     _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));
     //_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
