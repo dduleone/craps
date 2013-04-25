@@ -39,203 +39,209 @@
       <!--div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div -->
     </div>
     <div id='buffer'></div>
+    <div id='openButtons'>
+      <div id='openHelp' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
+      <div id='openRules' class='bttn blue' onclick='clickModalButton("rules")'>Rules</div>
+      <div id='openSettings' class='bttn blue' onclick='clickModalButton("settings")'>Settings</div>
+    </div>
     <div id='modalScreen' onclick="closeModal()"></div>
-    <div id='modal' class='round'>
+    <div id='modal' class='smallRound'>
       <div id='modalButtons'>
         <div id='helpButton' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
         <div id='rulesButton' class='bttn' onclick='clickModalButton("rules")'>Rules</div>
         <div id='settingsButton' class='bttn' onclick='clickModalButton("settings")'>Settings</div>
       </div>
-      <div id='settings'>
-        <label for='startingBank'>Starting Bank: </label>
-        <input id='startingBank' type='text'><br />
-        <label for='modalTiming'>Help Fade Out Time (milliseconds): </label>
-        <input id='modalTiming' type='text'><br />
-        <label for='colorScheme'>Color Scheme: </label>
-        <select id='colorScheme' onchange='updateColors()'>
-          <option value = "0">Standard Board</option>
-          <option value = "1">Red Board</option>
-          <option value = "2">Blue Board</option>
-          <option value = "3">Purple Board</option>
-          <option value = "4">Charcoal Board</option>
-          <option value = "5">Customize Your Own Scheme!</option>
-        </select><br />
-        <div id='customColors'>
-          <label for='boardColor'>Board: #</label><input id='boardColor' class='color'><br />
-          <label for='border'>Board Border: #</label><input id='border' class='color'><br />
-          <label for='betBorder'>Bet Border: #</label><input id='betBorder' class='color'><br />
-          <label for='betFill'>Bet Fill: #</label><input id='betFill' class='color'><br />
-          <label for='lines'>Lines: #</label><input id='lines' class='color'><br />
-          <label for='text'>Text: #</label><input id='text' class='color'><br />
-          <label for='specialText'>Special 1: #</label><input id='specialText' class='color'><br />
-          <label for='finalText'>Special 2: #</label><input id='finalText' class='color'><br />
-          <label for='dice'>Dice: #</label><input id='dice' class='color'><br />
-          <label for='dicePips'>Dice Pips: #</label><input id='dicePips' class='color'><br />
-          <label for='pointBorder'>Point Border: #</label><input id='pointBorder' class='color'><br />
-          <label for='pointOff'>Point Off: #</label><input id='pointOff' class='color'><br />
-          <label for='pointOn'>Point On: #</label><input id='pointOn' class='color'><br />
-          <label for='buttonText'>Point Text: #</label><input id='buttonText' class='color'><br />
-          <div id='resetColors' class='bttn yellow' onclick='resetColors()'>Reset Custom Colors</div>
+      <div id='modalWindow'>
+        <div id='settings'>
+          <label for='startingBank'>Starting Bank: </label>
+          <input id='startingBank' type='text'><br />
+          <label for='modalTiming'>Help Fade Out Time (milliseconds): </label>
+          <input id='modalTiming' type='text'><br />
+          <label for='colorScheme'>Color Scheme: </label>
+          <select id='colorScheme' onchange='updateColors()'>
+            <option value = "0">Standard Board</option>
+            <option value = "1">Red Board</option>
+            <option value = "2">Blue Board</option>
+            <option value = "3">Purple Board</option>
+            <option value = "4">Charcoal Board</option>
+            <option value = "5">Customize Your Own Scheme!</option>
+          </select><br />
+          <div id='customColors'>
+            <label for='boardColor'>Board: #</label><input id='boardColor' class='color'><br />
+            <label for='border'>Board Border: #</label><input id='border' class='color'><br />
+            <label for='lines'>Lines: #</label><input id='lines' class='color'><br />
+            <label for='specialText'>Special 1: #</label><input id='specialText' class='color'><br />
+            <label for='finalText'>Special 2: #</label><input id='finalText' class='color'><br />
+            <label for='dice'>Dice: #</label><input id='dice' class='color'><br />
+            <label for='dicePips'>Dice Pips: #</label><input id='dicePips' class='color'><br />
+            <label for='text'>Text: #</label><input id='text' class='color'><br />
+            <label for='pointBorder'>Point Border: #</label><input id='pointBorder' class='color'><br />
+            <label for='pointOff'>Point Off: #</label><input id='pointOff' class='color'><br />
+            <label for='pointOn'>Point On: #</label><input id='pointOn' class='color'><br />
+            <label for='buttonText'>Point Text: #</label><input id='buttonText' class='color'><br />
+            <label for='betFill'>Bet Fill: #</label><input id='betFill' class='color'><br />
+            <label for='betBorder'>Bet Border: #</label><input id='betBorder' class='color'><br />
+            <div id='resetColors' class='bttn yellow' onclick='resetColors()'>Reset Custom Colors</div>
+          </div>
+          <div id='save' class='bttn yellow' onclick='saveSettings()'>Apply</div>
         </div>
-        <div id='save' class='bttn yellow' onclick='saveSettings()'>Apply</div>
-      </div>
-      <div id='rules'>
-        <div id='rulesButtons'>
-          <div id='standardButton' class='bttn red' onclick='clickRulesButton("standard")'>Standard Bets</div>
-          <div id='multiButton' class='bttn' onclick='clickRulesButton("multi")'>Multi-Roll Bets</div>
-          <div id='singleButton' class='bttn' onclick='clickRulesButton("single")'>Single-Roll Bets</div>
-          <div id='fireButton' class='bttn' onclick='clickRulesButton("fire")'>Fire Bets</div>
-        </div>
-        <div id='standard'>
-          <ul>
-            <li>
-              Passline<br />
-              You may only place when the point is Off. If you have a Passline Bet on and a point gets set, you may not remove it.<br />
-              When the point is off:
-              <ul>
-                <li>7 &amp; 11 win</li>
-                <li>2 &amp; 3 lose</li>
-                <li>12 pushes</li>
-                <li>Anything else sets a point</li>
-              </ul>
-              When the point is on:
-              <ul>
-                <li>The point wins</li>
-                <li>7 loses</li>
-                <li>Anything else, roll again</li>
-              </ul>
-            </li>
-            <li>
-              Don't Pass<br />
-              You may only place when the point is Off. If you have a Don't Pass Bet on and a point gets set, you may not remove it.<br />
-              When the point is off:
-              <ul>
-                <li>7 &amp; 11 lose</li>
-                <li>2 &amp; 3 win</li>
-                <li>12 pushes</li>
-                <li>Anything else sets a point</li>
-              </ul>
-              When the point is on:
-              <ul>
-                <li>The point loses</li>
-                <li>7 wins</li>
-                <li>Anything else, roll again</li>
-              </ul>
-            </li>
-            <li>
-              Come<br />
-              A Passline bet, but on its own point cycle. You may place it whenever.
-            </li>
-            <li>
-              Don't Come<br />
-              A Don't Pass bet, but on its own point cycle. You may place it whenever.
-            </li>
-            <li>
-              Odds<br />
-              You may only place when you have a bet of the matching type on the table, and the bet has a point on.<br />
-              Same winning conditions as the associated bet.
-            </li>
-          </ul>
-        </div>
-        <div id='multi'>
-          You may place these whenever. Usually off when the point is off.
-          <ul>
-            <li>
-              Place Bets<br />
-              <ul>
-                <li>The place number wins</li>
-                <li>7 loses</li>
-                <li>Anything else pushes</li>
-              </ul>
-            </li>
-            <li>
-              Hardways Bets<br />
-              <ul>
-                <li>Hardways wins</li>
-                <li>Easy loses</li>
-                <li>7 loses</li>
-                <li>Anything else pushes</li>
-              </ul>
-            </li>
-            <li>
-              Big 6/8<br />
-              <ul>
-                <li>6 or 8 wins</li>
-                <li>7 loses</li>
-                <li>Anything else pushes</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div id='single'>
-          You may place these whenever. Usually off when the point is off.<br />
-          See the individual bet for the win conditions.
-        </div>
-        <div id='fire'>
-          A Fire Bet may only be placed during the initial Come out roll, when there is no point established, and no fire markers on the table.<br />
-          A Fire bet pays out only when four or more unique points are made before Seven Outting.
-        </div>
-      </div>
-      <div id='help'>
-        <h2>Help:</h2>
-        <ul>
-          <li>To set your name, click on/touch the name area.</li>
-          <li>To place a bet, click on/touch the area of the board you want to place a bet.
+        <div id='rules'>
+          <div id='rulesButtons'>
+            <div id='standardButton' class='bttn red' onclick='clickRulesButton("standard")'>Standard Bets</div>
+            <div id='multiButton' class='bttn' onclick='clickRulesButton("multi")'>Multi-Roll Bets</div>
+            <div id='singleButton' class='bttn' onclick='clickRulesButton("single")'>Single-Roll Bets</div>
+            <div id='fireButton' class='bttn' onclick='clickRulesButton("fire")'>Fire Bets</div>
+          </div>
+          <div id='standard'>
             <ul>
-              <li>Once you are satisfied with the bet, click "Create Bet!" or hit the "Enter" key.</li>
-              <li>If you decide you don't want to create the bet, click "Cancel" or hit the "Esc" key.</li>
-              <li>To place a Passline/Don't Pass odds bet, click on/touch the Passline/Don't Pass<br />area when there is a point on.</li>
-              <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come<br />standard areas, then select Come/Don't Come Odds from the drop down and<br />make sure the correct Original Bet Id is in the box.</li>
+              <li>
+                Passline<br />
+                You may only place when the point is Off. If you have a Passline Bet on and a point gets set, you may not remove it.<br />
+                When the point is off:
+                <ul>
+                  <li>7 &amp; 11 win</li>
+                  <li>2 &amp; 3 lose</li>
+                  <li>12 pushes</li>
+                  <li>Anything else sets a point</li>
+                </ul>
+                When the point is on:
+                <ul>
+                  <li>The point wins</li>
+                  <li>7 loses</li>
+                  <li>Anything else, roll again</li>
+                </ul>
+              </li>
+              <li>
+                Don't Pass<br />
+                You may only place when the point is Off. If you have a Don't Pass Bet on and a point gets set, you may not remove it.<br />
+                When the point is off:
+                <ul>
+                  <li>7 &amp; 11 lose</li>
+                  <li>2 &amp; 3 win</li>
+                  <li>12 pushes</li>
+                  <li>Anything else sets a point</li>
+                </ul>
+                When the point is on:
+                <ul>
+                  <li>The point loses</li>
+                  <li>7 wins</li>
+                  <li>Anything else, roll again</li>
+                </ul>
+              </li>
+              <li>
+                Come<br />
+                A Passline bet, but on its own point cycle. You may place it whenever.
+              </li>
+              <li>
+                Don't Come<br />
+                A Don't Pass bet, but on its own point cycle. You may place it whenever.
+              </li>
+              <li>
+                Odds<br />
+                You may only place when you have a bet of the matching type on the table, and the bet has a point on.<br />
+                Same winning conditions as the associated bet.
+              </li>
             </ul>
-          </li>
-          <li>To change a bet's amount, click on the amount.</li>
-          <li>To roll, click on/touch the red dice.</li>
-          <li>To reset your game and bankroll, click "Reset Game"</li>
-          <li>Your session will automatically save after every roll. If you want to take<br />
-              the game to another device, click "Save Game", and copy the URL in the pop up.<br />
-              Open that URL on your other device, and your game will pick up where this one left off!<br />
-              *** Important! When transfering to another device, all bets on the table and Fire Bet progress will be lost! ***
-         <!-- If you want to save your session, clear all your bets and copy the URL. <br />
-              When you come back to that URL, your game will pick up where you left off.<br />
-              *** Any bets left on the table will be lost when you come back! ***</li> -->
-        </ul>
-        <h2>Key:</h2>
-        <table>
-          <tr>
-            <th>Heading</th>
-            <th>Meaning</td>
-          </tr>
-          <tr>
-            <td class='imageKey'><img src='images/id-card_green_small.png'></td>
-            <td class='keyText'>Bet Id</td>
-          </tr>
-          <tr>
-            <td class='imageKey'><img src='images/shapes_small.png'></td>
-            <td class='keyText'>Bet Type</td>
-          </tr>
-          <tr>
-            <td class='imageKey'><img src='images/chips_small.png'></td>
-            <td class='keyText'>Bet Amount</td>
-          </tr>
-          <tr>
-            <td class='imageKey'><img src='images/power_button_black_small.png'></td>
-            <td class='keyText'>Bet On?</td>
-          </tr>
-          <tr>
-            <td class='imageKey'><img src='images/restart_small.png'></td>
-            <td class='keyText'>Repeat Bet on Win?</td>
-          </tr>
-          <tr>
-            <td class='imageKey'><img src='images/point_small.png'></td>
-            <td class='keyText'>Bet Point</td>
-          </tr>
-          <tr>
-            <td class='imageKey red'><img src='images/edit-clear_small.png'></td>
-            <td class='keyText'>Clear All Bets</td>
-          </tr>
-        </table>
+          </div>
+          <div id='multi'>
+            You may place these whenever. Usually off when the point is off.
+            <ul>
+              <li>
+                Place Bets<br />
+                <ul>
+                  <li>The place number wins</li>
+                  <li>7 loses</li>
+                  <li>Anything else pushes</li>
+                </ul>
+              </li>
+              <li>
+                Hardways Bets<br />
+                <ul>
+                  <li>Hardways wins</li>
+                  <li>Easy loses</li>
+                  <li>7 loses</li>
+                  <li>Anything else pushes</li>
+                </ul>
+              </li>
+              <li>
+                Big 6/8<br />
+                <ul>
+                  <li>6 or 8 wins</li>
+                  <li>7 loses</li>
+                  <li>Anything else pushes</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div id='single'>
+            You may place these whenever. Usually off when the point is off.<br />
+            See the individual bet for the win conditions.
+          </div>
+          <div id='fire'>
+            A Fire Bet may only be placed during the initial Come out roll, when there is no point established, and no fire markers on the table.<br />
+            A Fire bet pays out only when four or more unique points are made before Seven Outting.
+          </div>
+        </div>
+        <div id='help'>
+          <h2>Help:</h2>
+          <ul>
+            <li>To set your name, click on/touch the name area.</li>
+            <li>To place a bet, click on/touch the area of the board you want to place a bet.
+              <ul>
+                <li>Once you are satisfied with the bet, click "Create Bet!" or hit the "Enter" key.</li>
+                <li>If you decide you don't want to create the bet, click "Cancel" or hit the "Esc" key.</li>
+                <li>To place a Passline/Don't Pass odds bet, click on/touch the Passline/Don't Pass<br />area when there is a point on.</li>
+                <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come<br />standard areas, then select Come/Don't Come Odds from the drop down and<br />make sure the correct Original Bet Id is in the box.</li>
+              </ul>
+            </li>
+            <li>To change a bet's amount, click on the amount.</li>
+            <li>To roll, click on/touch the red dice.</li>
+            <li>To reset your game and bankroll, click "Reset Game"</li>
+            <li>Your session will automatically save after every roll. If you want to take<br />
+                the game to another device, click "Save Game", and copy the URL in the pop up.<br />
+                Open that URL on your other device, and your game will pick up where this one left off!<br />
+                *** Important! When transfering to another device, all bets on the table and Fire Bet progress will be lost! ***
+           <!-- If you want to save your session, clear all your bets and copy the URL. <br />
+                When you come back to that URL, your game will pick up where you left off.<br />
+                *** Any bets left on the table will be lost when you come back! ***</li> -->
+          </ul>
+          <h2>Key:</h2>
+          <table>
+            <tr>
+              <th>Heading</th>
+              <th>Meaning</td>
+            </tr>
+            <tr>
+              <td class='imageKey'><img src='images/id-card_green_small.png'></td>
+              <td class='keyText'>Bet Id</td>
+            </tr>
+            <tr>
+              <td class='imageKey'><img src='images/shapes_small.png'></td>
+              <td class='keyText'>Bet Type</td>
+            </tr>
+            <tr>
+              <td class='imageKey'><img src='images/chips_small.png'></td>
+              <td class='keyText'>Bet Amount</td>
+            </tr>
+            <tr>
+              <td class='imageKey'><img src='images/power_button_black_small.png'></td>
+              <td class='keyText'>Bet On?</td>
+            </tr>
+            <tr>
+              <td class='imageKey'><img src='images/restart_small.png'></td>
+              <td class='keyText'>Repeat Bet on Win?</td>
+            </tr>
+            <tr>
+              <td class='imageKey'><img src='images/point_small.png'></td>
+              <td class='keyText'>Bet Point</td>
+            </tr>
+            <tr>
+              <td class='imageKey red'><img src='images/edit-clear_small.png'></td>
+              <td class='keyText'>Clear All Bets</td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <br />
       <div id='closeModal' class='bttn red' onclick='closeModal()'>Close</div>
     </div>
   </body>
@@ -284,10 +290,10 @@
                   roll();
                   return;
                 }
-                if(boardArea.name == "Help"){
-                  openModal();
-                  return;
-                }
+                //if(boardArea.name == "Help"){
+                //  openModal();
+                //  return;
+                //}
                 if(boardArea.name == "Reset"){
                   if(_CRAPS.dealer.betManager.bets.length > 0){
                     alert("You cannot reset your game when you have bets on the table.");
@@ -1048,6 +1054,7 @@
       
       function updateColors(){
         if($('#colorScheme').val() == 5){
+          $('#customColors input').blur();
           $('#boardColor').attr('value', (colors5.board.slice(1,1) == "#")?colors5.board.slice(1):colors5.board);
           $('#border').attr('value', (colors5.border.slice(1,1) == "#")?colors5.border.slice(1):colors5.border);
           $('#pointOff').attr('value', (colors5.pointOff.slice(1,1) == "#")?colors5.pointOff.slice(1):colors5.pointOff);
@@ -1066,27 +1073,27 @@
         } else {
           $('#customColors').hide()
         }
-        resizeModal();
+        //resizeModal();
         colors = eval("colors" + $('#colorScheme').val());
         draw(Board);
       }
       
       function resetColors(){
         $.extend(colors5, colors0);
-        $('#betBorder').attr('value', colors5.betBorder.slice(1));
-        $('#boardColor').attr('value', colors5.board.slice(1));
-        $('#border').attr('value', colors5.border.slice(1));
-        $('#pointOff').attr('value', colors5.pointOff.slice(1));
-        $('#pointBorder').attr('value', colors5.pointBorder.slice(1));
-        $('#pointOn').attr('value', colors5.pointOn.slice(1));
-        $('#lines').attr('value', colors5.lines.slice(1));
-        $('#text').attr('value', colors5.text.slice(1));
-        $('#buttonText').attr('value', colors5.buttonText.slice(1));
-        $('#specialText').attr('value', colors5.specialText.slice(1));
-        $('#finalText').attr('value', colors5.finalText.slice(1));
-        $('#dice').attr('value', colors5.dice.slice(1));
-        $('#dicePips').attr('value', colors5.dicePips.slice(1));
-        $('#betFill').attr('value', colors5.betFill.slice(1));
+        $('#betBorder').attr('value', colors5.betBorder);
+        $('#boardColor').attr('value', colors5.board);
+        $('#border').attr('value', colors5.border);
+        $('#pointOff').attr('value', colors5.pointOff);
+        $('#pointBorder').attr('value', colors5.pointBorder);
+        $('#pointOn').attr('value', colors5.pointOn);
+        $('#lines').attr('value', colors5.lines);
+        $('#text').attr('value', colors5.text);
+        $('#buttonText').attr('value', colors5.buttonText);
+        $('#specialText').attr('value', colors5.specialText);
+        $('#finalText').attr('value', colors5.finalText);
+        $('#dice').attr('value', colors5.dice);
+        $('#dicePips').attr('value', colors5.dicePips);
+        $('#betFill').attr('value', colors5.betFill);
       }
       
       function saveSettings(){
@@ -1184,26 +1191,44 @@
         var mod = $('#modal');
         mod.show();
         mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
-        resizeModal();
+        //resizeModal();
         if($('#colorScheme').val() == 5){
           $('#customColors').show()
+          $('#customColors input').blur();
         } else {
           $('#customColors').hide()
         }
+        $('#openButtons').hide();
       }
       
       function closeModal(){
-        if($('#colorScheme').val() != 5){
-          saveSettings();
-        }
+        $('#boardColor').attr('value',  colors5.board      );
+        $('#border').attr('value',      colors5.border     );
+        $('#pointOff').attr('value',    colors5.pointOff   );
+        $('#pointBorder').attr('value', colors5.pointBorder);
+        $('#pointOn').attr('value',     colors5.pointOn    );
+        $('#lines').attr('value',       colors5.lines      );
+        $('#text').attr('value',        colors5.text       );
+        $('#buttonText').attr('value',  colors5.buttonText );
+        $('#specialText').attr('value', colors5.specialText);
+        $('#finalText').attr('value',   colors5.finalText  );
+        $('#dice').attr('value',        colors5.dice       );
+        $('#dicePips').attr('value',    colors5.dicePips   );
+        $('#betBorder').attr('value',   colors5.betBorder  );
+        $('#betFill').attr('value',     colors5.betFill    );
+        saveSettings();
         $('#colorScheme').val(localStorage['colors']);
         colors = eval("colors" + localStorage['colors']);
         $('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
+        $('#openButtons').show();
       }
       
       function clickModalButton(button){
         var modals = ['help', 'settings', 'rules'];
         var mod = $('#modal');
+        if(mod.css('visibility')== 'hidden' || mod.css('display') == 'none'){
+          openModal();
+        }
         modals.splice(modals.indexOf(button), 1);
         for(i in modals){
           $('#' + modals[i] + 'Button').removeClass('blue');
@@ -1211,9 +1236,10 @@
         }
         $('#' + button + 'Button').addClass('blue');
         $('#' + button).show();
-        resizeModal();
+        //resizeModal();
         if($('#colorScheme').val() == 5){
           $('#customColors').show()
+          $('#customColors input').blur();
         } else {
           $('#customColors').hide()
         }
@@ -1229,9 +1255,10 @@
         }
         $('#' + button + 'Button').addClass('red');
         $('#' + button).show();
-        resizeModal();
+        //resizeModal();
         if($('#colorScheme').val() == 5){
           $('#customColors').show()
+          $('#customColors input').blur();
         } else {
           $('#customColors').hide()
         }
@@ -1329,8 +1356,8 @@
         input.attr('type', 'text');
         input.attr('id', 'nameInput');
         input.css({width: '50%'});
-        $('#name').css({top: '05px'});
-        $('#name').removeClass('clickable');
+        nameDiv.css({top: '05px'});
+        nameDiv.removeClass('clickable');
         $('#bank').css({top: 0});
         $('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
         $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);

@@ -6,84 +6,84 @@ settings.src = 'images/wrench-white-small.png';
 var colors;
 
 var colors0 = {
-  betBorder: "#000080",
-  board: "#090",
-  border: "#000",
-  pointOff: "#000",
-  pointBorder: "#000",
-  pointOn: "#fff",
-  lines: "#fff",
-  text: "#fff",
-  buttonText: '#000',
-  specialText: "#ff0",
-  finalText: "#f00",
-  dice: "#f00",
-  dicePips: "#fff",
-  betFill:  "#800000",
+  betBorder: "000080",
+  board: "009900",
+  border: "000000",
+  pointOff: "000000",
+  pointBorder: "000000",
+  pointOn: "FFFFFF",
+  lines: "FFFFFF",
+  text: "FFFFFF",
+  buttonText: '000000',
+  specialText: "FFFF00",
+  finalText: "FF0000",
+  dice: "FF0000",
+  dicePips: "FFFFFF",
+  betFill:  "800000",
 };
 
 var colors1 = {
-  betBorder: "#0f0",
-  betFill: "#080",
-  board: "#8b0000",
-  border: "#000",
-  buttonText: "#000",
-  dice: "#000",
-  dicePips: "#c0c0c0",
-  finalText: "#8bc030",
-  lines: "#c0c0c0",
-  pointBorder: "#000",
-  pointOff: "#000",
-  pointOn: "#c0c0c0",
-  specialText: "#2bab9d",
-  text: "#c0c0c0"
+  betBorder: "00FF00",
+  betFill: "008800",
+  board: "8b0000",
+  border: "000000",
+  buttonText: "000000",
+  dice: "000000",
+  dicePips: "C0C0C0",
+  finalText: "8BC030",
+  lines: "C0C0C0",
+  pointBorder: "000000",
+  pointOff: "000000",
+  pointOn: "C0C0C0",
+  specialText: "2BAB9D",
+  text: "C0C0C0"
 };
 
 var colors2 = {
-  betBorder: "#0f0",
-  betFill: "#080",
-  board: "#00f",
-  border: "#000",
-  buttonText: "#000",
-  dice: "#080",
-  dicePips: "#fff",
-  finalText: "#0f0",
-  lines: "#fff",
-  pointBorder: "#000",
-  pointOff: "#000",
-  pointOn: "#fff",
-  specialText: "#ff0",
-  text: "#fff"
+  betBorder: "00FF00",
+  betFill: "008800",
+  board: "0000FF",
+  border: "000000",
+  buttonText: "000000",
+  dice: "008800",
+  dicePips: "FFFFFF",
+  finalText: "00FF00",
+  lines: "FFFFFF",
+  pointBorder: "000000",
+  pointOff: "000000",
+  pointOn: "FFFFFF",
+  specialText: "FFFF00",
+  text: "FFFFFF"
 };
 
 var colors3 = {
-  betBorder: "#0f0",
-  betFill: "#080",
-  board: "#4b0082",
-  border: "#000",
-  buttonText: "#000",
-  dice: "#ffa500",
-  dicePip: "#00f",
-  dicePips: "#000",
-  finalText: "#0f0",
-  lines: "#fff",
-  pointBorder: "#000",
-  pointOff: "#000",
-  pointOn: "#fff",
-  specialText: "#ff0",
-  text: "#fff"
+  betBorder: "00FF00",
+  betFill: "008800",
+  board: "4B0082",
+  border: "000000",
+  buttonText: "000000",
+  dice: "FFA500",
+  dicePip: "0000FF",
+  dicePips: "000000",
+  finalText: "00FF00",
+  lines: "FFFFFF",
+  pointBorder: "000000",
+  pointOff: "000000",
+  pointOn: "FFFFFF",
+  specialText: "FFFF00",
+  text: "FFFFFF"
 };
 
 var colors4 = {
   "betBorder":"888899",
   "board":"333333",
   "border":"CCCCCC",
-  "pointOff":"000",
+  "pointOff":"000000",
   "pointBorder":"000000",
-  "pointOn":"fff",
+  "pointOn":"FFFFFF",
   "lines":"FFFFFF",
   "text":"EEEEEE",
-  "buttonText":"000",
+  "buttonText":"000000",
   "specialText":"0066FF",
   "finalText":"CCCC00",
   "dice":"CC0000",
@@ -92,20 +92,20 @@ var colors4 = {
 };
 
 var colors5 = {
-  betBorder: "#000080",
-  board: "#090",
-  border: "#000",
-  pointOff: "#000",
-  pointBorder: "#000",
-  pointOn: "#fff",
-  lines: "#fff",
-  text: "#fff",
-  buttonText: '#000',
-  specialText: "#ff0",
-  finalText: "#f00",
-  dice: "#f00",
-  dicePips: "#fff",
-  betFill:  "#800000",
+  betBorder: "000080",
+  board: "009900",
+  border: "000000",
+  pointOff: "000000",
+  pointBorder: "000000",
+  pointOn: "FFFFFF",
+  lines: "FFFFFF",
+  text: "FFFFFF",
+  buttonText: "000000",
+  specialText: "FFFF00",
+  finalText: "FF0000",
+  dice: "FF0000",
+  dicePips: "FFFFFF",
+  betFill:  "800000",
 };
 
 (function() {
@@ -1385,41 +1385,41 @@ var colors5 = {
         }
     };
     
-    var Help = function(board) {
-        this.board = board;
-        return this;
-    }
-    Help.prototype = {
-        name: "Help",
-        draw: function() {
-            var ctx = this.board.context;
-            ctx.lineWidth = 5;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
-
-            ctx.strokeStyle = this.board.colors.lines;
-            ctx.beginPath();
-            ctx.arc(50, 950, 35, 2 * Math.PI, false);
-            ctx.textAlign = "left";
-            ctx.font = "30pt Verdana";
-            //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("?", 24, 962);
-            ctx.stroke();
-            ctx.font = "52pt Verdana";
-            ctx.fillText("/", 37, 971);
-            ctx.stroke();
-            ctx.drawImage(settings, 51, 938, 30, 30);
-            ctx.restore();
-            
-        },
-        isClickedRegion: function(x, y) {
-            if (x > 15 && x < 85 && y > 915 && y < 985) {
-                return true;
-            }
-            return false;
-        }
-    };
+    //var Help = function(board) {
+    //    this.board = board;
+    //    return this;
+    //}
+    //Help.prototype = {
+    //    name: "Help",
+    //    draw: function() {
+    //        var ctx = this.board.context;
+    //        ctx.lineWidth = 5;
+    //        ctx.textAlign = "center";
+    //        ctx.fillStyle = this.board.colors.text;
+    //        ctx.strokeStyle = this.board.colors.text;
+    //
+    //        ctx.strokeStyle = this.board.colors.lines;
+    //        ctx.beginPath();
+    //        ctx.arc(50, 950, 35, 2 * Math.PI, false);
+    //        ctx.textAlign = "left";
+    //        ctx.font = "30pt Verdana";
+    //        //ctx.rotate(Math.PI * -0.2);
+    //        ctx.fillText("?", 24, 962);
+    //        ctx.stroke();
+    //        ctx.font = "52pt Verdana";
+    //        ctx.fillText("/", 37, 971);
+    //        ctx.stroke();
+    //        ctx.drawImage(settings, 51, 938, 30, 30);
+    //        ctx.restore();
+    //        
+    //    },
+    //    isClickedRegion: function(x, y) {
+    //        if (x > 15 && x < 85 && y > 915 && y < 985) {
+    //            return true;
+    //        }
+    //        return false;
+    //    }
+    //};
     
     var Reset = function(board) {
         this.board = board;
@@ -1436,18 +1436,18 @@ var colors5 = {
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
-            ctx.arc(150, 950, 35, 2 * Math.PI, false);
+            ctx.arc(50, 950, 35, 2 * Math.PI, false);
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Reset", 123, 948);
-            ctx.fillText("Game",  121, 968);
+            ctx.fillText("Reset", 23, 948);
+            ctx.fillText("Game",  21, 968);
             ctx.stroke();
             ctx.restore();
             
         },
         isClickedRegion: function(x, y) {
-            if (x > 115 && x < 185 && y > 915 && y < 985) {
+            if (x > 15 && x < 85 && y > 915 && y < 985) {
                 return true;
             }
             return false;
@@ -1469,18 +1469,18 @@ var colors5 = {
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
-            ctx.arc(250, 950, 35, 2 * Math.PI, false);
+            ctx.arc(150, 950, 35, 2 * Math.PI, false);
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Save", 226, 948);
-            ctx.fillText("Game", 221, 968);
+            ctx.fillText("Save", 126, 948);
+            ctx.fillText("Game", 121, 968);
             ctx.stroke();
             ctx.restore();
             
         },
         isClickedRegion: function(x, y) {
-            if (x > 215 && x < 285 && y > 915 && y < 985) {
+            if (x > 115 && x < 185 && y > 915 && y < 985) {
                 return true;
             }
             return false;
@@ -1518,7 +1518,7 @@ var colors5 = {
         World,
         Fire,
         Dice,
-        Help,
+        //Help,
         Reset,
         SaveGame
     ];

@@ -41,10 +41,9 @@ $.extend(PlayerManager, {
     name.empty();
     bank.empty();
     name.html(this.players[0].player.name);
-    name.css('left', '0px');
-    name.width($('#buffer').width());
+    name.width($('#board').width()/(0.7)*(0.29));
+    name.css({top: '5px', left: $('#board').width()/(0.7)*(0.0025)});
     $('#playerArea').css({left: '0px'});
-    name.css({top: '5px', left: '0px'});
     //name.css('left', (($('#buffer').width() - name.width())/2));
     //name.attr('class', 'bttn');
     var bankTitle = $(document.createElement('p'));
@@ -86,7 +85,7 @@ $.extend(PlayerManager, {
     //
     bank.height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
     $('#playerArea').height($('#bank').height() + 4);
-    $('#buffer').css('top', $('#playerArea').height());
+    $('#buffer').css({top: $('#playerArea').height(), left: $('#board').width()/(0.7)*(0.0025)});
     $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
     $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
