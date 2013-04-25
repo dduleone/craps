@@ -219,7 +219,7 @@
     position: relative;
     background: #222;
     overflow: auto;
-    height: 90%;
+    /*height: 90%;*/
     overflow-x: hidden;
   }
   #help{
