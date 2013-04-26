@@ -48,7 +48,7 @@
       </div>
       <div id='closeTutorial' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
     </div>
-    <div id='tutorialInstruction'>Stuff!</div>
+    <div id='tutorialInstruction'></div>
     <div id='modalScreen' onclick="closeModal()"></div>
     <div id='modal' class='smallRound'>
       <div id='modalButtons'>
@@ -60,9 +60,7 @@
       <div id='modalWindow'>
         <div id='tutorial'>
           <div id='startTutorial' class='bttn yellow' onclick='startTutorial()'>Start Tutorial</div>
-          <p id='tutorialDescription'>
-          
-          </p>
+          <p id='tutorialDescription'></p>
           <div id='closeTutorial2' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
         </div>
         <div id='settings'>
@@ -316,6 +314,9 @@
                 //  return;
                 //}
                 if(boardArea.name == "Reset"){
+                  if(GameState.tutorial){
+                    return;
+                  }
                   if(_CRAPS.dealer.betManager.bets.length > 0){
                     alert("You cannot reset your game when you have bets on the table.");
                   } else {
@@ -330,6 +331,9 @@
                   return;
                 }
                 if(boardArea.name == "Save Game"){
+                  if(GameState.tutorial){
+                    return;
+                  }
                   saveGameState();
                   return;
                 }
@@ -1498,37 +1502,35 @@
           $('#tutorialDescription').html("This tutorial will teach you how to place a Pass Line bet, as well as a Pass Line Odds bet and walk you through a Pass Line bet sequence.<br /><br />While you are completing the tutorial, this window will describe what is happening, but you can close this window with the 'Close' button below to see your bets. To open this window again, click the 'Tutorial' button.<br /><br />Starting the tutorial will remove all your bets and reset the game.<br /><br />To start the tutorial, click 'Start Tutorial'.");
           $('#tutorialInstruction').html('');
         }else if(GameState.tutorialState == 0 && _bets.length == 0){
-          $('#tutorialDescription').html('To start, notice that the button says "Off". This means the Point is off. You can only place a Pass Line bet when the Point is off. You may now place a Pass Line Bet.<br /><br />Click on the Pass Line, and create a Pass Line bet by clicking "Create". $100 is a good amount to bet.');
+          $('#tutorialDescription').html('To start, notice that the <span style="font-style: italic" title="Point Indicator">button</span> says "Off". This means the <span style="font-style: italic" title="Roll Objective">Point</span> is off. You can only place a Pass Line bet when the <span style="font-style: italic" title="Roll Objective">Point</span> is off. You may now place a Pass Line bet.<br /><br />Click on the Pass Line, and create a Pass Line bet by clicking "Create". $100 is a good amount to bet.');
           $('#tutorialInstruction').html('Click the Pass Line');
         }else if(GameState.tutorialState == 0 && _bets.length == 1){
-          $('#tutorialDescription').html('You\'ve now created a Pass Line bet! Roll the dice, and let\'s see what happens on your come out roll!');
+          $('#tutorialDescription').html('You\'ve now created a Pass Line bet! Roll the dice, and let\'s see what happens on your <span style="font-style: italic" title="A roll when there is no Point set">come out roll</span>!');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 1){
-          $('#tutorialDescription').html('You rolled a 7! You win on the Pass Line come out roll!<br /><br />You have another come out roll, roll again!');
+          $('#tutorialDescription').html('You rolled a 7! You win on the Pass Line <span style="font-style: italic" title="A roll when there is no Point set">come out roll</span>!<br /><br />You have another <span style="font-style: italic" title="A roll when there is no Point set">come out roll</span>, roll again!');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 2){
-          $('#tutorialDescription').html('You rolled a 3! You lose on the Pass Line come out roll, but your roll isn\'t over! When you lose the Pass Line bet on a come out roll, it is automatically rebet.<br /><br />You have another come out roll, roll again!');
+          $('#tutorialDescription').html('You rolled a 3! You lose on the Pass Line <span style="font-style: italic" title="A roll when there is no Point set">come out roll</span>, but your roll isn\'t over! When you lose the Pass Line bet on a <span style="font-style: italic" title="A roll when there is no Point set">come out roll</span>, it is automatically rebet.<br /><br />You have another <span style="font-style: italic" title="A roll when there is no Point set">come out roll</span>, roll again!');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 3 && _bets.length == 1){
-          $('#tutorialDescription').html('You rolled an 8! A Point is now set, and you can create a Pass Line Odds bet!<br /><br />Click the Pass Line to create a Pass Line Odds bet!<br /><br />This is a 3x-4x-5x Odds table, so for a Point of 8, you can bet a maximum of 5 times your Pass Line bet. Create a Pass Line Odds bet by clicking "Create".');
+          $('#tutorialDescription').html('You rolled an 8! A <span style="font-style: italic" title="Roll Objective">Point</span> is now set, and you can create a Pass Line Odds bet!<br /><br />Click the Pass Line to create a Pass Line Odds bet!<br /><br />This is a <span style="font-style: italic" title="Determines the multiplier on Odds bets, based on the Point">3x-4x-5x Odds</span> table, so for a <span style="font-style: italic" title="Roll Objective">Point</span> of 8, you can bet a maximum of 5 times your Pass Line bet. Create a Pass Line Odds bet by clicking "Create".');
           $('#tutorialInstruction').html('Click the Pass Line');
         }else if(GameState.tutorialState == 3 && _bets.length == 2){
-          $('#tutorialDescription').html('You\'ve now created a Pass Line Odds bet! It\'s time to roll the dice again! You will roll until you roll the Point (an 8) or a 7.');
+          $('#tutorialDescription').html('You\'ve now created a Pass Line Odds bet! It\'s time to roll the dice again! You will roll until you roll the <span style="font-style: italic" title="Roll Objective">Point</span> (an 8) or a 7.');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 4){
-          $('#tutorialDescription').html('You rolled an 8! You won your Pass Line and Pass Line Odds bets by rolling the Point!<br /><br />The Point is off, and you are on a come out roll again! Roll the dice!');
+          $('#tutorialDescription').html('You rolled an 8! You won your Pass Line and Pass Line Odds bets by rolling the <span style="font-style: italic" title="Roll Objective">Point</span>!<br /><br />The <span style="font-style: italic" title="Roll Objective">Point</span> is off, and you are on a <span style="font-style: italic" title="A roll when there is no Point set">come out roll</span> again! Roll the dice!');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 5){
-          $('#tutorialDescription').html('You rolled a 5! A Point is now set. Because this is a tutorial, let\'s not create Pass Line Odds, since you already know how to do that!<br /><br />Roll the dice! You will roll until you roll the Point or a 7.');
+          $('#tutorialDescription').html('You rolled a 5! A <span style="font-style: italic" title="Roll Objective">Point</span> is now set. Because this is a tutorial, let\'s not bet Pass Line Odds, since you already know how to do that!<br /><br />Roll the dice! You will roll until you roll the <span style="font-style: italic" title="Roll Objective">Point</span> or a 7.');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 6){
-          $('#tutorialDescription').html('You rolled a 9! Since it is neither the Point nor a 7, you get to keep rolling!<br /><br />Roll the dice! You will roll until you roll the Point or a 7.');
+          $('#tutorialDescription').html('You rolled a 9! Since it is neither the <span style="font-style: italic" title="Roll Objective">Point</span> nor a 7, you get to keep rolling!<br /><br />Roll the dice! You will roll until you roll the <span style="font-style: italic" title="Roll Objective">Point</span> or a 7.');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 7){
-          $('#tutorialDescription').html('Seven out! You rolled a 7 with a Point on, so you lose your Pass Line bet, and would have lost a Pass Line Odds bet if you had one.<br /><br />That\'s how Pass Line and Pass Line Odds bets work!<br /><br />This tutorial is over. Click "Close Tutorial" to return to the normal game. You will not be able to play until you close the tutorial.');
+          $('#tutorialDescription').html('<i>Seven Out</i>! You rolled a 7 with a <span style="font-style: italic" title="Roll Objective">Point</span> on, so you lose your Pass Line bet, and would have lost a Pass Line Odds bet if you had one.<br /><br />That\'s how Pass Line and Pass Line Odds bets work!<br /><br />This tutorial is over. Click "Close Tutorial" to return to the normal game. You will not be able to play until you close the tutorial.');
           $('#tutorialInstruction').html('Seven Out! Click "Close Tutorial".');
-          GameState.tutorial = 0;
-          GameState.tutorialState = 0;
         }
       }
       

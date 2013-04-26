@@ -30,6 +30,9 @@
     left: 31%;
     float: left;
   }
+  #tutorial{
+    padding: 10px;
+  }
   #tutorialInstruction{
     position: relative;
     left: 31%;
