@@ -304,7 +304,7 @@
                   if(GameState.tutorial){
                     if((GameState.tutorialState == 0 && _CRAPS.dealer.betManager.bets.length == 0) ||
                        (GameState.tutorialState == 3 && _CRAPS.dealer.betManager.bets.length == 1) ||
-                        GameState.tutorialState == 6){
+                        GameState.tutorialState == 7){
                       return;
                     }
                   }
@@ -1522,6 +1522,9 @@
           $('#tutorialDescription').html('You rolled a 5! A Point is now set. Because this is a tutorial, let\'s not create Pass Line Odds, since you already know how to do that!<br /><br />Roll the dice! You will roll until you roll the Point or a 7.');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 6){
+          $('#tutorialDescription').html('You rolled a 9! Since it is neither the Point nor a 7, you get to keep rolling!<br /><br />Roll the dice! You will roll until you roll the Point or a 7.');
+          $('#tutorialInstruction').html('Click Roll');
+        }else if(GameState.tutorialState == 7){
           $('#tutorialDescription').html('Seven out! You rolled a 7 with a Point on, so you lose your Pass Line bet, and would have lost a Pass Line Odds bet if you had one.<br /><br />That\'s how Pass Line and Pass Line Odds bets work!<br /><br />This tutorial is over. Click "Close Tutorial" to return to the normal game. You will not be able to play until you close the tutorial.');
           $('#tutorialInstruction').html('Seven Out! Click "Close Tutorial".');
           GameState.tutorial = 0;

@@ -590,6 +590,12 @@ $.extend(_CRAPS, {
         theseDice.total = 5;
         GameState.tutorialState++;
       } else if(GameState.tutorialState == 5){
+        die0.value = 3;
+        die1.value = 6;
+        roll = 9;
+        theseDice.total = 9;
+        GameState.tutorialState++;
+      } else if(GameState.tutorialState == 6){
         die0.value = 5;
         die1.value = 2;
         roll = 7;
