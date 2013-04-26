@@ -24,6 +24,11 @@
     border-color: #888;
     border-width: 2px;
   }
+  .keyword{
+    border-bottom: 1px dashed;
+    font-family: serif;
+    font-style: italic;
+  }
   #generalButtons{
     position: absolute;
     top: 71%;
