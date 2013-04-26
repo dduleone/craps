@@ -403,7 +403,10 @@ BetManager.prototype = {
       var remove = $(document.createElement('td'));
       remove.append($(document.createElement('img')).attr('src', 'images/red_x_small.png'))//.html('Rem');
       //remove.attr({class: 'bttn'});
-      if(this.bets[betNum].type == 'passline'){
+      if(GameState.tutorial){
+        remove.attr('onclick', 'alert("You cannot take down a Tutorial bet.")');
+      }else if(this.bets[betNum].type == 'passline'){
+        
         if(GameState.point > 0){
           remove.attr('onclick', 'alert("You cannot take down a Pass Line bet when a point is on.")');
           remove.attr('disabled', 'true');
@@ -478,7 +481,7 @@ var GameState = {
   },
   numFire: 0,
   tutorial: false,
-  tutorialStateArray: [false, false, false, false, false]
+  tutorialState: 0
 };
 
 var _CRAPS = {};
@@ -556,43 +559,44 @@ $.extend(_CRAPS, {
       var die0 = _CRAPS.dice.dice.dice[0];
       var die1 = _CRAPS.dice.dice.dice[1];
       var theseDice = _CRAPS.dice.dice
-      if(!GameState.tutorialStateArray[0]){
+      if(GameState.tutorialState == 0){
         die0.value = 3;
         die1.value = 4;
         roll = 7;
         theseDice.total = 7;
-        GameState.tutorialStateArray[0] = true;
-      } else if(!GameState.tutorialStateArray[1]){
+        GameState.tutorialState++;
+      } else if(GameState.tutorialState == 1){
         die0.value = 1;
         die1.value = 2;
         roll = 3;
         theseDice.total = 3;
-        GameState.tutorialStateArray[1] = true;
-      } else if(!GameState.tutorialStateArray[2]){
+        GameState.tutorialState++;
+      } else if(GameState.tutorialState == 2){
         die0.value = 5;
         die1.value = 3;
         roll = 8;
         theseDice.total = 8;
-        GameState.tutorialStateArray[2] = true
-      } else if(!GameState.tutorialStateArray[3]){
+        GameState.tutorialState++;
+      } else if(GameState.tutorialState == 3){
         die0.value = 4;
         die1.value = 4;
         roll = 8;
         theseDice.total = 8;
-        GameState.tutorialStateArray[3] = true;
-      } else if(!GameState.tutorialStateArray[4]){
+        GameState.tutorialState++;
+      } else if(GameState.tutorialState == 4){
         die0.value = 4;
         die1.value = 1;
         roll = 5;
         theseDice.total = 5;
-        GameState.tutorialStateArray[4] = true;
-      } else if(!GameState.tutorialStateArray[5]){
+        GameState.tutorialState++;
+      } else if(GameState.tutorialState == 5){
         die0.value = 5;
         die1.value = 2;
         roll = 7;
         theseDice.total = 7;
-        GameState.tutorialStateArray[5] = true;
+        GameState.tutorialState++;
       }
+      updateTutorial();
     }
     var diceArray = diceToNum(_CRAPS.dice);
     _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));

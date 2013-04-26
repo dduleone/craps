@@ -39,19 +39,32 @@
       <!--div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div -->
     </div>
     <div id='buffer'></div>
-    <div id='openButtons'>
-      <div id='openHelp' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
-      <div id='openRules' class='bttn blue' onclick='clickModalButton("rules")'>Rules</div>
-      <div id='openSettings' class='bttn blue' onclick='clickModalButton("settings")'>Settings</div>
+    <div id='generalButtons'>
+      <div id='openButtons'>
+        <div id='openHelp' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
+        <div id='openRules' class='bttn blue' onclick='clickModalButton("rules")'>Rules</div>
+        <div id='openSettings' class='bttn blue' onclick='clickModalButton("settings")'>Settings</div>
+        <div id='openTutorial' class='bttn blue' onclick='clickModalButton("tutorial")'>Tutorial</div>
+      </div>
+      <div id='closeTutorial' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
     </div>
+    <div id='tutorialInstruction'>Stuff!</div>
     <div id='modalScreen' onclick="closeModal()"></div>
     <div id='modal' class='smallRound'>
       <div id='modalButtons'>
         <div id='helpButton' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
         <div id='rulesButton' class='bttn' onclick='clickModalButton("rules")'>Rules</div>
         <div id='settingsButton' class='bttn' onclick='clickModalButton("settings")'>Settings</div>
+        <div id='tutorialButton' class='bttn' onclick='clickModalButton("tutorial")'>Tutorial</div>
       </div>
       <div id='modalWindow'>
+        <div id='tutorial'>
+          <div id='startTutorial' class='bttn yellow' onclick='startTutorial()'>Start Tutorial</div>
+          <p id='tutorialDescription'>
+          
+          </p>
+          <div id='closeTutorial2' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
+        </div>
         <div id='settings'>
           <label for='startingBank'>Starting Bank: </label>
           <input id='startingBank' type='text'><br />
@@ -185,6 +198,7 @@
         <div id='help'>
           <h2>Help:</h2>
           <ul>
+            <li>To read about the different bets, check out the "Rules".</li>
             <li>To set your name, click on/touch the name area.</li>
             <li>To place a bet, click on/touch the area of the board you want to place a bet.
               <ul>
@@ -288,8 +302,9 @@
               if(boardArea){
                 if(boardArea.name == "Dice"){
                   if(GameState.tutorial){
-                    if((!GameState.tutorialStateArray[0] && _CRAPS.dealer.betManager.bets.length == 0) ||
-                        (GameState.tutorialStateArray[0] && GameState.tutorialStateArray[1] && GameState.tutorialStateArray[2] && _CRAPS.dealer.betManager.bets.length == 1 && !GameState.tutorialStateArray[3])){
+                    if((GameState.tutorialState == 0 && _CRAPS.dealer.betManager.bets.length == 0) ||
+                       (GameState.tutorialState == 3 && _CRAPS.dealer.betManager.bets.length == 1) ||
+                        GameState.tutorialState == 6){
                       return;
                     }
                   }
@@ -486,8 +501,8 @@
         
         if(GameState.tutorial){
           if(area.name == "Pass Line"){
-            if((!GameState.tutorialStateArray[0] && _CRAPS.dealer.betManager.bets.length == 0) ||
-               (GameState.tutorialStateArray[0] && GameState.tutorialStateArray[1] && GameState.tutorialStateArray[2] && !GameState.tutorialStateArray[3] && _CRAPS.dealer.betManager.bets.length == 1)){
+            if((GameState.tutorialState == 0 && _CRAPS.dealer.betManager.bets.length == 0) ||
+               (GameState.tutorialState == 3 && _CRAPS.dealer.betManager.bets.length == 1)){
               $('#betType').empty();
               var opt = $(document.createElement('option'));
               if(!GameState.point){
@@ -1228,14 +1243,16 @@
       function reset(){
         var _bets = _CRAPS.dealer.betManager.bets
         for(x in _bets){
-          if(_bets[x].type == 'passline'){
+          if(GameState.tutorial){
+            _CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
+            continue;
+          }else if(_bets[x].type == 'passline'){
             if(GameState.point > 0){
               continue;
             }else{
               _CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
             }
-          }
-          if(_bets[x].type == 'come'){
+          }else if(_bets[x].type == 'come'){
             if(_bets[x].point > 0){
               continue;
             }else{
@@ -1256,7 +1273,9 @@
       }
       
       function openModal(){
-        $('#modalScreen').show();
+        if(!GameState.tutorial){
+          $('#modalScreen').show();
+        }
         var mod = $('#modal');
         mod.show();
         mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
@@ -1290,10 +1309,11 @@
         colors = eval("colors" + localStorage['colors']);
         $('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
         $('#openButtons').show();
+        PlayerManager.updatePlayerArea();
       }
       
       function clickModalButton(button){
-        var modals = ['help', 'settings', 'rules'];
+        var modals = ['help', 'rules', 'settings', 'tutorial'];
         var mod = $('#modal');
         if(mod.css('visibility')== 'hidden' || mod.css('display') == 'none'){
           openModal();
@@ -1311,6 +1331,9 @@
           $('#customColors input').blur();
         } else {
           $('#customColors').hide()
+        }
+        if(button == 'tutorial'){
+          updateTutorial();
         }
       }
       
@@ -1411,6 +1434,9 @@
         _CRAPS.placeBet(newBet);
         PlayerManager.updatePlayerArea();
         $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, 1000, function(){$('#betForm').hide();});
+        if(GameState.tutorial){
+          updateTutorial();
+        }
       }
       
       function cancel(){
@@ -1463,6 +1489,79 @@
         });
         nameDiv.append(input);
         input.focus();
+      }
+      
+      function updateTutorial(){
+        var _bets = _CRAPS.dealer.betManager.bets;
+        if(!GameState.tutorial){
+          $('#tutorialDescription').html("This tutorial will teach you how to place a Pass Line bet, as well as a Pass Line Odds bet and walk you through a Pass Line bet sequence.<br /><br />While you are completing the tutorial, this window will describe what is happening, but you can close this window with the 'Close' button below to see your bets. To open this window again, click the 'Tutorial' button.<br /><br />Starting the tutorial will remove all your bets and reset the game.<br /><br />To start the tutorial, click 'Start Tutorial'.");
+          $('#tutorialInstruction').html('');
+        }else if(GameState.tutorialState == 0 && _bets.length == 0){
+          $('#tutorialDescription').html('To start, notice that the button says "Off". This means the Point is off. You can only place a Pass Line bet when the Point is off. You may now place a Pass Line Bet.<br /><br />Click on the Pass Line, and create a Pass Line bet by clicking "Create". $100 is a good amount to bet.');
+          $('#tutorialInstruction').html('Click the Pass Line');
+        }else if(GameState.tutorialState == 0 && _bets.length == 1){
+          $('#tutorialDescription').html('You\'ve now created a Pass Line bet! Roll the dice, and let\'s see what happens on your come out roll!');
+          $('#tutorialInstruction').html('Click Roll');
+        }else if(GameState.tutorialState == 1){
+          $('#tutorialDescription').html('You rolled a 7! You win on the Pass Line come out roll!<br /><br />You have another come out roll, roll again!');
+          $('#tutorialInstruction').html('Click Roll');
+        }else if(GameState.tutorialState == 2){
+          $('#tutorialDescription').html('You rolled a 3! You lose on the Pass Line come out roll, but your roll isn\'t over! When you lose the Pass Line bet on a come out roll, it is automatically rebet.<br /><br />You have another come out roll, roll again!');
+          $('#tutorialInstruction').html('Click Roll');
+        }else if(GameState.tutorialState == 3 && _bets.length == 1){
+          $('#tutorialDescription').html('You rolled an 8! A Point is now set, and you can create a Pass Line Odds bet!<br /><br />Click the Pass Line to create a Pass Line Odds bet!<br /><br />This is a 3x-4x-5x Odds table, so for a Point of 8, you can bet a maximum of 5 times your Pass Line bet. Create a Pass Line Odds bet by clicking "Create".');
+          $('#tutorialInstruction').html('Click the Pass Line');
+        }else if(GameState.tutorialState == 3 && _bets.length == 2){
+          $('#tutorialDescription').html('You\'ve now created a Pass Line Odds bet! It\'s time to roll the dice again! You will roll until you roll the Point (an 8) or a 7.');
+          $('#tutorialInstruction').html('Click Roll');
+        }else if(GameState.tutorialState == 4){
+          $('#tutorialDescription').html('You rolled an 8! You won your Pass Line and Pass Line Odds bets by rolling the Point!<br /><br />The Point is off, and you are on a come out roll again! Roll the dice!');
+          $('#tutorialInstruction').html('Click Roll');
+        }else if(GameState.tutorialState == 5){
+          $('#tutorialDescription').html('You rolled a 5! A Point is now set. Because this is a tutorial, let\'s not create Pass Line Odds, since you already know how to do that!<br /><br />Roll the dice! You will roll until you roll the Point or a 7.');
+          $('#tutorialInstruction').html('Click Roll');
+        }else if(GameState.tutorialState == 6){
+          $('#tutorialDescription').html('Seven out! You rolled a 7 with a Point on, so you lose your Pass Line bet, and would have lost a Pass Line Odds bet if you had one.<br /><br />That\'s how Pass Line and Pass Line Odds bets work!<br /><br />This tutorial is over. Click "Close Tutorial" to return to the normal game. You will not be able to play until you close the tutorial.');
+          $('#tutorialInstruction').html('Seven Out! Click "Close Tutorial".');
+          GameState.tutorial = 0;
+          GameState.tutorialState = 0;
+        }
+      }
+      
+      function startTutorial(){
+        $('#closeTutorial').show();
+        $('#closeTutorial2').show();
+        $('#tutorialInstruction').show();
+        $('#startTutorial').hide();
+        $('#modalScreen').hide();
+        GameState.tutorial = true;
+        GameState.tutorialState = 0;
+        
+        //reset Bets
+        reset();
+        
+        //reset Game
+        nextBetId = 1;
+        GameState.point = null;
+        for(i in GameState.fireArray){
+          GameState.fireArray[i] = false;
+        }
+        PlayerManager.updatePlayerArea();
+        
+        updateTutorial();
+      }
+      
+      function closeTutorial(){
+        GameState.tutorial = false;
+        if($('#modal').css('display') != 'none'){
+          $('#modalScreen').show();
+        }
+        $('#startTutorial').show();
+        $('#closeTutorial').hide();
+        $('#closeTutorial2').hide();
+        $('#tutorialInstruction').hide();
+        updateTutorial();
+        
       }
       
       function updateBet(idNum){
