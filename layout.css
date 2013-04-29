@@ -216,6 +216,35 @@
     border-spacing:0;
     border-collapse:collapse;
   }
+  #glossaryScreen{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    display: none;
+    opacity: 0;
+  }
+  #glossary{
+    position: absolute;
+    background: #444 repeat-y;
+    color: #FFF;
+    top: 30%;
+    left: 5%;
+    width: 19%;
+    height: auto;
+    padding: 10px;
+    display: none;
+    border: 1px;
+    border-color: #FFFFFF;
+  }
+  #glossaryWindow {
+    position: relative;
+    background: #222;
+    overflow: auto;
+    overflow-x: hidden;
+  }
   #modalScreen{
     position: absolute;
     left: 0px;

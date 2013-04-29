@@ -6,106 +6,105 @@ settings.src = 'images/wrench-white-small.png';
 var colors;
 
 var colors0 = {
-  betBorder: "000080",
   board: "009900",
   border: "000000",
-  pointOff: "000000",
-  pointBorder: "000000",
-  pointOn: "FFFFFF",
   lines: "FFFFFF",
-  text: "FFFFFF",
-  buttonText: '000000',
   specialText: "FFFF00",
   finalText: "FF0000",
   dice: "FF0000",
   dicePips: "FFFFFF",
-  betFill:  "800000",
+  text: "FFFFFF",
+  pointBorder: "000000",
+  pointOff: "000000",
+  pointOn: "FFFFFF",
+  buttonText: '000000',
+  betFill:  "B30000",
+  betBorder: "590000"
 };
 
 var colors1 = {
-  betBorder: "00FF00",
-  betFill: "008800",
   board: "8b0000",
   border: "000000",
-  buttonText: "000000",
+  lines: "C0C0C0",
+  specialText: "2BAB9D",
+  finalText: "8BC030",
   dice: "000000",
   dicePips: "C0C0C0",
-  finalText: "8BC030",
-  lines: "C0C0C0",
+  text: "C0C0C0",
   pointBorder: "000000",
   pointOff: "000000",
   pointOn: "C0C0C0",
-  specialText: "2BAB9D",
-  text: "C0C0C0"
+  buttonText: "000000",
+  betFill: "008800",
+  betBorder: "00FF00"
 };
 
 var colors2 = {
-  betBorder: "00FF00",
-  betFill: "008800",
   board: "0000FF",
   border: "000000",
-  buttonText: "000000",
+  lines: "FFFFFF",
+  specialText: "FFFF00",
+  finalText: "00FF00",
   dice: "008800",
   dicePips: "FFFFFF",
-  finalText: "00FF00",
-  lines: "FFFFFF",
+  text: "FFFFFF",
   pointBorder: "000000",
   pointOff: "000000",
   pointOn: "FFFFFF",
-  specialText: "FFFF00",
-  text: "FFFFFF"
+  buttonText: "000000",
+  betFill: "008800",
+  betBorder: "00FF00"
 };
 
 var colors3 = {
-  betBorder: "00FF00",
-  betFill: "008800",
   board: "4B0082",
   border: "000000",
-  buttonText: "000000",
-  dice: "FFA500",
-  dicePip: "0000FF",
-  dicePips: "000000",
-  finalText: "00FF00",
   lines: "FFFFFF",
+  specialText: "FFFF00",
+  finalText: "00FF00",
+  dice: "FFA500",
+  dicePips: "000000",
+  text: "FFFFFF",
   pointBorder: "000000",
   pointOff: "000000",
   pointOn: "FFFFFF",
-  specialText: "FFFF00",
-  text: "FFFFFF"
+  buttonText: "000000",
+  betFill: "008800",
+  betBorder: "00FF00"
 };
 
 var colors4 = {
-  "betBorder":"888899",
-  "board":"333333",
-  "border":"CCCCCC",
-  "pointOff":"000000",
-  "pointBorder":"000000",
-  "pointOn":"FFFFFF",
-  "lines":"FFFFFF",
-  "text":"EEEEEE",
-  "buttonText":"000000",
-  "specialText":"0066FF",
-  "finalText":"CCCC00",
-  "dice":"CC0000",
-  "dicePips":"FFFFFF",
-  "betFill":"666677"
+  board:"333333",
+  border:"CCCCCC",
+  lines:"FFFFFF",
+  specialText:"0066FF",
+  finalText:"CCCC00",
+  dice:"CC0000",
+  dicePips:"FFFFFF",
+  text:"EEEEEE",
+  pointBorder:"000000",
+  pointOff:"000000",
+  pointOn:"FFFFFF",
+  buttonText:"000000",
+  betFill:"666677",
+  betBorder:"888899"
 };
 
 var colors5 = {
-  betBorder: "000080",
   board: "009900",
   border: "000000",
-  pointOff: "000000",
-  pointBorder: "000000",
-  pointOn: "FFFFFF",
   lines: "FFFFFF",
-  text: "FFFFFF",
-  buttonText: "000000",
   specialText: "FFFF00",
   finalText: "FF0000",
   dice: "FF0000",
   dicePips: "FFFFFF",
-  betFill:  "800000",
+  text: "FFFFFF",
+  pointBorder: "000000",
+  pointOff: "000000",
+  pointOn: "FFFFFF",
+  buttonText: '000000',
+  betFill:  "B30000",
+  betBorder: "590000"
 };
 
 (function() {
