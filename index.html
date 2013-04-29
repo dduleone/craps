@@ -41,8 +41,8 @@
     <div id='buffer'></div>
     <div id='generalButtons'>
       <div id='openButtons'>
-        <div id='openHelp' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
-        <div id='openRules' class='bttn blue' onclick='clickModalButton("rules")'>Rules</div>
+        <div id='openHelp' class='bttn blue' onclick='clickModalButton("help")'>Game Play</div>
+        <div id='openRules' class='bttn blue' onclick='clickModalButton("rules")'>Bet Descriptions</div>
         <div id='openSettings' class='bttn blue' onclick='clickModalButton("settings")'>Settings</div>
         <div id='openTutorial' class='bttn blue' onclick='clickModalButton("tutorial")'>Tutorial</div>
       </div>
@@ -52,15 +52,15 @@
     <div id='modalScreen' onclick="closeModal()"></div>
     <div id='modal' class='smallRound'>
       <div id='modalButtons'>
-        <div id='helpButton' class='bttn blue' onclick='clickModalButton("help")'>Help</div>
-        <div id='rulesButton' class='bttn' onclick='clickModalButton("rules")'>Rules</div>
+        <div id='helpButton' class='bttn blue' onclick='clickModalButton("help")'>Game Play</div>
+        <div id='rulesButton' class='bttn' onclick='clickModalButton("rules")'>Bet Descriptions</div>
         <div id='settingsButton' class='bttn' onclick='clickModalButton("settings")'>Settings</div>
         <div id='tutorialButton' class='bttn' onclick='clickModalButton("tutorial")'>Tutorial</div>
       </div>
       <div id='modalWindow'>
         <div id='tutorial'>
-          <div id='startTutorial' class='bttn yellow' onclick='startTutorial()'>Start Tutorial</div>
           <p id='tutorialDescription'></p>
+          <div id='startTutorial' class='bttn yellow' onclick='startTutorial()'>Start Tutorial</div>
           <div id='closeTutorial2' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
         </div>
         <div id='settings'>
@@ -196,9 +196,9 @@
           </div>
         </div>
         <div id='help'>
-          <h2>Help:</h2>
+          <u>Game Play:</u>
           <ul>
-            <li>To read about the different bets, check out the "Rules".</li>
+            <li>To read about the different bets, check out the "Bet Descriptions".</li>
             <li>To set your name, click on/touch the name area.</li>
             <li>To place a bet, click on/touch the area of the board you want to place a bet.
               <ul>
@@ -219,7 +219,7 @@
                 When you come back to that URL, your game will pick up where you left off.<br />
                 *** Any bets left on the table will be lost when you come back! ***</li> -->
           </ul>
-          <h2>Key:</h2>
+          <u>Key:</u>
           <table>
             <tr>
               <th>Heading</th>
@@ -259,10 +259,8 @@
       <div id='closeModal' class='bttn red' onclick='closeModal()'>Close</div>
     </div>
     <div id='glossary'>
-      <div id='glossaryWindow'>
-        <span id='glossaryTerm' style='display:block'></span>
-        <span id='glossaryDefinition' style='display:block'></span>
-      </div>
+      <span id='glossaryTerm' style='display:block'></span>
+      <span id='glossaryDefinition' style='display:block'></span>
     </div>
     <div id='glossaryScreen' onclick="closeGlossary()"></div>
   </body>
@@ -1342,19 +1340,19 @@
         switch(term){
         case "button":
           $('#glossaryTerm').html('Button:');
-          $('#glossaryDefinition').html('Point Indicator');
+          $('#glossaryDefinition').html('A circle disk on the table that either says "OFF" when there is no Point on, or says "ON" resting on top of a number in the Place Bets area, indicating that is the current Point.');
           break;
         case "point":
           $('#glossaryTerm').html('Point:');
-          $('#glossaryDefinition').html('Roll Objective');
+          $('#glossaryDefinition').html('What ever number is "ON".');
           break;
         case "comeOut":
           $('#glossaryTerm').html('Come Out Roll:');
-          $('#glossaryDefinition').html('A roll when there is no Point set');
+          $('#glossaryDefinition').html('A roll when there is no Point set.');
           break;
         case "345":
           $('#glossaryTerm').html('3x-4x-5x Odds:');
-          $('#glossaryDefinition').html('Determines the multiplier on Odds bets, based on the Point');
+          $('#glossaryDefinition').html('Scheme to determine the multiplier on Odds bets, based on the Point.<br /> Points 4 &amp; 10 may bet at most 3 times<br /> Points 5 &amp; 9 may bet at most 4 times<br /> Points 6 &amp; 8 may bet at most 5 times');
           break;
         case "sevenOut":
           $('#glossaryTerm').html('Seven Out:');

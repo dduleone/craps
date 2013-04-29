@@ -239,11 +239,17 @@
     border: 1px;
     border-color: #FFFFFF;
   }
-  #glossaryWindow {
+  #glossaryTerm{
+    position: relative;
+    color: #000;
+    background: #DDD
+  }
+  #glossaryDefinition{
     position: relative;
     background: #222;
     overflow: auto;
     overflow-x: hidden;
+    height: auto;
   }
   #modalScreen{
     position: absolute;
