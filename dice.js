@@ -44,7 +44,7 @@ function makeDice(n){
             colors['dicePips'] = "FFFFFF"
           }
         } else {
-          if(colors['dice'] == "000000")
+          if(colors['dice'] == "000000"){
             colors['dicePips'] = "282828"
           } else {
             colors['dicePips'] = "000000"
