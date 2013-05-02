@@ -1,4 +1,3 @@
-
 function makeDie(sides){
   sides = (typeof sides == 'undefined') ? 6 : sides;
 
@@ -17,6 +16,7 @@ function makeDie(sides){
   };
 }
 
+var roller = null;
 
 function makeDice(n){
   count = (typeof n == 'undefined') ? 2 : n;
@@ -31,9 +31,10 @@ function makeDice(n){
     total: 0,
     roll: function(callback){
       //_CRAPS.output("Rolling...");
-      _dice = this.dice;
-      _total = this.total;
+      self = this;
       roller = setInterval(function(){
+        _dice = self.dice;
+        _total = self.total;
         _total = 0;
         for(var i in _dice){_total += _dice[i].roll();}
         draw(Board);
@@ -43,6 +44,7 @@ function makeDice(n){
         for(var i in _dice){_total += _dice[i].roll();}
         draw(Board);
         clearInterval(roller);
+        roller = null;
         callback(_total);
       }, DICE_ROLL);
     },
