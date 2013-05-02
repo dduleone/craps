@@ -106,6 +106,7 @@ $.extend(PlayerManager, {
     localStorage['colors'] = $('#colorScheme').val();
     localStorage['modalTiming'] = $('#modalTiming').val();
     localStorage['betFormTiming'] = $('#betFormTiming').val();
+    localStorage['diceTiming'] = $('#diceTiming').val();
     localStorage['colors5'] = JSON.stringify(colors5);
     //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
   }

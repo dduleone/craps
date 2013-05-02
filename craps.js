@@ -552,113 +552,115 @@ $.extend(_CRAPS, {
   },
   dice: null,
   roll: function(){
-  // Roll the dice.
+    // Roll the dice.
     //_CRAPS.output("Before Roll - The point is: " + GameState.point);
-    var roll = _CRAPS.dice.roll();
-    if(GameState.tutorial){
-      var die0 = _CRAPS.dice.dice.dice[0];
-      var die1 = _CRAPS.dice.dice.dice[1];
-      var theseDice = _CRAPS.dice.dice
-      if(GameState.tutorialState == 0){
-        die0.value = 3;
-        die1.value = 4;
-        roll = 7;
-        theseDice.total = 7;
-        GameState.tutorialState++;
-      } else if(GameState.tutorialState == 1){
-        die0.value = 1;
-        die1.value = 2;
-        roll = 3;
-        theseDice.total = 3;
-        GameState.tutorialState++;
-      } else if(GameState.tutorialState == 2){
-        die0.value = 5;
-        die1.value = 3;
-        roll = 8;
-        theseDice.total = 8;
-        GameState.tutorialState++;
-      } else if(GameState.tutorialState == 3){
-        die0.value = 4;
-        die1.value = 4;
-        roll = 8;
-        theseDice.total = 8;
-        GameState.tutorialState++;
-      } else if(GameState.tutorialState == 4){
-        die0.value = 4;
-        die1.value = 1;
-        roll = 5;
-        theseDice.total = 5;
-        GameState.tutorialState++;
-      } else if(GameState.tutorialState == 5){
-        die0.value = 3;
-        die1.value = 6;
-        roll = 9;
-        theseDice.total = 9;
-        GameState.tutorialState++;
-      } else if(GameState.tutorialState == 6){
-        die0.value = 5;
-        die1.value = 2;
-        roll = 7;
-        theseDice.total = 7;
-        GameState.tutorialState++;
+    var $CRAPS = this;
+    _CRAPS.dice.dice.roll(function(roll){
+      if(GameState.tutorial){
+        var die0 = _CRAPS.dice.dice.dice[0];
+        var die1 = _CRAPS.dice.dice.dice[1];
+        var theseDice = _CRAPS.dice.dice
+        if(GameState.tutorialState == 0){
+          die0.value = 3;
+          die1.value = 4;
+          roll = 7;
+          theseDice.total = 7;
+          GameState.tutorialState++;
+        } else if(GameState.tutorialState == 1){
+          die0.value = 1;
+          die1.value = 2;
+          roll = 3;
+          theseDice.total = 3;
+          GameState.tutorialState++;
+        } else if(GameState.tutorialState == 2){
+          die0.value = 5;
+          die1.value = 3;
+          roll = 8;
+          theseDice.total = 8;
+          GameState.tutorialState++;
+        } else if(GameState.tutorialState == 3){
+          die0.value = 4;
+          die1.value = 4;
+          roll = 8;
+          theseDice.total = 8;
+          GameState.tutorialState++;
+        } else if(GameState.tutorialState == 4){
+          die0.value = 4;
+          die1.value = 1;
+          roll = 5;
+          theseDice.total = 5;
+          GameState.tutorialState++;
+        } else if(GameState.tutorialState == 5){
+          die0.value = 3;
+          die1.value = 6;
+          roll = 9;
+          theseDice.total = 9;
+          GameState.tutorialState++;
+        } else if(GameState.tutorialState == 6){
+          die0.value = 5;
+          die1.value = 2;
+          roll = 7;
+          theseDice.total = 7;
+          GameState.tutorialState++;
+        }
+        updateTutorial();
       }
-      updateTutorial();
-    }
-    var diceArray = diceToNum(_CRAPS.dice);
-    _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));
-    //_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
-    _CRAPS.checkBets();
-    PlayerManager.updatePlayerArea();
-  // Set & unset the point, as appropriate.
-    if (GameState.point > 0){
-      if (roll == 7){
-        GameState.point = false;
-        GameState.numFire = 0;
-        for(i in GameState.fireArray){
-          if(GameState.fireArray[i]){
-            GameState.numFire++;
+      var diceArray = diceToNum(_CRAPS.dice);
+      _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));
+      //_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
+      _CRAPS.checkBets();
+      PlayerManager.updatePlayerArea();
+    // Set & unset the point, as appropriate.
+      if (GameState.point > 0){
+        if (roll == 7){
+          GameState.point = false;
+          GameState.numFire = 0;
+          for(i in GameState.fireArray){
+            if(GameState.fireArray[i]){
+              GameState.numFire++;
+            }
+            GameState.fireArray[i] = false;
           }
-          GameState.fireArray[i] = false;
+          
+          _CRAPS.output("Seven Out! Pay all Don't Come and Don't Pass! All other bets lose.");
+          // Resolve Bets.
+          return;
+        }
+      
+        if (roll == GameState.point){
+          GameState.fireArray[GameState.point] = true;
+          GameState.point = false;
+          _CRAPS.output("Shooter made the point!");
+          _CRAPS.output("All Pass Line bets win!");
+          _CRAPS.output("All Single- and Multi-roll bets are off!");
+          $CRAPS.dealer.betManager.turnBetsOff();
+          //_CRAPS.output("All bets will be resolved!");
+          // Resolve Bets
+          return;
+        }
+      } else {
+        if(_CRAPS.dice.isCraps()){
+          _CRAPS.output("Craps " + roll + "!");
+          if(roll == 12){
+            _CRAPS.output("All Pass Line bets push!");
+          }else{
+            _CRAPS.output("All Pass Line bets lose!");
+          }
+          return;
+        }
+      
+        if(_CRAPS.dice.isComeOutWinner()){
+          _CRAPS.output("Come out win!");
+          _CRAPS.output("All Pass Line bets pay 1:1!");
+          return;
         }
         
-        _CRAPS.output("Seven Out! Pay all Don't Come and Don't Pass! All other bets lose.");
-        // Resolve Bets.
-        return;
+        _CRAPS.output("We have a point. All bets are on!");
+        $CRAPS.dealer.betManager.turnBetsOn();
+        GameState.point = roll;
       }
-
-      if (roll == GameState.point){
-        GameState.fireArray[GameState.point] = true;
-        GameState.point = false;
-        _CRAPS.output("Shooter made the point!");
-        _CRAPS.output("All Pass Line bets win!");
-        _CRAPS.output("All Single- and Multi-roll bets are off!");
-        this.dealer.betManager.turnBetsOff();
-        //_CRAPS.output("All bets will be resolved!");
-        // Resolve Bets
-        return;
-      }
-    } else {
-      if(_CRAPS.dice.isCraps()){
-        _CRAPS.output("Craps " + roll + "!");
-        if(roll == 12){
-          _CRAPS.output("All Pass Line bets push!");
-        }else{
-          _CRAPS.output("All Pass Line bets lose!");
-        }
-        return;
-      }
-
-      if(_CRAPS.dice.isComeOutWinner()){
-        _CRAPS.output("Come out win!");
-        _CRAPS.output("All Pass Line bets pay 1:1!");
-        return;
-      }
-      
-      _CRAPS.output("We have a point. All bets are on!");
-      this.dealer.betManager.turnBetsOn();
-      GameState.point = roll;
-    }
-    //_CRAPS.output("After Roll - The point is: " + GameState.point);
+      //_CRAPS.output("After Roll - The point is: " + GameState.point);
+    });
   },
   init: function(){
     _CRAPS.dice = new CrapsDice();

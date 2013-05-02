@@ -73,6 +73,8 @@
           <input id='modalTiming' type='text'><br />
           <label for='betFormTiming'>Bet Form Slide Time (milliseconds): </label>
           <input id='betFormTiming' type='text'><br />
+          <label for='diceTiming'>Dice Roll Time (milliseconds): </label>
+          <input id='diceTiming' type='text'><br />
           <label for='colorScheme'>Color Scheme: </label>
           <select id='colorScheme' onchange='updateColors()'>
             <option value = "0">Standard Board</option>
@@ -1092,6 +1094,7 @@
       var initBank;
       var MODAL_FADE_INTERVAL;
       var BET_FORM_FADE_OUT;
+      var DICE_ROLL;
       if(localStorage["initBank"]){
         initBank = parseInt(localStorage["initBank"]);
       } else {
@@ -1120,11 +1123,17 @@
       } else {
         BET_FORM_FADE_OUT = 1000;
       }
+      if(localStorage["diceTiming"]){
+        DICE_ROLL = parseInt(localStorage["diceTiming"]);
+      } else {
+        DICE_ROLL = 1000;
+      }
       if(localStorage['colors5']){
         colors5 = JSON.parse(localStorage['colors5']);
       }
       $('#modalTiming').val(MODAL_FADE_INTERVAL);
       $('#betFormTiming').val(BET_FORM_FADE_OUT);
+      $('#diceTiming').val(DICE_ROLL);
       $('#startingBank').val(initBank);
       if(window.location.hash != ""){
         var crapsInfo = parseHash(window.location.hash);
@@ -1204,6 +1213,7 @@
           initBank = parseInt($('#startingBank').val());
           MODAL_FADE_INTERVAL = parseInt($('#modalTiming').val());
           BET_FORM_FADE_OUT = parseInt($('#betFormTiming').val());
+          DICE_ROLL = parseInt($('#diceTiming').val());
           colors5.betBorder = $('#betBorder').attr('value');
           colors5.board = $('#boardColor').attr('value');
           colors5.border = $('#border').attr('value');

@@ -29,15 +29,22 @@ function makeDice(n){
   return {
     dice: d,
     total: 0,
-    roll: function(){
+    roll: function(callback){
       //_CRAPS.output("Rolling...");
-      this.total = 0;
-      for(var i in this.dice){
-        var roll = this.dice[i].roll();
-        //_CRAPS.output("Die #" + i + ": " + roll);
-        this.total += roll;
-      }
-      return this.total;
+      _dice = this.dice;
+      _total = this.total;
+      roller = setInterval(function(){
+        _total = 0;
+        for(var i in _dice){_total += _dice[i].roll();}
+        draw(Board);
+        }, 200);
+      setTimeout(function(){
+        _total = 0;
+        for(var i in _dice){_total += _dice[i].roll();}
+        draw(Board);
+        clearInterval(roller);
+        callback(_total);
+      }, DICE_ROLL);
     },
     validate: function(){
       for(var i in this.dice){
