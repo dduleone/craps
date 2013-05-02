@@ -502,7 +502,7 @@
             }
           }
           if(code == 32 || code == 82){
-            if(roller == null && ($('#modal').css('visibility') == 'hidden' || $('#modal').css('display') == 'none') && ($('#betForm').css('visibility') == 'hidden' || $('#betForm').css('display') == 'none')){
+            if(($('#modal').css('visibility') == 'hidden' || $('#modal').css('display') == 'none') && ($('#betForm').css('visibility') == 'hidden' || $('#betForm').css('display') == 'none')){
               roll();
             }
           }
@@ -1260,6 +1260,9 @@
       var BET_FADE_INTERVAL = 2000;
 
       function roll(){
+        if(roller != null){
+          return;
+        }
         _CRAPS.roll();
         localStorage['point'] = GameState.point;
         localStorage['fireArray'] = JSON.stringify(GameState.fireArray);
