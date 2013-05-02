@@ -291,7 +291,7 @@
           var canvas = document.getElementById("board");
       
           var board;
-          if(colors['dicePips']){
+          if(!colors){
             var pips = colors['dicePips'];
           }
           colors = $.extend({}, eval("colors" + $('#colorScheme').val()));
