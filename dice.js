@@ -38,9 +38,17 @@ function makeDice(n){
         var blue = parseInt(pips.slice(2,4), 16)
         var green = parseInt(pips.slice(4,6), 16)
         if(((red + blue + green) / 3) < 128){
-          colors['dicePips'] = "FFFFFF"
+          if(colors['dice'] == "FFFFFF")
+            colors['dicePips'] = "D8D8D8"
+          } else {
+            colors['dicePips'] = "FFFFFF"
+          }
         } else {
-          colors['dicePips'] = "000000"
+          if(colors['dice'] == "000000")
+            colors['dicePips'] = "282828"
+          } else {
+            colors['dicePips'] = "000000"
+          }
         }
       }
       roller = setInterval(function(){
