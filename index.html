@@ -291,7 +291,7 @@
           var canvas = document.getElementById("board");
       
           var board;
-          colors = eval("colors" + $('#colorScheme').val());
+          colors = $.extend({}, eval("colors" + $('#colorScheme').val()));
           
           board = new Board(canvas, colors);
           board.draw();
