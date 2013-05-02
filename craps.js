@@ -556,6 +556,7 @@ $.extend(_CRAPS, {
     //_CRAPS.output("Before Roll - The point is: " + GameState.point);
     var $CRAPS = this;
     _CRAPS.dice.dice.roll(function(roll){
+      _CRAPS.dice.dice.total = roll;
       if(GameState.tutorial){
         var die0 = _CRAPS.dice.dice.dice[0];
         var die1 = _CRAPS.dice.dice.dice[1];
