@@ -295,7 +295,9 @@
             var pips = colors['dicePips'];
           }
           colors = $.extend({}, eval("colors" + $('#colorScheme').val()));
-          colors['dicePips'] = pips;
+          if(pips){
+            colors['dicePips'] = pips;
+          }
           
           board = new Board(canvas, colors);
           board.draw();
