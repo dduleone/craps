@@ -38,7 +38,7 @@ function makeDice(n){
         var blue = parseInt(pips.slice(2,4), 16)
         var green = parseInt(pips.slice(4,6), 16)
         if(((red + blue + green) / 3) < 128){
-          if(colors['dice'] == "FFFFFF")
+          if(colors['dice'] == "FFFFFF"){
             colors['dicePips'] = "D8D8D8"
           } else {
             colors['dicePips'] = "FFFFFF"
