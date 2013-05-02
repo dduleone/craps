@@ -59,6 +59,8 @@ function makeDice(n){
         draw(Board);
         }, 200);
       setTimeout(function(){
+        _dice = self.dice;
+        _total = self.total;
         _total = 0;
         for(var i in _dice){_total += _dice[i].roll();}
         draw(Board);
