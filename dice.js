@@ -32,14 +32,16 @@ function makeDice(n){
     roll: function(callback){
       //_CRAPS.output("Rolling...");
       self = this;
-      var pips = colors['dicePips'];
-      var red = parseInt(pips.slice(0,2), 16)
-      var blue = parseInt(pips.slice(2,4), 16)
-      var green = parseInt(pips.slice(4,6), 16)
-      if(((red + blue + green) / 3) < 128){
-        colors['dicePips'] = "FFFFFF"
-      } else {
-        colors['dicePips'] = "000000"
+      if(colors){
+        var pips = colors['dicePips'];
+        var red = parseInt(pips.slice(0,2), 16)
+        var blue = parseInt(pips.slice(2,4), 16)
+        var green = parseInt(pips.slice(4,6), 16)
+        if(((red + blue + green) / 3) < 128){
+          colors['dicePips'] = "FFFFFF"
+        } else {
+          colors['dicePips'] = "000000"
+        }
       }
       roller = setInterval(function(){
         _dice = self.dice;
