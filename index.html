@@ -80,38 +80,40 @@
         </div>
         <div id='settings'>
           <label for='startingBank'>Starting Bank: </label>
-          <input id='startingBank' type='text' size="10"><br />
-          Timing Settings (For off/no delay, try "0"):<br />
-          <label for='modalTiming'>Help Fade Out Time (milliseconds): </label>
-          <input id='modalTiming' type='text' size="10"><br />
-          <label for='betFormTiming'>Bet Form Slide Time (milliseconds): </label>
-          <input id='betFormTiming' type='text' size="10"><br />
-          <label for='diceTiming'>Dice Roll Time (milliseconds): </label>
-          <input id='diceTiming' type='text' size="10"><br />
-          <label for='colorScheme'>Color Scheme: </label>
-          <select id='colorScheme' onchange='updateColors()'>
-            <option value = "0">Standard Board</option>
-            <option value = "1">Red Board</option>
-            <option value = "2">Blue Board</option>
-            <option value = "3">Purple Board</option>
-            <option value = "4">Charcoal Board</option>
-            <option value = "5">Customize Your Own Scheme!</option>
-          </select><br />
+          <input id='startingBank' type='text' size="10"><br /><br />
+          <center>Timing Settings (For off/no delay, try "0"):</center><br />
+          <label for='modalTiming'>Help Fade Out Time (ms): </label>
+          <input id='modalTiming' type='text' size="10"><br /><br />
+          <label for='betFormTiming'>Bet Form Slide Time (ms): </label>
+          <input id='betFormTiming' type='text' size="10"><br /><br />
+          <label for='diceTiming'>Dice Roll Time (ms): </label>
+          <input id='diceTiming' type='text' size="10"><br /><br />
+          <center>
+            <label for='colorScheme'>Color Scheme: </label>
+            <select id='colorScheme' onchange='updateColors()'>
+              <option value = "0">Standard Board</option>
+              <option value = "1">Red Board</option>
+              <option value = "2">Blue Board</option>
+              <option value = "3">Purple Board</option>
+              <option value = "4">Charcoal Board</option>
+              <option value = "5">Customize Your Own Scheme!</option>
+            </select>
+          </center><br />
           <div id='customColors'>
-            <label for='boardColor'>Board: #</label><input id='boardColor' class='color'><br />
-            <label for='border'>Board Border: #</label><input id='border' class='color'><br />
-            <label for='lines'>Lines: #</label><input id='lines' class='color'><br />
-            <label for='specialText'>Special 1: #</label><input id='specialText' class='color'><br />
-            <label for='finalText'>Special 2: #</label><input id='finalText' class='color'><br />
-            <label for='dice'>Dice: #</label><input id='dice' class='color'><br />
-            <label for='dicePips'>Dice Pips: #</label><input id='dicePips' class='color'><br />
-            <label for='text'>Text: #</label><input id='text' class='color'><br />
-            <label for='pointBorder'>Point Border: #</label><input id='pointBorder' class='color'><br />
-            <label for='pointOff'>Point Off: #</label><input id='pointOff' class='color'><br />
-            <label for='pointOn'>Point On: #</label><input id='pointOn' class='color'><br />
-            <label for='buttonText'>Point Text: #</label><input id='buttonText' class='color'><br />
-            <label for='betFill'>Bet Fill: #</label><input id='betFill' class='color'><br />
-            <label for='betBorder'>Bet Border: #</label><input id='betBorder' class='color'><br />
+            <label for='boardColor'>Board: #</label><input id='boardColor' class='color' size="10"><br /><br />
+            <label for='border'>Board Border: #</label><input id='border' class='color' size="10"><br /><br />
+            <label for='lines'>Lines: #</label><input id='lines' class='color' size="10"><br /><br />
+            <label for='specialText'>Special 1: #</label><input id='specialText' class='color' size="10"><br /><br />
+            <label for='finalText'>Special 2: #</label><input id='finalText' class='color' size="10"><br /><br />
+            <label for='dice'>Dice: #</label><input id='dice' class='color' size="10"><br /><br />
+            <label for='dicePips'>Dice Pips: #</label><input id='dicePips' class='color' size="10"><br /><br />
+            <label for='text'>Text: #</label><input id='text' class='color' size="10"><br /><br />
+            <label for='pointBorder'>Point Border: #</label><input id='pointBorder' class='color' size="10"><br /><br />
+            <label for='pointOff'>Point Off: #</label><input id='pointOff' class='color' size="10"><br /><br />
+            <label for='pointOn'>Point On: #</label><input id='pointOn' class='color' size="10"><br /><br />
+            <label for='buttonText'>Point Text: #</label><input id='buttonText' class='color' size="10"><br /><br />
+            <label for='betFill'>Bet Fill: #</label><input id='betFill' class='color' size="10"><br /><br />
+            <label for='betBorder'>Bet Border: #</label><input id='betBorder' class='color' size="10"><br /><br />
             <div id='apply' class='bttn yellow' onclick='saveSettings()'>Apply</div>
             <div id='resetColors' class='bttn yellow' onclick='resetColors()'>Reset Custom Colors</div>
           </div>
@@ -504,7 +506,7 @@
       
       $(window).bind('keyup',
         function(e) { var code = (e.keyCode ? e.keyCode : e.which);
-          //console.log(code);
+          console.log(code);
           if(code == 13) {
             if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
               create();

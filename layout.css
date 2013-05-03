@@ -364,11 +364,13 @@
     color: #FFF;
     top: 2%;
     left: 0;
-    width: 80%;
     padding: 10px;
     /*float: left;*/
     overflow: auto;
     display: none;
+  }
+  #settings input{
+    float: right;
   }
   .imageKey{
     background: #FFF;
