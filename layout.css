@@ -3,6 +3,17 @@
     overflow-y: hidden;
     font-family: "verdana"
   }
+  a{
+    text-decoration: none;
+    color: #B8B8B8;
+  }
+  a:hover{
+    border-top: dashed 1px;
+    border-bottom: dashed 1px;
+  }
+  a:visited{
+    border-bottom: dashed 1px;
+  }
   .round{
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -36,6 +47,9 @@
     float: left;
   }
   #tutorial{
+    padding: 10px;
+  }
+  #about{
     padding: 10px;
   }
   #tutorialInstruction{

@@ -48,6 +48,7 @@
         <div id='openRules' class='bttn blue' onclick='clickModalButton("rules")'>Bets</div>
         <div id='openSettings' class='bttn blue' onclick='clickModalButton("settings")'>Settings</div>
         <div id='openTutorial' class='bttn blue' onclick='clickModalButton("tutorial")'>Tutorial</div>
+        <div id='openAbout' class='bttn blue' onclick='clickModalButton("about")'>About</div>
       </div>
       <div id='closeTutorial' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
     </div>
@@ -59,8 +60,19 @@
         <div id='rulesButton' class='bttn' onclick='clickModalButton("rules")'>Bets</div>
         <div id='settingsButton' class='bttn' onclick='clickModalButton("settings")'>Settings</div>
         <div id='tutorialButton' class='bttn' onclick='clickModalButton("tutorial")'>Tutorial</div>
+        <div id='aboutButton' class='bttn' onclick='clickModalButton("about")'>About</div>
       </div>
       <div id='modalWindow'>
+        <div id='about'>
+          <h3>
+            About the Author
+          </h3>
+          <p>
+            Matt DuLeone<br />
+            matt@duleone.com<br />
+            github: <a href='https://github.com/dantothelz/craps'>https://github.com/dantothelz/craps</a>
+          </p>
+        </div>
         <div id='tutorial'>
           <p id='tutorialDescription'></p>
           <div id='startTutorial' class='bttn yellow' onclick='startTutorial()'>Start Tutorial</div>
@@ -1399,7 +1411,7 @@
       }
       
       function clickModalButton(button){
-        var modals = ['help', 'rules', 'settings', 'tutorial'];
+        var modals = ['help', 'rules', 'settings', 'tutorial', 'about'];
         var mod = $('#modal');
         if(mod.css('visibility')== 'hidden' || mod.css('display') == 'none'){
           openModal();
