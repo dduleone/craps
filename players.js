@@ -43,13 +43,11 @@ $.extend(PlayerManager, {
     name.html(this.players[0].player.name);
     name.width($('#board').width()/(0.7)*(0.29));
     name.css({top: '5px', left: $('#board').width()/(0.7)*(0.0025)});
-    $('#openButtons').show()
     if($('#openButtons').width() > $('#modalWindow').width()){
       $('#modalWindow').height($('#modal').height() - 95);
     }else{
       $('#modalWindow').height($('#modal').height() - 65);
     }
-    $('#openButtons').hide()
     $('#tutorialInstruction').css({'top': ($('#generalButtons').offset().top + $('#generalButtons').height())});
     $('#playerArea').css({left: '0px'});
     //name.css('left', (($('#buffer').width() - name.width())/2));
