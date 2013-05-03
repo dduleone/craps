@@ -1280,15 +1280,11 @@
         localStorage['fireArray'] = JSON.stringify(GameState.fireArray);
         //draw(Board);
         //$('#pointWindow').html('Point: ' + ((GameState.point>0)?GameState.point:'None'));
-        if($('.winningBet').is(':animated') || $('.losingBet').is(':animated')){
-          var animateTimeout = setInterval(
-            function(){
-              _CRAPS.dealer.betManager.displayBets();
-              clearInterval(animateTimeout);
-            }, BET_FADE_INTERVAL);
-        }else{
-          _CRAPS.dealer.betManager.displayBets();
-        }
+        var animateTimeout = setInterval(
+          function(){
+            _CRAPS.dealer.betManager.displayBets();
+            clearInterval(animateTimeout);
+          }, (BET_FADE_INTERVAL + DICE_ROLL));
       }
       
       function reset(){
