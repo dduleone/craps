@@ -157,8 +157,9 @@
               </li>
               <li>
                 Odds<br />
-                You may only place when you have a bet of the matching type on the table, and the bet has a point on.<br />
-                Same winning conditions as the associated bet.
+                You may only place when you have a bet of the matching type on the table (Pass Line/Don't Pass Line/Come/Don't Come), and the bet has a point on.<br />
+                Same winning conditions as the associated bet.<br />
+                Payout:<br />Point 4, 10: 1 pays 2<br />Point 5, 9: 2 pays 3 <br />Point 6, 8: 5 pays 6
               </li>
             </ul>
           </div>
@@ -206,7 +207,7 @@
           <ul>
             <li>To read about the different bets, check out the "Bets" tab.</li>
             <li>To set your name, click on/touch the name area.</li>
-            <li>To roll, click on/touch the red dice or hit the "R" or "SPACE" key.</li>
+            <li>To roll, click on/touch the dice on the table or hit the "R" or "SPACE" key.</li>
             <li>To place a bet, click on/touch the area of the board you want to place a bet.
               <ul>
                 <li>Once you are satisfied with the bet, click "Create Bet!" or hit the "Enter" key.</li>
@@ -1380,7 +1381,7 @@
           break;
         case "345":
           $('#glossaryTerm').html('3x-4x-5x Odds:');
-          $('#glossaryDefinition').html('Scheme to determine the multiplier on Odds bets, based on the Point.<br /> Points 4 &amp; 10 may bet at most 3 times<br /> Points 5 &amp; 9 may bet at most 4 times<br /> Points 6 &amp; 8 may bet at most 5 times');
+          $('#glossaryDefinition').html('Scheme to determine the multiplier on Odds bets, based on the Point.<br /> Points 4 &amp; 10 may bet at most 3 times the attached bet<br /> Points 5 &amp; 9 may bet at most 4 times the attached bet<br /> Points 6 &amp; 8 may bet at most 5 times the attached bet');
           break;
         case "sevenOut":
           $('#glossaryTerm').html('Seven Out:');
@@ -1578,10 +1579,10 @@
       function updateTutorial(){
         var _bets = _CRAPS.dealer.betManager.bets;
         if(!GameState.tutorial){
-          $('#tutorialDescription').html("This tutorial will teach you how to place a Pass Line bet, as well as a Pass Line Odds bet and walk you through a Pass Line bet sequence.<br /><br />While you are completing the tutorial, this window will describe what is happening, but you can close this window with the 'Close' button below to see your bets. To open this window again, click the 'Tutorial' button.<br /><br />Starting the tutorial will remove all your bets and reset the game.<br /><br />To start the tutorial, click 'Start Tutorial'.");
+          $('#tutorialDescription').html("This tutorial will teach you how to place a Pass Line bet, as well as a Pass Line Odds bet and walk you through a Pass Line bet sequence.<br /><br />The Pass Line bet is the traditional/standard bet in Craps, and the one that most people think of when they think of Craps.<br /><br />While you are completing the tutorial, this window will describe what is happening, but you can close this window with the 'Close' button below to see your bets. To open this window again, click the 'Tutorial' button.<br /><br />Starting the tutorial will remove all your bets and reset the game.<br /><br />To start the tutorial, click 'Start Tutorial'.");
           $('#tutorialInstruction').html('');
         }else if(GameState.tutorialState == 0 && _bets.length == 0){
-          $('#tutorialDescription').html('To start, notice that the <span class="keyword" onclick="openGlossary(\'button\')" title="Point Indicator">button</span> says "Off". This means the <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> is off. You can only place a Pass Line bet when the <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> is off. You may now place a Pass Line bet.<br /><br />Click on the Pass Line, and create a Pass Line bet by clicking "Create". $100 is a good amount to bet.');
+          $('#tutorialDescription').html('To start, notice that the <span class="keyword" onclick="openGlossary(\'button\')" title="Point Indicator">button</span> says "Off". This means the <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> is off. You can only place a Pass Line bet when the <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> is off. You may now place a Pass Line bet.<br /><br />Click on the Pass Line, and create a Pass Line bet by clicking "Create Bet". $100 is a good amount to bet.');
           $('#tutorialInstruction').html('Click the Pass Line');
         }else if(GameState.tutorialState == 0 && _bets.length == 1){
           $('#tutorialDescription').html('You\'ve now created a Pass Line bet! Roll the dice, and let\'s see what happens on your <span class="keyword" onclick="openGlossary(\'comeOut\')" title="A roll when there is no Point set">come out roll</span>!');
@@ -1593,7 +1594,7 @@
           $('#tutorialDescription').html('You rolled a 3! You lose on the Pass Line <span class="keyword" onclick="openGlossary(\'comeOut\')" title="A roll when there is no Point set">come out roll</span>, but your roll isn\'t over! When you lose the Pass Line bet on a <span class="keyword" onclick="openGlossary(\'comeOut\')" title="A roll when there is no Point set">come out roll</span>, it is automatically rebet.<br /><br />You have another <span class="keyword" onclick="openGlossary(\'comeOut\')" title="A roll when there is no Point set">come out roll</span>, roll again!');
           $('#tutorialInstruction').html('Click Roll');
         }else if(GameState.tutorialState == 3 && _bets.length == 1){
-          $('#tutorialDescription').html('You rolled an 8! A <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> is now set, and you can create a Pass Line Odds bet!<br /><br />Click the Pass Line to create a Pass Line Odds bet!<br /><br />This is a <span class="keyword" onclick="openGlossary(\'345\')" title="Determines the multiplier on Odds bets, based on the Point">3x-4x-5x Odds</span> table, so for a <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> of 8, you can bet a maximum of 5 times your Pass Line bet. Create a Pass Line Odds bet by clicking "Create".');
+          $('#tutorialDescription').html('You rolled an 8! A <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> is now set. Because a <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> is set and you have a Pass Line bet on the table, you can now create a Pass Line Odds bet! You want to create a Pass Line Odds bet because the Pass Line bet only pays out 1 to 1, but Pass Line Odds bets pay out at better odds.<br /><br />Click the Pass Line to create a Pass Line Odds bet!<br /><br />This is a <span class="keyword" onclick="openGlossary(\'345\')" title="Determines the multiplier on Odds bets, based on the Point">3x-4x-5x Odds</span> table, so for a <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> of 8, you can bet a maximum of 5 times your Pass Line bet. Create a Pass Line Odds bet for $' + (_CRAPS.dealer.betManager.bets[0].bet.value * 5) + '. Create a Pass Line Odds bet by using the slider and clicking "Create Bet".');
           $('#tutorialInstruction').html('Click the Pass Line');
         }else if(GameState.tutorialState == 3 && _bets.length == 2){
           $('#tutorialDescription').html('You\'ve now created a Pass Line Odds bet! It\'s time to roll the dice again! You will roll until you roll the <span class="keyword" onclick="openGlossary(\'point\')" title="Roll Objective">Point</span> (an 8) or a 7.');
