@@ -1284,6 +1284,7 @@
         var animateTimeout = setInterval(
           function(){
             _CRAPS.dealer.betManager.displayBets();
+            PlayerManager.updatePlayerArea();
             clearInterval(animateTimeout);
           }, (BET_FADE_INTERVAL + DICE_ROLL));
       }
