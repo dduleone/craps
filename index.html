@@ -495,6 +495,7 @@
       
       $(window).bind('keyup',
         function(e) { var code = (e.keyCode ? e.keyCode : e.which);
+          //console.log(code);
           if(code == 13) {
             if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
               create();
@@ -509,7 +510,11 @@
             }
           }
           if(code == 32 || code == 82){
-            if(((!$('#nameInput')) && $('#modal').css('visibility') == 'hidden' || $('#modal').css('display') == 'none') && ($('#betForm').css('visibility') == 'hidden' || $('#betForm').css('display') == 'none')){
+            if(($('#modal').css('visibility') == 'hidden' || $('#modal').css('display') == 'none') && ($('#betForm').css('visibility') == 'hidden' || $('#betForm').css('display') == 'none')){
+              var active = $(document.activeElement);
+              if(active[0] === $('#nameInput')[0]){
+                return;
+              }
               roll();
             }
           }
