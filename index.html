@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
   <head>
     <title>DuLeone Craps</title>
     <meta name="description" content="HTML5 Craps">
@@ -10,6 +10,14 @@
     <link rel="icon" type="image/x-icon" href="images/dice_small.ico" />
   </head>
   <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <!-- canvas id="board" height='1024' width='768'></canvas -->
     <canvas id="board"></canvas>
     
@@ -282,6 +290,7 @@
       <span id='glossaryDefinition' style='display:block'></span>
     </div>
     <div id='glossaryScreen' onclick="closeGlossary()"></div>
+    <fb:like id='fblike' href="http://duleone.com/craps" send="false" width="450" show_faces="false" font="arial"></fb:like>
   </body>
   <footer>
 
@@ -506,7 +515,7 @@
       
       $(window).bind('keyup',
         function(e) { var code = (e.keyCode ? e.keyCode : e.which);
-          console.log(code);
+          //console.log(code);
           if(code == 13) {
             if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
               create();

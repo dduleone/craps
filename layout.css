@@ -385,3 +385,7 @@
     -moz-appearance: none;
     */
   }
+  #fblike{
+    top: 71%;
+    float: right;
+  }

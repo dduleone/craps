@@ -53,6 +53,7 @@ $.extend(PlayerManager, {
     }else{
       $('#modalWindow').height($('#modal').height() - 65);
     }
+    $('#fblike').css('top', '71%');
     //if(hideAgain){
     //  $('#openButtons').hide();
     //  hideAgain = false;
