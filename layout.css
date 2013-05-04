@@ -386,6 +386,7 @@
     */
   }
   #fblike{
+    position: absolute;
     top: 71%;
     float: right;
   }
