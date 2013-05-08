@@ -14,6 +14,12 @@
   a:visited{
     border-bottom: dashed 1px;
   }
+  fb{
+    position: relative;
+    left: 31%;
+    float: left;
+
+  }
   .round{
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
