@@ -1682,11 +1682,10 @@
         var _betDispVal = $('#val' + idNum);
         var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
         
-        var oldVal = _betDispVal.html().slice(1);
+        var oldVal = _bet.bet.value;
         //console.log(oldVal);
         
         _betDispVal.empty();
-        _betDispVal.removeClass('bttn');
         var input = $(document.createElement('input'));
         input.attr('type', 'text');
         //input.attr('id', 'nameInput');
