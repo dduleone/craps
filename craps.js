@@ -608,7 +608,7 @@ $.extend(_CRAPS, {
         updateTutorial();
       }
       var diceArray = diceToNum(_CRAPS.dice);
-      _CRAPS.output("---Rolling--- " + diceArray[0] + " " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));
+      _CRAPS.output("---Rolling--- " + diceArray[0] + " + " + diceArray[1] + " = " + (diceArray[0] + diceArray[1]));
       //_CRAPS.output("The roll is: <b><font size='15'>" + roll + "</font></b>");
       _CRAPS.checkBets();
       PlayerManager.updatePlayerArea();
