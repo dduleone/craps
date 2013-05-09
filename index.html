@@ -98,11 +98,11 @@
           <input id='startingBank' type='text' size="10"><br /><br />
           <center>Timing Settings (To turn animation off and remove the delay, try 0):</center><br />
           <label for='modalTiming'>Help Fade Out Time (ms): </label>
-          <input id='modalTiming' type='text' size="10"><br /><br />
+          <input id='modalTiming' type='text' placeholder="0" size="10"><br /><br />
           <label for='betFormTiming'>Bet Form Slide Time (ms): </label>
-          <input id='betFormTiming' type='text' size="10"><br /><br />
+          <input id='betFormTiming' type='text' placeholder="0" size="10"><br /><br />
           <label for='diceTiming'>Dice Roll Time (ms): </label>
-          <input id='diceTiming' type='text' size="10"><br /><br />
+          <input id='diceTiming' type='text' placeholder="1000" size="10"><br /><br />
           <center>
             <label for='colorScheme'>Color Scheme: </label>
             <select id='colorScheme' onchange='updateColors()'>
@@ -1570,9 +1570,6 @@
         $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
         input.attr('value', player.player.name);
         nameDiv.css('left', 0);
-        if(input.attr('value') == 'Set your name!'){
-          input.attr('value', 'Your Name');
-        }
         input.focus(function(){
           input.select();
           $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
