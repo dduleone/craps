@@ -10,6 +10,7 @@
     <meta property='og:image' content='http://duleone.com/craps/images/dice.png' />
     <meta property='og:description' content='HTML5 Craps by Matt DuLeone' />
     <meta property='og:url' content='http://duleone.com/craps/' />
+    <meta name="appsfuel_code" content="ce06541daa02a75"/>
     <link href="layout.css" media="all" rel="stylesheet" type="text/css" />
     <link href="css3-gmail-style.css" media="all" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/x-icon" href="images/dice_small.ico" />
@@ -63,9 +64,8 @@
         <div id='openTutorial' class='bttn blue' onclick='clickModalButton("tutorial")'>Tutorial</div>
         <div id='openAbout' class='bttn blue' onclick='clickModalButton("about")'>About</div>
       </div>
-      <fb:like href="http://duleone.com/craps" send="false" width="450" show_faces="true"></fb:like>
-      <br />
       <div id='closeTutorial' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
+      <fb:like href="http://duleone.com/craps" send="false" width="450" show_faces="true"></fb:like>
     </div>
     <div id='tutorialInstruction'></div>
     <div id='modalScreen' onclick="closeModal()"></div>
@@ -85,7 +85,8 @@
           <p>
             Matt DuLeone<br />
             <a href='mailto:matt@duleone.com?subject=Craps%20HTML5%20Game'>matt@duleone.com</a><br />
-            github: <a href='https://github.com/dantothelz/craps'>https://github.com/dantothelz/craps</a>
+            github: <a href='https://github.com/dantothelz/craps'>https://github.com/dantothelz/craps</a><br />
+            Version: 1.0.415
           </p>
         </div>
         <div id='tutorial'>
@@ -1679,11 +1680,10 @@
         var _betDispVal = $('#val' + idNum);
         var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
         
-        var oldVal = _betDispVal.html().slice(1);
+        var oldVal = _bet.bet.value;
         //console.log(oldVal);
         
         _betDispVal.empty();
-        _betDispVal.removeClass('bttn');
         var input = $(document.createElement('input'));
         input.attr('type', 'text');
         //input.attr('id', 'nameInput');
