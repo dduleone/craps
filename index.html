@@ -1283,7 +1283,7 @@
       
       function saveGameState(){
         //prompt("Copy URL to take game to another device!", "http://duleone.com/craps/#!/" + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36));
-        prompt("Copy URL to take game to another device!\nAll bets on the table and Fire Bet progress will be lost!", window.location.origin + window.location.pathname + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36));
+        prompt("Copy URL to take game to another device!\nAll bets on the table and Fire Bet progress will be lost!", window.location.origin + window.location.pathname + "#!/" + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36));
         //window.location.hash = '!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
       }
       
