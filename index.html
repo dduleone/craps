@@ -88,7 +88,7 @@
             github: <a href='https://github.com/dantothelz/craps'>https://github.com/dantothelz/craps</a><br />
             facebook: <a href='https://www.facebook.com/CasinoCraps'>https://www.facebook.com/CasinoCraps</a><br />
             Linked In: <a href='http://www.linkedin.com/pub/matt-duleone/10/a65/123'>http://www.linkedin.com/pub/matt-duleone/10/a65/123</a><br />
-            Version: 1.0.424
+            Version: 1.0.425
           </p>
         </div>
         <div id='tutorial'>
@@ -1812,6 +1812,7 @@
             }
             origLabel.html('Original Bet ID: ');
             origBet.append(origLabel).append(orig);
+            origBet.show();
             var origVal;
             for(i in _CRAPS.dealer.betManager.bets){
               if(_CRAPS.dealer.betManager.bets[i].type == 'passline'){
