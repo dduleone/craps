@@ -41,6 +41,7 @@ $.extend(PlayerManager, {
     name.empty();
     bank.empty();
     name.html(this.players[0].player.name);
+    $('#settingsName').val(this.players[0].player.name)
     name.width($('#board').width()/(0.7)*(0.29));
     name.css({top: '5px', left: $('#board').width()/(0.7)*(0.0025)});
     //var hideAgain = false;
