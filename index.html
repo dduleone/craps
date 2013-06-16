@@ -88,7 +88,7 @@
             github: <a href='https://github.com/dantothelz/craps'>https://github.com/dantothelz/craps</a><br />
             facebook: <a href='https://www.facebook.com/CasinoCraps'>https://www.facebook.com/CasinoCraps</a><br />
             Linked In: <a href='http://www.linkedin.com/pub/matt-duleone/10/a65/123'>http://www.linkedin.com/pub/matt-duleone/10/a65/123</a><br />
-            Version: 1.0.427
+            Version: 1.0.428
           </p>
         </div>
         <div id='tutorial'>
@@ -1753,6 +1753,29 @@
         input.focus();
       }
       
+      //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
+      var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+      };
+      //end snippet
+      
       (function() {
         if (isMobile.any()){
           $('#name').removeClass('clickable');
@@ -2132,30 +2155,6 @@
           return;
         }
       }
-      
-      //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
-      var isMobile = {
-        Android: function() {
-            return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function() {
-            return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function() {
-            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function() {
-            return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function() {
-            return navigator.userAgent.match(/IEMobile/i);
-        },
-        any: function() {
-            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-        }
-      };
-      //end snippet
-
     </script>
     <!-- Starfyre -->
     <!-- script>
