@@ -88,7 +88,7 @@
             github: <a href='https://github.com/dantothelz/craps'>https://github.com/dantothelz/craps</a><br />
             facebook: <a href='https://www.facebook.com/CasinoCraps'>https://www.facebook.com/CasinoCraps</a><br />
             Linked In: <a href='http://www.linkedin.com/pub/matt-duleone/10/a65/123'>http://www.linkedin.com/pub/matt-duleone/10/a65/123</a><br />
-            Version: 1.0.425
+            Version: 1.0.426
           </p>
         </div>
         <div id='tutorial'>
@@ -1260,9 +1260,9 @@
       function saveSettings(){
         if(!isNaN(parseInt($('#startingBank').val()))){
           initBank = parseInt($('#startingBank').val());
-          MODAL_FADE_INTERVAL = parseInt($('#modalTiming').val());
-          BET_FORM_FADE_OUT = parseInt($('#betFormTiming').val());
-          DICE_ROLL = parseInt($('#diceTiming').val());
+          MODAL_FADE_INTERVAL = isNaN(parseInt($('#modalTiming').val()))?0:parseInt($('#modalTiming').val());
+          BET_FORM_FADE_OUT = isNaN(parseInt($('#betFormTiming').val()))?0:parseInt($('#betFormTiming').val());
+          DICE_ROLL = isNaN(parseInt($('#diceTiming').val()))?1000:parseInt($('#diceTiming').val());
           colors5.betBorder = $('#betBorder').attr('value');
           colors5.board = $('#boardColor').attr('value');
           colors5.border = $('#border').attr('value');
@@ -1560,6 +1560,9 @@
       }
       
       function updatePlayerName(){
+        if (isMobile.any()){
+          return;
+        }
         var player = PlayerManager.players[0];
         var nameDiv = $('#name');
         nameDiv.empty();
@@ -2125,6 +2128,29 @@
           return;
         }
       }
+      
+      //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
+      var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+      };
+      //end snippet
 
     </script>
     <!-- Starfyre -->
