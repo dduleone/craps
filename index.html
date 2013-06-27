@@ -14,6 +14,7 @@
     <link href="layout.css" media="all" rel="stylesheet" type="text/css" />
     <link href="css3-gmail-style.css" media="all" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/x-icon" href="images/dice_small.ico" />
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
   </head>
   <body>
     <div id="fb-root"></div>
@@ -265,31 +266,32 @@
               <th>Meaning</td>
             </tr>
             <tr>
-              <td class='imageKey'><img src='images/id-card_green_small.png'></td>
+              <td class='imageKey'><!--img src='images/id-card_green_small.png'--><i class='icon-qrcode icon-large icon-dark' /></td>
               <td class='keyText'>Bet Id</td>
             </tr>
             <tr>
-              <td class='imageKey'><img src='images/shapes_small.png'></td>
+              <!--td class='imageKey'><img src='images/shapes_small.png'></td-->
+              <td class='imageKey'><img src='images/bet-type.png'></td>
               <td class='keyText'>Bet Type</td>
             </tr>
             <tr>
-              <td class='imageKey'><img src='images/chips_small.png'></td>
+              <td class='imageKey'><!--img src='images/chips_small.png'--><i class='icon-money icon-large icon-dark' /></td>
               <td class='keyText'>Bet Amount</td>
             </tr>
             <tr>
-              <td class='imageKey'><img src='images/power_button_black_small.png'></td>
+              <td class='imageKey'><!--img src='images/power_button_black_small.png'--><i class='icon-off icon-large icon-dark' /></td>
               <td class='keyText'>Bet On?</td>
             </tr>
             <tr>
-              <td class='imageKey'><img src='images/restart_small.png'></td>
+              <td class='imageKey'><!--img src='images/restart_small.png'--><i class='icon-repeat icon-large icon-dark' /></td>
               <td class='keyText'>Repeat Bet on Win?</td>
             </tr>
             <tr>
-              <td class='imageKey'><img src='images/point_small.png'></td>
+              <td class='imageKey'><!--img src='images/point_small.png'--><i class='icon-exclamation icon-large icon-dark' /></td>
               <td class='keyText'>Bet Point</td>
             </tr>
             <tr>
-              <td class='imageKey red'><img src='images/edit-clear_small.png'></td>
+              <td class='imageKey bttn red'><!--img src='images/edit-clear_small.png'--><i class='icon-eraser icon-large' /></td>
               <td class='keyText'>Clear All Bets</td>
             </tr>
           </table>
@@ -366,17 +368,23 @@
                     return;
                   }
                   if(_CRAPS.dealer.betManager.bets.length > 0){
-                    alert("You cannot reset your game when you have bets on the table.");
-                  } else {
-                    nextBetId = 1;
-                    GameState.point = null;
-                    for(i in GameState.fireArray){
-                      GameState.fireArray[i] = false;
+                    if(!confirm("You have bets on the table, are you sure you want to reset?")){
+                      return;
                     }
-                    PlayerManager.players[0].player.bank = initBank;
-                    PlayerManager.updatePlayerArea();
-                    $('#buffer').empty();
                   }
+                  var bets = _CRAPS.dealer.betManager.bets;
+                  for(bet in bets){
+                    _CRAPS.dealer.betManager.removeBet(bets[bet].bet.betId);
+                  }
+                  _CRAPS.dealer.betManager.displayBets();
+                  GameState.point = null;
+                  for(i in GameState.fireArray){
+                    GameState.fireArray[i] = false;
+                  }
+                  nextBetId = 1;
+                  PlayerManager.players[0].player.bank = initBank;
+                  PlayerManager.updatePlayerArea();
+                  $('#buffer').empty();
                   return;
                 }
                 if(boardArea.name == "Save Game"){

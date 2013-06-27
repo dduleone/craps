@@ -323,13 +323,21 @@ BetManager.prototype = {
     betTable.attr('id', 'betTable');
     var heading = $(document.createElement('thead'));
     var headers = $(document.createElement('tr'));
-    headers.append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Id').attr('src', 'images/id-card_green_small.png')))//.html('Id'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.19)).append($(document.createElement('img')).attr('title', 'Bet Amount').attr('src', 'images/chips_small.png')))//.html('Value'))
-           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet On?').attr('src', 'images/power_button_black_small.png')))//.html('On?'))
-           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Repeat On Win?').attr('src', 'images/restart_small.png')))//.html('Repeat?'))
-           .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Point').attr('src', 'images/point_small.png')))//.html('Point'))
-           .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').append($(document.createElement('img')).attr('title', 'Remove All Bets').attr('src', 'images/edit-clear_small.png')));//.html('Rem All'));
+    //headers.append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Id').attr('src', 'images/id-card_green_small.png')))//.html('Id'))
+    //       .append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
+    //       .append($(document.createElement('th')).width($('#buffer').width()*(0.19)).append($(document.createElement('img')).attr('title', 'Bet Amount').attr('src', 'images/chips_small.png')))//.html('Value'))
+    //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet On?').attr('src', 'images/power_button_black_small.png')))//.html('On?'))
+    //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Repeat On Win?').attr('src', 'images/restart_small.png')))//.html('Repeat?'))
+    //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Point').attr('src', 'images/point_small.png')))//.html('Point'))
+    //       .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').append($(document.createElement('img')).attr('title', 'Remove All Bets').attr('src', 'images/edit-clear_small.png')));//.html('Rem All'));
+    headers.append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Id').attr('class', 'icon-qrcode icon-large')))//.html('Id'))
+           //.append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/bet-type.png')))//.html('Type'))
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.19)).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
+           .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
+           .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.03)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
+           .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large')));//.html('Rem All'));
     heading.append(headers);
     betTable.append(heading);
     betListing.html('<center>Click the Board to Place a Bet!</center>');
@@ -401,8 +409,9 @@ BetManager.prototype = {
       }
       
       var remove = $(document.createElement('td'));
-      remove.append($(document.createElement('img')).attr('src', 'images/red_x_small.png'))//.html('Rem');
-      //remove.attr({class: 'bttn'});
+      //remove.append($(document.createElement('img')).attr('src', 'images/red_x_small.png'))//.html('Rem');
+      remove.append($(document.createElement('i')).attr('class', 'icon-remove icon-large'))//.html('Rem');
+      remove.attr({class: 'bttn red'});
       if(GameState.tutorial){
         remove.attr('onclick', 'alert("You cannot take down a Tutorial bet.")');
       }else if(this.bets[betNum].type == 'passline'){
