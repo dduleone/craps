@@ -1,7 +1,5 @@
 var fireImg = new Image();
 fireImg.src = 'images/fire.png';
-var settings = new Image();
-settings.src = 'images/wrench-white-small.png';
 
 var colors;
 
@@ -1383,42 +1381,6 @@ var colors5 = {
             return false;
         }
     };
-    
-    //var Help = function(board) {
-    //    this.board = board;
-    //    return this;
-    //}
-    //Help.prototype = {
-    //    name: "Help",
-    //    draw: function() {
-    //        var ctx = this.board.context;
-    //        ctx.lineWidth = 5;
-    //        ctx.textAlign = "center";
-    //        ctx.fillStyle = this.board.colors.text;
-    //        ctx.strokeStyle = this.board.colors.text;
-    //
-    //        ctx.strokeStyle = this.board.colors.lines;
-    //        ctx.beginPath();
-    //        ctx.arc(50, 950, 35, 2 * Math.PI, false);
-    //        ctx.textAlign = "left";
-    //        ctx.font = "30pt Verdana";
-    //        //ctx.rotate(Math.PI * -0.2);
-    //        ctx.fillText("?", 24, 962);
-    //        ctx.stroke();
-    //        ctx.font = "52pt Verdana";
-    //        ctx.fillText("/", 37, 971);
-    //        ctx.stroke();
-    //        ctx.drawImage(settings, 51, 938, 30, 30);
-    //        ctx.restore();
-    //        
-    //    },
-    //    isClickedRegion: function(x, y) {
-    //        if (x > 15 && x < 85 && y > 915 && y < 985) {
-    //            return true;
-    //        }
-    //        return false;
-    //    }
-    //};
     
     var Reset = function(board) {
         this.board = board;
