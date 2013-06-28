@@ -248,7 +248,6 @@
                 <li>Once you are satisfied with the bet, click "Create Bet!" or hit the "Enter" key.</li>
                 <li>If you decide you don't want to create the bet, click "Cancel" or hit the "Esc" key.</li>
                 <li>To place a Passline/Don't Pass odds bet, click on/touch the Passline/Don't Pass<br />area when there is a point on.</li>
-                <li>To place a Come/Don't Come odds bet, click on/touch the Come/Don't Come<br />standard areas, then select Come/Don't Come Odds from the drop down and<br />make sure the correct Original Bet Id is in the box.</li>
               </ul>
             </li>
             <li>To change a bet's amount, click on the amount.</li>
@@ -265,29 +264,29 @@
               <th>Heading</th>
               <th>Meaning</td>
             </tr>
-            <tr>
-              <td class='imageKey'><!--img src='images/id-card_green_small.png'--><i class='icon-qrcode icon-large icon-dark' /></td>
+            <!--tr>
+              <td class='imageKey'><i class='icon-qrcode icon-large icon-dark' /></td>
               <td class='keyText'>Bet Id</td>
-            </tr>
+            </tr-->
             <tr>
               <!--td class='imageKey'><img src='images/shapes_small.png'></td-->
               <td class='imageKey'><img src='images/bet-type.png'></td>
               <td class='keyText'>Bet Type</td>
             </tr>
             <tr>
-              <td class='imageKey'><!--img src='images/chips_small.png'--><i class='icon-money icon-large icon-dark' /></td>
+              <td class='imageKey'><!--img src='images/chips_small.png'--><i class='icon-money icon-large' style='color:#000' /></td>
               <td class='keyText'>Bet Amount</td>
             </tr>
             <tr>
-              <td class='imageKey'><!--img src='images/power_button_black_small.png'--><i class='icon-off icon-large icon-dark' /></td>
+              <td class='imageKey'><!--img src='images/power_button_black_small.png'--><i class='icon-off icon-large' style='color:#000' /></td>
               <td class='keyText'>Bet On?</td>
             </tr>
             <tr>
-              <td class='imageKey'><!--img src='images/restart_small.png'--><i class='icon-repeat icon-large icon-dark' /></td>
+              <td class='imageKey'><!--img src='images/restart_small.png'--><i class='icon-repeat icon-large' style='color:#000' /></td>
               <td class='keyText'>Repeat Bet on Win?</td>
             </tr>
             <tr>
-              <td class='imageKey'><!--img src='images/point_small.png'--><i class='icon-exclamation icon-large icon-dark' /></td>
+              <td class='imageKey'><!--img src='images/point_small.png'--><i class='icon-exclamation icon-large' style='color:#000' /></td>
               <td class='keyText'>Bet Point</td>
             </tr>
             <tr>
@@ -340,7 +339,7 @@
           board.draw();
       
           canvas.onclick = function(e) {
-              //console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
+              console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
               //console.log(board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop));
               //ctx = board.context;
               //ctx.beginPath();
@@ -368,7 +367,7 @@
                     return;
                   }
                   if(_CRAPS.dealer.betManager.bets.length > 0){
-                    if(!confirm("You have bets on the table, are you sure you want to reset?")){
+                    if(!confirm("You have bets on the table. Are you sure you want to reset?")){
                       return;
                     }
                   }
@@ -747,39 +746,263 @@
           var opt = $(document.createElement('option'));
           opt.attr('value', 'come');
           opt.html('Come Line');
-          var opt2 = $(document.createElement('option'));
-          opt2.attr('value', 'comeOdds');
-          opt2.html('Come Line Odds');
+          //var opt2 = $(document.createElement('option'));
+          //opt2.attr('value', 'comeOdds');
+          //opt2.html('Come Line Odds');
           $('#betRepeat').attr('checked','');
           $('#origBet').empty();
-          if($('#betType').val() == 'comeOdds'){
-            var origBet = $('#origBet');
-            var origLabel = $(document.createElement('label'));
-            var orig = $(document.createElement('input'));
-            orig.attr('type', 'text');
-            orig.css({width: '50px'});
-            orig.attr('id', 'orig');
-            origLabel.html('Original Bet ID: ');
-            origBet.append(origLabel).append(orig);
-            origBet.show()
-            $('#betRepeat').removeAttr('checked');
-            origVal = _CRAPS.dealer.betManager.getBetById(orig.val()).bet.value;
-            if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 10){
-              $('#betValSlide').attr('step', '50');
-              $('#betValSlide').attr('max', origVal * 3);
-              $('#betValSlide').attr('value', $('#betValue').attr('value'));
-            } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 9){
-              $('#betValSlide').attr('step', '50');
-              $('#betValSlide').attr('max', origVal * 4);
-              $('#betValSlide').attr('value', $('#betValue').attr('value'));
-            } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 8){
-              $('#betValSlide').attr('step', '50');
-              $('#betValSlide').attr('max', origVal * 5);
-              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //if($('#betType').val() == 'comeOdds'){
+          //  var origBet = $('#origBet');
+          //  var origLabel = $(document.createElement('label'));
+          //  var orig = $(document.createElement('input'));
+          //  orig.attr('type', 'text');
+          //  orig.css({width: '50px'});
+          //  orig.attr('id', 'orig');
+          //  origLabel.html('Original Bet ID: ');
+          //  origBet.append(origLabel).append(orig);
+          //  origBet.show();
+          //  $('#betRepeat').removeAttr('checked');
+          //  origVal = _CRAPS.dealer.betManager.getBetById(orig.val()).bet.value;
+          //  if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 10){
+          //    $('#betValSlide').attr('step', '50');
+          //    $('#betValSlide').attr('max', origVal * 3);
+          //    $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //  } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 9){
+          //    $('#betValSlide').attr('step', '50');
+          //    $('#betValSlide').attr('max', origVal * 4);
+          //    $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //  } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 8){
+          //    $('#betValSlide').attr('step', '50');
+          //    $('#betValSlide').attr('max', origVal * 5);
+          //    $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //  }
+          //}
+          $('#betType').append(opt);
+          //$('#betName').hide();
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          updateBetDesc();
+          break;
+        case "ComeOdds4":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'come' && _bets[bet].point == 4){
+              exists = bet;
             }
           }
-          $('#betType').append(opt).append(opt2).attr('disabled', false);
-          $('#betName').hide();
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'comeOdds');
+          opt.html('Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 3), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "ComeOdds5":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'come' && _bets[bet].point == 5){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'comeOdds');
+          opt.html('Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 4), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "ComeOdds6":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'come' && _bets[bet].point == 6){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'comeOdds');
+          opt.html('Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 5), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "ComeOdds8":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'come' && _bets[bet].point == 8){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'comeOdds');
+          opt.html('Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 5), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "ComeOdds9":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'come' && _bets[bet].point == 9){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'comeOdds');
+          opt.html('Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 4), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "ComeOdds10":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'come' && _bets[bet].point == 10){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'comeOdds');
+          opt.html('Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 3), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
           updateBetDesc();
           break;
         case "Don't Come":
@@ -787,39 +1010,260 @@
           var opt = $(document.createElement('option'));
           opt.attr('value', 'dontCome');
           opt.html('Don\'t Come Line');
-          var opt2 = $(document.createElement('option'));
-          opt2.attr('value', 'dontComeOdds');
-          opt2.html('Don\'t Come Odds');
           $('#betRepeat').attr('checked'), '';
           $('#origBet').empty();
-          if($('#betType').val() == 'dontComeOdds'){
-            var origBet = $('#origBet');
-            var origLabel = $(document.createElement('label'));
-            var orig = $(document.createElement('input'));
-            orig.attr('type', 'text');
-            orig.css({width: '50px'});
-            orig.attr('id', 'orig');
-            origLabel.html('Original Bet ID: ');
-            origBet.append(origLabel).append(orig);
-            origBet.show()
-            $('#betRepeat').removeAttr('checked');
-            origVal = _CRAPS.dealer.betManager.getBetById(orig.val()).bet.value;
-            if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 10){
-              $('#betValSlide').attr('step', '50');
-              $('#betValSlide').attr('max', origVal * 6);
-              $('#betValSlide').attr('value', $('#betValue').attr('value'));
-            } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 9){
-              $('#betValSlide').attr('step', '30');
-              $('#betValSlide').attr('max', origVal * 8);
-              $('#betValSlide').attr('value', $('#betValue').attr('value'));
-            } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 8){
-              $('#betValSlide').attr('step', '60');
-              $('#betValSlide').attr('max', origVal * 10);
-              $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //if($('#betType').val() == 'dontComeOdds'){
+          //  var origBet = $('#origBet');
+          //  var origLabel = $(document.createElement('label'));
+          //  var orig = $(document.createElement('input'));
+          //  orig.attr('type', 'text');
+          //  orig.css({width: '50px'});
+          //  orig.attr('id', 'orig');
+          //  origLabel.html('Original Bet ID: ');
+          //  origBet.append(origLabel).append(orig);
+          //  origBet.show()
+          //  $('#betRepeat').removeAttr('checked');
+          //  origVal = _CRAPS.dealer.betManager.getBetById(orig.val()).bet.value;
+          //  if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 4 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 10){
+          //    $('#betValSlide').attr('step', '50');
+          //    $('#betValSlide').attr('max', origVal * 6);
+          //    $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //  } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 5 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 9){
+          //    $('#betValSlide').attr('step', '30');
+          //    $('#betValSlide').attr('max', origVal * 8);
+          //    $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //  } else if(_CRAPS.dealer.betManager.getBetById(orig.val()).point == 6 || _CRAPS.dealer.betManager.getBetById(orig.val()).point == 8){
+          //    $('#betValSlide').attr('step', '60');
+          //    $('#betValSlide').attr('max', origVal * 10);
+          //    $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          //  }
+          //}
+          $('#betType').append(opt);
+          //$('#betName').hide();
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          updateBetDesc();
+          break;
+        case "DontComeOdds4":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'dontCome' && _bets[bet].point == 4){
+              exists = bet;
             }
           }
-          $('#betType').append(opt).append(opt2).attr('disabled', false);
-          $('#betName').hide();
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontComeOdds');
+          opt.html('Don\'t Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 6), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "DontComeOdds5":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'dontCome' && _bets[bet].point == 5){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontComeOdds');
+          opt.html('Don\'t Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '30');
+          $('#betValSlide').attr('max', Math.min((origVal * 8), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "DontComeOdds6":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'dontCome' && _bets[bet].point == 6){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontComeOdds');
+          opt.html('Don\'t Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '60');
+          $('#betValSlide').attr('max', Math.min((origVal * 10), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "DontComeOdds8":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'dontCome' && _bets[bet].point == 8){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontComeOdds');
+          opt.html('Don\'t Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '60');
+          $('#betValSlide').attr('max', Math.min((origVal * 10), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "DontComeOdds9":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'dontCome' && _bets[bet].point == 9){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontComeOdds');
+          opt.html('Don\'t Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '30');
+          $('#betValSlide').attr('max', Math.min((origVal * 8), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
+          updateBetDesc();
+          break;
+        case "DontComeOdds10":
+          var _bets = _CRAPS.dealer.betManager.bets
+          var exists = false;
+          var id = false;
+          for(bet in _bets){
+            if(_bets[bet].type == 'dontCome' && _bets[bet].point == 10){
+              exists = bet;
+            }
+          }
+          if(!exists){
+            return false;
+          }
+          $('#betType').empty();
+          $('#origBet').empty();
+          var opt = $(document.createElement('option'));
+          opt.attr('value', 'dontComeOdds');
+          opt.html('Don\'t Come Line Odds');
+          var origBet = $('#origBet');
+          var origLabel = $(document.createElement('label'));
+          var orig = $(document.createElement('input'));
+          orig.attr('type', 'text');
+          orig.css({width: '50px'});
+          orig.attr('id', 'orig');
+          origLabel.html('Original Bet ID: ');
+          origBet.append(origLabel).append(orig);
+          orig.attr('value', _bets[exists].bet.betId);
+          origVal = _CRAPS.dealer.betManager.bets[exists].bet.value;
+          $('#betRepeat').removeAttr('checked');
+          $('#betValSlide').attr('step', '50');
+          $('#betValSlide').attr('max', Math.min((origVal * 6), PlayerManager.players[0].player.bank));
+          $('#betValSlide').attr('value', $('#betValue').attr('value'));
+          $('#betType').append(opt);
+          $('#betType').hide();
+          $('#betName').html(nameToPretty($('#betType').val()));
+          origBet.hide();
           updateBetDesc();
           break;
         case "Place 4":
@@ -1826,28 +2270,28 @@
                 }
               }
             }
-            if(type == 'comeOdds' || type == 'dontComeOdds'){
-              var _type = type.slice(0, -4);
-              var valid = [];
-              var odds = [];
-              var oddsPoints = [];
-              for(i in bets){
-                if(bets[i].type == _type){
-                  valid.push(bets[i]);
-                }
-                if(bets[i].type == type){
-                  odds.push(bets[i]);
-                  oddsPoints.push(bets[i].origBet.point);
-                }
-              }
-              
-              for(i in valid){
-                if(oddsPoints.indexOf(valid[i].point) == -1 && valid[i].point > 0){
-                  orig.attr('value', valid[i].bet.betId);
-                  break;
-                }
-              }
-            }
+            //if(type == 'comeOdds' || type == 'dontComeOdds'){
+            //  var _type = type.slice(0, -4);
+            //  var valid = [];
+            //  var odds = [];
+            //  var oddsPoints = [];
+            //  for(i in bets){
+            //    if(bets[i].type == _type){
+            //      valid.push(bets[i]);
+            //    }
+            //    if(bets[i].type == type){
+            //      odds.push(bets[i]);
+            //      oddsPoints.push(bets[i].origBet.point);
+            //    }
+            //  }
+            //  
+            //  for(i in valid){
+            //    if(oddsPoints.indexOf(valid[i].point) == -1 && valid[i].point > 0){
+            //      orig.attr('value', valid[i].bet.betId);
+            //      break;
+            //    }
+            //  }
+            //}
             origLabel.html('Original Bet ID: ');
             origBet.append(origLabel).append(orig);
             origBet.show();

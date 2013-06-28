@@ -330,9 +330,9 @@ BetManager.prototype = {
     //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Repeat On Win?').attr('src', 'images/restart_small.png')))//.html('Repeat?'))
     //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Point').attr('src', 'images/point_small.png')))//.html('Point'))
     //       .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').append($(document.createElement('img')).attr('title', 'Remove All Bets').attr('src', 'images/edit-clear_small.png')));//.html('Rem All'));
-    headers.append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Id').attr('class', 'icon-qrcode icon-large')))//.html('Id'))
-           //.append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/bet-type.png')))//.html('Type'))
+    //headers.append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Id').attr('class', 'icon-qrcode icon-large')))//.html('Id'))
+    headers.width($('#buffer').width());
+    headers.append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/bet-type.png')))//.html('Type'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.19)).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
@@ -347,9 +347,9 @@ BetManager.prototype = {
       var newBetRow = $(document.createElement('tr'));
       newBetRow.css('backgroundColor', (betNum%2)?'#c0c0c0':'#fff');
       newBetRow.attr('id', 'bet' + this.bets[betNum].bet.betId);
-      //newBetRow.css({float: 'left', left: '0px'});
-      var id = $(document.createElement('td'));
-      id.html(this.bets[betNum].bet.betId);
+      ////newBetRow.css({float: 'left', left: '0px'});
+      //var id = $(document.createElement('td'));
+      //id.html(this.bets[betNum].bet.betId);
       
       var type = $(document.createElement('td'));
       type.html(nameToPretty(this.bets[betNum].type));
@@ -435,7 +435,7 @@ BetManager.prototype = {
       //pTag.append(remove);
       //newBetRow.append(legend);
       betTable.append(newBetRow);
-      newBetRow.append(id);
+      //newBetRow.append(id);
       newBetRow.append(type);
       newBetRow.append(val);
       newBetRow.append(on);

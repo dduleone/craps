@@ -466,17 +466,17 @@ var colors5 = {
                 ctx.strokeStyle = this.board.colors.lines;
                 ctx.lineWidth = 10;
                 ctx.beginPath();
-                ctx.moveTo(500 + offset[n], 100);
+                ctx.moveTo(500 + offset[n], 175);
                 ctx.lineTo(500 + offset[n], 350);
                 ctx.lineTo(600 + offset[n], 350);
-                ctx.lineTo(600 + offset[n], 100);
-                ctx.lineTo(500 + offset[n], 100);
+                ctx.lineTo(600 + offset[n], 175);
+                ctx.lineTo(500 + offset[n], 175);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.moveTo(500 + offset[n], 150);
-                ctx.lineTo(600 + offset[n], 150);
-                ctx.moveTo(500 + offset[n], 175);
-                ctx.lineTo(600 + offset[n], 175);
+                //ctx.moveTo(500 + offset[n], 150);
+                //ctx.lineTo(600 + offset[n], 150);
+                //ctx.moveTo(500 + offset[n], 175);
+                //ctx.lineTo(600 + offset[n], 175);
                 ctx.moveTo(500 + offset[n], 325);
                 ctx.lineTo(600 + offset[n], 325);
                 ctx.stroke();
@@ -521,7 +521,107 @@ var colors5 = {
                 }
             },
             isClickedRegion: function(x, y) {
-                if (x > 500 + offset[n] && x < 600 + offset[n] && y > 100 && y < 350) {
+                if (x > 500 + offset[n] && x < 600 + offset[n] && y > 175 && y < 350) {
+                    return true;
+                }
+            }
+        };
+        return type;
+    }
+ 
+    var DontComeOdds = function(n) {
+        var type = function(board) {
+            this.board = board;
+            return this;
+        };
+        offset = {4: 0, 5: 100, 6: 200, 8: 300, 9: 400, 10: 500};
+        type.prototype = {
+            name: "DontComeOdds" + n,
+            value: n,
+            draw: function() {
+                var ctx = this.board.context;
+                ctx.strokeStyle = this.board.colors.lines;
+                ctx.lineWidth = 10;
+                ctx.beginPath();
+                ctx.lineTo(550 + offset[n], 100);
+                ctx.lineTo(500 + offset[n], 100);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(500 + offset[n], 150);
+                ctx.lineTo(550 + offset[n], 150);
+                ctx.moveTo(500 + offset[n], 175);
+                ctx.lineTo(550 + offset[n], 175);
+                ctx.stroke();
+                ctx.lineWidth = 2;
+                if (!ctx.setLineDash) {
+                    ctx.setLineDash = function () {}
+                }
+                ctx.beginPath();
+                ctx.setLineDash([5]);
+                ctx.moveTo(550 + offset[n], 100);
+                ctx.lineTo(550 + offset[n], 175);
+                ctx.closePath();
+                ctx.stroke();
+                this.drawText();
+                ctx.setLineDash([0]);
+            },
+            drawText: function() {
+                var ctx = this.board.context;
+                ctx.textAlign = "center";
+                ctx.fillStyle = this.board.colors.text;
+                ctx.strokeStyle = this.board.colors.text;
+                ctx.font = "30pt Verdana";
+                ctx.fillText("D", 528 + offset[n], 140);
+            },
+            isClickedRegion: function(x, y) {
+                if (x > 500 + offset[n] && x < 550 + offset[n] && y > 100 && y < 175) {
+                    return true;
+                }
+            }
+        };
+        return type;
+    }
+
+    var ComeOdds = function(n) {
+        var type = function(board) {
+            this.board = board;
+            return this;
+        };
+        offset = {4: 0, 5: 100, 6: 200, 8: 300, 9: 400, 10: 500};
+        type.prototype = {
+            name: "ComeOdds" + n,
+            value: n,
+            draw: function() {
+                var ctx = this.board.context;
+                ctx.strokeStyle = this.board.colors.lines;
+                ctx.lineWidth = 10;
+                ctx.beginPath();
+                ctx.lineTo(600 + offset[n], 100);
+                ctx.lineTo(550 + offset[n], 100);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(550 + offset[n], 150);
+                ctx.lineTo(600 + offset[n], 150);
+                ctx.moveTo(550 + offset[n], 175);
+                ctx.lineTo(600 + offset[n], 175);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(600 + offset[n], 95);
+                ctx.lineTo(600 + offset[n], 175);
+                ctx.stroke();
+                
+                this.drawText();
+            },
+            drawText: function() {
+                var ctx = this.board.context;
+                ctx.textAlign = "center";
+                ctx.fillStyle = this.board.colors.text;
+                ctx.strokeStyle = this.board.colors.text;
+                ctx.font = "30pt Verdana";
+                ctx.fillText("C", 572 + offset[n], 140);
+            },
+            isClickedRegion: function(x, y) {
+                if (x > 550 + offset[n] && x < 600 + offset[n] && y > 100 && y < 175) {
                     return true;
                 }
             }
@@ -1461,6 +1561,18 @@ var colors5 = {
         Place(8),
         Place(9),
         Place(10),
+        ComeOdds(4),
+        ComeOdds(5),
+        ComeOdds(6),
+        ComeOdds(8),
+        ComeOdds(9),
+        ComeOdds(10),
+        DontComeOdds(4),
+        DontComeOdds(5),
+        DontComeOdds(6),
+        DontComeOdds(8),
+        DontComeOdds(9),
+        DontComeOdds(10),
         Big6,
         Big8,
         Seven,
