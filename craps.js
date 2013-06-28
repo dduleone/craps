@@ -337,7 +337,7 @@ BetManager.prototype = {
            .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
            .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.03)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
-           .append($(document.createElement('th')).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css({'color:#f00, cursor:pointer'})));//.html('Rem All'));
+           .append($(document.createElement('th')).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css(color:'#f00', cursor:'pointer'})));//.html('Rem All'));
     heading.append(headers);
     betTable.append(heading);
     betListing.html('<center>Click the Board to Place a Bet!</center>');
@@ -410,7 +410,7 @@ BetManager.prototype = {
       
       var remove = $(document.createElement('td'));
       //remove.append($(document.createElement('img')).attr('src', 'images/red_x_small.png'))//.html('Rem');
-      remove.append($(document.createElement('i')).attr('class', 'icon-remove icon-large').css({'color:#f00, cursor:pointer'}))//.html('Rem');
+      remove.append($(document.createElement('i')).attr('class', 'icon-remove icon-large').css(color:'#f00', cursor:'pointer'}))//.html('Rem');
       //remove.attr({class: 'bttn red'});
       if(GameState.tutorial){
         remove.attr('onclick', 'alert("You cannot take down a Tutorial bet.")');
