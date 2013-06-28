@@ -334,10 +334,10 @@ BetManager.prototype = {
            //.append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/bet-type.png')))//.html('Type'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.19)).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.08)).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.08)).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.08)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.08)).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css({color:'#f00', cursor:'pointer'})));//.html('Rem All'));
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css({color:'#f00', cursor:'pointer'})));//.html('Rem All'));
     heading.append(headers);
     betTable.append(heading);
     betListing.html('<center>Click the Board to Place a Bet!</center>');
