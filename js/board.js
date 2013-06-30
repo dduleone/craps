@@ -1,5 +1,5 @@
 var fireImg = new Image();
-fireImg.src = 'images/fire.png';
+fireImg.src = 'img/fire.png';
 
 var colors;
 
