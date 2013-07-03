@@ -75,6 +75,13 @@ BetManager.prototype = {
         }
       }
     }
+    if(bet.type == 'come' || bet.type == 'dontCome'){
+      for(i in this.bets){
+        if(bet.type == this.bets[i].type && !this.bets[i].point){
+          return [0, function(){alert('You may only place one ' + nameToPretty(bet.type) + ' bet with no point at a time. Bet has not been placed.');}];
+        }
+      }
+    }
     
     if(bet.origBet){
       var _origBet = bet.origBet.bet;
