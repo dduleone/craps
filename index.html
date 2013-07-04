@@ -37,7 +37,7 @@
           <p id='betName'></p>
           <p id='betDesc'></p>
           <label id='betValLabel' for='betValue'>Bet Value</label>
-          <input id='betValue' name='betValue' type='text' onchange='updateSlider(this.value)' /><br />
+          <input id='betValue' name='betValue' type='number' onchange='updateSlider(this.value)' /><br />
           <input id='betValSlide' name='betValue' type='range' min='0' max='10000' step='10' value='10' onchange='betValSlide(this.value)' /><br />
           <label for='repeat'>Repeat Bet on Win?</label>
           <input id='betRepeat' name='betRepeat' type='checkbox' />
@@ -1546,12 +1546,12 @@
       if(localStorage["modalTiming"]){
         MODAL_FADE_INTERVAL = parseInt(localStorage["modalTiming"]);
       } else {
-        MODAL_FADE_INTERVAL = 1000;
+        MODAL_FADE_INTERVAL = 0;
       }
       if(localStorage["betFormTiming"]){
         BET_FORM_FADE_OUT = parseInt(localStorage["betFormTiming"]);
       } else {
-        BET_FORM_FADE_OUT = 1000;
+        BET_FORM_FADE_OUT = 0;
       }
       if(localStorage["diceTiming"]){
         DICE_ROLL = parseInt(localStorage["diceTiming"]);
@@ -2074,7 +2074,7 @@
         
         _betDispVal.empty();
         var input = $(document.createElement('input'));
-        input.attr('type', 'text');
+        input.attr('type', 'number');
         //input.attr('id', 'nameInput');
         input.css({width: $('#val' + idNum).width()});
         input.attr('value', oldVal);
