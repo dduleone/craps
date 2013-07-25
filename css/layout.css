@@ -378,10 +378,10 @@
   .keyText{
     text-align: left;
   }
-  input[type=range]{
+  /*input[type=range]{
     background-color: #000;
     /*
     -webkit-appearance: none;
     -moz-appearance: none;
-    */
-  }
+    
+  }*/
