@@ -823,6 +823,7 @@ function create(){
     if(!_CRAPS.dealer.betManager.getBetById($('#orig').val())){
       alert('You may not place a ' + nameToPretty($('#betType').val()) + ' Bet when there is no ' + nameToPretty($('#betType').val().slice(0,-4)) + ' Bet on the table.');
       cancel();
+      return;
     }
   }
   var newBet = p.createBet($('#betType').val(), parseInt($('#betValue').val()), $('#betRepeat').is(':checked'), origBet);

@@ -15,7 +15,7 @@ var colors0 = {
   pointBorder: "000000",
   pointOff: "000000",
   pointOn: "FFFFFF",
-  buttonText: '000000',
+  buttonText: "000000",
   betFill:  "B30000",
   betBorder: "590000"
 };

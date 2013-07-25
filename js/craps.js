@@ -330,21 +330,18 @@ BetManager.prototype = {
     betTable.attr('id', 'betTable');
     var heading = $(document.createElement('thead'));
     var headers = $(document.createElement('tr'));
-    //headers.append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Id').attr('src', 'images/id-card_green_small.png')))//.html('Id'))
-    //       .append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'images/shapes_small.png')))//.html('Type'))
-    //       .append($(document.createElement('th')).width($('#buffer').width()*(0.19)).append($(document.createElement('img')).attr('title', 'Bet Amount').attr('src', 'images/chips_small.png')))//.html('Value'))
-    //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet On?').attr('src', 'images/power_button_black_small.png')))//.html('On?'))
-    //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Repeat On Win?').attr('src', 'images/restart_small.png')))//.html('Repeat?'))
-    //       .append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Point').attr('src', 'images/point_small.png')))//.html('Point'))
-    //       .append($(document.createElement('th')).attr({class: 'bttn red'}).attr('onclick', 'reset()').append($(document.createElement('img')).attr('title', 'Remove All Bets').attr('src', 'images/edit-clear_small.png')));//.html('Rem All'));
-    //headers.append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Id').attr('class', 'icon-qrcode icon-large')))//.html('Id'))
     headers.width($('#buffer').width());
     headers.append($(document.createElement('th')).width($('#buffer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'img/bet-type.png')))//.html('Type'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.19)).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
            .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
-           .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css({color:'#f00', cursor:'pointer'})));//.html('Rem All'));
+           .append($(document.createElement('th')).width($('#buffer').width()*(0.05)).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css({color:'#f00', cursor:'pointer'})));//.html('Clear'));
+           //.append($(document.createElement('th')).width($('#buffer').width()*(0.19)).html('Value'))
+           //.append($(document.createElement('th')).width($('#buffer').width()*(0.05)).html('On?'))
+           //.append($(document.createElement('th')).width($('#buffer').width()*(0.05)).html('Repeat?'))
+           //.append($(document.createElement('th')).width($('#buffer').width()*(0.05)).html('Point'))
+           //.append($(document.createElement('th')).width($('#buffer').width()*(0.05)).attr('onclick', 'reset()').html('Clear'));
     heading.append(headers);
     betTable.append(heading);
     betListing.html('<center>Click the Board to Place a Bet!</center>');
@@ -418,6 +415,7 @@ BetManager.prototype = {
       var remove = $(document.createElement('td'));
       //remove.append($(document.createElement('img')).attr('src', 'images/red_x_small.png'))//.html('Rem');
       remove.append($(document.createElement('i')).attr('class', 'icon-remove icon-large').css({color:'#f00', cursor:'pointer'}))//.html('Rem');
+      //remove.html('Rem');
       //remove.attr({class: 'bttn red'});
       if(GameState.tutorial){
         remove.attr('onclick', 'alert("You cannot take down a Tutorial bet.")');
@@ -450,6 +448,44 @@ BetManager.prototype = {
       newBetRow.append(point);
       newBetRow.append(remove);
     }
+    //var numBets = this.bets.length;
+    //while(numBets < 6){
+    //  var newBetRow = $(document.createElement('tr'));
+    //  //newBetRow.css('backgroundColor', (numBets%2)?'#c0c0c0':'#fff');
+    //  newBetRow.css('backgroundColor', '#fff');
+    //  var betElement1 = $(document.createElement('td'));
+    //  var betElement2 = $(document.createElement('td'));
+    //  var betElement3 = $(document.createElement('td'));
+    //  var betElement4 = $(document.createElement('td'));
+    //  var betElement5 = $(document.createElement('td'));
+    //  var betElement6 = $(document.createElement('td'));
+    //  //betElement1.css('color', (numBets%2)?'#c0c0c0':'#fff');
+    //  //betElement2.css('color', (numBets%2)?'#c0c0c0':'#fff');
+    //  //betElement3.css('color', (numBets%2)?'#c0c0c0':'#fff');
+    //  //betElement4.css('color', (numBets%2)?'#c0c0c0':'#fff');
+    //  //betElement5.css('color', (numBets%2)?'#c0c0c0':'#fff');
+    //  //betElement6.css('color', (numBets%2)?'#c0c0c0':'#fff');
+    //  //betElement1.css('color', '#fff');
+    //  //betElement2.css('color', '#fff');
+    //  //betElement3.css('color', '#fff');
+    //  //betElement4.css('color', '#fff');
+    //  //betElement5.css('color', '#fff');
+    //  //betElement6.css('color', '#fff');
+    //  betElement1.html("test");
+    //  betElement2.html("test");
+    //  betElement3.html("test");
+    //  betElement4.html("test");
+    //  betElement5.html("test");
+    //  betElement6.html("test");
+    //  betTable.append(newBetRow);
+    //  newBetRow.append(betElement1)
+    //           .append(betElement2)
+    //           .append(betElement3)
+    //           .append(betElement4)
+    //           .append(betElement5)
+    //           .append(betElement6);
+    //  numBets++;
+    //}
   },
   animateBets: function(){
     for(x in this.winningBetIds){

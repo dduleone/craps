@@ -328,9 +328,16 @@
           if(colors){
             var pips = colors['dicePips'];
           }
-          colors = $.extend({}, eval("colors" + $('#colorScheme').val()));
+          
+          colors = $.extend({}, getColors($('#colorScheme').val()));
           if(pips){
             colors['dicePips'] = pips;
+          }
+          
+          for(i in colors){
+            if(colors[i].slice(0,1) != "#"){
+              colors[i] = '#' + colors[i];
+            }
           }
           
           board = new Board(canvas, colors);
@@ -386,12 +393,38 @@
               }
           };
       }
+      
+      var getColors = function (val){
+        switch(val){
+        case '0':
+          return colors0;
+          break;
+        case '1':
+          return colors1;
+          break;
+        case '2':
+          return colors2;
+          break;
+        case '3':
+          return colors3;
+          break;
+        case '4':
+          return colors4;
+          break;
+        case '5':
+          return colors5;
+          break;
+        default:
+          return 'you fail';
+        }
+      }
       var savePoint;
       var saveBets;
       var saveFireArray;
       var saveDice;
       var drawer = setInterval(function(){draw(Board);}, 200);
-            
+      //draw(Board);
+        
       var name;
       var bank;
       var initBank;
