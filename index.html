@@ -35,6 +35,7 @@
         <p>
           <label for='betType'>Bet Type</label>
           <select id='betType' name='betType'></select><br />
+          <p>Available Bank: <span id='avail2'></span></p>
           <p id='betName'></p>
           <p id='betDesc'></p>
           <label id='betValLabel' for='betValue'>Bet Value</label>
@@ -50,14 +51,30 @@
         </p>
       </fieldset>
     </div>
-    <div id='betListing'></div>
-    <div id='playerArea'>
-      <div id='name' class='name clickable' onclick='updatePlayerName()' align='center'></div>
-      <div id='bank'></div>
-      <!--div id='roll' unselectable='on' class='bttn red' onclick='roll()'>Roll</div -->
-      <!--div id='reset' unselectable='on' class='bttn red' onclick='reset()'>Reset Bets</div -->
+    <div id='betListBG' class='round'>
+      <div id='betListLayer'>
+        <div id='playerArea'>
+          <div id='bank'>
+            <table>
+              <tr>
+                <th>Available Bank:</th>
+                <th>Money In Play:</th>
+                <th>Total Worth:</th>
+              </tr>
+              <tr>
+                <td><span id='availBank'></span></td>
+                <td><span id='inPlay'></span></td>
+                <td><span id='totBank'></span></td>
+              </tr>
+            </table>
+          </div>
+          <!-- div id='name' class='name clickable' onclick='updatePlayerName()' align='center'></div -->
+        </div>
+        <div id='betListing'></div>
+      </div>
+      <div id='closeBets' class='bttn red' onclick='closeBets()'>Close</div>
     </div>
-    <div id='buffer'></div>
+    <!-- div id='buffer'></div -->
     <div id='generalButtons'>
       <div id='openButtons'>
         <div id='openGameplay' class='bttn blue' onclick='clickModalButton("gameplay")'>Game Play</div>
@@ -65,6 +82,7 @@
         <div id='openSettings' class='bttn blue' onclick='clickModalButton("settings")'>Settings</div>
         <div id='openTutorial' class='bttn blue' onclick='clickModalButton("tutorial")'>Tutorial</div>
         <div id='openAbout' class='bttn blue' onclick='clickModalButton("about")'>About</div>
+        <div id='openBets' class='bttn blue' onclick='openBets()'>Open Bets</div>
       </div>
       <div id='closeTutorial' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
       <fb:like href="http://duleone.com/craps" send="false" width="450" show_faces="true"></fb:like>
@@ -576,35 +594,38 @@
         nameDiv.css({top: '05px'});
         nameDiv.removeClass('clickable');
         $('#bank').css({top: 0});
-        $('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
-        $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-        $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
+        //$('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
+        //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+        //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
         input.attr('value', player.player.name);
         nameDiv.css('left', 0);
         input.focus(function(){
           input.select();
-          $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
-          $('#playerArea').height($('#bank').height() + 4);
-          $('#buffer').css('top', $('#playerArea').height());
-          $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
+          //$('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
+          //$('#playerArea').height($('#bank').height() + 4);
+          //$('#buffer').css('top', $('#playerArea').height());
+          //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+          //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
+          $('#betListing').css('top', ($('#bank').height() + 2));
         });
         input.change(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
           $('#name').attr('class', 'clickable');
-          $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
+          //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+          //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
+          $('#betListing').css('top', ($('#bank').height() + 2));
         });
         input.blur(function(){
           player.changeName(input.val());
           PlayerManager.updatePlayerArea();
           $('#name').attr('class', 'clickable');
-          $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          $('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
+          //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+          //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
+          $('#betListing').css('top', ($('#bank').height() + 2));
         });
         nameDiv.append(input);
         input.focus();
@@ -637,21 +658,23 @@
         if (isMobile.any()){
           $('#name').removeClass('clickable');
         }
+        $('#buffer').hide();
+        $('#betListBG').hide();
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
-        $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
-        $('#playerArea').height($('#bank').height() + 4);
-        $('#buffer').css('top', $('#playerArea').height());
-        $('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
+        //$('#playerArea').height($('#bank').height() + 4);
+        //$('#buffer').css('top', $('#playerArea').height());
+        //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
         //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
-        $('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
+        //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
         $('#settingsName').val(PlayerManager.players[0].player.name);
         $('#settingsName').change(function(){
           PlayerManager.players[0].player.changeName($('#settingsName').val());
           PlayerManager.updatePlayerArea();
         });
         _CRAPS.dealer.betManager.displayBets();
+        //$('#closeBets').css('bottom', ($('#betListLayer').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
       })();
       
       $(window).resize(function(){PlayerManager.updatePlayerArea();});

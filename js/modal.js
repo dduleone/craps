@@ -53,6 +53,18 @@ function closeModal(){
   //setTimeout(function(){$('#buffer').show();$('#betListing').show()},1000);
 }
 
+function closeBets(){
+  $('#betListBG').hide();
+  $('#openButtons').show();
+}
+
+function openBets(){
+  $('#betListBG').show();
+  $('#openButtons').hide();
+  _CRAPS.dealer.betManager.displayBets();
+  PlayerManager.updatePlayerArea();
+}
+
 function openGlossary(term){
   switch(term){
   case "button":

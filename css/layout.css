@@ -42,8 +42,8 @@
   }
   #generalButtons{
     position: absolute;
-    top: 71%;
-    left: 31%;
+    top: 90%;
+    left: 0%;
     float: left;
   }
   #tutorial{
@@ -106,9 +106,9 @@
   #board{
     position: absolute;
     top: 0px;
-    left: 30.5%;
-    height: 69.5%;
-    width: 69.5%;
+    left: 0px;
+    height: 90%%;
+    width: 100%;
     margin: 0px;
     padding: 0px;
   }
@@ -134,12 +134,31 @@
     color: #FFF;
     border: none;
   }
-  #betListing{
+  #betListBG{
     position: absolute;
+    height: 90%;
+    background: #444;
+    margin: 0px;
+    padding: 10px;
+  }
+  #betListLayer{
+    position: relative;
+    background: #222;
+    color: #FFF;
+  }
+  #closeBets{
+    position: relative;
+  }
+  #playerArea{
+    position: relative;
+    width: 100%;
+  }
+  #betListing{
+    position: relative;
     left: 1px;
-    width: 30%;
+    width: 100%;
     overflow: auto;
-    margin-left: 5px;
+    margin-left: 0px;
     padding: 0px;
     float: left;
   }
@@ -157,7 +176,7 @@
   }
   #cancel{
     float: right;
-  }
+  }/*
   #playerArea{
     position: absolute;
     height: 18%;
@@ -176,7 +195,7 @@
     left: 0.25%;
     /*height: 30%;
     /*margin: 0px;
-    padding: 0px;*/
+    padding: 0px;
   }
   #nameInput{
     position: relative;
@@ -184,7 +203,7 @@
     top: -10px;
     font-family: 'Verdana';
     font-size: 30pt;
-  }
+  }/*
   #bank{
     position: relative;
     text-align: center;
@@ -209,7 +228,7 @@
     left: 0%;
     width: 33%;
     float: left;
-  }
+  }*/
   .winning{
     color: white;
     background-color: green;
@@ -277,7 +296,7 @@
   }
   #modal{
     position: absolute;
-    background: #444 repeat-y;
+    background: #444;
     color: #FFF;
     top: 15%;
     left: 0%;
