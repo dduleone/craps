@@ -32,19 +32,19 @@
     <div id='betForm' class='round modal'>
       <fieldset id='betInfo' class='round'>
         <legend>Create a Bet!</legend>
-        <p>
-          <label for='betType'>Bet Type</label>
+        <!-- p>
+          <!-- label for='betType'>Bet Type</label -->
           <select id='betType' name='betType'></select><br />
-          <p>Available Bank: <span id='avail2'></span></p>
-          <p id='betName'></p>
-          <p id='betDesc'></p>
+          <div>Available Bank: <span id='avail2'></span></div>
+          <div id='betName'></div>
+          <div id='betDesc'></div>
           <label id='betValLabel' for='betValue'>Bet Value</label>
           <input id='betValue' name='betValue' type='number' onchange='updateSlider(this.value)' /><br />
           <input id='betValSlide' name='betValue' type='range' min='0' max='10000' step='10' value='10' onchange='betValSlide(this.value)' /><br />
           <label for='repeat'>Repeat Bet on Win?</label>
           <input id='betRepeat' name='betRepeat' type='checkbox' />
-        </p>
-        <p id='origBet'></p>
+        <!-- /p>
+        <p id='origBet'></p -->
         <p>
           <div id='create' unselectable='on' class='bttn blue' onclick='create()'>Create Bet!</div>
           <div id='cancel' unselectable='on' class='bttn red' onclick='cancel()'>Close</div>
