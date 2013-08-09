@@ -91,8 +91,9 @@ $.extend(PlayerManager, {
     $('#betListing').css('top', ($('#bank').height()));
     $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
-    //$('#closeBets').css('bottom', ($('#betListLayer').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
-    $('#betListLayer').height($('#betListBG').height() - 35);
+    //$('#closeBets').css('bottom', ($('#betListWindow').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
+    $('#betListWindow').height($('#betListBG').height() - 35);
+    $('#betResultsWindow').height($('#betResultsBG').height() - 35);
     
     localStorage.clear();
     localStorage['name'] = PlayerManager.players[0].player.name;

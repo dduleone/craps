@@ -47,6 +47,8 @@ function closeModal(){
   $('#openButtons').show();
   PlayerManager.updatePlayerArea();
   _CRAPS.dealer.betManager.displayBets();
+  closeBets();
+  closeBetResults();
   //_CRAPS.dealer.betManager.displayBets();
   //$('#buffer').hide();
   //$('#betListing').hide();
@@ -55,14 +57,28 @@ function closeModal(){
 
 function closeBets(){
   $('#betListBG').hide();
+  $('#modalScreen').hide();
   $('#openButtons').show();
 }
 
 function openBets(){
   $('#betListBG').show();
   $('#openButtons').hide();
+  $('#modalScreen').show();
   _CRAPS.dealer.betManager.displayBets();
   PlayerManager.updatePlayerArea();
+}
+
+function closeBetResults(){
+  $('#betResultsBG').hide();
+  $('#modalScreen').hide();
+  $('#openButtons').show();
+}
+
+function openBetResults(){
+  $('#betResultsBG').show();
+  $('#modalScreen').show();
+  $('#openButtons').hide();
 }
 
 function openGlossary(term){

@@ -40,6 +40,15 @@
     font-family: serif;
     font-style: italic;
   }
+  .modal{
+    z-index: 1;
+  }
+  .modalScreen{
+    z-index: 0;
+  }
+  .modalTop{
+    z-index: 2;
+  }
   #generalButtons{
     position: absolute;
     top: 90%;
@@ -91,6 +100,7 @@
     vertical-align: baseline;
   }
   #buffer{
+    display: none;
     position: absolute;
     left: 1px;
     width: 30%;
@@ -111,6 +121,7 @@
     width: 100%;
     margin: 0px;
     padding: 0px;
+    z-index:-1;
   }
   #betForm{
     /* background: http://www.photos-public-domain.com/wp-content/uploads/2012/02/green-faux-leather-texture.jpg */
@@ -136,18 +147,50 @@
   }
   #betListBG{
     position: absolute;
+    display: none;
     height: 90%;
     background: #444;
     margin: 0px;
     padding: 10px;
   }
-  #betListLayer{
+  #betListWindow{
     position: relative;
     background: #222;
     color: #FFF;
   }
   #closeBets{
     position: relative;
+  }
+  #betResultsBG{
+    position: absolute;
+    display: none;
+    height: 50%;
+    width: 50%;
+    top: 25%;
+    left: 25%;
+    background: #444;
+    margin: 0px;
+    padding: 10px;
+  }
+  #betResultsWindow{
+    position: relative;
+    background: #222;
+    color: #FFF;
+  }
+  #closeBetResults{
+    position: relative;
+  }
+  #winningBets{
+    position: relative;
+    width: 50%;
+    float: left;
+    background: green;
+  }
+  #losingBets{
+    position: relative;
+    width: 50%;
+    float: right;
+    background: red;
   }
   #playerArea{
     position: relative;

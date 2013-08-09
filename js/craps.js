@@ -7,13 +7,16 @@ function onWin(bet, amount){
   var _player = PlayerManager.getPlayerById(_bet.playerId).player;
   
   _CRAPS.dealer.betManager.winningBetIds.push(_bet.betId);
+  _CRAPS.dealer.betManager.winningBets.push([bet, amount]);
   _CRAPS.output(nameToPretty(bet.type) + " bet wins! Pays out $" + amount);
   _player.addToBank(amount);
+  
 }
 
 function onLose(bet){
   var _bet = bet.bet;
     _CRAPS.dealer.betManager.losingBetIds.push(_bet.betId);
+    _CRAPS.dealer.betManager.losingBets.push(bet);
 }
 
 $('window').bind(onWin);
@@ -29,15 +32,15 @@ BetManager.prototype = {
   bets: [],
   winningBetIds: [],
   losingBetIds: [],
+  winningBets: [],
+  losingBets: [],
   placeBet: function(bet) {
     this.bets.push(bet);
     this.displayBets();
   },
   checkBets: function(dice){
     this.bets = BetChecker(GameState.point, this.bets, _CRAPS.dice);
-    if(this.winningBetIds.length > 0 || this.losingBetIds.length > 0){
-      this.animateBets();
-    }
+    this.animateBets();
   },
   removeBet: function(betId){
     var _bets = this.bets
@@ -332,12 +335,12 @@ BetManager.prototype = {
     var heading = $(document.createElement('thead'));
     var headers = $(document.createElement('tr'));
     headers.width($('#buffer').width());
-    headers.append($(document.createElement('th')).width($('#betListLayer').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'img/bet-type.png')))//.html('Type'))
-           .append($(document.createElement('th')).width($('#betListLayer').width()*(0.25)).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
-           .append($(document.createElement('th')).width($('#betListLayer').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
-           .append($(document.createElement('th')).width($('#betListLayer').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
-           .append($(document.createElement('th')).width($('#betListLayer').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
-           .append($(document.createElement('th')).width($('#betListLayer').width()*(0.10)).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css({color:'#f00', cursor:'pointer'})));//.html('Clear'));
+    headers.append($(document.createElement('th')).width($('#betListWindow').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'img/bet-type.png')))//.html('Type'))
+           .append($(document.createElement('th')).width($('#betListWindow').width()*(0.25)).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
+           .append($(document.createElement('th')).width($('#betListWindow').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
+           .append($(document.createElement('th')).width($('#betListWindow').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
+           .append($(document.createElement('th')).width($('#betListWindow').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
+           .append($(document.createElement('th')).width($('#betListWindow').width()*(0.10)).attr('onclick', 'reset()').append($(document.createElement('i')).attr('title', 'Remove All Bets').attr('class', 'icon-eraser icon-large').css({color:'#f00', cursor:'pointer'})));//.html('Clear'));
     heading.append(headers);
     betTable.append(heading);
     //betListing.html('<center>Click the Board to Place a Bet!</center>');
@@ -444,7 +447,7 @@ BetManager.prototype = {
       newBetRow.append(point);
       newBetRow.append(remove);
       
-      //$('#closeBets').css('bottom', ($('#betListLayer').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
+      //$('#closeBets').css('bottom', ($('#betListWindow').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
     }
     //var numBets = this.bets.length;
     //while(numBets < 6){
@@ -502,6 +505,97 @@ BetManager.prototype = {
             }, BET_FADE_INTERVAL);
     this.winningBetIds = [];
     this.losingBetIds = [];
+    
+    if(this.winningBets.length < 1){
+      $('#winningBets').empty();
+      $('#winningBets').html("None of your bets won! Try again!")
+    }else{
+      $('#winningBets').empty();
+      $('#winningBets').html("Your winning bets are: <br />")
+      var winningTable = $(document.createElement('table'));
+      var heading = $(document.createElement('thead'));
+      var headers = $(document.createElement('tr'));
+      headers.width($('#buffer').width());
+      headers.append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'img/bet-type.png')))//.html('Type'))
+             .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
+             .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
+             .append($(document.createElement('th')).html('Winnings'));
+      heading.append(headers);
+      winningTable.append(heading);
+      for(var betNum in this.winningBets){
+        var newBetRow = $(document.createElement('tr'));
+        
+        var type = $(document.createElement('td'));
+        type.html(nameToPretty(this.winningBets[betNum][0].type));
+        
+        var val = $(document.createElement('td'));
+        val.html('$' + this.winningBets[betNum][0].bet.value);
+        
+        var point = $(document.createElement('td'));
+        if(['come', 'dontCome'].indexOf(this.winningBets[betNum][0].type) != -1){
+          point.html(this.winningBets[betNum][0].point);
+        } else if(['comeOdds', 'dontComeOdds'].indexOf(this.winningBets[betNum][0].type) != -1){
+          point.html(this.winningBets[betNum][0].origBet.point);
+        } else {
+          point.html('');
+        }
+        
+        var winnings = $(document.createElement('td'));
+        winnings.html('$' + this.winningBets[betNum][1]);
+        winningTable.append(newBetRow);
+        newBetRow.append(type);
+        newBetRow.append(val);
+        newBetRow.append(point);
+        newBetRow.append(winnings);
+      }
+      $('#winningBets').append(winningTable);
+    }
+    if(this.losingBets.length < 1){
+      $('#losingBets').empty();
+      $('#losingBets').html("Great Job! None of your bets lost!")
+    }else{
+      $('#losingBets').empty();
+      $('#losingBets').html("Your losing bets are: <br />")
+      var losingTable = $(document.createElement('table'));
+      var heading = $(document.createElement('thead'));
+      var headers = $(document.createElement('tr'));
+      headers.width($('#buffer').width());
+      headers.append($(document.createElement('th')).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'img/bet-type.png')))
+             .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))
+             .append($(document.createElement('th')).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')));
+      heading.append(headers);
+      losingTable.append(heading);
+      for(var betNum in this.losingBets){
+        var newBetRow = $(document.createElement('tr'));
+        
+        var type = $(document.createElement('td'));
+        type.html(nameToPretty(this.losingBets[betNum].type));
+        
+        var val = $(document.createElement('td'));
+        val.html('$' + this.losingBets[betNum].bet.value);
+        
+        var point = $(document.createElement('td'));
+        if(['come', 'dontCome'].indexOf(this.losingBets[betNum].type) != -1){
+          point.html(this.losingBets[betNum].point);
+        } else if(['comeOdds', 'dontComeOdds'].indexOf(this.losingBets[betNum].type) != -1){
+          point.html(this.losingBets[betNum].origBet.point);
+        } else {
+          point.html('');
+        }
+        
+        losingTable.append(newBetRow);
+        newBetRow.append(type);
+        newBetRow.append(val);
+        newBetRow.append(point);
+      }
+      $('#losingBets').append(losingTable);
+    }
+    
+    if(this.winningBets.length > 0 || this.losingBets.length > 0){
+      openBetResults();
+    }
+    this.winningBets = [];
+    this.losingBets = [];
   },
   getBetById: function(betId){
     for(x in this.bets){
