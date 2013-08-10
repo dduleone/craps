@@ -88,7 +88,7 @@ $.extend(PlayerManager, {
     //$('#buffer').css({top: $('#playerArea').height(), left: $('#board').width()/(0.7)*(0.0025)});
     //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
     //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-    $('#betListing').css('top', ($('#bank').height()));
+    //$('#betListing').css('top', ($('#bank').height()));
     $('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
     //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
     //$('#closeBets').css('bottom', ($('#betListWindow').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
