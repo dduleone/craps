@@ -613,25 +613,17 @@
       //end snippet
       
       (function() {
-        //if (isMobile.any()){
-        //  $('#name').removeClass('clickable');
-        //}
         $('#betResultsWindow').height($('#betResultsBG').height() - 35);
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
-        //$('#playerArea').height($('#bank').height() + 4);
-        //$('#buffer').css('top', $('#playerArea').height());
-        //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-        //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height());
-        //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
         $('#settingsName').val(PlayerManager.players[0].player.name);
         $('#settingsName').change(function(){
           PlayerManager.players[0].player.changeName($('#settingsName').val());
           PlayerManager.updatePlayerArea();
         });
+        PlayerManager.updatePlayerArea();
         _CRAPS.dealer.betManager.displayBets();
-        //$('#closeBets').css('bottom', ($('#betListWindow').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
       })();
       
       $(window).resize(function(){PlayerManager.updatePlayerArea();});

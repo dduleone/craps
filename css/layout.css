@@ -158,6 +158,7 @@
     background: #222;
     color: #FFF;
     overflow: auto;
+    overflow-x: hidden;
   }
   #closeBets{
     position: relative;
@@ -300,9 +301,9 @@
     top: 0px;
     height: 100%;
     width: 100%;
-    background-color: #000;
     display: none;
     opacity: 0;
+    z-index: 3;
   }
   #glossary{
     position: absolute;
@@ -336,8 +337,7 @@
     height: 100%;
     width: 100%;
     display: none;
-    background-color: #000;
-    opacity: 0.5;
+    opacity: 0.75;
   }
   #modal{
     position: absolute;
