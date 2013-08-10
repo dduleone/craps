@@ -1,6 +1,10 @@
 var fireImg = new Image();
 fireImg.src = 'img/fire.png';
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 var colors;
 
 var colors0 = {
@@ -560,8 +564,8 @@ var colors5 = {
                 ctx.setLineDash([5]);
                 ctx.moveTo(550 + offset[n], 100);
                 ctx.lineTo(550 + offset[n], 175);
-                ctx.closePath();
                 ctx.stroke();
+                ctx.closePath();
                 this.drawText();
                 ctx.setLineDash([0]);
             },
@@ -1639,6 +1643,10 @@ var colors5 = {
             ctx.fillText('3x-4x-5x Odds', 1200, 100); 
             ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
             ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
+            ctx.closePath();
+            ctx.font = '40pt Verdana';
+            ctx.fillStyle = this.colors.finalText;
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 100, 70);
             this.drawPoint(ctx, GameState.point);
             this.drawFire(ctx, GameState.fireArray);
         },

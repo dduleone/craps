@@ -589,58 +589,6 @@
         }
       }
       
-      function updatePlayerName(){
-        if (isMobile.any()){
-          $('#name').removeClass('clickable');
-          return;
-        }
-        var player = PlayerManager.players[0];
-        var nameDiv = $('#name');
-        nameDiv.empty();
-        var input = $(document.createElement('input'));
-        input.attr('type', 'text');
-        input.attr('id', 'nameInput');
-        input.css({width: '50%'});
-        nameDiv.css({top: '05px'});
-        nameDiv.removeClass('clickable');
-        $('#bank').css({top: 0});
-        //$('#buffer').css({top: ($('#bank').offset().top + $('#bank').height())});
-        //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-        //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
-        input.attr('value', player.player.name);
-        nameDiv.css('left', 0);
-        input.focus(function(){
-          input.select();
-          //$('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
-          //$('#playerArea').height($('#bank').height() + 4);
-          //$('#buffer').css('top', $('#playerArea').height());
-          //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
-          $('#betListing').css('top', ($('#bank').height() + 2));
-        });
-        input.change(function(){
-          player.changeName(input.val());
-          PlayerManager.updatePlayerArea();
-          $('#name').attr('class', 'clickable');
-          //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
-          $('#betListing').css('top', ($('#bank').height() + 2));
-        });
-        input.blur(function(){
-          player.changeName(input.val());
-          PlayerManager.updatePlayerArea();
-          $('#name').attr('class', 'clickable');
-          //$('#buffer').height(($('#board').height() - $('#playerArea').height())/2);
-          //$('#betListing').css('top', ($('#buffer').offset().top + $('#buffer').height() + 2));
-          //$('#betListing').height($('#board').height() - $('#playerArea').height() - $('#buffer').height() + $(board).height()*(3/7));
-          $('#betListing').css('top', ($('#bank').height() + 2));
-        });
-        nameDiv.append(input);
-        input.focus();
-      }
-      
       //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
       var isMobile = {
         Android: function() {
@@ -665,9 +613,9 @@
       //end snippet
       
       (function() {
-        if (isMobile.any()){
-          $('#name').removeClass('clickable');
-        }
+        //if (isMobile.any()){
+        //  $('#name').removeClass('clickable');
+        //}
         $('#betResultsWindow').height($('#betResultsBG').height() - 35);
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
