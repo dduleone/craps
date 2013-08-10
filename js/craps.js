@@ -362,6 +362,13 @@ BetManager.prototype = {
       val.html('$' + this.bets[betNum].bet.value);
       val.attr('onclick', 'updateBet(' + this.bets[betNum].bet.betId + ')');
       val.attr('class', 'clickable');
+      if(((this.bets[betNum].type == 'passline' ||
+           this.bets[betNum].type == 'dontPassline') && GameState.point) ||
+         ((this.bets[betNum].type == 'come' ||
+           this.bets[betNum].type == 'dontCome') && this.bets[betNum].point)){
+            val.removeClass('clickable');
+            val.removeAttr('onclick');
+           }
       
       var betOn = $(document.createElement('input'));
       //betOnLabel.html('<br />Bet On: ');
