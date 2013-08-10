@@ -636,8 +636,7 @@
       (function() {
         if (isMobile.any()){
           //$('#name').removeClass('clickable');
-          window.location = 'http://m.duleone.com/craps/#!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36);
-          window.location.reload();
+          window.location.assign('http://m.duleone.com/craps/#!/' + encodeURIComponent(PlayerManager.players[0].player.name) + '/' + (PlayerManager.players[0].player.bank).toString(36));
         }
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
