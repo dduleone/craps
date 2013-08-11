@@ -642,6 +642,14 @@
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
+        $('#modal').show();
+        $('#modal').width($('#gameplayButton').width() + 
+                          $('#rulesButton').width() + 
+                          $('#settingsButton').width() + 
+                          $('#tutorialButton').width() + 
+                          $('#aboutButton').width() + 
+                          115);
+        $('#modal').hide();
         $('#settingsName').val(PlayerManager.players[0].player.name);
         $('#settingsName').change(function(){
           PlayerManager.players[0].player.changeName($('#settingsName').val());

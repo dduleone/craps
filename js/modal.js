@@ -8,7 +8,8 @@ function openModal(){
   }
   var mod = $('#modal');
   mod.show();
-  mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+  //mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+  mod.animate({left: ($('#board').offset().left + $('#board').width() - mod.width() - 20), opacity: 1}, MODAL_FADE_INTERVAL);
   //resizeModal();
   if($('#colorScheme').val() == 5){
     $('#customColors').show();
@@ -43,7 +44,8 @@ function closeModal(){
   saveSettings();
   $('#colorScheme').val(localStorage['colors']);
   colors = eval("colors" + localStorage['colors']);
-  $('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
+  //$('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
+  $('#modal').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modal').hide();});
   $('#openButtons').show();
   PlayerManager.updatePlayerArea();
   _CRAPS.dealer.betManager.displayBets();
@@ -157,65 +159,65 @@ function clickRulesButton(button){
   }
 }
 
-function resizeModal(){
-  $('#gameplay').height('auto');
-  $('#rules').height('auto');
-  $('#standard').height('auto');
-  $('#multi').height('auto');
-  $('#single').height('auto');
-  $('#fire').height('auto');
-  $('#settings').height('auto');
-  $('#modal').height('auto');
-  if($('#modal').height() > $(window).height() * 0.8){
-    $('#modal').height($(window).height() * 0.7);
-    $('#gameplay').height($('#modal').height() * 0.7);
-    $('#rules').height($('#modal').height() * 0.7);
-    $('#rules').height($('#modal').height() * 0.7);
-    $('#standard').height($('#rules').height() * 0.7);
-    $('#multi').height($('#rules').height() * 0.7);
-    $('#single').height($('#rules').height() * 0.7);
-    $('#fire').height($('#rules').height() * 0.7);
-    $('#settings').height($('#modal').height() * 0.7);
-  } else {
-    $('#gameplay').height('auto');
-    $('#rules').height('auto');
-    $('#standard').height('auto');
-    $('#multi').height('auto');
-    $('#single').height('auto');
-    $('#fire').height('auto');
-    $('#settings').height('auto');
-    $('#modal').height('auto');
-  }
-  $('#gameplay').width('auto');
-  $('#rules').width('auto');
-  $('#standard').width('auto');
-  $('#multi').width('auto');
-  $('#single').width('auto');
-  $('#fire').width('auto');
-  $('#settings').width('auto');
-  $('#modal').width('auto');
-  if($('#modal').width() > $(window).width() * 0.8){
-    $('#modal').width($(window).width() * 0.7);
-    $('#gameplay').width('auto');
-    $('#rules').width('auto');
-    $('#standard').width('auto');
-    $('#multi').width('auto');
-    $('#single').width('auto');
-    $('#fire').width('auto');
-    $('#settings').width('auto');
-  } else {
-    $('#gameplay').width('auto');
-    $('#rules').width('auto');
-    $('#standard').width('auto');
-    $('#multi').width('auto');
-    $('#single').width('auto');
-    $('#fire').width('auto');
-    $('#settings').width('auto');
-    $('#modal').width('auto');
-  }
-  $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
-  $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
-}
+//function resizeModal(){
+//  $('#gameplay').height('auto');
+//  $('#rules').height('auto');
+//  $('#standard').height('auto');
+//  $('#multi').height('auto');
+//  $('#single').height('auto');
+//  $('#fire').height('auto');
+//  $('#settings').height('auto');
+//  $('#modal').height('auto');
+//  if($('#modal').height() > $(window).height() * 0.8){
+//    $('#modal').height($(window).height() * 0.7);
+//    $('#gameplay').height($('#modal').height() * 0.7);
+//    $('#rules').height($('#modal').height() * 0.7);
+//    $('#rules').height($('#modal').height() * 0.7);
+//    $('#standard').height($('#rules').height() * 0.7);
+//    $('#multi').height($('#rules').height() * 0.7);
+//    $('#single').height($('#rules').height() * 0.7);
+//    $('#fire').height($('#rules').height() * 0.7);
+//    $('#settings').height($('#modal').height() * 0.7);
+//  } else {
+//    $('#gameplay').height('auto');
+//    $('#rules').height('auto');
+//    $('#standard').height('auto');
+//    $('#multi').height('auto');
+//    $('#single').height('auto');
+//    $('#fire').height('auto');
+//    $('#settings').height('auto');
+//    $('#modal').height('auto');
+//  }
+//  $('#gameplay').width('auto');
+//  $('#rules').width('auto');
+//  $('#standard').width('auto');
+//  $('#multi').width('auto');
+//  $('#single').width('auto');
+//  $('#fire').width('auto');
+//  $('#settings').width('auto');
+//  $('#modal').width('auto');
+//  if($('#modal').width() > $(window).width() * 0.8){
+//    $('#modal').width($(window).width() * 0.7);
+//    $('#gameplay').width('auto');
+//    $('#rules').width('auto');
+//    $('#standard').width('auto');
+//    $('#multi').width('auto');
+//    $('#single').width('auto');
+//    $('#fire').width('auto');
+//    $('#settings').width('auto');
+//  } else {
+//    $('#gameplay').width('auto');
+//    $('#rules').width('auto');
+//    $('#standard').width('auto');
+//    $('#multi').width('auto');
+//    $('#single').width('auto');
+//    $('#fire').width('auto');
+//    $('#settings').width('auto');
+//    $('#modal').width('auto');
+//  }
+//  $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
+//  $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
+//}
 
 function updateColors(){
   if($('#colorScheme').val() == 5){

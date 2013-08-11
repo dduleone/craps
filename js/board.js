@@ -1499,12 +1499,16 @@ var colors5 = {
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
 
-            ctx.strokeStyle = this.board.colors.lines;
-            ctx.beginPath();
             //ctx.arc(50, 950, 35, 2 * Math.PI, false);
+            ctx.strokeStyle = '#CCC';
+            ctx.beginPath();
             ctx.moveTo(15,915);
             ctx.lineTo(15,985);
             ctx.lineTo(85,985);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.strokeStyle = '#333';
+            ctx.beginPath();
             ctx.lineTo(85,915);
             ctx.lineTo(15,915);
             ctx.textAlign = "left";

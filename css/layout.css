@@ -368,12 +368,14 @@
     background: #444;
     color: #FFF;
     top: 15%;
-    left: 0%;
-    width: 29%;
+    left: 100%;
     height: 70%;
     padding: 10px;
     display: none;
     opacity: 0;
+  }
+  #modalButtons{
+    position: relative;
   }
   #modalWindow{
     position: relative;
