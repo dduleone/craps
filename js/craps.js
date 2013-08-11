@@ -514,11 +514,11 @@ BetManager.prototype = {
     this.losingBetIds = [];
     
     if(this.winningBets.length < 1){
-      $('#winningBets').empty();
-      $('#winningBets').html("None of your bets won! Try again!")
+      $('#wins').empty();
+      $('#wins').html("None of your bets won! Try again!")
     }else{
-      $('#winningBets').empty();
-      $('#winningBets').html("Your winning bets are: <br />")
+      $('#wins').empty();
+      $('#wins').html("Your winning bets are: <br />")
       var winningTable = $(document.createElement('table'));
       var heading = $(document.createElement('thead'));
       var headers = $(document.createElement('tr'));
@@ -555,14 +555,14 @@ BetManager.prototype = {
         newBetRow.append(point);
         newBetRow.append(winnings);
       }
-      $('#winningBets').append(winningTable);
+      $('#wins').append(winningTable);
     }
     if(this.losingBets.length < 1){
-      $('#losingBets').empty();
-      $('#losingBets').html("Great Job! None of your bets lost!")
+      $('#losses').empty();
+      $('#losses').html("<span id=''>Great Job! None of your bets lost!")
     }else{
-      $('#losingBets').empty();
-      $('#losingBets').html("Your losing bets are: <br />")
+      $('#losses').empty();
+      $('#losses').html("Your losing bets are: <br />")
       var losingTable = $(document.createElement('table'));
       var heading = $(document.createElement('thead'));
       var headers = $(document.createElement('tr'));
@@ -595,7 +595,7 @@ BetManager.prototype = {
         newBetRow.append(val);
         newBetRow.append(point);
       }
-      $('#losingBets').append(losingTable);
+      $('#losses').append(losingTable);
     }
     
     if(this.winningBets.length > 0 || this.losingBets.length > 0){

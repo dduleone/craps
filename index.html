@@ -320,8 +320,16 @@
     <div id='glossaryScreen' onclick="closeGlossary()" class='modalScreen'></div>
     <div id='betResultsBG' class='smallRound' class='modal'>
       <div id='betResultsWindow'>
-        <div id='winningBets'>None of your bets won! Try again!</div>
-        <div id='losingBets'>Great Job! None of your bets lost!</div>
+        <div id='winningBets'>
+          <div id='wins'>
+            None of your bets won! Try again!
+          </div>
+        </div>
+        <div id='losingBets'>
+          <div id='losses'>
+            Great Job! None of your bets lost!
+          </div>
+        </div>
       </div>
       <div id='closeBetResults' class='bttn red' onclick='closeBetResults()'>Close</div>
     </div>
