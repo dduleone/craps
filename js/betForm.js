@@ -2,6 +2,8 @@
  betForm.js
 */
 
+var preFireVal = 0;
+
 function updateBetDesc(){
   switch($('#betType').val()){
   case "passline":
@@ -158,6 +160,7 @@ function setUpBetForm(name){
 }
 
 function addBet(area){
+  preFireVal = $('#betValue').val();
   $('#betRepeat').removeAttr('disabled');
   $('#betRepeat').attr('checked', '');
   $('#betType').hide();
@@ -834,12 +837,18 @@ function create(){
   if(GameState.tutorial){
     updateTutorial();
   }
+  if($('#betType').val() == 'fire'){
+    $('#betValue').val(preFireVal);
+  }
 }
 
 function cancel(){
   $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, BET_FORM_FADE_OUT, function(){$('#betForm').hide();});
   PlayerManager.updatePlayerArea();
   _CRAPS.dealer.betManager.displayBets();
+  if($('#betType').val() == 'fire'){
+    $('#betValue').val(preFireVal);
+  }
 }
 
 function updateBet(idNum){
