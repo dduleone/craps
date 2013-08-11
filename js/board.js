@@ -1501,7 +1501,12 @@ var colors5 = {
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
-            ctx.arc(50, 950, 35, 2 * Math.PI, false);
+            //ctx.arc(50, 950, 35, 2 * Math.PI, false);
+            ctx.moveTo(15,915);
+            ctx.lineTo(15,985);
+            ctx.lineTo(85,985);
+            ctx.lineTo(85,915);
+            ctx.lineTo(15,915);
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1534,7 +1539,12 @@ var colors5 = {
 
             ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
-            ctx.arc(150, 950, 35, 2 * Math.PI, false);
+            //ctx.arc(150, 950, 35, 2 * Math.PI, false);
+            ctx.moveTo(115,915);
+            ctx.lineTo(115,985);
+            ctx.lineTo(185,985);
+            ctx.lineTo(185,915);
+            ctx.lineTo(115,915);
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1551,7 +1561,120 @@ var colors5 = {
             return false;
         }
     };
+
+    var Menu = function(board) {
+        this.board = board;
+        return this;
+    }
+    Menu.prototype = {
+        name: "Menu",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            //ctx.arc(1935, 85, 50, 2 * Math.PI, false);
+            ctx.moveTo(1885,35);
+            ctx.lineTo(1885,135);
+            ctx.lineTo(1985,135);
+            ctx.lineTo(1985,35);
+            ctx.lineTo(1885,35);
+            ctx.textAlign = "left";
+            ctx.font = "20pt Verdana";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Menu", 1900, 95);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 1885 && x < 1985 && y > 35 && y < 135) {
+                return true;
+            }
+            return false;
+        }
+    };
     
+    var ShowBets = function(board) {
+        this.board = board;
+        return this;
+    }
+    ShowBets.prototype = {
+        name: "Show Bets",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            //ctx.arc(1935, 200, 50, 2 * Math.PI, false);
+            ctx.moveTo(1885,150);
+            ctx.lineTo(1885,250);
+            ctx.lineTo(1985,250);
+            ctx.lineTo(1985,150);
+            ctx.lineTo(1885,150);
+            ctx.textAlign = "left";
+            ctx.font = "20pt Verdana";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Show", 1900, 197);
+            ctx.fillText("Bets", 1905, 222);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 1885 && x < 1985 && y > 150 && y < 250) {
+                return true;
+            }
+            return false;
+        }
+    };
+
+    var LastRoll = function(board) {
+        this.board = board;
+        return this;
+    }
+    LastRoll.prototype = {
+        name: "Last Roll",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.lineWidth = 5;
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.board.colors.text;
+            ctx.strokeStyle = this.board.colors.text;
+
+            ctx.strokeStyle = this.board.colors.lines;
+            ctx.beginPath();
+            //ctx.arc(1935, 315, 50, 2 * Math.PI, false);
+            ctx.moveTo(1885,265);
+            ctx.lineTo(1885,365);
+            ctx.lineTo(1985,365);
+            ctx.lineTo(1985,265);
+            ctx.lineTo(1885,265);
+            ctx.textAlign = "left";
+            ctx.font = "20pt Verdana";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Last", 1907, 310);
+            ctx.fillText("Roll", 1912, 335);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 1885 && x < 1985 && y > 265 && y < 365) {
+                return true;
+            }
+            return false;
+        }
+    };
+
     var regions = [
         PassLine,
         DontPass,
@@ -1597,7 +1720,10 @@ var colors5 = {
         Dice,
         //Help,
         Reset,
-        SaveGame
+        SaveGame,
+        ShowBets,
+        LastRoll,
+        Menu
     ];
 
     var Board = function(canvas, colors) {

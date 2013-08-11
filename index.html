@@ -426,6 +426,18 @@
                   saveGameState();
                   return;
                 }
+                if(boardArea.name == "Menu"){
+                  openModal();
+                  return;
+                }
+                if(boardArea.name == "Show Bets"){
+                  openBets()
+                  return;
+                }
+                if(boardArea.name == "Last Roll"){
+                  openBetResults();
+                  return;
+                }
                 clickAreaPlaceBet(boardArea);
               }
           };
@@ -622,6 +634,10 @@
       //end snippet
       
       (function() {
+        $('#rules').hide();
+        $('#settings').hide();
+        $('#tutorial').hide();
+        $('#about').hide();
         $('#betResultsWindow').height($('#betResultsBG').height() - 35);
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});

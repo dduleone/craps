@@ -50,6 +50,7 @@
     z-index: 2;
   }
   #generalButtons{
+    display: none;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -359,7 +360,7 @@
     height: 100%;
     width: 100%;
     display: none;
-    background-color: #FFF;
+    background-color: #000;
     opacity: 0.5;
   }
   #modal{
