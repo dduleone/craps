@@ -321,14 +321,15 @@
     <div id='glossaryScreen' onclick="closeGlossary()" class='modalScreen'></div>
     <div id='betResultsBG' class='smallRound' class='modal'>
       <div id='betResultsWindow'>
+        <div id='lastRoll'>
+        Your last roll was a <span id='die1'></span> <span id='die2'></span>.
+        </div>
         <div id='winningBets'>
           <div id='wins'>
-            None of your bets won! Try again!
           </div>
         </div>
         <div id='losingBets'>
           <div id='losses'>
-            Great Job! None of your bets lost!
           </div>
         </div>
       </div>
@@ -657,6 +658,7 @@
         });
         PlayerManager.updatePlayerArea();
         _CRAPS.dealer.betManager.displayBets();
+        _CRAPS.dealer.betManager.animateBets();
       })();
       
       $(window).resize(function(){PlayerManager.updatePlayerArea();});

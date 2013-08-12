@@ -1500,17 +1500,24 @@ var colors5 = {
             ctx.strokeStyle = this.board.colors.text;
 
             //ctx.arc(50, 950, 35, 2 * Math.PI, false);
-            ctx.strokeStyle = '#CCC';
+            //var lineColor = '';
+            //if(this.board.colors.lines.length = 3){
+            //  lineColor = this.board
+            //} else {
+            //  
+            //}
+            ctx.strokeStyle = this.board.colors.lines;
             ctx.beginPath();
-            ctx.moveTo(15,915);
-            ctx.lineTo(15,985);
-            ctx.lineTo(85,985);
-            ctx.stroke();
-            ctx.closePath();
-            ctx.strokeStyle = '#333';
-            ctx.beginPath();
-            ctx.lineTo(85,915);
+            ctx.moveTo(85,915);
             ctx.lineTo(15,915);
+            ctx.lineTo(15,985);
+            //ctx.stroke();
+            //ctx.closePath();
+            
+            //ctx.strokeStyle = '#333';
+            //ctx.beginPath();
+            ctx.lineTo(85,985);
+            ctx.lineTo(85,915);
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);

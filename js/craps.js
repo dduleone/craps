@@ -512,7 +512,18 @@ BetManager.prototype = {
             }, BET_FADE_INTERVAL);
     this.winningBetIds = [];
     this.losingBetIds = [];
-    
+    var diceArray = _CRAPS.dice.dice.getArray();
+    var dieSymbols = ['&#x2680;', '&#x2681;', '&#x2682;', '&#x2683;', '&#x2684;', '&#x2685;'];
+    if(!diceArray[0]){
+      $('#die1').html(dieSymbols[3]);
+    } else {
+      $('#die1').html(dieSymbols[diceArray[0] - 1]);
+    }
+    if(!diceArray[1]){
+      $('#die2').html(dieSymbols[3]);
+    } else {
+      $('#die2').html(dieSymbols[diceArray[1] - 1]);
+    }
     if(this.winningBets.length < 1){
       $('#wins').empty();
       $('#wins').html("None of your bets won! Try again!")
