@@ -5,7 +5,7 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-var getLineColor = function(lineColor){
+var getButtonColors = function(lineColor){
   var lines='';
   var upperLines='';
   var numUpper = [];
@@ -18,6 +18,13 @@ var getLineColor = function(lineColor){
     lines = lineColor;
   }
   if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
+    var lowerSplit = lines.split('');
+    numLower[0] = lowerSplit[1] + lowerSplit[2];
+    numLower[1] = lowerSplit[3] + lowerSplit[4];
+    numLower[2] = lowerSplit[5] + lowerSplit[6];
+    numLower[0] = parseInt(numLower[0], 16);
+    numLower[1] = parseInt(numLower[1], 16);
+    numLower[2] = parseInt(numLower[2], 16);
     var upperSplit = lines.split('');
     numUpper[0] = upperSplit[1] + upperSplit[2];
     numUpper[1] = upperSplit[3] + upperSplit[4];
@@ -29,6 +36,13 @@ var getLineColor = function(lineColor){
     lowerLines = lines;
   } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64 ||
             parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64){
+    var upperSplit = lines.split('');
+    numUpper[0] = upperSplit[1] + upperSplit[2];
+    numUpper[1] = upperSplit[3] + upperSplit[4];
+    numUpper[2] = upperSplit[5] + upperSplit[6];
+    numUpper[0] = parseInt(numUpper[0], 16);
+    numUpper[1] = parseInt(numUpper[1], 16);
+    numUpper[2] = parseInt(numUpper[2], 16);
     var lowerSplit = lines.split('');
     numLower[0] = lowerSplit[1] + lowerSplit[2];
     numLower[1] = lowerSplit[3] + lowerSplit[4];
@@ -56,7 +70,11 @@ var getLineColor = function(lineColor){
     numLower[2] = Math.max((parseInt(numLower[2], 16) - 64), 0);
     lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16);
   }
-  return [lowerLines, upperLines]
+  var numButton = [(numUpper[0] + numLower[0])/2, (numUpper[1] + numLower[1])/2, (numUpper[2] + numLower[2])/2]
+  var buttonColor = '#' + numButton[0].toString(16) + numButton[1].toString(16) + numButton[2].toString(16);
+  var numText = [255 - numButton[0], 255 - numButton[1], 255 - numButton[2]] 
+  var buttonText = '#' + numText[0].toString(16) + numText[1].toString(16) + numText[2].toString(16);
+  return [lowerLines, upperLines, buttonColor, buttonText]
 }
 
 var colors;
@@ -1548,10 +1566,6 @@ var colors5 = {
         name: "Reset",
         draw: function() {
             var ctx = this.board.context;
-            ctx.lineWidth = 5;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
 
             //ctx.arc(50, 950, 35, 2 * Math.PI, false);
             //var lineColor = '';
@@ -1560,7 +1574,16 @@ var colors5 = {
             //} else {
             //  
             //}
-            var lines = getLineColor(this.board.colors.lines);
+            var lines = getButtonColors(this.board.colors.lines);
+            ctx.beginPath();
+            ctx.rect(15, 915, 70, 70);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
             ctx.moveTo(15,985);
@@ -1578,6 +1601,9 @@ var colors5 = {
             ctx.closePath();
             
             ctx.beginPath();
+            ctx.textAlign = "center";
+            ctx.strokeStyle = lines[3];
+            ctx.fillStyle = lines[3];
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1595,53 +1621,53 @@ var colors5 = {
         }
     };
 
-    var SaveGame = function(board) {
-        this.board = board;
-        return this;
-    }
-    SaveGame.prototype = {
-        name: "Save Game",
-        draw: function() {
-            var ctx = this.board.context;
-            ctx.lineWidth = 5;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
-            
-            var lines = getLineColor(this.board.colors.lines);
-            ctx.strokeStyle = lines[0];
-            ctx.beginPath();
-            ctx.moveTo(115,985);
-            ctx.lineTo(185,985);
-            ctx.lineTo(185,915);
-            ctx.stroke();
-            ctx.closePath();
-            
-            ctx.strokeStyle = lines[1];
-            ctx.beginPath();
-            ctx.moveTo(185,915);
-            ctx.lineTo(115,915);
-            ctx.lineTo(115,985);
-            ctx.stroke();
-            ctx.closePath();            
-            
-            ctx.beginPath();
-            ctx.textAlign = "left";
-            ctx.font = "14pt Verdana";
-            //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Save", 126, 948);
-            ctx.fillText("Game", 121, 968);
-            ctx.stroke();
-            ctx.restore();
-            
-        },
-        isClickedRegion: function(x, y) {
-            if (x > 115 && x < 185 && y > 915 && y < 985) {
-                return true;
-            }
-            return false;
-        }
-    };
+    //var SaveGame = function(board) {
+    //    this.board = board;
+    //    return this;
+    //}
+    //SaveGame.prototype = {
+    //    name: "Save Game",
+    //    draw: function() {
+    //        var ctx = this.board.context;
+    //        ctx.lineWidth = 5;
+    //        ctx.textAlign = "center";
+    //        ctx.fillStyle = this.board.colors.text;
+    //        ctx.strokeStyle = this.board.colors.text;
+    //        
+    //        var lines = getButtonColors(this.board.colors.lines);
+    //        ctx.strokeStyle = lines[0];
+    //        ctx.beginPath();
+    //        ctx.moveTo(115,985);
+    //        ctx.lineTo(185,985);
+    //        ctx.lineTo(185,915);
+    //        ctx.stroke();
+    //        ctx.closePath();
+    //        
+    //        ctx.strokeStyle = lines[1];
+    //        ctx.beginPath();
+    //        ctx.moveTo(185,915);
+    //        ctx.lineTo(115,915);
+    //        ctx.lineTo(115,985);
+    //        ctx.stroke();
+    //        ctx.closePath();            
+    //        
+    //        ctx.beginPath();
+    //        ctx.textAlign = "left";
+    //        ctx.font = "14pt Verdana";
+    //        //ctx.rotate(Math.PI * -0.2);
+    //        ctx.fillText("Save", 126, 948);
+    //        ctx.fillText("Game", 121, 968);
+    //        ctx.stroke();
+    //        ctx.restore();
+    //        
+    //    },
+    //    isClickedRegion: function(x, y) {
+    //        if (x > 115 && x < 185 && y > 915 && y < 985) {
+    //            return true;
+    //        }
+    //        return false;
+    //    }
+    //};
 
     var Menu = function(board) {
         this.board = board;
@@ -1651,12 +1677,18 @@ var colors5 = {
         name: "Menu",
         draw: function() {
             var ctx = this.board.context;
-            ctx.lineWidth = 5;
             ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
             
-            var lines = getLineColor(this.board.colors.lines);
+            var lines = getButtonColors(this.board.colors.lines);
+            ctx.beginPath();
+            ctx.rect(1885, 35, 100, 100);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
             ctx.moveTo(1885,135);
@@ -1675,6 +1707,8 @@ var colors5 = {
             
             ctx.beginPath();
             ctx.textAlign = "left";
+            ctx.strokeStyle = lines[3];
+            ctx.fillStyle = lines[3];
             ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("Menu", 1900, 95);
@@ -1698,12 +1732,18 @@ var colors5 = {
         name: "Show Bets",
         draw: function() {
             var ctx = this.board.context;
-            ctx.lineWidth = 5;
             ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
             
-            var lines = getLineColor(this.board.colors.lines);
+            var lines = getButtonColors(this.board.colors.lines);
+            ctx.beginPath();
+            ctx.rect(1885, 150, 100, 100);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
             ctx.moveTo(1885,250);
@@ -1722,6 +1762,8 @@ var colors5 = {
             
             ctx.beginPath();  
             ctx.textAlign = "left";
+            ctx.fillStyle = lines[3];
+            ctx.strokeStyle = lines[3];
             ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("Show", 1900, 197);
@@ -1746,12 +1788,18 @@ var colors5 = {
         name: "Last Roll",
         draw: function() {
             var ctx = this.board.context;
-            ctx.lineWidth = 5;
             ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
             
-            var lines = getLineColor(this.board.colors.lines);
+            var lines = getButtonColors(this.board.colors.lines);
+            ctx.beginPath();
+            ctx.rect(1885, 265, 100, 100);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
             ctx.moveTo(1885,365);
@@ -1770,6 +1818,8 @@ var colors5 = {
             
             ctx.beginPath();
             ctx.textAlign = "left";
+            ctx.fillStyle = lines[3];
+            ctx.strokeStyle = lines[3];
             ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
             ctx.fillText("Last", 1907, 310);
@@ -1831,7 +1881,7 @@ var colors5 = {
         Dice,
         //Help,
         Reset,
-        SaveGame,
+        //SaveGame,
         ShowBets,
         LastRoll,
         Menu
