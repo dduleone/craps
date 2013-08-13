@@ -1931,9 +1931,16 @@ var colors5 = {
             ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
             ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
             ctx.closePath();
+            ctx.beginPath();
+            ctx.font = '40pt Verdana';
+            ctx.fillStyle = "#000000";
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 103, 73);
+            ctx.closePath();
+            ctx.beginPath();
             ctx.font = '40pt Verdana';
             ctx.fillStyle = this.colors.finalText;
             ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 100, 70);
+            ctx.closePath();
             this.drawPoint(ctx, GameState.point);
             this.drawFire(ctx, GameState.fireArray);
         },
