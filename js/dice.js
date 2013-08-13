@@ -34,20 +34,20 @@ function makeDice(n){
       self = this;
       if(colors){
         var pips = colors['dicePips'];
-        var red = parseInt(pips.slice(0,2), 16)
-        var blue = parseInt(pips.slice(2,4), 16)
-        var green = parseInt(pips.slice(4,6), 16)
+        var red = parseInt(pips.slice(1,3), 16)
+        var blue = parseInt(pips.slice(3,5), 16)
+        var green = parseInt(pips.slice(5,7), 16)
         if(((red + blue + green) / 3) < 128){
-          if(colors['dice'] == "FFFFFF"){
-            colors['dicePips'] = "D8D8D8"
+          if(colors['dice'] == "#FFFFFF"){
+            colors['dicePips'] = "#D8D8D8"
           } else {
-            colors['dicePips'] = "FFFFFF"
+            colors['dicePips'] = "#FFFFFF"
           }
         } else {
-          if(colors['dice'] == "000000"){
-            colors['dicePips'] = "282828"
+          if(colors['dice'] == "#000000"){
+            colors['dicePips'] = "#282828"
           } else {
-            colors['dicePips'] = "000000"
+            colors['dicePips'] = "#000000"
           }
         }
       }
