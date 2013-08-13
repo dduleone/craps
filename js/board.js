@@ -1506,18 +1506,73 @@ var colors5 = {
             //} else {
             //  
             //}
-            ctx.strokeStyle = this.board.colors.lines;
+            var lines='';
+            var upperLines='';
+            var numUpper = [];
+            var lowerLines='';
+            var numLower = [];
+            if(this.board.colors.lines.length == 4){
+              var tempLines = this.board.colors.lines.split('');
+              lines = '#' + tempLines[1] + tempLines[1] + tempLines[2] + tempLines[2] + tempLines[3] + tempLines[3];
+            } else {
+              lines = this.board.colors.lines;
+            }
+            if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              lowerLines = lines;
+            } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128 ||
+                      parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128){
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16); 
+              upperLines = lines;
+            } else {
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16);
+            }
+            ctx.strokeStyle = lowerLines;
+            ctx.beginPath();
+            ctx.moveTo(15,985);
+            ctx.lineTo(85,985);
+            ctx.lineTo(85,915);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = upperLines;
             ctx.beginPath();
             ctx.moveTo(85,915);
             ctx.lineTo(15,915);
             ctx.lineTo(15,985);
-            //ctx.stroke();
-            //ctx.closePath();
+            ctx.stroke();
+            ctx.closePath();
             
-            //ctx.strokeStyle = '#333';
-            //ctx.beginPath();
-            ctx.lineTo(85,985);
-            ctx.lineTo(85,915);
+            ctx.beginPath();
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1548,14 +1603,73 @@ var colors5 = {
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
 
-            ctx.strokeStyle = this.board.colors.lines;
+            var lines='';
+            var upperLines='';
+            var numUpper = [];
+            var lowerLines='';
+            var numLower = [];
+            if(this.board.colors.lines.length == 4){
+              var tempLines = this.board.colors.lines.split('');
+              lines = '#' + tempLines[1] + tempLines[1] + tempLines[2] + tempLines[2] + tempLines[3] + tempLines[3];
+            } else {
+              lines = this.board.colors.lines;
+            }
+            if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              lowerLines = lines;
+            } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128 ||
+                      parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128){
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16); 
+              upperLines = lines;
+            } else {
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16);
+            }
+            ctx.strokeStyle = lowerLines;
             ctx.beginPath();
-            //ctx.arc(150, 950, 35, 2 * Math.PI, false);
-            ctx.moveTo(115,915);
-            ctx.lineTo(115,985);
+            ctx.moveTo(115,985);
             ctx.lineTo(185,985);
             ctx.lineTo(185,915);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = upperLines;
+            ctx.beginPath();
+            ctx.moveTo(185,915);
             ctx.lineTo(115,915);
+            ctx.lineTo(115,985);
+            ctx.stroke();
+            ctx.closePath();            
+            
+            ctx.beginPath();
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1585,15 +1699,74 @@ var colors5 = {
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
-
-            ctx.strokeStyle = this.board.colors.lines;
+            
+            var lines='';
+            var upperLines='';
+            var numUpper = [];
+            var lowerLines='';
+            var numLower = [];
+            if(this.board.colors.lines.length == 4){
+              var tempLines = this.board.colors.lines.split('');
+              lines = '#' + tempLines[1] + tempLines[1] + tempLines[2] + tempLines[2] + tempLines[3] + tempLines[3];
+            } else {
+              lines = this.board.colors.lines;
+            }
+            if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              lowerLines = lines;
+            } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128 ||
+                      parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128){
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16); 
+              upperLines = lines;
+            } else {
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16);
+            }
+            ctx.strokeStyle = lowerLines;
             ctx.beginPath();
-            //ctx.arc(1935, 85, 50, 2 * Math.PI, false);
-            ctx.moveTo(1885,35);
-            ctx.lineTo(1885,135);
+            ctx.moveTo(1885,135);
             ctx.lineTo(1985,135);
             ctx.lineTo(1985,35);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = upperLines;
+            ctx.beginPath();
+            ctx.moveTo(1985,35);
             ctx.lineTo(1885,35);
+            ctx.lineTo(1885,135);
+            ctx.stroke();
+            ctx.closePath();            
+            
+            ctx.beginPath();
             ctx.textAlign = "left";
             ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1623,14 +1796,73 @@ var colors5 = {
             ctx.fillStyle = this.board.colors.text;
             ctx.strokeStyle = this.board.colors.text;
 
-            ctx.strokeStyle = this.board.colors.lines;
+            var lines='';
+            var upperLines='';
+            var numUpper = [];
+            var lowerLines='';
+            var numLower = [];
+            if(this.board.colors.lines.length == 4){
+              var tempLines = this.board.colors.lines.split('');
+              lines = '#' + tempLines[1] + tempLines[1] + tempLines[2] + tempLines[2] + tempLines[3] + tempLines[3];
+            } else {
+              lines = this.board.colors.lines;
+            }
+            if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              lowerLines = lines;
+            } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128 ||
+                      parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128){
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16); 
+              upperLines = lines;
+            } else {
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16);
+            }
+            ctx.strokeStyle = lowerLines;
             ctx.beginPath();
-            //ctx.arc(1935, 200, 50, 2 * Math.PI, false);
-            ctx.moveTo(1885,150);
-            ctx.lineTo(1885,250);
+            ctx.moveTo(1885,250);
             ctx.lineTo(1985,250);
             ctx.lineTo(1985,150);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = upperLines;
+            ctx.beginPath();
+            ctx.moveTo(1985,150);
             ctx.lineTo(1885,150);
+            ctx.lineTo(1885,250);
+            ctx.stroke();
+            ctx.closePath();            
+            
+            ctx.beginPath();  
             ctx.textAlign = "left";
             ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1659,16 +1891,73 @@ var colors5 = {
             ctx.lineWidth = 5;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
-
-            ctx.strokeStyle = this.board.colors.lines;
+            ctx.strokeStyle = this.board.colors.text;var lines='';
+            var upperLines='';
+            var numUpper = [];
+            var lowerLines='';
+            var numLower = [];
+            if(this.board.colors.lines.length == 4){
+              var tempLines = this.board.colors.lines.split('');
+              lines = '#' + tempLines[1] + tempLines[1] + tempLines[2] + tempLines[2] + tempLines[3] + tempLines[3];
+            } else {
+              lines = this.board.colors.lines;
+            }
+            if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              lowerLines = lines;
+            } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128 ||
+                      parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 128 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 128 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 128){
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16); 
+              upperLines = lines;
+            } else {
+              var upperSplit = lines.split('');
+              numUpper[0] = upperSplit[1] + upperSplit[2];
+              numUpper[1] = upperSplit[3] + upperSplit[4];
+              numUpper[2] = upperSplit[5] + upperSplit[6];
+              numUpper[0] = parseInt(numUpper[0], 16) + 128;
+              numUpper[1] = parseInt(numUpper[1], 16) + 128;
+              numUpper[2] = parseInt(numUpper[2], 16) + 128;
+              upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+              var lowerSplit = lines.split('');
+              numLower[0] = lowerSplit[1] + lowerSplit[2];
+              numLower[1] = lowerSplit[3] + lowerSplit[4];
+              numLower[2] = lowerSplit[5] + lowerSplit[6];
+              numLower[0] = parseInt(numLower[0], 16) - 128;
+              numLower[1] = parseInt(numLower[1], 16) - 128;
+              numLower[2] = parseInt(numLower[2], 16) - 128;
+              lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16);
+            }
+            ctx.strokeStyle = lowerLines;
             ctx.beginPath();
-            //ctx.arc(1935, 315, 50, 2 * Math.PI, false);
-            ctx.moveTo(1885,265);
-            ctx.lineTo(1885,365);
+            ctx.moveTo(1885,365);
             ctx.lineTo(1985,365);
             ctx.lineTo(1985,265);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = upperLines;
+            ctx.beginPath();
+            ctx.moveTo(1985,265);
             ctx.lineTo(1885,265);
+            ctx.lineTo(1885,365);
+            ctx.stroke();
+            ctx.closePath();            
+            
+            ctx.beginPath();
             ctx.textAlign = "left";
             ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
