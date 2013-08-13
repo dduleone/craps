@@ -130,7 +130,9 @@ $(window).bind('keyup',
       if($('#betForm').css('visibility')!= 'hidden' && $('#betForm').css('display') != 'none'){
         cancel();
       }
-      if($('#modal').css('visibility')!= 'hidden' && $('#modal').css('display') != 'none'){
+      if(($('#modal').css('visibility')!= 'hidden' && $('#modal').css('display') != 'none') ||
+         ($('#betListBG').css('visibility')!= 'hidden' && $('#betListBG').css('display') != 'none') ||
+         ($('#betResultsBG').css('visibility')!= 'hidden' && $('#betResultsBG').css('display') != 'none')){
         closeModal();
       }
     }
