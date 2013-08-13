@@ -1455,6 +1455,15 @@ var colors5 = {
         draw: function(){
           var ctx = this.board.context;
           ctx.beginPath();
+          ctx.rect(1203, 203, 75, 75);
+          ctx.rect(1303, 203, 75, 75);
+          ctx.fillStyle = '#000000';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = '#000000';
+          ctx.stroke();
+          ctx.closePath();
+          ctx.beginPath();
           ctx.rect(1200, 200, 75, 75);
           ctx.rect(1300, 200, 75, 75);
           ctx.fillStyle = this.board.colors.dice;
@@ -1462,6 +1471,7 @@ var colors5 = {
           ctx.lineWidth = 5;
           ctx.strokeStyle = this.board.colors.dice;
           ctx.stroke();
+          ctx.closePath();
           this.drawDots();
 
           ctx.beginPath();
