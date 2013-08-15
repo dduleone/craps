@@ -194,7 +194,7 @@ function resizeModal(){
     multi.show();
   }
   if(singleHidden){
-    single).show();
+    single.show();
   }
   if(fireHidden){
     fire.show();
@@ -214,10 +214,10 @@ function resizeModal(){
     multi.hide();
   }
   if(singleHidden){
-    #single.hide();
+    single.hide();
   }
   if(fireHidden){
-    #fire.hide();
+    fire.hide();
   }
   if(rulesHidden){
     rules.hide();
