@@ -346,7 +346,7 @@ var colors5 = {
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = "#000000";
-            ctx.lineWidth = 1px;
+            ctx.lineWidth = 1;
             ctx.font = "75pt Verdana";
             ctx.fillText("COME", 650, 450);
             ctx.strokeText("COME", 650, 450);
