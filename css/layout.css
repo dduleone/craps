@@ -255,8 +255,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 1px;
-    border-color: black;
+    border: 1px solid black;
+    border-bottom: 0 none;
     margin: 0px 0px;
     padding: 0px 5px;
     background: #666;
@@ -270,9 +270,8 @@
     color: #000;
   }
   .tab.active{
-    border: 1px;
-    border-bottom: none;
-    border-color: black;
+    border: 1px solid black;
+    border-bottom: 0 none;
     background: #222;
     color: #fff;
     text-decoration: underline;
@@ -285,8 +284,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 1px;
-    border-color: black;
+    border: 1px solid black;
+    border-bottom: 0 none;
     margin: 0px 0px;
     padding: 0px 5px;
     background: #888;
@@ -300,8 +299,8 @@
     color: #000;
   }
   .insideTab.active{
-    border: 1px;
-    border-bottom: none;
+    border: 1px solid black;
+    border-bottom: 0 none;
     border-color: black;
     background: #444;
     color: #fff;
