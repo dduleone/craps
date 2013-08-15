@@ -630,6 +630,7 @@
         }
       };
       //end snippet
+      $(window).resize(function(){resizeModal();})
       
       (function() {
         $('#rules').hide();
@@ -640,6 +641,8 @@
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
+        resizeModal();
+        /*
         $('#modal').show();
         $('#modal').width($('#gameplayButton').width() + 
                           $('#rulesButton').width() + 
@@ -667,6 +670,7 @@
         $('#fire').hide();
         $('#rules').hide();
         $('#modal').hide();
+        */
         $('#settingsName').val(PlayerManager.players[0].player.name);
         $('#settingsName').change(function(){
           PlayerManager.players[0].player.changeName($('#settingsName').val());
