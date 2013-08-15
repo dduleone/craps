@@ -226,7 +226,7 @@ function resizeModal(){
     mod.hide();
   }
   if(!hidden){
-    mod.css({left: ($('#board').offset().left + $('#board').width() + 2)});
+    mod.css({left: ($('#board').offset().left + $('#board').width() - mod.width() - 20)});
   }
 }
 
