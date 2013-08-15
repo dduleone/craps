@@ -12,8 +12,40 @@
     <meta property='og:url' content='http://duleone.com/craps/' />
     <meta name="appsfuel_code" content="ce06541daa02a75"/ -->
     <!--meta name="viewport" content="user-scalable=0, width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" / -->
-    <meta name="viewport" content="user-scalable=0, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- meta name="viewport" content="user-scalable=0, initial-scale=1.0, maximum-scale=1.0" / -->
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <script type='text/javascript' language='javascript'>
+          //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
+      var isMobile = {
+        Android: function() {
+            return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+            return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+            return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+            return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+      };
+      //end snippet
+      var viewport = document.createElement('meta');
+      viewport.setAttribute('name', 'viewport');
+      if(isMobile.iOS()){
+        viewport.setAttribute('content','content',"user-scalable=0, initial-scale=1.0, maximum-scale=1.0");
+      } else {
+        viewport.setAttribute('content',"user-scalable=0, width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi");
+      }
+      document.getElementsByTagName('head')[0].appendChild(viewport);
+    </script>
     <link href="css/layout.css" media="all" rel="stylesheet" type="text/css" />
     <link href="css/css3-gmail-style.css" media="all" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/x-icon" href="img/dice_small.ico" />
@@ -607,29 +639,6 @@
           _CRAPS.dealer.betManager.removeBet(_bets[x].bet.betId);
         }
       }
-      
-      //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
-      var isMobile = {
-        Android: function() {
-            return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function() {
-            return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function() {
-            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function() {
-            return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function() {
-            return navigator.userAgent.match(/IEMobile/i);
-        },
-        any: function() {
-            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-        }
-      };
-      //end snippet
       
       (function() {
         $('#rules').hide();
