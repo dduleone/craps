@@ -159,65 +159,31 @@ function clickRulesButton(button){
   }
 }
 
-//function resizeModal(){
-//  $('#gameplay').height('auto');
-//  $('#rules').height('auto');
-//  $('#standard').height('auto');
-//  $('#multi').height('auto');
-//  $('#single').height('auto');
-//  $('#fire').height('auto');
-//  $('#settings').height('auto');
-//  $('#modal').height('auto');
-//  if($('#modal').height() > $(window).height() * 0.8){
-//    $('#modal').height($(window).height() * 0.7);
-//    $('#gameplay').height($('#modal').height() * 0.7);
-//    $('#rules').height($('#modal').height() * 0.7);
-//    $('#rules').height($('#modal').height() * 0.7);
-//    $('#standard').height($('#rules').height() * 0.7);
-//    $('#multi').height($('#rules').height() * 0.7);
-//    $('#single').height($('#rules').height() * 0.7);
-//    $('#fire').height($('#rules').height() * 0.7);
-//    $('#settings').height($('#modal').height() * 0.7);
-//  } else {
-//    $('#gameplay').height('auto');
-//    $('#rules').height('auto');
-//    $('#standard').height('auto');
-//    $('#multi').height('auto');
-//    $('#single').height('auto');
-//    $('#fire').height('auto');
-//    $('#settings').height('auto');
-//    $('#modal').height('auto');
-//  }
-//  $('#gameplay').width('auto');
-//  $('#rules').width('auto');
-//  $('#standard').width('auto');
-//  $('#multi').width('auto');
-//  $('#single').width('auto');
-//  $('#fire').width('auto');
-//  $('#settings').width('auto');
-//  $('#modal').width('auto');
-//  if($('#modal').width() > $(window).width() * 0.8){
-//    $('#modal').width($(window).width() * 0.7);
-//    $('#gameplay').width('auto');
-//    $('#rules').width('auto');
-//    $('#standard').width('auto');
-//    $('#multi').width('auto');
-//    $('#single').width('auto');
-//    $('#fire').width('auto');
-//    $('#settings').width('auto');
-//  } else {
-//    $('#gameplay').width('auto');
-//    $('#rules').width('auto');
-//    $('#standard').width('auto');
-//    $('#multi').width('auto');
-//    $('#single').width('auto');
-//    $('#fire').width('auto');
-//    $('#settings').width('auto');
-//    $('#modal').width('auto');
-//  }
-//  $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
-//  $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
-//}
+function resizeModal(){
+  $('#modal').show();
+  $('#modal').width($('#gameplayButton').width() + 
+                    $('#rulesButton').width() + 
+                    $('#settingsButton').width() + 
+                    $('#tutorialButton').width() + 
+                    $('#aboutButton').width() + 
+                    115);
+  $('#modalWindow').height($('#modal').height() - 55);
+  $('#rules').show();
+  $('#rules').height($('#modalWindow').height() - 20);
+  $('#rules').width($('#modalWindow').width() - 20);
+  $('.insideTab').show();
+  $('#standard').width($('#rules').width() - 20);
+  $('#multi').width($('#rules').width() - 20);
+  $('#single').width($('#rules').width() - 20);
+  $('#fire').width($('#rules').width() - 20);
+  $('#standard').height($('#rules').height() - 45);
+  $('#multi').height($('#rules').height() - 45);
+  $('#single').height($('#rules').height() - 45);
+  $('#fire').height($('#rules').height() - 45);
+  $('.insideTab').hide();
+  $('.insideTab.active').show();
+  $('#modal').hide();
+}
 
 function updateColors(){
   if($('#colorScheme').val() == 5){
