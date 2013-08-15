@@ -1965,6 +1965,22 @@ var colors5 = {
             ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 103, 73);
             ctx.closePath();
             ctx.beginPath();
+            var col = colorToNumArray(this.colors.finalText);
+            col[0] = col[0]*(1/3)
+            col[1] = col[1]*(1/3)
+            col[2] = col[2]*(1/3)
+            ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 102, 72);
+            ctx.closePath();
+            ctx.beginPath();
+            var col = colorToNumArray(this.colors.finalText);
+            col[0] = col[0]*(2/3)
+            col[1] = col[1]*(2/3)
+            col[2] = col[2]*(2/3)
+            ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 101, 71);
+            ctx.closePath();
+            ctx.beginPath();
             ctx.font = '40pt Verdana';
             ctx.fillStyle = this.colors.finalText;
             ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 100, 70);
