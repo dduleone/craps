@@ -171,7 +171,10 @@ function resizeModal(){
   $('#rules').show();
   $('#rules').height($('#modalWindow').height() - 20);
   $('#rules').width($('#modalWindow').width() - 20);
-  $('.insideTab').show();
+  $('#standard').show();
+  $('#multi').show();
+  $('#single').show();
+  $('#fire').show();
   $('#standard').width($('#rules').width() - 20);
   $('#multi').width($('#rules').width() - 20);
   $('#single').width($('#rules').width() - 20);
@@ -180,8 +183,10 @@ function resizeModal(){
   $('#multi').height($('#rules').height() - 45);
   $('#single').height($('#rules').height() - 45);
   $('#fire').height($('#rules').height() - 45);
-  $('.insideTab').hide();
-  $('.insideTab.active').show();
+  $('#standard').hide();
+  $('#multi').hide();
+  $('#single').hide();
+  $('#fire').hide();
   $('#modal').hide();
 }
 
