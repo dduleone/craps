@@ -630,7 +630,9 @@
         }
       };
       //end snippet
-      
+      $(window).resize(function() {
+          resizeModal();
+        });
       (function() {
         $('#rules').hide();
         $('#settings').hide();
