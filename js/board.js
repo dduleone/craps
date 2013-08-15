@@ -45,8 +45,8 @@ var getButtonColors = function(lineColor){
     numUpper[2] = Math.min((numUpper[2] + 64), 255);
     upperLines = '#' + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
     lowerLines = lines;
-  } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64 ||
-            parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64){
+  } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 191 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 191 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 191 ||
+            parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 191 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 191 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 191){
     numLower[0] = Math.max((numLower[0] - 64), 0);
     numLower[1] = Math.max((numLower[1] - 64), 0);
     numLower[2] = Math.max((numLower[2] - 64), 0);
