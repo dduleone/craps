@@ -350,7 +350,6 @@ var colors5 = {
             ctx.font = "75pt Verdana";
             ctx.fillText("COME", 650, 450);
             ctx.strokeText("COME", 650, 450);
-            ctx.fill();
             ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -728,7 +727,6 @@ var colors5 = {
             ctx.font = "38pt Verdana";
             ctx.fillText("SEVEN", 1550, 493);
             ctx.strokeText("SEVEN", 1550, 493);
-            ctx.fill();
             ctx.stroke();
         },
         isClickedRegion: function(x, y) {
@@ -1307,7 +1305,6 @@ var colors5 = {
             ctx.font = "38pt Verdana";
             ctx.fillText("CRAPS", 1550, 944);
             ctx.strokeText("CRAPS", 1550, 944);
-            ctx.fill();
             ctx.stroke();
         },
         isClickedRegion: function(x, y) {
