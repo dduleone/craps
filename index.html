@@ -630,7 +630,6 @@
         }
       };
       //end snippet
-      $(window).resize(function(){resizeModal();});
       
       (function() {
         $('#rules').hide();
@@ -681,7 +680,9 @@
         _CRAPS.dealer.betManager.animateBets();
       })();
       
-      $(window).resize(function(){PlayerManager.updatePlayerArea();});
+      $(window).resize(function(){
+        PlayerManager.updatePlayerArea();
+        });
       
       function prettyToName(betType){
         switch(betType){
