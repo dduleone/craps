@@ -724,7 +724,7 @@ var colors5 = {
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = "#000000";
-            ctx.lineWidth = 1px;
+            ctx.lineWidth = 1;
             ctx.font = "38pt Verdana";
             ctx.fillText("SEVEN", 1550, 493);
             ctx.strokeText("SEVEN", 1550, 493);
@@ -1303,7 +1303,7 @@ var colors5 = {
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = "#000000";
-            ctx.lineWidth = 1px;
+            ctx.lineWidth = 1;
             ctx.font = "38pt Verdana";
             ctx.fillText("CRAPS", 1550, 944);
             ctx.strokeText("CRAPS", 1550, 944);
