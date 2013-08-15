@@ -43,26 +43,26 @@ var getButtonColors = function(lineColor){
     numUpper[0] = Math.min((numUpper[0] + 64), 255);
     numUpper[1] = Math.min((numUpper[1] + 64), 255);
     numUpper[2] = Math.min((numUpper[2] + 64), 255);
-    upperLines = '#' + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
+    upperLines = '#' + (numLower[0]<16?'0':'') + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
     lowerLines = lines;
-  } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64 ||
-            parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64){
+  } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 191 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 191 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 191 ||
+            parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 191 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 191 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 191){
     numLower[0] = Math.max((numLower[0] - 64), 0);
     numLower[1] = Math.max((numLower[1] - 64), 0);
     numLower[2] = Math.max((numLower[2] - 64), 0);
-    lowerLines = '#' + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
     upperLines = lines;
+    lowerLines = '#' + (numLower[0]<16?'0':'') + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
   } else {
     numUpper[0] = Math.min((numUpper[0] + 64), 255);
     numUpper[1] = Math.min((numUpper[1] + 64), 255);
     numUpper[2] = Math.min((numUpper[2] + 64), 255);
-    upperLines = '#' + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
+    upperLines = '#' + (numLower[0]<16?'0':'') + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
     numLower[0] = Math.max((numLower[0] - 64), 0);
     numLower[1] = Math.max((numLower[1] - 64), 0);
     numLower[2] = Math.max((numLower[2] - 64), 0);
-    lowerLines = '#' + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
+    lowerLines = '#' + (numLower[0]<16?'0':'') + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
   }
-  var numButton = [(numUpper[0] + numLower[0])/2, (numUpper[1] + numLower[1])/2, (numUpper[2] + numLower[2])/2]
+  var numButton = [Math.round((numUpper[0] + numLower[0])/2), Math.round((numUpper[1] + numLower[1])/2), Math.round((numUpper[2] + numLower[2])/2)]
   var buttonColor = '#' + numButton[0].toString(16) + numButton[1].toString(16) + numButton[2].toString(16);
   var numText = [255 - numButton[0], 255 - numButton[1], 255 - numButton[2]] 
   var buttonText = '#' + numText[0].toString(16) + numText[1].toString(16) + numText[2].toString(16);
@@ -1459,9 +1459,9 @@ var colors5 = {
           ctx.rect(1202, 202, 75, 75);
           ctx.rect(1302, 202, 75, 75);
           var col = colorToNumArray(this.board.colors.dice);
-          col[0] = col[0]*(1/3)
-          col[1] = col[1]*(1/3)
-          col[2] = col[2]*(1/3)
+          col[0] = Math.round(col[0]*(1/3))
+          col[1] = Math.round(col[1]*(1/3))
+          col[2] = Math.round(col[2]*(1/3))
           ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
           ctx.fill();
           ctx.lineWidth = 5;
@@ -1472,9 +1472,9 @@ var colors5 = {
           ctx.rect(1201, 201, 75, 75);
           ctx.rect(1301, 201, 75, 75);
           var col = colorToNumArray(this.board.colors.dice);
-          col[0] = col[0]*(2/3)
-          col[1] = col[1]*(2/3)
-          col[2] = col[2]*(2/3)
+          col[0] = Math.round(col[0]*(2/3))
+          col[1] = Math.round(col[1]*(2/3))
+          col[2] = Math.round(col[2]*(2/3))
           ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
           ctx.fill();
           ctx.lineWidth = 5;
@@ -1966,17 +1966,17 @@ var colors5 = {
             ctx.closePath();
             ctx.beginPath();
             var col = colorToNumArray(this.colors.finalText);
-            col[0] = col[0]*(1/3)
-            col[1] = col[1]*(1/3)
-            col[2] = col[2]*(1/3)
+            col[0] = Math.round(col[0]*(1/3))
+            col[1] = Math.round(col[1]*(1/3))
+            col[2] = Math.round(col[2]*(1/3))
             ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
             ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 102, 72);
             ctx.closePath();
             ctx.beginPath();
             var col = colorToNumArray(this.colors.finalText);
-            col[0] = col[0]*(2/3)
-            col[1] = col[1]*(2/3)
-            col[2] = col[2]*(2/3)
+            col[0] = Math.round(col[0]*(2/3))
+            col[1] = Math.round(col[1]*(2/3))
+            col[2] = Math.round(col[2]*(2/3))
             ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
             ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 101, 71);
             ctx.closePath();
