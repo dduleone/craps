@@ -5,6 +5,26 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+var colorToNumArray = function(color){
+  var colorArray = []
+  var cleanColor = ''
+  if(color.split('')[0]='#'){
+    cleanColor = color.slice(1);
+  } else {
+    cleanColor = color;
+  }
+
+  var split = cleanColor.split('');
+  colorArray[0] = split[0] + split[1];
+  colorArray[1] = split[2] + split[3];
+  colorArray[2] = split[4] + split[5];
+  colorArray[0] = parseInt(colorArray[0], 16);
+  colorArray[1] = parseInt(colorArray[1], 16);
+  colorArray[2] = parseInt(colorArray[2], 16);
+  
+  return colorArray;
+}
+
 var getButtonColors = function(lineColor){
   var lines='';
   var upperLines='';
@@ -17,58 +37,30 @@ var getButtonColors = function(lineColor){
   } else {
     lines = lineColor;
   }
+    numLower = colorToNumArray(lines);
+    numUpper = colorToNumArray(lines);
   if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
-    var lowerSplit = lines.split('');
-    numLower[0] = lowerSplit[1] + lowerSplit[2];
-    numLower[1] = lowerSplit[3] + lowerSplit[4];
-    numLower[2] = lowerSplit[5] + lowerSplit[6];
-    numLower[0] = parseInt(numLower[0], 16);
-    numLower[1] = parseInt(numLower[1], 16);
-    numLower[2] = parseInt(numLower[2], 16);
-    var upperSplit = lines.split('');
-    numUpper[0] = upperSplit[1] + upperSplit[2];
-    numUpper[1] = upperSplit[3] + upperSplit[4];
-    numUpper[2] = upperSplit[5] + upperSplit[6];
-    numUpper[0] = Math.min((parseInt(numUpper[0], 16) + 64), 255);
-    numUpper[1] = Math.min((parseInt(numUpper[1], 16) + 64), 255);
-    numUpper[2] = Math.min((parseInt(numUpper[2], 16) + 64), 255);
-    upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
+    numUpper[0] = Math.min((numUpper[0] + 64), 255);
+    numUpper[1] = Math.min((numUpper[1] + 64), 255);
+    numUpper[2] = Math.min((numUpper[2] + 64), 255);
+    upperLines = '#' + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
     lowerLines = lines;
   } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64 ||
             parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 64 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 64 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 64){
-    var upperSplit = lines.split('');
-    numUpper[0] = upperSplit[1] + upperSplit[2];
-    numUpper[1] = upperSplit[3] + upperSplit[4];
-    numUpper[2] = upperSplit[5] + upperSplit[6];
-    numUpper[0] = parseInt(numUpper[0], 16);
-    numUpper[1] = parseInt(numUpper[1], 16);
-    numUpper[2] = parseInt(numUpper[2], 16);
-    var lowerSplit = lines.split('');
-    numLower[0] = lowerSplit[1] + lowerSplit[2];
-    numLower[1] = lowerSplit[3] + lowerSplit[4];
-    numLower[2] = lowerSplit[5] + lowerSplit[6];
-    numLower[0] = Math.max((parseInt(numLower[0], 16) - 64), 0);
-    numLower[1] = Math.max((parseInt(numLower[1], 16) - 64), 0);
-    numLower[2] = Math.max((parseInt(numLower[2], 16) - 64), 0);
-    lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16); 
+    numLower[0] = Math.max((numLower[0] - 64), 0);
+    numLower[1] = Math.max((numLower[1] - 64), 0);
+    numLower[2] = Math.max((numLower[2] - 64), 0);
+    lowerLines = '#' + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
     upperLines = lines;
   } else {
-    var upperSplit = lines.split('');
-    numUpper[0] = upperSplit[1] + upperSplit[2];
-    numUpper[1] = upperSplit[3] + upperSplit[4];
-    numUpper[2] = upperSplit[5] + upperSplit[6];
-    numUpper[0] = Math.min((parseInt(numUpper[0], 16) + 64), 255);
-    numUpper[1] = Math.min((parseInt(numUpper[1], 16) + 64), 255);
-    numUpper[2] = Math.min((parseInt(numUpper[2], 16) + 64), 255);
-    upperLines = '#' + numUpper[0].toString(16) + numUpper[1].toString(16) + numUpper[2].toString(16);
-    var lowerSplit = lines.split('');
-    numLower[0] = lowerSplit[1] + lowerSplit[2];
-    numLower[1] = lowerSplit[3] + lowerSplit[4];
-    numLower[2] = lowerSplit[5] + lowerSplit[6];
-    numLower[0] = Math.max((parseInt(numLower[0], 16) - 64), 0);
-    numLower[1] = Math.max((parseInt(numLower[1], 16) - 64), 0);
-    numLower[2] = Math.max((parseInt(numLower[2], 16) - 64), 0);
-    lowerLines = '#' + numLower[0].toString(16) + numLower[1].toString(16) + numLower[2].toString(16);
+    numUpper[0] = Math.min((numUpper[0] + 64), 255);
+    numUpper[1] = Math.min((numUpper[1] + 64), 255);
+    numUpper[2] = Math.min((numUpper[2] + 64), 255);
+    upperLines = '#' + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
+    numLower[0] = Math.max((numLower[0] - 64), 0);
+    numLower[1] = Math.max((numLower[1] - 64), 0);
+    numLower[2] = Math.max((numLower[2] - 64), 0);
+    lowerLines = '#' + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
   }
   var numButton = [(numUpper[0] + numLower[0])/2, (numUpper[1] + numLower[1])/2, (numUpper[2] + numLower[2])/2]
   var buttonColor = '#' + numButton[0].toString(16) + numButton[1].toString(16) + numButton[2].toString(16);
@@ -1461,6 +1453,32 @@ var colors5 = {
           ctx.fill();
           ctx.lineWidth = 5;
           ctx.strokeStyle = '#000000';
+          ctx.stroke();
+          ctx.closePath();
+          ctx.beginPath();
+          ctx.rect(1202, 202, 75, 75);
+          ctx.rect(1302, 202, 75, 75);
+          var col = colorToNumArray(this.board.colors.dice);
+          col[0] = col[0]*(1/3)
+          col[1] = col[1]*(1/3)
+          col[2] = col[2]*(1/3)
+          ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = ctx.fillStyle;
+          ctx.stroke();
+          ctx.closePath();
+          ctx.beginPath();
+          ctx.rect(1201, 201, 75, 75);
+          ctx.rect(1301, 201, 75, 75);
+          var col = colorToNumArray(this.board.colors.dice);
+          col[0] = col[0]*(2/3)
+          col[1] = col[1]*(2/3)
+          col[2] = col[2]*(2/3)
+          ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = ctx.fillStyle;
           ctx.stroke();
           ctx.closePath();
           ctx.beginPath();

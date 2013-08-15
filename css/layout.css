@@ -247,71 +247,76 @@
     -ms-user-select: none;
     user-select: none;
   }
+  .tab{
+    height: 25px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px;
+    border-color: black;
+    margin: 0px 0px;
+    padding: 0px 5px;
+    background: #666;
+    color: #fff;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 25px;
+  }
+  .tab:hover{
+    background: #888;
+    color: #000;
+  }
+  .tab.active{
+    border: 1px;
+    border-bottom: none;
+    border-color: black;
+    background: #222;
+    color: #fff;
+    text-decoration: underline;
+  }
+  .insideTab{
+    height: 25px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px;
+    border-color: black;
+    margin: 0px 0px;
+    padding: 0px 5px;
+    background: #888;
+    color: #000;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 25px;
+  }
+  .insideTab:hover{
+    background: #aaa;
+    color: #000;
+  }
+  .insideTab.active{
+    border: 1px;
+    border-bottom: none;
+    border-color: black;
+    background: #444;
+    color: #fff;
+    text-decoration: underline;
+  }
+  #rulesWindow{
+    background: #444;
+    margin: 0;
+    padding: 0;
+  }
   #create{
     float: left;
   }
   #cancel{
     float: right;
-  }/*
-  #playerArea{
-    position: absolute;
-    height: 18%;
-    width: 30%;
-    top: 0px;
-    left: 0px;
-    margin: 2px;
-    padding: 5px;
-  }
-  #name{
-    position: relative;
-    text-align: center;
-    top: 0px;
-    font-size: 30pt;
-    width: 29%;
-    left: 0.25%;
-    /*height: 30%;
-    /*margin: 0px;
-    padding: 0px;
-  }
-  #nameInput{
-    position: relative;
-    text-align: center;
-    top: -10px;
-    font-family: 'Verdana';
-    font-size: 30pt;
-  }/*
-  #bank{
-    position: relative;
-    text-align: center;
-  }
-  #availBank{
-    position: relative;
-    top: auto;
-    left: 0%;
-    width: 33%;
-    float: left;
-  }
-  #inPlay{
-    position: relative;
-    top: auto;
-    left: 0%;
-    width: 33%;
-    float: left;
-  }
-  #totBank{
-    position: relative;
-    top: auto;
-    left: 0%;
-    width: 33%;
-    float: left;
-  }*/
-  .winning{
-    color: white;
-    background-color: green;
-  }
-  .losing{
-    color: white;
-    background-color: red;
   }
   table, td, th{
     text-align: center;
@@ -383,18 +388,25 @@
   }
   #modalButtons{
     position: relative;
+    padding: 0;
+    margin: 0;
+  }
+  #rulesButtons{
+    position: relative;
+    padding: 0;
+    margin: 0;
   }
   #modalWindow{
     position: relative;
     background: #222;
     overflow: auto;
     overflow-x: hidden;
+    padding: 0px;
   }
   #gameplay{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
-    top: 2%;
     left: 0;
     padding: 10px;
     overflow: auto;
@@ -404,19 +416,18 @@
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
-    top: 2%;
     left: 0;
-    width: 100%;
+    /*width: 100%;*/
     padding: 10px;
     float: left;
-    overflow: auto;
+    overflow: none;
     display: none;
   }
   #standard{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
     padding: 10px;
     float: left;
@@ -425,8 +436,8 @@
   #multi{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
     padding: 10px;
     float: left;
@@ -436,8 +447,8 @@
   #single{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
     padding: 10px;
     float: left;
@@ -447,8 +458,8 @@
   #fire{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
     padding: 10px;
     float: left;
@@ -459,7 +470,6 @@
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
-    top: 2%;
     left: 0;
     padding: 10px;
     /*float: left;*/

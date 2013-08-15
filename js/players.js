@@ -38,12 +38,12 @@ $.extend(PlayerManager, {
     
     var bank = $('#bank');
     $('#settingsName').val(this.players[0].player.name)
-    if($('#modalButtons').height() > 60){
-      $('#modalWindow').height($('#modal').height() - 95);
-    }else{
-      $('#modalWindow').height($('#modal').height() - 65);
-    }
-    $('#tutorialInstruction').css({'top': ($('#generalButtons').offset().top + $('#generalButtons').height())});
+    //if($('#modalButtons').height() > 60){
+    //  $('#modalWindow').height($('#modal').height() - 95);
+    //}else{
+    //  $('#modalWindow').height($('#modal').height() - 65);
+    //}
+    //$('#tutorialInstruction').css({'top': ($('#generalButtons').offset().top + $('#generalButtons').height())});
     var totalBets = 0;
     for(x in _CRAPS.dealer.betManager.bets){
       totalBets += _CRAPS.dealer.betManager.bets[x].bet.value;

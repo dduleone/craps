@@ -123,10 +123,10 @@ function clickModalButton(button){
   }
   modals.splice(modals.indexOf(button), 1);
   for(i in modals){
-    $('#' + modals[i] + 'Button').removeClass('blue');
+    $('#' + modals[i] + 'Button').removeClass('active');
     $('#' + modals[i]).hide();
   }
-  $('#' + button + 'Button').addClass('blue');
+  $('#' + button + 'Button').addClass('active');
   $('#' + button).show();
   //resizeModal();
   if($('#colorScheme').val() == 5){
@@ -145,10 +145,10 @@ function clickRulesButton(button){
   var mod = $('#modal');
   modals.splice(modals.indexOf(button), 1);
   for(i in modals){
-    $('#' + modals[i] + 'Button').removeClass('red');
+    $('#' + modals[i] + 'Button').removeClass('active');
     $('#' + modals[i]).hide();
   }
-  $('#' + button + 'Button').addClass('red');
+  $('#' + button + 'Button').addClass('active');
   $('#' + button).show();
   //resizeModal();
   if($('#colorScheme').val() == 5){
