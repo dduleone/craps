@@ -343,6 +343,7 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context;
+            ctx.beginPath();
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = "#000000";
@@ -351,6 +352,7 @@ var colors5 = {
             ctx.fillText("COME", 650, 450);
             ctx.strokeText("COME", 650, 450);
             ctx.stroke();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (x > 300 && x < 1000 && y > 350 && y < 500) {
@@ -720,6 +722,7 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context;
+            ctx.beginPath();
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = "#000000";
@@ -728,6 +731,7 @@ var colors5 = {
             ctx.fillText("SEVEN", 1550, 493);
             ctx.strokeText("SEVEN", 1550, 493);
             ctx.stroke();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1900 && y > 450 && y < 500) {
@@ -1298,6 +1302,7 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context;
+            ctx.beginPath();
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
             ctx.strokeStyle = "#000000";
@@ -1306,6 +1311,7 @@ var colors5 = {
             ctx.fillText("CRAPS", 1550, 944);
             ctx.strokeText("CRAPS", 1550, 944);
             ctx.stroke();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1900 && y > 900 && y < 950) {
