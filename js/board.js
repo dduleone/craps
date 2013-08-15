@@ -476,15 +476,21 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context
+            ctx.beginPath();
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
             ctx.font = "70pt Verdana";
             ctx.save();
             ctx.translate(270, 550);
             ctx.rotate(Math.PI * 0.25);
             ctx.fillText("6", 5, 50);
+            ctx.strokeText("6", 5, 50);
+            ctx.stroke();
             ctx.restore();
+            ctx.closePath()
         },
         isClickedRegion: function(x, y) {
             if (200 < x && x < 300 && 500 < y && y < ((-7/6)*x + 933.33)) {
@@ -505,15 +511,21 @@ var colors5 = {
         name: "Big 8",
         draw: function() {
             var ctx = this.board.context
+            ctx.beginPath();
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
             ctx.font = "70pt Verdana";
             ctx.save();
             ctx.translate(350, 650);
             ctx.rotate(Math.PI * 0.25);
             ctx.fillText("8", 5, 50);
+            ctx.strokeText("8", 5, 50);
+            ctx.stroke();
             ctx.restore();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (200 < x && x < 350 && (-7/6 * x + 983.33) < y && y < 750 ||
