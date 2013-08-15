@@ -225,6 +225,9 @@ function resizeModal(){
   if(hidden){
     mod.hide();
   }
+  if(!hidden){
+    mod.css({left: ($('#board').offset().left + $('#board').width() + 2)});
+  }
 }
 
 function updateColors(){
