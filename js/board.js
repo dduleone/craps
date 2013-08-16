@@ -2071,6 +2071,7 @@ var colors5 = {
                     // resulting color is white
                 }
             }
+            context.putImageData(imageData, 1430, 70);
             this.drawPoint(ctx, GameState.point);
             this.drawFire(ctx, GameState.fireArray);
         },
