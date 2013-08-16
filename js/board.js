@@ -2040,8 +2040,9 @@ var colors5 = {
             //} else if(this.colors.board =='#333333' || this.colors.board =='#333'){
             //  ctx.drawImage(logoWhite, 1430, 70, 400, 320);
             //} else {
-              ctx.drawImage(logo, 1430, 70, 400, 320);
+            //ctx.drawImage(logo, 1430, 70, 400, 320);
             //}
+            ctx.drawImage(logoFull, 1430, 70, 400, 320);
             ctx.closePath();
             var imageData = ctx.getImageData(1430, 70, 400, 320);
             var pixelArray = imageData.data;
