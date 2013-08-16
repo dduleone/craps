@@ -2057,17 +2057,17 @@ var colors5 = {
                 var a = pixelArray[++index];
             
                 if (r === 0 && g === 0 && b === 0 & a === 255) { // pixel is red
-                    var boardColors = colorToNumArray(this.colors.board);
-                    pixelArray[--index] = boardColors[2]; // blue is set to 100%
-                    pixelArray[--index] = boardColors[1]; // green is set to 100%
-                    pixelArray[--index] = boardColors[0]; // red is set to 100%
-                    // resulting color is white
-                }
-                if (r === 255 && g === 255 && b === 255 & a === 255) { // pixel is red
                     var lineColors = colorToNumArray(this.colors.lines);
                     pixelArray[--index] = lineColors[2]; // blue is set to 100%
                     pixelArray[--index] = lineColors[1]; // green is set to 100%
                     pixelArray[--index] = lineColors[0]; // red is set to 100%
+                    // resulting color is white
+                }
+                if (r === 255 && g === 255 && b === 255 & a === 255) { // pixel is red
+                    var boardColors = colorToNumArray(this.colors.board);
+                    pixelArray[--index] = boardColors[2]; // blue is set to 100%
+                    pixelArray[--index] = boardColors[1]; // green is set to 100%
+                    pixelArray[--index] = boardColors[0]; // red is set to 100%
                     // resulting color is white
                 }
             }
