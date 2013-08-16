@@ -1,5 +1,21 @@
 var fireImg = new Image();
 fireImg.src = 'img/fire.png';
+fireImg.crossOrigin = "Anonymous";
+var logo = new Image();
+logo.src = 'img/logo.png';
+logo.crossOrigin = "Anonymous";
+var logoFull = new Image();
+logoFull.src = 'img/logoFull.png';
+logoFull.crossOrigin = "Anonymous";
+document.getElementsByTagName('canvas')[0].crossOrigin = "Anonymous";
+//logoFull.onLoad = function(){
+//      localStorage.setItem( "logoFull", canvas.toDataURL("image/png") );
+//}
+//logoFull.src = logoFullSrc;
+//if ( logoFull.complete || logoFull.complete === undefined ) {
+//    logoFull.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+//    logoFull.src += logoFullSrc;
+//}
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1981,9 +1997,12 @@ var colors5 = {
             ctx.fillStyle = this.colors.specialText;
             ctx.strokeStyle = this.colors.specialText;
             ctx.font = "20pt Verdana";
-            ctx.fillText('3x-4x-5x Odds', 1200, 100); 
-            ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
-            ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
+            //ctx.fillText('3x-4x-5x Odds', 1200, 100); 
+            //ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
+            //ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
+            ctx.fillText('3x-4x-5x Odds', 300, 910); 
+            ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 300, 935); 
+            ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 300, 960);
             ctx.closePath();
             ctx.beginPath();
             ctx.font = '40pt Verdana';
@@ -2011,6 +2030,37 @@ var colors5 = {
             ctx.fillStyle = this.colors.finalText;
             ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 100, 70);
             ctx.closePath();
+            
+            ctx.beginPath();
+            ctx.drawImage(logoFull, 1430, 70, 400, 320);
+            ctx.closePath();
+            var imageData = ctx.getImageData(1430, 70, 400, 320);
+            var pixelArray = imageData.data;
+            var length = pixelArray.length / 4; // 4 components - red, green, blue and alpha
+            
+            for (var i = 0; i < length; i++) {
+                var index = 4 * i;
+            
+                var r = pixelArray[index];
+                var g = pixelArray[++index];
+                var b = pixelArray[++index];
+                var a = pixelArray[++index];
+            
+                if (r === 0 && g === 0 && b === 0 & a === 255) { // pixel is red
+                    var boardColors = colorToNumArray(this.colors.board);
+                    pixelArray[--index] = boardColors[2]; // blue is set to 100%
+                    pixelArray[--index] = boardColors[1]; // green is set to 100%
+                    pixelArray[--index] = boardColors[0]; // red is set to 100%
+                    // resulting color is white
+                }
+                if (r === 255 && g === 255 && b === 255 & a === 255) { // pixel is red
+                    var lineColors = colorToNumArray(this.colors.lines);
+                    pixelArray[--index] = lineColors[2]; // blue is set to 100%
+                    pixelArray[--index] = lineColors[1]; // green is set to 100%
+                    pixelArray[--index] = lineColors[0]; // red is set to 100%
+                    // resulting color is white
+                }
+            }
             this.drawPoint(ctx, GameState.point);
             this.drawFire(ctx, GameState.fireArray);
         },

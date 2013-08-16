@@ -5,6 +5,8 @@
     <meta name="description" content="HTML5 Craps" />
     <meta name="keywords" content="Craps, Free Craps, HTML5 Craps, Play Craps, Learn Craps, Craps Tutorial, Online Craps, Learn to play Craps, Craps for free, casino, Craps casino, online casino games, online casino, las vegas, atlantic city, free casino, HTML5 Casino, craps odds, play casino craps, casino craps online, casino craps games" />
     <meta name="author" content="Matt DuLeone" />
+		<meta charset="UTF-8" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <!-- meta property='og:title' content='HTML5 Craps' />
     <meta property='og:type' content='website' />
     <meta property='og:image' content='http://duleone.com/craps/img/dice.png' />
@@ -411,7 +413,7 @@
           board.draw();
       
           canvas.onclick = function(e) {
-              //console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
+              console.log('(x = ' + ((e.clientX - board.canvas.offsetLeft)/ board.canvas.clientWidth) * 2000 + ',','y = ' +  ((e.clientY - board.canvas.offsetTop)/ board.canvas.clientHeight) * 1000 + ')');
               boardArea = board.processClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
               if(boardArea){
                 if(boardArea.name == "Dice"){
