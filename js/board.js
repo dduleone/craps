@@ -1,11 +1,11 @@
 var fireImg = new Image();
-fireImg.src = 'img/fire.png';
+fireImg.src = 'http://duleone.com/craps/img/fire.png';
 fireImg.crossOrigin = "Anonymous";
 var logo = new Image();
-logo.src = 'img/logo.png';
+logo.src = 'http://duleone.com/craps/img/logo.png';
 logo.crossOrigin = "Anonymous";
 var logoFull = new Image();
-logoFull.src = 'img/logoFull.png';
+logoFull.src = 'http://duleone.com/craps/img/logoFull.png';
 logoFull.crossOrigin = "Anonymous";
 document.getElementsByTagName('canvas')[0].crossOrigin = "Anonymous";
 //logoFull.onLoad = function(){
