@@ -1,12 +1,12 @@
 var fireImg = new Image();
 fireImg.src = 'http://duleone.com/craps/img/fire.png';
-fireImg.crossOrigin = "Anonymous";
+//fireImg.crossOrigin = "Anonymous";
 var logo = new Image();
 logo.src = 'http://duleone.com/craps/img/logo.png';
-logo.crossOrigin = "Anonymous";
+//logo.crossOrigin = "Anonymous";
 var logoFull = new Image();
 logoFull.src = 'http://duleone.com/craps/img/logoFull.png';
-logoFull.crossOrigin = "Anonymous";
+//logoFull.crossOrigin = "Anonymous";
 document.getElementsByTagName('canvas')[0].crossOrigin = "Anonymous";
 //logoFull.onLoad = function(){
 //      localStorage.setItem( "logoFull", canvas.toDataURL("image/png") );
