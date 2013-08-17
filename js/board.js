@@ -3,9 +3,11 @@ fireImg.src = 'img/fire.png';
 //fireImg.crossOrigin = "Anonymous";
 var logo = new Image();
 logo.src = 'img/logo.png';
+logo.setAttribute('onload', 'draw(Board)');
 //logo.crossOrigin = "Anonymous";
 var logoWhite = new Image();
 logoWhite.src = 'img/logoWhite.png';
+logoWhite.setAttribute('onload', 'draw(Board)');
 //logo.crossOrigin = "Anonymous";
 var logoFull = new Image();
 logoFull.src = 'img/logoFull.png';
@@ -2035,43 +2037,42 @@ var colors5 = {
             ctx.closePath();
             
             ctx.beginPath();
-            //if(this.colors.board =='#000000' || this.colors.board =='#000'){
-            //  ctx.drawImage(logoWhite, 1430, 70, 400, 320);
-            //} else if(this.colors.board =='#333333' || this.colors.board =='#333'){
-            //  ctx.drawImage(logoWhite, 1430, 70, 400, 320);
-            //} else {
-            //ctx.drawImage(logo, 1430, 70, 400, 320);
-            //}
-            ctx.drawImage(logoFull, 1430, 70, 400, 320);
-            ctx.closePath();
-            var imageData = ctx.getImageData(1430, 70, 400, 320);
-            var pixelArray = imageData.data;
-            var length = pixelArray.length / 4; // 4 components - red, green, blue and alpha
-            
-            for (var i = 0; i < length; i++) {
-                var index = 4 * i;
-            
-                var r = pixelArray[index];
-                var g = pixelArray[++index];
-                var b = pixelArray[++index];
-                var a = pixelArray[++index];
-            
-                if (r === 0 && g === 0 && b === 0 & a === 255) { // pixel is red
-                    var lineColors = colorToNumArray(this.colors.lines);
-                    pixelArray[--index] = lineColors[2]; // blue is set to 100%
-                    pixelArray[--index] = lineColors[1]; // green is set to 100%
-                    pixelArray[--index] = lineColors[0]; // red is set to 100%
-                    // resulting color is white
-                }
-                if (r === 255 && g === 255 && b === 255 & a === 255) { // pixel is red
-                    var boardColors = colorToNumArray(this.colors.board);
-                    pixelArray[--index] = boardColors[2]; // blue is set to 100%
-                    pixelArray[--index] = boardColors[1]; // green is set to 100%
-                    pixelArray[--index] = boardColors[0]; // red is set to 100%
-                    // resulting color is white
-                }
+            var boardColors = colorToNumArray(this.colors.board);
+            if(boardColors[0] < 64 && boardColors[1] < 64 && boardColors[2] < 64){
+              ctx.drawImage(logoWhite, 1430, 70, 400, 320);
+            } else {
+              ctx.drawImage(logo, 1430, 70, 400, 320);
             }
-            ctx.putImageData(imageData, 1430, 70);
+            //ctx.drawImage(logoFull, 1430, 70, 400, 320);
+            ctx.closePath();
+            //var imageData = ctx.getImageData(1430, 70, 400, 320);
+            //var pixelArray = imageData.data;
+            //var length = pixelArray.length / 4; // 4 components - red, green, blue and alpha
+            //
+            //for (var i = 0; i < length; i++) {
+            //    var index = 4 * i;
+            //
+            //    var r = pixelArray[index];
+            //    var g = pixelArray[++index];
+            //    var b = pixelArray[++index];
+            //    var a = pixelArray[++index];
+            //
+            //    if (r === 0 && g === 0 && b === 0 & a === 255) { // pixel is red
+            //        var lineColors = colorToNumArray(this.colors.lines);
+            //        pixelArray[--index] = lineColors[2]; // blue is set to 100%
+            //        pixelArray[--index] = lineColors[1]; // green is set to 100%
+            //        pixelArray[--index] = lineColors[0]; // red is set to 100%
+            //        // resulting color is white
+            //    }
+            //    if (r === 255 && g === 255 && b === 255 & a === 255) { // pixel is red
+            //        var boardColors = colorToNumArray(this.colors.board);
+            //        pixelArray[--index] = boardColors[2]; // blue is set to 100%
+            //        pixelArray[--index] = boardColors[1]; // green is set to 100%
+            //        pixelArray[--index] = boardColors[0]; // red is set to 100%
+            //        // resulting color is white
+            //    }
+            //}
+            //ctx.putImageData(imageData, 1430, 70);
             this.drawPoint(ctx, GameState.point);
             this.drawFire(ctx, GameState.fireArray);
         },

@@ -842,6 +842,7 @@ function create(){
   if($('#betType').val() == 'fire'){
     $('#betValue').val(preFireVal);
   }
+  draw(Board);
 }
 
 function cancel(){
