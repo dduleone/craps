@@ -9,7 +9,7 @@ function openModal(){
   var mod = $('#modal');
   mod.show();
   //mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
-  mod.animate({left: ($('#board').offset().left + $('#board').width() - mod.width() - 20), opacity: 1}, MODAL_FADE_INTERVAL);
+  mod.animate({left: ($('#board').width() - mod.width() - 20), opacity: 1}, MODAL_FADE_INTERVAL);
   //resizeModal();
   if($('#colorScheme').val() == 5){
     $('#customColors').show();
@@ -67,7 +67,7 @@ function closeBets(){
 function openBets(){
   var betList = $('#betListBG');
   betList.show();
-  betList.animate({left: ($('#board').offset().left + $('#board').width() - betList.width() - 20), opacity: 1}, MODAL_FADE_INTERVAL);
+  betList.animate({left: ($('#board').width() - betList.width() - 20), opacity: 1}, MODAL_FADE_INTERVAL);
   $('#modalScreen').show();
   _CRAPS.dealer.betManager.displayBets();
   PlayerManager.updatePlayerArea();
