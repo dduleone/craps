@@ -42,12 +42,12 @@
       viewport.setAttribute('name', 'viewport');
       if(isMobile.iOS()){
         viewport.setAttribute('content','content',"user-scalable=0, initial-scale=1.0, maximum-scale=1.0");
+        var apple = document.createElement('meta');
         apple.setAttribute('name','apple-mobile-web-app-capable')
         apple.setAttribute('content','yes')
         document.getElementsByTagName('head')[0].appendChild(apple);
       } else {
         viewport.setAttribute('content',"user-scalable=0, width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi");
-        var apple = document.createElement('meta');
       }
       document.getElementsByTagName('head')[0].appendChild(viewport);
     </script>
