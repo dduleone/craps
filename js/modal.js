@@ -58,14 +58,16 @@ function closeModal(){
 }
 
 function closeBets(){
-  $('#betListBG').hide();
+  var betList = $('#betListBG');
+  betList.animate({left: '100%', opacity: 0}, MODAL_FADE_INTERVAL), function(){$('#betListBG').hide();};
   $('#modalScreen').hide();
   $('#openButtons').show();
 }
 
 function openBets(){
-  $('#betListBG').show();
-  $('#openButtons').hide();
+  var betList = $('#betListBG');
+  betList.show();
+  betList.animate({left: ($('#board').offset().left + $('#board').width() - betList.width() - 20), opacity: 1}, MODAL_FADE_INTERVAL);
   $('#modalScreen').show();
   _CRAPS.dealer.betManager.displayBets();
   PlayerManager.updatePlayerArea();
