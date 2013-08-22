@@ -1,5 +1,94 @@
 var fireImg = new Image();
 fireImg.src = 'img/fire.png';
+//fireImg.crossOrigin = "Anonymous";
+var logo = new Image();
+logo.src = 'img/logo.png';
+logo.setAttribute('onload', 'draw(Board)');
+//logo.crossOrigin = "Anonymous";
+var logoWhite = new Image();
+logoWhite.src = 'img/logoWhite.png';
+logoWhite.setAttribute('onload', 'draw(Board)');
+//logo.crossOrigin = "Anonymous";
+var logoFull = new Image();
+logoFull.src = 'img/logoFull.png';
+//logoFull.crossOrigin = "Anonymous";
+//document.getElementsByTagName('canvas')[0].crossOrigin = "Anonymous";
+//logoFull.onLoad = function(){
+//      localStorage.setItem( "logoFull", canvas.toDataURL("image/png") );
+//}
+//logoFull.src = logoFullSrc;
+//if ( logoFull.complete || logoFull.complete === undefined ) {
+//    logoFull.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+//    logoFull.src += logoFullSrc;
+//}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+var colorToNumArray = function(color){
+  var colorArray = []
+  var cleanColor = ''
+  if(color.split('')[0]='#'){
+    cleanColor = color.slice(1);
+  } else {
+    cleanColor = color;
+  }
+
+  var split = cleanColor.split('');
+  colorArray[0] = split[0] + split[1];
+  colorArray[1] = split[2] + split[3];
+  colorArray[2] = split[4] + split[5];
+  colorArray[0] = parseInt(colorArray[0], 16);
+  colorArray[1] = parseInt(colorArray[1], 16);
+  colorArray[2] = parseInt(colorArray[2], 16);
+  
+  return colorArray;
+}
+
+var getButtonColors = function(lineColor){
+  var lines='';
+  var upperLines='';
+  var numUpper = [];
+  var lowerLines='';
+  var numLower = [];
+  if(lineColor.length == 4){
+    var tempLines = lineColor.split('');
+    lines = '#' + tempLines[1] + tempLines[1] + tempLines[2] + tempLines[2] + tempLines[3] + tempLines[3];
+  } else {
+    lines = lineColor;
+  }
+    numLower = colorToNumArray(lines);
+    numUpper = colorToNumArray(lines);
+  if(lines.split('')[1] == '0' || lines.split('')[3] == '0' || lines.split('')[5] == '0'){
+    numUpper[0] = Math.min((numUpper[0] + 64), 255);
+    numUpper[1] = Math.min((numUpper[1] + 64), 255);
+    numUpper[2] = Math.min((numUpper[2] + 64), 255);
+    upperLines = '#' + (numUpper[0]<16?'0':'') + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
+    lowerLines = lines;
+  } else if(parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 191 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 191 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 191 ||
+            parseInt((lines.split('')[1] + lines.split('')[2]), 16) >= 191 || parseInt((lines.split('')[3] + lines.split('')[4]), 16) >= 191 || parseInt((lines.split('')[5] + lines.split('')[6]), 16) >= 191){
+    numLower[0] = Math.max((numLower[0] - 64), 0);
+    numLower[1] = Math.max((numLower[1] - 64), 0);
+    numLower[2] = Math.max((numLower[2] - 64), 0);
+    upperLines = lines;
+    lowerLines = '#' + (numLower[0]<16?'0':'') + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
+  } else {
+    numUpper[0] = Math.min((numUpper[0] + 64), 255);
+    numUpper[1] = Math.min((numUpper[1] + 64), 255);
+    numUpper[2] = Math.min((numUpper[2] + 64), 255);
+    upperLines = '#' + (numUpper[0]<16?'0':'') + numUpper[0].toString(16) + (numUpper[1]<16?'0':'') + numUpper[1].toString(16) + (numUpper[2]<16?'0':'') + numUpper[2].toString(16);
+    numLower[0] = Math.max((numLower[0] - 64), 0);
+    numLower[1] = Math.max((numLower[1] - 64), 0);
+    numLower[2] = Math.max((numLower[2] - 64), 0);
+    lowerLines = '#' + (numLower[0]<16?'0':'') + numLower[0].toString(16) + (numLower[1]<16?'0':'') + numLower[1].toString(16) + (numLower[2]<16?'0':'') + numLower[2].toString(16);
+  }
+  var numButton = [Math.round((numUpper[0] + numLower[0])/2), Math.round((numUpper[1] + numLower[1])/2), Math.round((numUpper[2] + numLower[2])/2)]
+  var buttonColor = '#' + numButton[0].toString(16) + numButton[1].toString(16) + numButton[2].toString(16);
+  var numText = [255 - numButton[0], 255 - numButton[1], 255 - numButton[2]] 
+  var buttonText = '#' + numText[0].toString(16) + numText[1].toString(16) + numText[2].toString(16);
+  return [lowerLines, upperLines, buttonColor, buttonText]
+}
 
 var colors;
 
@@ -275,12 +364,16 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context;
+            ctx.beginPath();
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
-            ctx.strokeStyle = this.board.colors.finalText;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
             ctx.font = "75pt Verdana";
             ctx.fillText("COME", 650, 450);
-
+            ctx.strokeText("COME", 650, 450);
+            ctx.stroke();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (x > 300 && x < 1000 && y > 350 && y < 500) {
@@ -404,15 +497,21 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context
+            ctx.beginPath();
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
             ctx.font = "70pt Verdana";
             ctx.save();
             ctx.translate(270, 550);
             ctx.rotate(Math.PI * 0.25);
             ctx.fillText("6", 5, 50);
+            ctx.strokeText("6", 5, 50);
+            ctx.stroke();
             ctx.restore();
+            ctx.closePath()
         },
         isClickedRegion: function(x, y) {
             if (200 < x && x < 300 && 500 < y && y < ((-7/6)*x + 933.33)) {
@@ -433,15 +532,21 @@ var colors5 = {
         name: "Big 8",
         draw: function() {
             var ctx = this.board.context
+            ctx.beginPath();
             ctx.strokeStyle = this.board.colors.finalText;
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
             ctx.font = "70pt Verdana";
             ctx.save();
             ctx.translate(350, 650);
             ctx.rotate(Math.PI * 0.25);
             ctx.fillText("8", 5, 50);
+            ctx.strokeText("8", 5, 50);
+            ctx.stroke();
             ctx.restore();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (200 < x && x < 350 && (-7/6 * x + 983.33) < y && y < 750 ||
@@ -560,8 +665,8 @@ var colors5 = {
                 ctx.setLineDash([5]);
                 ctx.moveTo(550 + offset[n], 100);
                 ctx.lineTo(550 + offset[n], 175);
-                ctx.closePath();
                 ctx.stroke();
+                ctx.closePath();
                 this.drawText();
                 ctx.setLineDash([0]);
             },
@@ -650,11 +755,16 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context;
+            ctx.beginPath();
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
-            ctx.strokeStyle = this.board.colors.finalText;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
             ctx.font = "38pt Verdana";
             ctx.fillText("SEVEN", 1550, 493);
+            ctx.strokeText("SEVEN", 1550, 493);
+            ctx.stroke();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1900 && y > 450 && y < 500) {
@@ -1225,11 +1335,16 @@ var colors5 = {
         },
         drawText: function() {
             var ctx = this.board.context;
+            ctx.beginPath();
             ctx.textAlign = "center";
             ctx.fillStyle = this.board.colors.finalText;
-            ctx.strokeStyle = this.board.colors.finalText;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
             ctx.font = "38pt Verdana";
             ctx.fillText("CRAPS", 1550, 944);
+            ctx.strokeText("CRAPS", 1550, 944);
+            ctx.stroke();
+            ctx.closePath();
         },
         isClickedRegion: function(x, y) {
             if (x > 1200 && x < 1900 && y > 900 && y < 950) {
@@ -1379,6 +1494,41 @@ var colors5 = {
         draw: function(){
           var ctx = this.board.context;
           ctx.beginPath();
+          ctx.rect(1203, 203, 75, 75);
+          ctx.rect(1303, 203, 75, 75);
+          ctx.fillStyle = '#000000';
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = '#000000';
+          ctx.stroke();
+          ctx.closePath();
+          ctx.beginPath();
+          ctx.rect(1202, 202, 75, 75);
+          ctx.rect(1302, 202, 75, 75);
+          var col = colorToNumArray(this.board.colors.dice);
+          col[0] = Math.round(col[0]*(1/3))
+          col[1] = Math.round(col[1]*(1/3))
+          col[2] = Math.round(col[2]*(1/3))
+          ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = ctx.fillStyle;
+          ctx.stroke();
+          ctx.closePath();
+          ctx.beginPath();
+          ctx.rect(1201, 201, 75, 75);
+          ctx.rect(1301, 201, 75, 75);
+          var col = colorToNumArray(this.board.colors.dice);
+          col[0] = Math.round(col[0]*(2/3))
+          col[1] = Math.round(col[1]*(2/3))
+          col[2] = Math.round(col[2]*(2/3))
+          ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+          ctx.fill();
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = ctx.fillStyle;
+          ctx.stroke();
+          ctx.closePath();
+          ctx.beginPath();
           ctx.rect(1200, 200, 75, 75);
           ctx.rect(1300, 200, 75, 75);
           ctx.fillStyle = this.board.colors.dice;
@@ -1386,6 +1536,7 @@ var colors5 = {
           ctx.lineWidth = 5;
           ctx.strokeStyle = this.board.colors.dice;
           ctx.stroke();
+          ctx.closePath();
           this.drawDots();
 
           ctx.beginPath();
@@ -1490,14 +1641,44 @@ var colors5 = {
         name: "Reset",
         draw: function() {
             var ctx = this.board.context;
-            ctx.lineWidth = 5;
-            ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
 
-            ctx.strokeStyle = this.board.colors.lines;
+            //ctx.arc(50, 950, 35, 2 * Math.PI, false);
+            //var lineColor = '';
+            //if(this.board.colors.lines.length = 3){
+            //  lineColor = this.board
+            //} else {
+            //  
+            //}
+            var lines = getButtonColors(this.board.colors.lines);
             ctx.beginPath();
-            ctx.arc(50, 950, 35, 2 * Math.PI, false);
+            ctx.rect(15, 915, 70, 70);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = lines[0];
+            ctx.beginPath();
+            ctx.moveTo(15,985);
+            ctx.lineTo(85,985);
+            ctx.lineTo(85,915);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = lines[1];
+            ctx.beginPath();
+            ctx.moveTo(85,915);
+            ctx.lineTo(15,915);
+            ctx.lineTo(15,985);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.beginPath();
+            ctx.textAlign = "center";
+            ctx.strokeStyle = lines[3];
+            ctx.fillStyle = lines[3];
             ctx.textAlign = "left";
             ctx.font = "14pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
@@ -1515,39 +1696,221 @@ var colors5 = {
         }
     };
 
-    var SaveGame = function(board) {
+    //var SaveGame = function(board) {
+    //    this.board = board;
+    //    return this;
+    //}
+    //SaveGame.prototype = {
+    //    name: "Save Game",
+    //    draw: function() {
+    //        var ctx = this.board.context;
+    //        ctx.lineWidth = 5;
+    //        ctx.textAlign = "center";
+    //        ctx.fillStyle = this.board.colors.text;
+    //        ctx.strokeStyle = this.board.colors.text;
+    //        
+    //        var lines = getButtonColors(this.board.colors.lines);
+    //        ctx.strokeStyle = lines[0];
+    //        ctx.beginPath();
+    //        ctx.moveTo(115,985);
+    //        ctx.lineTo(185,985);
+    //        ctx.lineTo(185,915);
+    //        ctx.stroke();
+    //        ctx.closePath();
+    //        
+    //        ctx.strokeStyle = lines[1];
+    //        ctx.beginPath();
+    //        ctx.moveTo(185,915);
+    //        ctx.lineTo(115,915);
+    //        ctx.lineTo(115,985);
+    //        ctx.stroke();
+    //        ctx.closePath();            
+    //        
+    //        ctx.beginPath();
+    //        ctx.textAlign = "left";
+    //        ctx.font = "14pt Verdana";
+    //        //ctx.rotate(Math.PI * -0.2);
+    //        ctx.fillText("Save", 126, 948);
+    //        ctx.fillText("Game", 121, 968);
+    //        ctx.stroke();
+    //        ctx.restore();
+    //        
+    //    },
+    //    isClickedRegion: function(x, y) {
+    //        if (x > 115 && x < 185 && y > 915 && y < 985) {
+    //            return true;
+    //        }
+    //        return false;
+    //    }
+    //};
+
+    var Menu = function(board) {
         this.board = board;
         return this;
     }
-    SaveGame.prototype = {
-        name: "Save Game",
+    Menu.prototype = {
+        name: "Menu",
         draw: function() {
             var ctx = this.board.context;
-            ctx.lineWidth = 5;
             ctx.textAlign = "center";
-            ctx.fillStyle = this.board.colors.text;
-            ctx.strokeStyle = this.board.colors.text;
-
-            ctx.strokeStyle = this.board.colors.lines;
+            
+            var lines = getButtonColors(this.board.colors.lines);
             ctx.beginPath();
-            ctx.arc(150, 950, 35, 2 * Math.PI, false);
+            ctx.rect(1885, 35, 100, 100);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = lines[0];
+            ctx.beginPath();
+            ctx.moveTo(1885,135);
+            ctx.lineTo(1985,135);
+            ctx.lineTo(1985,35);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = lines[1];
+            ctx.beginPath();
+            ctx.moveTo(1985,35);
+            ctx.lineTo(1885,35);
+            ctx.lineTo(1885,135);
+            ctx.stroke();
+            ctx.closePath();            
+            
+            ctx.beginPath();
             ctx.textAlign = "left";
-            ctx.font = "14pt Verdana";
+            ctx.strokeStyle = lines[3];
+            ctx.fillStyle = lines[3];
+            ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Save", 126, 948);
-            ctx.fillText("Game", 121, 968);
+            ctx.fillText("Menu", 1900, 95);
             ctx.stroke();
             ctx.restore();
             
         },
         isClickedRegion: function(x, y) {
-            if (x > 115 && x < 185 && y > 915 && y < 985) {
+            if (x > 1885 && x < 1985 && y > 35 && y < 135) {
                 return true;
             }
             return false;
         }
     };
     
+    var ShowBets = function(board) {
+        this.board = board;
+        return this;
+    }
+    ShowBets.prototype = {
+        name: "Show Bets",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.textAlign = "center";
+            
+            var lines = getButtonColors(this.board.colors.lines);
+            ctx.beginPath();
+            ctx.rect(1885, 150, 100, 100);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = lines[0];
+            ctx.beginPath();
+            ctx.moveTo(1885,250);
+            ctx.lineTo(1985,250);
+            ctx.lineTo(1985,150);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = lines[1];
+            ctx.beginPath();
+            ctx.moveTo(1985,150);
+            ctx.lineTo(1885,150);
+            ctx.lineTo(1885,250);
+            ctx.stroke();
+            ctx.closePath();            
+            
+            ctx.beginPath();  
+            ctx.textAlign = "left";
+            ctx.fillStyle = lines[3];
+            ctx.strokeStyle = lines[3];
+            ctx.font = "20pt Verdana";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Show", 1900, 197);
+            ctx.fillText("Bets", 1905, 222);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 1885 && x < 1985 && y > 150 && y < 250) {
+                return true;
+            }
+            return false;
+        }
+    };
+
+    var LastRoll = function(board) {
+        this.board = board;
+        return this;
+    }
+    LastRoll.prototype = {
+        name: "Last Roll",
+        draw: function() {
+            var ctx = this.board.context;
+            ctx.textAlign = "center";
+            
+            var lines = getButtonColors(this.board.colors.lines);
+            ctx.beginPath();
+            ctx.rect(1885, 265, 100, 100);
+            ctx.fillStyle = lines[2];
+            ctx.fill();
+            //ctx.lineWidth = 1;
+            //ctx.stroke();
+            ctx.closePath();
+            
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = lines[0];
+            ctx.beginPath();
+            ctx.moveTo(1885,365);
+            ctx.lineTo(1985,365);
+            ctx.lineTo(1985,265);
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.strokeStyle = lines[1];
+            ctx.beginPath();
+            ctx.moveTo(1985,265);
+            ctx.lineTo(1885,265);
+            ctx.lineTo(1885,365);
+            ctx.stroke();
+            ctx.closePath();            
+            
+            ctx.beginPath();
+            ctx.textAlign = "left";
+            ctx.fillStyle = lines[3];
+            ctx.strokeStyle = lines[3];
+            ctx.font = "20pt Verdana";
+            //ctx.rotate(Math.PI * -0.2);
+            ctx.fillText("Last", 1907, 310);
+            ctx.fillText("Roll", 1912, 335);
+            ctx.stroke();
+            ctx.restore();
+            
+        },
+        isClickedRegion: function(x, y) {
+            if (x > 1885 && x < 1985 && y > 265 && y < 365) {
+                return true;
+            }
+            return false;
+        }
+    };
+
     var regions = [
         PassLine,
         DontPass,
@@ -1593,7 +1956,10 @@ var colors5 = {
         Dice,
         //Help,
         Reset,
-        SaveGame
+        //SaveGame,
+        ShowBets,
+        LastRoll,
+        Menu
     ];
 
     var Board = function(canvas, colors) {
@@ -1636,9 +2002,77 @@ var colors5 = {
             ctx.fillStyle = this.colors.specialText;
             ctx.strokeStyle = this.colors.specialText;
             ctx.font = "20pt Verdana";
-            ctx.fillText('3x-4x-5x Odds', 1200, 100); 
-            ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
-            ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
+            //ctx.fillText('3x-4x-5x Odds', 1200, 100); 
+            //ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
+            //ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
+            ctx.fillText('3x-4x-5x Odds', 300, 910); 
+            ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 300, 935); 
+            ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 300, 960);
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.font = '40pt Verdana';
+            ctx.fillStyle = "#000000";
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 103, 73);
+            ctx.closePath();
+            ctx.beginPath();
+            var col = colorToNumArray(this.colors.finalText);
+            col[0] = Math.round(col[0]*(1/3))
+            col[1] = Math.round(col[1]*(1/3))
+            col[2] = Math.round(col[2]*(1/3))
+            ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 102, 72);
+            ctx.closePath();
+            ctx.beginPath();
+            var col = colorToNumArray(this.colors.finalText);
+            col[0] = Math.round(col[0]*(2/3))
+            col[1] = Math.round(col[1]*(2/3))
+            col[2] = Math.round(col[2]*(2/3))
+            ctx.fillStyle = '#' + col[0].toString(16) + (col[1]<16?'0':'') + col[1].toString(16) + (col[2]<16?'0':'') + col[2].toString(16);
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 101, 71);
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.font = '40pt Verdana';
+            ctx.fillStyle = this.colors.finalText;
+            ctx.fillText('Available Bank: $' + numberWithCommas(PlayerManager.players[0].player.bank), 100, 70);
+            ctx.closePath();
+            
+            ctx.beginPath();
+            var boardColors = colorToNumArray(this.colors.board);
+            if(boardColors[0] < 64 && boardColors[1] < 64 && boardColors[2] < 64){
+              ctx.drawImage(logoWhite, 1430, 70, 400, 320);
+            } else {
+              ctx.drawImage(logo, 1430, 70, 400, 320);
+            }
+            //ctx.drawImage(logoFull, 1430, 70, 400, 320);
+            ctx.closePath();
+            //var imageData = ctx.getImageData(1430, 70, 400, 320);
+            //var pixelArray = imageData.data;
+            //var length = pixelArray.length / 4; // 4 components - red, green, blue and alpha
+            //
+            //for (var i = 0; i < length; i++) {
+            //    var index = 4 * i;
+            //
+            //    var r = pixelArray[index];
+            //    var g = pixelArray[++index];
+            //    var b = pixelArray[++index];
+            //    var a = pixelArray[++index];
+            //
+            //    if (r === 0 && g === 0 && b === 0 & a === 255) { // pixel is red
+            //        var lineColors = colorToNumArray(this.colors.lines);
+            //        pixelArray[--index] = lineColors[2]; // blue is set to 100%
+            //        pixelArray[--index] = lineColors[1]; // green is set to 100%
+            //        pixelArray[--index] = lineColors[0]; // red is set to 100%
+            //        // resulting color is white
+            //    }
+            //    if (r === 255 && g === 255 && b === 255 & a === 255) { // pixel is red
+            //        var boardColors = colorToNumArray(this.colors.board);
+            //        pixelArray[--index] = boardColors[2]; // blue is set to 100%
+            //        pixelArray[--index] = boardColors[1]; // green is set to 100%
+            //        pixelArray[--index] = boardColors[0]; // red is set to 100%
+            //        // resulting color is white
+            //    }
+            //}
+            //ctx.putImageData(imageData, 1430, 70);
             this.drawPoint(ctx, GameState.point);
             this.drawFire(ctx, GameState.fireArray);
         },

@@ -8,7 +8,8 @@ function openModal(){
   }
   var mod = $('#modal');
   mod.show();
-  mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+  //mod.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+  mod.animate({left: ($('#board').width()*(0.98) - mod.width()), opacity: 1}, MODAL_FADE_INTERVAL);
   //resizeModal();
   if($('#colorScheme').val() == 5){
     $('#customColors').show();
@@ -43,14 +44,45 @@ function closeModal(){
   saveSettings();
   $('#colorScheme').val(localStorage['colors']);
   colors = eval("colors" + localStorage['colors']);
-  $('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
+  //$('#modal').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#modal').hide();});
+  $('#modal').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modal').hide();});
   $('#openButtons').show();
   PlayerManager.updatePlayerArea();
   _CRAPS.dealer.betManager.displayBets();
+  closeBets();
+  closeBetResults();
   //_CRAPS.dealer.betManager.displayBets();
   //$('#buffer').hide();
   //$('#betListing').hide();
   //setTimeout(function(){$('#buffer').show();$('#betListing').show()},1000);
+}
+
+function closeBets(){
+  var betList = $('#betListBG');
+  betList.animate({left: '100%', opacity: 0}, MODAL_FADE_INTERVAL), function(){$('#betListBG').hide();};
+  $('#modalScreen').hide();
+  $('#openButtons').show();
+}
+
+function openBets(){
+  var betList = $('#betListBG');
+  betList.show();
+  betList.animate({left: ($('#board').width()*(0.98) - betList.width()), opacity: 1}, MODAL_FADE_INTERVAL);
+  $('#modalScreen').show();
+  _CRAPS.dealer.betManager.displayBets();
+  PlayerManager.updatePlayerArea();
+}
+
+function closeBetResults(){
+  $('#betResultsBG').hide();
+  $('#modalScreen').hide();
+  $('#openButtons').show();
+}
+
+function openBetResults(){
+  $('#betResultsBG').show();
+  $('#modalScreen').show();
+  $('#openButtons').hide();
 }
 
 function openGlossary(term){
@@ -93,10 +125,10 @@ function clickModalButton(button){
   }
   modals.splice(modals.indexOf(button), 1);
   for(i in modals){
-    $('#' + modals[i] + 'Button').removeClass('blue');
+    $('#' + modals[i] + 'Button').removeClass('active');
     $('#' + modals[i]).hide();
   }
-  $('#' + button + 'Button').addClass('blue');
+  $('#' + button + 'Button').addClass('active');
   $('#' + button).show();
   //resizeModal();
   if($('#colorScheme').val() == 5){
@@ -115,10 +147,10 @@ function clickRulesButton(button){
   var mod = $('#modal');
   modals.splice(modals.indexOf(button), 1);
   for(i in modals){
-    $('#' + modals[i] + 'Button').removeClass('red');
+    $('#' + modals[i] + 'Button').removeClass('active');
     $('#' + modals[i]).hide();
   }
-  $('#' + button + 'Button').addClass('red');
+  $('#' + button + 'Button').addClass('active');
   $('#' + button).show();
   //resizeModal();
   if($('#colorScheme').val() == 5){
@@ -130,63 +162,74 @@ function clickRulesButton(button){
 }
 
 function resizeModal(){
-  $('#gameplay').height('auto');
-  $('#rules').height('auto');
-  $('#standard').height('auto');
-  $('#multi').height('auto');
-  $('#single').height('auto');
-  $('#fire').height('auto');
-  $('#settings').height('auto');
-  $('#modal').height('auto');
-  if($('#modal').height() > $(window).height() * 0.8){
-    $('#modal').height($(window).height() * 0.7);
-    $('#gameplay').height($('#modal').height() * 0.7);
-    $('#rules').height($('#modal').height() * 0.7);
-    $('#rules').height($('#modal').height() * 0.7);
-    $('#standard').height($('#rules').height() * 0.7);
-    $('#multi').height($('#rules').height() * 0.7);
-    $('#single').height($('#rules').height() * 0.7);
-    $('#fire').height($('#rules').height() * 0.7);
-    $('#settings').height($('#modal').height() * 0.7);
-  } else {
-    $('#gameplay').height('auto');
-    $('#rules').height('auto');
-    $('#standard').height('auto');
-    $('#multi').height('auto');
-    $('#single').height('auto');
-    $('#fire').height('auto');
-    $('#settings').height('auto');
-    $('#modal').height('auto');
+  var mod = $('#modal');
+  var hidden = (mod.css('visibility')== 'hidden' || mod.css('display') == 'none')
+  if(hidden){
+    mod.show();
   }
-  $('#gameplay').width('auto');
-  $('#rules').width('auto');
-  $('#standard').width('auto');
-  $('#multi').width('auto');
-  $('#single').width('auto');
-  $('#fire').width('auto');
-  $('#settings').width('auto');
-  $('#modal').width('auto');
-  if($('#modal').width() > $(window).width() * 0.8){
-    $('#modal').width($(window).width() * 0.7);
-    $('#gameplay').width('auto');
-    $('#rules').width('auto');
-    $('#standard').width('auto');
-    $('#multi').width('auto');
-    $('#single').width('auto');
-    $('#fire').width('auto');
-    $('#settings').width('auto');
-  } else {
-    $('#gameplay').width('auto');
-    $('#rules').width('auto');
-    $('#standard').width('auto');
-    $('#multi').width('auto');
-    $('#single').width('auto');
-    $('#fire').width('auto');
-    $('#settings').width('auto');
-    $('#modal').width('auto');
+  mod.width($('#gameplayButton').width() + 
+            $('#rulesButton').width() + 
+            $('#settingsButton').width() + 
+            $('#tutorialButton').width() + 
+            $('#aboutButton').width() + 
+            115);
+  $('#modalWindow').height(mod.height() - mod.height()*(0.005) - $('#board').height()*(0.02) - 35);
+  var rules = $('#rules');
+  var rulesHidden = (rules.css('visibility')== 'hidden' || rules.css('display') == 'none')
+  if(rulesHidden){
+    rules.show();
   }
-  $('#modal').css('left', (($(window).width() - $('#modal').width())/2));
-  $('#modal').css('top', (($(window).height() - $('#modal').height())/2));
+  rules.height($('#modalWindow').height()*(0.98));
+  rules.width($('#modalWindow').width()*(0.98));
+  var standard = $('#standard');
+  var standardHidden = (standard.css('visibility')== 'hidden' || standard.css('display') == 'none');
+  var multi = $('#multi');
+  var multiHidden = (multi.css('visibility')== 'hidden' || multi.css('display') == 'none');
+  var single = $('#single');
+  var singleHidden = (single.css('visibility')== 'hidden' || single.css('display') == 'none');
+  var fire = $('#fire');
+  var fireHidden = (fire.css('visibility')== 'hidden' || fire.css('display') == 'none');
+  if(standardHidden){
+    standard.show();
+  }
+  if(multiHidden){
+    multi.show();
+  }
+  if(singleHidden){
+    single.show();
+  }
+  if(fireHidden){
+    fire.show();
+  }
+  standard.width($('#rules').width()*(0.98));
+  multi.width($('#rules').width()*(0.98));
+  single.width($('#rules').width()*(0.98));
+  fire.width($('#rules').width()*(0.98));
+  standard.height($('#rules').height()*(0.98) - 25);
+  multi.height($('#rules').height()*(0.98) - 25);
+  single.height($('#rules').height()*(0.98) - 25);
+  fire.height($('#rules').height()*(0.98) - 25);
+  if(standardHidden){
+    standard.show();
+  }
+  if(multiHidden){
+    multi.hide();
+  }
+  if(singleHidden){
+    single.hide();
+  }
+  if(fireHidden){
+    fire.hide();
+  }
+  if(rulesHidden){
+    rules.hide();
+  }
+  if(hidden){
+    mod.hide();
+  }
+  if(!hidden){
+    mod.css({left: ($('#board').width()*(0.98) - mod.width())});
+  }
 }
 
 function updateColors(){

@@ -1,7 +1,8 @@
   body{
     overflow-x: hidden;
     overflow-y: hidden;
-    font-family: "verdana"
+    font-family: "verdana";
+    font-size: 0.90em;
   }
   a{
     text-decoration: none;
@@ -40,17 +41,27 @@
     font-family: serif;
     font-style: italic;
   }
+  .modal{
+    z-index: 1;
+  }
+  .modalScreen{
+    z-index: 0;
+  }
+  .modalTop{
+    z-index: 2;
+  }
   #generalButtons{
+    display: none;
     position: absolute;
-    top: 71%;
-    left: 31%;
-    float: left;
+    top: 5px;
+    right: 5px;
+    float: right;
   }
   #tutorial{
-    padding: 10px;
+    padding: 1%;
   }
   #about{
-    padding: 10px;
+    padding: 1%;
   }
   #tutorialInstruction{
     position: relative;
@@ -91,6 +102,7 @@
     vertical-align: baseline;
   }
   #buffer{
+    display: none;
     position: absolute;
     left: 1px;
     width: 30%;
@@ -106,11 +118,12 @@
   #board{
     position: absolute;
     top: 0px;
-    left: 30.5%;
-    height: 69.5%;
-    width: 69.5%;
+    left: 0px;
+    height: 100%%;
+    width: 100%;
     margin: 0px;
     padding: 0px;
+    z-index:-1;
   }
   #betForm{
     /* background: http://www.photos-public-domain.com/wp-content/uploads/2012/02/green-faux-leather-texture.jpg */
@@ -130,16 +143,100 @@
   #betInfo{
     margin: 2px;
     padding: 2px;
-    width: 200px;
+    width: 10%;
     color: #FFF;
     border: none;
   }
-  #betListing{
+  #betListBG{
     position: absolute;
-    left: 1px;
-    width: 30%;
+    left: 100%;
+    display: none;
+    height: 90%;
+    background: #444;
+    margin: 0px;
+    padding: 1%;
+  }
+  #betListWindow{
+    position: relative;
+    background: #222;
+    color: #FFF;
     overflow: auto;
-    margin-left: 5px;
+    overflow-x: hidden;
+  }
+  #closeBets{
+    position: relative;
+  }
+  #betResultsBG{
+    position: absolute;
+    display: none;
+    height: 50%;
+    width: 50%;
+    top: 25%;
+    left: 25%;
+    background: #444;
+    margin: 0px;
+    padding: 1%;
+  }
+  #betResultsWindow{
+    position: relative;
+    background: #222;
+    color: #FFF;
+    overflow: hidden;
+  }
+  #closeBetResults{
+    position: relative;
+  }
+  #winningBets{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: left;
+    background: #9C9;
+    color: #000;
+    padding: 2px 0px;
+  }
+  #losingBets{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: right;
+    background: #C99;
+    color: #000;
+    padding: 2px 0px;
+  }
+  #die1, #die2{
+    font-family: 'Segoe UI Symbol';
+    font-size: 20pt;
+  }
+  #lastRoll{
+    padding: 0 4px;
+  }
+  #wins{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 4px;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+  #losses{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 4px;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+  #playerArea{
+    position: relative;
+    width: 100%;
+  }
+  #betListing{
+    position: relative;
+    left: 1px;
+    width: 100%;
+    overflow: auto;
+    margin-left: 0px;
     padding: 0px;
     float: left;
   }
@@ -152,71 +249,75 @@
     -ms-user-select: none;
     user-select: none;
   }
+  .tab{
+    height: 25px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid black;
+    border-bottom: 0 none;
+    margin: 0px 0px;
+    padding: 0px 5px;
+    background: #666;
+    color: #fff;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 25px;
+  }
+  .tab:hover{
+    background: #888;
+    color: #000;
+  }
+  .tab.active{
+    border: 1px solid black;
+    border-bottom: 0 none;
+    background: #222;
+    color: #fff;
+    text-decoration: underline;
+  }
+  .insideTab{
+    height: 25px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid black;
+    border-bottom: 0 none;
+    margin: 0px 0px;
+    padding: 0px 5px;
+    background: #888;
+    color: #000;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 25px;
+  }
+  .insideTab:hover{
+    background: #aaa;
+    color: #000;
+  }
+  .insideTab.active{
+    border: 1px solid black;
+    border-bottom: 0 none;
+    border-color: black;
+    background: #444;
+    color: #fff;
+    text-decoration: underline;
+  }
+  #rulesWindow{
+    background: #444;
+    margin: 0;
+    padding: 0;
+  }
   #create{
     float: left;
   }
   #cancel{
     float: right;
-  }
-  #playerArea{
-    position: absolute;
-    height: 18%;
-    width: 30%;
-    top: 0px;
-    left: 0px;
-    margin: 2px;
-    padding: 5px;
-  }
-  #name{
-    position: relative;
-    text-align: center;
-    top: 0px;
-    font-size: 30pt;
-    width: 29%;
-    left: 0.25%;
-    /*height: 30%;
-    /*margin: 0px;
-    padding: 0px;*/
-  }
-  #nameInput{
-    position: relative;
-    text-align: center;
-    top: -10px;
-    font-family: 'Verdana';
-    font-size: 30pt;
-  }
-  #bank{
-    position: relative;
-    text-align: center;
-  }
-  #availBank{
-    position: relative;
-    top: auto;
-    left: 0%;
-    width: 33%;
-    float: left;
-  }
-  #inPlay{
-    position: relative;
-    top: auto;
-    left: 0%;
-    width: 33%;
-    float: left;
-  }
-  #totBank{
-    position: relative;
-    top: auto;
-    left: 0%;
-    width: 33%;
-    float: left;
-  }
-  .winning{
-    color: white;
-    background-color: green;
-  }
-  .losing{
-    color: white;
-    background-color: red;
   }
   table, td, th{
     text-align: center;
@@ -236,19 +337,19 @@
     top: 0px;
     height: 100%;
     width: 100%;
-    background-color: #000;
     display: none;
     opacity: 0;
+    z-index: 3;
   }
   #glossary{
     position: absolute;
     background: #444 repeat-y;
     color: #FFF;
     top: 30%;
-    left: 5%;
+    right: 5%;
     width: 19%;
     height: auto;
-    padding: 10px;
+    padding: 1%;
     display: none;
     border: 1px;
     border-color: #FFFFFF;
@@ -277,29 +378,39 @@
   }
   #modal{
     position: absolute;
-    background: #444 repeat-y;
+    background: #444;
     color: #FFF;
     top: 15%;
-    left: 0%;
-    width: 29%;
+    left: 100%;
     height: 70%;
-    padding: 10px;
+    padding: 1%;
     display: none;
     opacity: 0;
+  }
+  #modalButtons{
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+  #rulesButtons{
+    position: relative;
+    padding: 0;
+    margin: 0;
   }
   #modalWindow{
     position: relative;
     background: #222;
     overflow: auto;
     overflow-x: hidden;
+    padding: 0px;
+    margin-bottom: 0.5%;
   }
   #gameplay{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
-    top: 2%;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     overflow: auto;
     /*float: left;*/
   }
@@ -307,31 +418,30 @@
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
-    top: 2%;
     left: 0;
-    width: 100%;
-    padding: 10px;
+    /*width: 100%;*/
+    padding: 1%;
     float: left;
-    overflow: auto;
+    overflow: none;
     display: none;
   }
   #standard{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
   }
   #multi{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
     display: none;
@@ -339,10 +449,10 @@
   #single{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
     display: none;
@@ -350,10 +460,10 @@
   #fire{
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
+    background: #444;
     color: #FFF;
-    top: 2%;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
     display: none;
@@ -362,9 +472,8 @@
     position: relative;
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
-    top: 2%;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     /*float: left;*/
     overflow: auto;
     display: none;
