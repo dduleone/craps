@@ -97,7 +97,7 @@ function updateBetDesc(){
     $('#betDesc').html('Payout:<br />Roll 2, 12: 5 pays 26<br />Roll 3, 11: 5 pays 11<br />Roll 7: Push<br />No Minimum Bet<br />Increments of 5');
     break;
   case "fire":
-    $('#betDesc').html('Payout:<br />4 points in a row: 1 pays 24<br />5 points in a row: 1 pays 249<br />6 points in a row: 1 pays 999<br />$10 maximum bet');
+    $('#betDesc').html('Payout:<br />4 points: 1 pays 24<br />5 points: 1 pays 249<br />6 points: 1 pays 999<br />$10 maximum bet');
     break;
   default:
     return false;
