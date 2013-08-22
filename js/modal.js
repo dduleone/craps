@@ -173,7 +173,7 @@ function resizeModal(){
             $('#tutorialButton').width() + 
             $('#aboutButton').width() + 
             115);
-  $('#modalWindow').height(mod.height()*(99.995) - $('#board').height()*(0.02) - 35);
+  $('#modalWindow').height(mod.height()*(.995) - $('#board').height()*(0.02) - 35);
   var rules = $('#rules');
   var rulesHidden = (rules.css('visibility')== 'hidden' || rules.css('display') == 'none')
   if(rulesHidden){
