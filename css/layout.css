@@ -403,6 +403,7 @@
     overflow: auto;
     overflow-x: hidden;
     padding: 0px;
+    margin-bottom: 0.5%;
   }
   #gameplay{
     position: relative;
