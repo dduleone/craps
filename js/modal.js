@@ -173,14 +173,14 @@ function resizeModal(){
             $('#tutorialButton').width() + 
             $('#aboutButton').width() + 
             115);
-  $('#modalWindow').height(mod.height() - 55);
+  $('#modalWindow').height(mod.height()*(0.98) - 35);
   var rules = $('#rules');
   var rulesHidden = (rules.css('visibility')== 'hidden' || rules.css('display') == 'none')
   if(rulesHidden){
     rules.show();
   }
-  rules.height($('#modalWindow').height() - 20);
-  rules.width($('#modalWindow').width() - 20);
+  rules.height($('#modalWindow').height()*(0.98));
+  rules.width($('#modalWindow').width()*(0.98));
   var standard = $('#standard');
   var standardHidden = (standard.css('visibility')== 'hidden' || standard.css('display') == 'none');
   var multi = $('#multi');
@@ -201,14 +201,14 @@ function resizeModal(){
   if(fireHidden){
     fire.show();
   }
-  standard.width($('#rules').width() - 20);
-  multi.width($('#rules').width() - 20);
-  single.width($('#rules').width() - 20);
-  fire.width($('#rules').width() - 20);
-  standard.height($('#rules').height() - 45);
-  multi.height($('#rules').height() - 45);
-  single.height($('#rules').height() - 45);
-  fire.height($('#rules').height() - 45);
+  standard.width($('#rules').width()*(0.98));
+  multi.width($('#rules').width()*(0.98));
+  single.width($('#rules').width()*(0.98));
+  fire.width($('#rules').width()*(0.98));
+  standard.height($('#rules').height()*(0.98) - 25);
+  multi.height($('#rules').height()*(0.98) - 25);
+  single.height($('#rules').height()*(0.98) - 25);
+  fire.height($('#rules').height()*(0.98) - 25);
   if(standardHidden){
     standard.show();
   }
@@ -228,7 +228,7 @@ function resizeModal(){
     mod.hide();
   }
   if(!hidden){
-    mod.css({left: ($('#board').offset().left + $('#board').width() - mod.width() - 20)});
+    mod.css({left: ($('#board').width()*(0.98) - mod.width())});
   }
 }
 
