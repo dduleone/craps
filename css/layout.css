@@ -2,7 +2,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     font-family: "verdana";
-    font-size: 0.75em;
+    font-size: 0.90em;
   }
   a{
     text-decoration: none;
@@ -58,10 +58,10 @@
     float: right;
   }
   #tutorial{
-    padding: 10px;
+    padding: 1%;
   }
   #about{
-    padding: 10px;
+    padding: 1$;
   }
   #tutorialInstruction{
     position: relative;
@@ -349,7 +349,7 @@
     right: 5%;
     width: 19%;
     height: auto;
-    padding: 10px;
+    padding: 1%;
     display: none;
     border: 1px;
     border-color: #FFFFFF;
@@ -383,7 +383,7 @@
     top: 15%;
     left: 100%;
     height: 70%;
-    padding: 10px;
+    padding: 1%;
     display: none;
     opacity: 0;
   }
@@ -409,7 +409,7 @@
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     overflow: auto;
     /*float: left;*/
   }
@@ -419,7 +419,7 @@
     color: #FFF;
     left: 0;
     /*width: 100%;*/
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: none;
     display: none;
@@ -430,7 +430,7 @@
     background: #444;
     color: #FFF;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
   }
@@ -440,7 +440,7 @@
     background: #444;
     color: #FFF;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
     display: none;
@@ -451,7 +451,7 @@
     background: #444;
     color: #FFF;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
     display: none;
@@ -462,7 +462,7 @@
     background: #444;
     color: #FFF;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     float: left;
     overflow: auto;
     display: none;
@@ -472,7 +472,7 @@
     /* background: #000 url(bet_bg.jpg) repeat-y; */
     color: #FFF;
     left: 0;
-    padding: 10px;
+    padding: 1%;
     /*float: left;*/
     overflow: auto;
     display: none;
