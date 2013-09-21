@@ -610,7 +610,7 @@ BetManager.prototype = {
     }
     
     if(this.winningBets.length > 0 || this.losingBets.length > 0){
-      openBetResults();
+      setTimeout(function(){openBetResults();},500);
     }
     this.winningBets = [];
     this.losingBets = [];

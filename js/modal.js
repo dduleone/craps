@@ -76,13 +76,13 @@ function openBets(){
 function closeBetResults(){
   $('#betResultsBG').hide();
   $('#modalScreen').hide();
-  $('#openButtons').show();
+  //$('#openButtons').show();
 }
 
 function openBetResults(){
   $('#betResultsBG').show();
   $('#modalScreen').show();
-  $('#openButtons').hide();
+  //$('#openButtons').hide();
 }
 
 function openGlossary(term){
