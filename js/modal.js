@@ -50,18 +50,20 @@ function closeModal(){
   PlayerManager.updatePlayerArea();
   _CRAPS.dealer.betManager.displayBets();
   closeBets();
+  closeSingle();
   closeBetResults();
-  //_CRAPS.dealer.betManager.displayBets();
-  //$('#buffer').hide();
-  //$('#betListing').hide();
-  //setTimeout(function(){$('#buffer').show();$('#betListing').show()},1000);
 }
 
 function closeBets(){
   var betList = $('#betListBG');
   betList.animate({left: '100%', opacity: 0}, MODAL_FADE_INTERVAL), function(){$('#betListBG').hide();};
   $('#modalScreen').hide();
-  $('#openButtons').show();
+}
+
+function closeSingle(){
+  var betList = $('#singleBetListBG');
+  betList.animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#singleBetListBG').hide();});
+  $('#modalScreen').hide();
 }
 
 function openBets(){
@@ -76,13 +78,11 @@ function openBets(){
 function closeBetResults(){
   $('#betResultsBG').hide();
   $('#modalScreen').hide();
-  //$('#openButtons').show();
 }
 
 function openBetResults(){
   $('#betResultsBG').show();
   $('#modalScreen').show();
-  //$('#openButtons').hide();
 }
 
 function openGlossary(term){

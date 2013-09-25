@@ -105,7 +105,249 @@ function updateBetDesc(){
 };
 
 function clickAreaPlaceBet(area){
+  var name = prettyToName(area.name);
+  var oddsPoint = false;
+  if(name == 'comeOdds' || name == 'dontComeOdds'){
+    oddsPoint = parseInt(area.name.substring(area.name.length - 1));
+    if (oddsPoint == 0){
+      oddsPoint = 10;
+    }
+  }
+  var _bets = _CRAPS.dealer.betManager.bets;
+  var manager = _CRAPS.dealer.betManager;
+  if(['passline', 'dontPass'].indexOf(name) != -1){
+    if(GameState.point){
+      for(i in _bets){
+        if((name == 'passline' && _bets[i].type == 'passlineOdds') ||
+           (name == 'dontPass' && _bets[i].type == 'dontPassOdds')){
+           var betList = $('#singleBetListBG');
+           betList.show();
+           betList.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+           $('#modalScreen').show();
+           displayBetArray([manager.getBetById(_bets[i].origBet.bet.betId), _bets[i]]);
+           return;
+        }
+      }
+    }else{
+      for(i in _bets){
+        if((name == 'passline' && _bets[i].type == 'passline') ||
+           (name == 'dontPass' && _bets[i].type == 'dontPass')){
+           var betList = $('#singleBetListBG');
+           betList.show();
+           betList.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+           $('#modalScreen').show();
+           displayBetArray([_bets[i]]);
+           return;
+        }
+      }
+    }
+  }else if(['come', 'dontCome'].indexOf(name) != -1){
+    for(i in _bets){
+      if((name == 'come' && _bets[i].type == 'come' && !_bets[i].point) ||
+         (name == 'dontCome' && _bets[i].type == 'dontCome' && !_bets[i].point)){
+         var betList = $('#singleBetListBG');
+         betList.show();
+         betList.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+         $('#modalScreen').show();
+         displayBetArray([_bets[i]]);
+         return;
+      }
+    }
+  }else if(['comeOdds', 'dontComeOdds'].indexOf(name) != -1){
+    for(i in _bets){
+      if((name == 'comeOdds' && _bets[i].type == 'comeOdds' && _bets[i].point == oddsPoint) ||
+         (name == 'dontComeOdds' && _bets[i].type == 'dontComeOdds' && _bets[i].point == oddsPoint)){
+         var betList = $('#singleBetListBG');
+         betList.show();
+         betList.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+         $('#modalScreen').show();
+         displayBetArray([manager.getBetById(_bets[i].origBet.bet.betId), _bets[i]]);
+         return;
+      }
+    }
+  }else{
+    for(i in _bets){
+      if(name == _bets[i].type){
+         var betList = $('#singleBetListBG');
+         betList.show();
+         betList.animate({opacity: 1}, MODAL_FADE_INTERVAL);
+         $('#modalScreen').show();
+         displayBetArray([_bets[i]]);
+         return;
+      }
+    }
+  }
   addBet(area);
+}
+
+function displayBetArray(_bets){
+  var betListing = $('#singleBetListing');
+  if(betListing.children().length > 0){
+    betListing.empty();
+  }
+  var betTable = $(document.createElement('table'));
+  betTable.attr('id', 'betTable');
+  
+  // Bet Table Headings
+  var heading = $(document.createElement('thead'));
+  var headers = $(document.createElement('tr'));
+  headers.width($('#buffer').width());
+  headers.append($(document.createElement('th')).width($('#singleBetListWindow').width()*(0.35)).append($(document.createElement('img')).attr('title', 'Bet Type').attr('src', 'img/bet-type.png')))//.html('Type'))
+         .append($(document.createElement('th')).width($('#singleBetListWindow').width()*(0.25)).append($(document.createElement('i')).attr('title', 'Bet Amount').attr('class', 'icon-money icon-large')))//.html('Value'))
+         .append($(document.createElement('th')).width($('#singleBetListWindow').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Bet On?').attr('class', 'icon-off icon-large')))//.html('On?'))
+         .append($(document.createElement('th')).width($('#singleBetListWindow').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Repeat On Win?').attr('class', 'icon-repeat icon-large')))//.html('Repeat?'))
+         .append($(document.createElement('th')).width($('#singleBetListWindow').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Bet Point').attr('class', 'icon-exclamation icon-large')))//.html('Point'))
+         .append($(document.createElement('th')).width($('#singleBetListWindow').width()*(0.10)).append($(document.createElement('i')).attr('title', 'Remove Bet').attr('class', 'icon-eraser icon-large')));//.html('Clear'));
+  heading.append(headers);
+  betTable.append(heading);
+  betListing.append(betTable);
+  
+  // Bet Rows
+  for(betNum in _bets){
+    var newBetRow = $(document.createElement('tr'));
+    newBetRow.css('backgroundColor', (betNum%2)?'#666':'#888');
+    newBetRow.attr('id', 'betSingle' + _bets[betNum].bet.betId);
+    
+    var type = $(document.createElement('td'));
+    type.html(nameToPretty(_bets[betNum].type));
+    
+    var val = $(document.createElement('td'));
+    val.attr('id', 'valSingle' + _bets[betNum].bet.betId);
+    val.html('$' + _bets[betNum].bet.value);
+    val.attr('onclick', 'updateSingleBet(' + _bets[betNum].bet.betId + ')');
+    val.attr('class', 'clickable');
+    if(((_bets[betNum].type == 'passline' ||
+         _bets[betNum].type == 'dontPassline') && GameState.point) ||
+       ((_bets[betNum].type == 'come' ||
+         _bets[betNum].type == 'dontCome') && _bets[betNum].point)){
+          val.removeClass('clickable');
+          val.removeAttr('onclick');
+         }
+    
+    var betOn = $(document.createElement('input'));
+    var on = $(document.createElement('td'));
+    betOn.attr('type', 'checkbox');
+    betOn.attr('checked', _bets[betNum].bet.on);
+    betOn.attr('id', 'onSingle' + _bets[betNum].bet.betId);
+    betOn.attr('betNum', _bets[betNum].bet.betId);
+    if(['passline', 'dontPass', 'passlineOdds', 'dontPassOdds', 'come', 'dontCome', 'comeOdds', 'dontComeOdds', 'fire'].indexOf(_bets[betNum].type) != -1){
+      betOn.attr('disabled', 'true');
+    }
+    var toggleBet = function(e){
+      var betNumber = $($(this)[0]).attr("betNum");
+      _CRAPS.dealer.betManager.getBetById(betNumber).bet.on = $($(this)[0]).is(':checked');
+    }
+    betOn.change(toggleBet);
+    on.append(betOn);
+    
+    var repeat = $(document.createElement('td'));
+    var repeatWin = $(document.createElement('input'));
+    repeatWin.attr('type', 'checkbox');
+    repeatWin.attr('checked', _bets[betNum].repeat);
+    repeatWin.attr('id', 'repSingle' + _bets[betNum].bet.betId);
+    repeatWin.attr('betNum', _bets[betNum].bet.betId);
+    var toggleRepeat = function(e){
+      var betNumber = $($(this)[0]).attr("betNum");
+      _CRAPS.dealer.betManager.getBetById(betNumber).repeat = $(this).is(':checked');
+    }
+    repeatWin.change(toggleRepeat);
+    if(['passline', 'dontPass'].indexOf(_bets[betNum].type) != -1){
+      repeatWin.attr('disabled', 'true');
+    }
+    if(['passlineOdds', 'dontPassOdds', 'comeOdds', 'dontComeOdds'].indexOf(_bets[betNum].type) != -1){
+      repeatWin.attr('disabled', 'true');
+    }
+    repeat.append(repeatWin);
+    
+    var point = $(document.createElement('td'));
+    if(['come', 'dontCome'].indexOf(_bets[betNum].type) != -1){
+      point.html(_bets[betNum].point);
+    } else if(['comeOdds', 'dontComeOdds'].indexOf(_bets[betNum].type) != -1){
+      point.html(_bets[betNum].origBet.point);
+    } else {
+      point.html('');
+    }
+    
+    var remove = $(document.createElement('td'));
+    remove.append($(document.createElement('i')).attr('class', 'icon-remove icon-large').css({color:'#f00', cursor:'pointer'}))//.html('Rem');
+    if(GameState.tutorial){
+      remove.click(function(){
+                     alert("You cannot take down a Tutorial bet.")
+                   });
+    }else if(_bets[betNum].type == 'passline'){
+      if(GameState.point > 0){
+        remove.click(function(){
+                       alert("You cannot take down a Pass Line bet when a point is on.")
+                     });
+        remove.attr('disabled', 'true');
+      }else{
+        remove.click(function(){
+                      _CRAPS.dealer.betManager.removeBet(_bets[betNum].bet.betId);
+                      closeSingle();
+                     });
+      }
+    }else if(_bets[betNum].type == 'dontPass'){
+      if(GameState.point > 0){
+        remove.click(function(){
+                       alert("You cannot take down a Don\'t Pass bet when a point is on.")
+                     });
+        remove.attr('disabled', 'true');
+      }else{
+        remove.click(function(){
+                      _CRAPS.dealer.betManager.removeBet(_bets[betNum].bet.betId);
+                      closeSingle();
+                     });
+      }
+    }else if(_bets[betNum].type == 'come'){
+      if(_bets[betNum].point > 0){
+        remove.click(function(){
+                       alert("You cannot take down a Come bet when it has a point.");
+                     });
+        remove.attr('disabled', 'true');
+      }else{
+        remove.click(function(){
+                      _CRAPS.dealer.betManager.removeBet(_bets[betNum].bet.betId);
+                      closeSingle();
+                     });
+      }
+    }else if(_bets[betNum].type == 'dontCome'){
+        if(_bets[betNum].point > 0){
+          remove.click(function(){
+                        alert("You cannot take down a Don\'t Come bet when it has a point.");
+                      });
+          remove.attr('disabled', 'true');
+        }else{
+          remove.click(function(){
+                        _CRAPS.dealer.betManager.removeBet(_bets[betNum].bet.betId);
+                        closeSingle();
+                      });
+        }
+    }else if(_bets[betNum].type == 'fire'){
+      if(GameState.point > 0 || GameState.numFire > 0){
+        remove.click(function(){
+                      alert("You may only take down a fire bet on the inital Come Out Roll.");
+                    });
+        remove.attr('disabled', 'true');
+      }else{
+        remove.click(function(){
+                      _CRAPS.dealer.betManager.removeBet(_bets[betNum].bet.betId);
+                      closeSingle();
+                    });
+      }
+    }else{
+      remove.click(function(){
+                    _CRAPS.dealer.betManager.removeBet(_bets[betNum].bet.betId);
+                    closeSingle();
+                   });
+    }
+    betTable.append(newBetRow);
+    newBetRow.append(type);
+    newBetRow.append(val);
+    newBetRow.append(on);
+    newBetRow.append(repeat);
+    newBetRow.append(point);
+    newBetRow.append(remove);
+  }
 }
 
 function betValSlide(value){
@@ -876,7 +1118,7 @@ function updateBet(idNum){
     var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
     var oldVal = _bet.bet.value;
     var newAmount = input.val();
-    var retArray = revalidate(_bet, newAmount)
+    var retArray = revalidate(_bet, newAmount);
     if(!retArray[0]){
       retArray[1]();
       return;
@@ -891,7 +1133,7 @@ function updateBet(idNum){
       _betDispVal.html('$' + newAmount);
     _betDispVal.attr('class', 'clickable');
       _bet.bet.value = parseInt(newAmount);
-      var diff = (parseInt(newAmount) - parseInt(oldVal))
+      var diff = (parseInt(newAmount) - parseInt(oldVal));
       PlayerManager.getPlayerById(_bet.bet.playerId).player.subFromBank(diff);
     }
     PlayerManager.updatePlayerArea();
@@ -904,7 +1146,7 @@ function updateBet(idNum){
     var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
     var oldVal = _bet.bet.value;
     var newAmount = input.val();
-    var retArray = revalidate(_bet, newAmount)
+    var retArray = revalidate(_bet, newAmount);
     if(!retArray[0]){
       retArray[1]();
       return;
@@ -913,8 +1155,78 @@ function updateBet(idNum){
     _betDispVal.html('$' + newAmount);
     _betDispVal.attr('class', 'clickable');
     _bet.bet.value = parseInt(newAmount);
-    var diff = (parseInt(newAmount) - parseInt(oldVal))
-    _bet.bet.player.player.subFromBank(diff);
+    var diff = (parseInt(newAmount) - parseInt(oldVal));
+    PlayerManager.getPlayerById(_bet.bet.playerId).player.subFromBank(diff);
+    PlayerManager.updatePlayerArea();
+    if(retArray[0] == 2){
+      retArray[1]();
+    }
+  });
+  _betDispVal.append(input);
+  input.focus();
+}
+
+function updateSingleBet(idNum){
+  var _betDisp = $('#betSingle' + idNum);
+  var _betDispVal = $('#valSingle' + idNum);
+  var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
+  
+  var oldVal = _bet.bet.value;
+  //console.log(oldVal);
+  
+  _betDispVal.empty();
+  var input = $(document.createElement('input'));
+  input.attr('type', 'number');
+  //input.attr('id', 'nameInput');
+  input.css({width: $('#valSingle' + idNum).width()});
+  input.attr('value', oldVal);
+  input.focus(function(){
+    input.select();
+  });
+  input.change(function(){
+    var _betDispVal = $('#valSingle' + idNum);
+    var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
+    var oldVal = _bet.bet.value;
+    var newAmount = input.val();
+    var retArray = revalidate(_bet, newAmount);
+    if(!retArray[0]){
+      retArray[1]();
+      return;
+    }
+    if(retArray[0] == 3){
+      _betDispVal.empty();
+      _betDispVal.html('$' + oldVal);
+      retArray[1]();
+      return;
+    } else {
+      _betDispVal.empty();
+      _betDispVal.html('$' + newAmount);
+    _betDispVal.attr('class', 'clickable');
+      _bet.bet.value = parseInt(newAmount);
+      var diff = (parseInt(newAmount) - parseInt(oldVal));
+      PlayerManager.getPlayerById(_bet.bet.playerId).player.subFromBank(diff);
+    }
+    PlayerManager.updatePlayerArea();
+    if(retArray[0] == 2){
+      retArray[1]();
+    }
+  });
+  input.blur(function(){
+    var _betDispVal = $('#valSingle' + idNum);
+    var _bet = _CRAPS.dealer.betManager.getBetById(idNum);
+    var oldVal = _bet.bet.value;
+    var newAmount = input.val();
+    var retArray = revalidate(_bet, newAmount);
+    if(!retArray[0]){
+      retArray[1]();
+      return;
+    }
+    _betDispVal.empty();
+    _betDispVal.html('$' + newAmount);
+    _betDispVal.attr('class', 'clickable');
+    _bet.bet.value = parseInt(newAmount);
+    var diff = (parseInt(newAmount) - parseInt(oldVal));
+    PlayerManager.getPlayerById(_bet.bet.playerId).player.subFromBank(diff);
     PlayerManager.updatePlayerArea();
     if(retArray[0] == 2){
       retArray[1]();

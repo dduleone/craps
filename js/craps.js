@@ -424,24 +424,68 @@ BetManager.prototype = {
       //remove.html('Rem');
       //remove.attr({class: 'bttn red'});
       if(GameState.tutorial){
-        remove.attr('onclick', 'alert("You cannot take down a Tutorial bet.")');
+        remove.click(function(){
+                      alert("You cannot take down a Tutorial bet.");
+                     });
       }else if(this.bets[betNum].type == 'passline'){
-        
         if(GameState.point > 0){
-          remove.attr('onclick', 'alert("You cannot take down a Pass Line bet when a point is on.")');
+          remove.click(function(){
+                        alert("You cannot take down a Pass Line bet when a point is on.");
+                      });
           remove.attr('disabled', 'true');
         }else{
-          remove.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
+          remove.click(function(){
+                        _CRAPS.dealer.betManager.removeBet(this.bets[betNum].bet.betId);
+                      });
+        }
+      }else if(this.bets[betNum].type == 'dontPass'){
+        if(GameState.point > 0){
+          remove.click(function(){
+                        alert("You cannot take down a Don\'t Pass bet when a point is on.");
+                      });
+          remove.attr('disabled', 'true');
+        }else{
+          remove.click(function(){
+                        _CRAPS.dealer.betManager.removeBet(this.bets[betNum].bet.betId);
+                      });
         }
       }else if(this.bets[betNum].type == 'come'){
         if(this.bets[betNum].point > 0){
-          remove.attr('onclick', 'alert("You cannot take down a Come bet when it has a point.")');
+          remove.click(function(){
+                        alert("You cannot take down a Come bet when it has a point.");
+                      });
           remove.attr('disabled', 'true');
         }else{
-          remove.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
+          remove.click(function(){
+                        _CRAPS.dealer.betManager.removeBet(this.bets[betNum].bet.betId);
+                      });
+        }
+      }else if(this.bets[betNum].type == 'dontCome'){
+        if(this.bets[betNum].point > 0){
+          remove.click(function(){
+                        alert("You cannot take down a Don\'t Come bet when it has a point.");
+                      });
+          remove.attr('disabled', 'true');
+        }else{
+          remove.click(function(){
+                        _CRAPS.dealer.betManager.removeBet(this.bets[betNum].bet.betId);
+                      });
+        }
+      }else if(this.bets[betNum].type == 'fire'){
+        if(GameState.point > 0 || GameState.numFire > 0){
+          remove.click(function(){
+                        alert("You may only take down a fire bet on the inital Come Out Roll.");
+                      });
+          remove.attr('disabled', 'true');
+        }else{
+          remove.click(function(){
+                        _CRAPS.dealer.betManager.removeBet(this.bets[betNum].bet.betId);
+                      });
         }
       }else{
-        remove.attr('onclick', '_CRAPS.dealer.betManager.removeBet(' + this.bets[betNum].bet.betId + ')');
+        remove.click(function(){
+                       _CRAPS.dealer.betManager.removeBet(this.bets[betNum].bet.betId);
+                     });
       }
       //pTag.append(remove);
       //newBetRow.append(legend);
@@ -453,47 +497,7 @@ BetManager.prototype = {
       newBetRow.append(repeat);
       newBetRow.append(point);
       newBetRow.append(remove);
-      
-      //$('#closeBets').css('bottom', ($('#betListWindow').height() - $('#betListing').height() - $('#playerArea').height() - $('#closeBets').height()));
     }
-    //var numBets = this.bets.length;
-    //while(numBets < 6){
-    //  var newBetRow = $(document.createElement('tr'));
-    //  //newBetRow.css('backgroundColor', (numBets%2)?'#c0c0c0':'#fff');
-    //  newBetRow.css('backgroundColor', '#fff');
-    //  var betElement1 = $(document.createElement('td'));
-    //  var betElement2 = $(document.createElement('td'));
-    //  var betElement3 = $(document.createElement('td'));
-    //  var betElement4 = $(document.createElement('td'));
-    //  var betElement5 = $(document.createElement('td'));
-    //  var betElement6 = $(document.createElement('td'));
-    //  //betElement1.css('color', (numBets%2)?'#c0c0c0':'#fff');
-    //  //betElement2.css('color', (numBets%2)?'#c0c0c0':'#fff');
-    //  //betElement3.css('color', (numBets%2)?'#c0c0c0':'#fff');
-    //  //betElement4.css('color', (numBets%2)?'#c0c0c0':'#fff');
-    //  //betElement5.css('color', (numBets%2)?'#c0c0c0':'#fff');
-    //  //betElement6.css('color', (numBets%2)?'#c0c0c0':'#fff');
-    //  //betElement1.css('color', '#fff');
-    //  //betElement2.css('color', '#fff');
-    //  //betElement3.css('color', '#fff');
-    //  //betElement4.css('color', '#fff');
-    //  //betElement5.css('color', '#fff');
-    //  //betElement6.css('color', '#fff');
-    //  betElement1.html("test");
-    //  betElement2.html("test");
-    //  betElement3.html("test");
-    //  betElement4.html("test");
-    //  betElement5.html("test");
-    //  betElement6.html("test");
-    //  betTable.append(newBetRow);
-    //  newBetRow.append(betElement1)
-    //           .append(betElement2)
-    //           .append(betElement3)
-    //           .append(betElement4)
-    //           .append(betElement5)
-    //           .append(betElement6);
-    //  numBets++;
-    //}
   },
   animateBets: function(){
     for(x in this.winningBetIds){

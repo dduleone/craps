@@ -163,6 +163,24 @@
     overflow: auto;
     overflow-x: hidden;
   }
+  #singleBetListBG{
+    position: absolute;
+    left: 15%;
+    top: 35%;
+    display: none;
+    height: auto;
+    width: 70%;
+    background: #444;
+    margin: 0px;
+    padding: 1%;
+  }
+  #singleBetListWindow{
+    position: relative;
+    background: #222;
+    color: #FFF;
+    overflow: auto;
+    overflow-x: hidden;
+  }
   #closeBets{
     position: relative;
   }
