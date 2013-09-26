@@ -241,7 +241,7 @@ var colors5 = {
             ctx.stroke();
         },
         isClickedRegion: function(x, y) {
-            if (x < 100 || y > 850 || x > 1000 || y < 100) {
+            if (x < 100 || y > 900 || x > 1000 || y < 100) {
                 // short circuit
                 return false;
             }
@@ -260,6 +260,9 @@ var colors5 = {
             }
             if (x > 200 && y > 750 && x < 300 && y < 850) {
                 //ignore the curve
+                return true;
+            }
+            if (GameState.point && x > 500 && x < 580 && y > 850 && y < 900) {
                 return true;
             }
             return false;
@@ -1538,33 +1541,44 @@ var colors5 = {
           ctx.stroke();
           ctx.closePath();
           this.drawDots();
-
+          
+          ctx.lineCap = 'round';
+          var lines = getButtonColors(this.board.colors.dice);
           ctx.beginPath();
-          ctx.fillStyle = this.board.colors.text;
-          ctx.font = "35pt Verdana";
+          ctx.rect(1200, 290, 175, 40);
+          ctx.fillStyle = lines[2];
+          ctx.fill();
+          //ctx.lineWidth = 1;
+          //ctx.stroke();
+          ctx.closePath();
+          
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = lines[0];
+          ctx.beginPath();
+          ctx.moveTo(1200,330);//ll
+          ctx.lineTo(1375,330);//lr
+          ctx.lineTo(1375,290);//ur
+          ctx.stroke();
+          ctx.closePath();
+          
+          ctx.strokeStyle = lines[1];
+          ctx.beginPath();
+          ctx.moveTo(1375,290);//ur
+          ctx.lineTo(1200,290);//ul
+          ctx.lineTo(1200,330);//ll
+          ctx.stroke();
+          ctx.closePath();
+          
+          ctx.beginPath();
+          ctx.textAlign = "center";
+          ctx.strokeStyle = this.board.colors.dicePips; // lines[3]
+          ctx.fillStyle = this.board.colors.dicePips; // lines[3]
           ctx.textAlign = "left";
-          ctx.fillText("Roll", 1243, 320);
+          ctx.font = "25pt Verdana";
+          //ctx.rotate(Math.PI * -0.2);
+          ctx.fillText("Roll", 1257, 323);
           ctx.stroke();
-          ctx.closePath();
-          
-          ctx.beginPath();
-          ctx.lineWidth = 5;
-          ctx.moveTo(1238, 310);
-          ctx.lineCap = 'round'
-          ctx.strokeStyle = this.board.colors.lines;
-          ctx.quadraticCurveTo(1216, 312, 1218, 290);
-          ctx.stroke();
-          ctx.closePath();
-          
-          ctx.beginPath();
-          ctx.lineWidth = 5;
-          ctx.moveTo(1337, 310);
-          ctx.lineCap = 'round'
-          ctx.strokeStyle = this.board.colors.lines;
-          ctx.quadraticCurveTo(1359, 312, 1357, 290);
-          ctx.stroke();
-          ctx.closePath();
-          
+          ctx.restore();
         },
         drawDots: function(){
           var dice = diceToNum(_CRAPS.dice);
@@ -1626,7 +1640,7 @@ var colors5 = {
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
-            if (x > 1200 && x < 1375 && y > 200 && y < 320) {
+            if (x > 1200 && x < 1375 && y > 200 && y < 330) {
                 return true;
             }
             return false;
@@ -1651,7 +1665,7 @@ var colors5 = {
             //}
             var lines = getButtonColors(this.board.colors.lines);
             ctx.beginPath();
-            ctx.rect(15, 915, 70, 70);
+            ctx.rect(15, 885, 100, 100);
             ctx.fillStyle = lines[2];
             ctx.fill();
             //ctx.lineWidth = 1;
@@ -1661,17 +1675,17 @@ var colors5 = {
             ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
-            ctx.moveTo(15,985);
-            ctx.lineTo(85,985);
-            ctx.lineTo(85,915);
+            ctx.moveTo(15,985);//ll
+            ctx.lineTo(115,985);//lr
+            ctx.lineTo(115,885);//ur
             ctx.stroke();
             ctx.closePath();
             
             ctx.strokeStyle = lines[1];
             ctx.beginPath();
-            ctx.moveTo(85,915);
-            ctx.lineTo(15,915);
-            ctx.lineTo(15,985);
+            ctx.moveTo(115,885);//ur
+            ctx.lineTo(15,885);//ul
+            ctx.lineTo(15,985);//ll
             ctx.stroke();
             ctx.closePath();
             
@@ -1680,69 +1694,21 @@ var colors5 = {
             ctx.strokeStyle = lines[3];
             ctx.fillStyle = lines[3];
             ctx.textAlign = "left";
-            ctx.font = "14pt Verdana";
+            ctx.font = "20pt Verdana";
             //ctx.rotate(Math.PI * -0.2);
-            ctx.fillText("Reset", 23, 948);
-            ctx.fillText("Game",  21, 968);
+            ctx.fillText("Reset", 25, 932);
+            ctx.fillText("Game",  23, 957);
             ctx.stroke();
             ctx.restore();
             
         },
         isClickedRegion: function(x, y) {
-            if (x > 15 && x < 85 && y > 915 && y < 985) {
+            if (x > 15 && x < 115 && y > 885 && y < 985) {
                 return true;
             }
             return false;
         }
     };
-
-    //var SaveGame = function(board) {
-    //    this.board = board;
-    //    return this;
-    //}
-    //SaveGame.prototype = {
-    //    name: "Save Game",
-    //    draw: function() {
-    //        var ctx = this.board.context;
-    //        ctx.lineWidth = 5;
-    //        ctx.textAlign = "center";
-    //        ctx.fillStyle = this.board.colors.text;
-    //        ctx.strokeStyle = this.board.colors.text;
-    //        
-    //        var lines = getButtonColors(this.board.colors.lines);
-    //        ctx.strokeStyle = lines[0];
-    //        ctx.beginPath();
-    //        ctx.moveTo(115,985);
-    //        ctx.lineTo(185,985);
-    //        ctx.lineTo(185,915);
-    //        ctx.stroke();
-    //        ctx.closePath();
-    //        
-    //        ctx.strokeStyle = lines[1];
-    //        ctx.beginPath();
-    //        ctx.moveTo(185,915);
-    //        ctx.lineTo(115,915);
-    //        ctx.lineTo(115,985);
-    //        ctx.stroke();
-    //        ctx.closePath();            
-    //        
-    //        ctx.beginPath();
-    //        ctx.textAlign = "left";
-    //        ctx.font = "14pt Verdana";
-    //        //ctx.rotate(Math.PI * -0.2);
-    //        ctx.fillText("Save", 126, 948);
-    //        ctx.fillText("Game", 121, 968);
-    //        ctx.stroke();
-    //        ctx.restore();
-    //        
-    //    },
-    //    isClickedRegion: function(x, y) {
-    //        if (x > 115 && x < 185 && y > 915 && y < 985) {
-    //            return true;
-    //        }
-    //        return false;
-    //    }
-    //};
 
     var Menu = function(board) {
         this.board = board;
@@ -1766,17 +1732,17 @@ var colors5 = {
             ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
-            ctx.moveTo(1885,135);
-            ctx.lineTo(1985,135);
-            ctx.lineTo(1985,35);
+            ctx.moveTo(1885,135);//ll
+            ctx.lineTo(1985,135);//lr
+            ctx.lineTo(1985,35);//ur
             ctx.stroke();
             ctx.closePath();
             
             ctx.strokeStyle = lines[1];
             ctx.beginPath();
-            ctx.moveTo(1985,35);
-            ctx.lineTo(1885,35);
-            ctx.lineTo(1885,135);
+            ctx.moveTo(1985,35);//ur
+            ctx.lineTo(1885,35);//ul
+            ctx.lineTo(1885,135);//ll
             ctx.stroke();
             ctx.closePath();            
             
@@ -1821,17 +1787,17 @@ var colors5 = {
             ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
-            ctx.moveTo(1885,250);
-            ctx.lineTo(1985,250);
-            ctx.lineTo(1985,150);
+            ctx.moveTo(1885,250);//ll
+            ctx.lineTo(1985,250);//lr
+            ctx.lineTo(1985,150);//ur
             ctx.stroke();
             ctx.closePath();
             
             ctx.strokeStyle = lines[1];
             ctx.beginPath();
-            ctx.moveTo(1985,150);
-            ctx.lineTo(1885,150);
-            ctx.lineTo(1885,250);
+            ctx.moveTo(1985,150);//ur
+            ctx.lineTo(1885,150);//ul
+            ctx.lineTo(1885,250);//ll
             ctx.stroke();
             ctx.closePath();            
             
@@ -1877,17 +1843,17 @@ var colors5 = {
             ctx.lineWidth = 5;
             ctx.strokeStyle = lines[0];
             ctx.beginPath();
-            ctx.moveTo(1885,365);
-            ctx.lineTo(1985,365);
-            ctx.lineTo(1985,265);
+            ctx.moveTo(1885,365);//ll
+            ctx.lineTo(1985,365);//lr
+            ctx.lineTo(1985,265);//ur
             ctx.stroke();
             ctx.closePath();
             
             ctx.strokeStyle = lines[1];
             ctx.beginPath();
-            ctx.moveTo(1985,265);
-            ctx.lineTo(1885,265);
-            ctx.lineTo(1885,365);
+            ctx.moveTo(1985,265);//ur
+            ctx.lineTo(1885,265);//ul
+            ctx.lineTo(1885,365);//ll
             ctx.stroke();
             ctx.closePath();            
             
@@ -1954,9 +1920,7 @@ var colors5 = {
         World,
         Fire,
         Dice,
-        //Help,
         Reset,
-        //SaveGame,
         ShowBets,
         LastRoll,
         Menu
@@ -2001,13 +1965,16 @@ var colors5 = {
             var ctx = this.context;
             ctx.fillStyle = this.colors.specialText;
             ctx.strokeStyle = this.colors.specialText;
-            ctx.font = "20pt Verdana";
+            ctx.font = "25pt Verdana";
             //ctx.fillText('3x-4x-5x Odds', 1200, 100); 
             //ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 1200, 125); 
             //ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 1200, 150);
-            ctx.fillText('3x-4x-5x Odds', 300, 910); 
-            ctx.fillText('Table Min Bet: $' + _CRAPS.minBet, 300, 935); 
-            ctx.fillText('Table Max Bet: $' + _CRAPS.maxBet, 300, 960);
+            //ctx.fillText('3x-4x-5x Odds', 300, 905); 
+            //ctx.fillText('Min Bet: $' + _CRAPS.minBet, 300, 935); 
+            //ctx.fillText('Max Bet: $' + _CRAPS.maxBet, 300, 965);
+            ctx.fillText('3x-4x-5x Odds', 1200, 55); 
+            ctx.fillText('Min Bet: $' + _CRAPS.minBet, 1200, 85); 
+            ctx.fillText('Max Bet: $' + _CRAPS.maxBet, 1200, 115);
             ctx.closePath();
             ctx.beginPath();
             ctx.font = '40pt Verdana';
