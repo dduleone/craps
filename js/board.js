@@ -241,18 +241,21 @@ var colors5 = {
             ctx.stroke();
         },
         isClickedRegion: function(x, y) {
-            if (x < 100 || y > 900 || x > 1000 || y < 100) {
-                // short circuit
-                return false;
-            }
-            if (x < 200 && y < 700) {
+            //if (x < 100 || y > 900 || x > 1000 || y < 100) {
+            //    // short circuit
+            //    return false;
+            //}
+            //if (x < 200 && y < 700) {
+            //    return true;
+            //}
+            //if (x > 300 && y > 750) {
+            //    return true;
+            //}
+            //if (x > 300 || y < 650) {
+            //    return false;
+            //}
+            if (x > 100 && x < 200 && y > 100 && y < 900) {
                 return true;
-            }
-            if (x > 300 && y > 750) {
-                return true;
-            }
-            if (x > 300 || y < 650) {
-                return false;
             }
             if (x > 100 && y > 700 && x < 200 && y < 850) {
                 //ignore the curve
@@ -260,6 +263,9 @@ var colors5 = {
             }
             if (x > 200 && y > 750 && x < 300 && y < 850) {
                 //ignore the curve
+                return true;
+            }
+            if (x > 100 && x < 1000 && y > 750 && y < 850) {
                 return true;
             }
             if (GameState.point && x > 500 && x < 580 && y > 850 && y < 900) {

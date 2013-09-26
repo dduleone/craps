@@ -128,6 +128,16 @@ function clickAreaPlaceBet(area){
            return;
         }
       }
+      var noBet = true;
+      for(i in _bets){
+        if((name == 'passline' && _bets[i].type == 'passline') ||
+           (name == 'dontPass' && _bets[i].type == 'dontPass')){
+            noBet = false;
+        }
+      }
+      if(noBet){
+        return;
+      }
     }else{
       for(i in _bets){
         if((name == 'passline' && _bets[i].type == 'passline') ||
