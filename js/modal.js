@@ -76,13 +76,14 @@ function openBets(){
 }
 
 function closeBetResults(){
-  $('#betResultsBG').hide();
+  $('#betResultsBG').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#betResultsBG').hide();});
   $('#modalScreen').hide();
 }
 
 function openBetResults(){
-  $('#betResultsBG').show();
   $('#modalScreen').show();
+  $('#betResultsBG').show();
+  $('#betResultsBG').animate({opacity: 1}, MODAL_FADE_INTERVAL);
 }
 
 function openGlossary(term){
