@@ -155,7 +155,6 @@
     height: calc(100% - 35px);
     height: -webkit-calc(100% - 35px);
   }
-  .
   .modalScreen{
     z-index: 1;
   }

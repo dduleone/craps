@@ -379,7 +379,7 @@ function startTutorial(){
 
 function closeTutorial(){
   GameState.tutorial = false;
-  $('#tutorialBG').removeClass('one two three four five six seven');
+  $('#tutorialBG').removeClass('one two three four five six');
   //$('#startTutorial').show();
   //$('#closeTutorial').hide();
   //$('#tutorialInstruction').hide();
