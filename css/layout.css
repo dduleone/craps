@@ -146,6 +146,9 @@
   }
   .modalWindow{
     position: relative;
+    /* PhoneGap
+    position: absolute;
+    */
     background: #222;
     overflow: auto;
     overflow-x: hidden;
@@ -154,6 +157,10 @@
     margin-bottom: 0.5%;
     height: calc(100% - 35px);
     height: -webkit-calc(100% - 35px);
+    /* PhoneGap
+    height: calc(100% - 35px);
+    height: -webkit-calc(100% - 35px);
+    */
   }
   .modalScreen{
     z-index: 1;
