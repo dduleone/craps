@@ -16,7 +16,7 @@
     <!--meta name="viewport" content="user-scalable=0, width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" / -->
     <!-- meta name="viewport" content="user-scalable=0, initial-scale=1.0, maximum-scale=1.0" / -->
     <script type='text/javascript' language='javascript'>
-          //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
+      //snippet from http://www.abeautifulsite.net/blog/2011/11/detecting-mobile-devices-with-javascript/
       var isMobile = {
         Android: function() {
             return navigator.userAgent.match(/Android/i);
@@ -58,21 +58,12 @@
   </head>
   <body>
     <div id="fb-root"></div>
-    <!-- script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script -->
-    <!-- canvas id="board" height='1024' width='768'></canvas -->
     <canvas id="board"></canvas>
     
-    <div id='betForm' class='round modal'>
+    <div id='modalScreen' onclick="closeModal()" class='modalScreen'></div>
+    <div id='betForm' class='round modalBG'>
       <fieldset id='betInfo' class='round'>
         <legend>Create a Bet!</legend>
-        <!-- p>
-          <!-- label for='betType'>Bet Type</label -->
           <select id='betType' name='betType'></select><br />
           <div>Available Bank: <span id='avail2'></span></div>
           <div id='betName'></div>
@@ -82,7 +73,6 @@
           <input id='betValSlide' name='betValue' type='range' min='0' max='10000' step='10' value='10' onchange='betValSlide(this.value)' /><br />
           <label for='repeat'>Repeat Bet on Win?</label>
           <input id='betRepeat' name='betRepeat' type='checkbox' />
-        <!-- /p -->
         <span id='origBet'></span>
         <p>
           <div id='create' unselectable='on' class='bttn blue' onclick='create()'>Create Bet!</div>
@@ -90,8 +80,8 @@
         </p>
       </fieldset>
     </div>
-    <div id='betListBG' class='smallRound modal'>
-      <div id='betListWindow'>
+    <div id='betListBG' class='smallRound modalBG'>
+      <div id='betListWindow' class='modalWindow'>
         <div id='playerArea'>
           <div id='bank'>
             <table>
@@ -107,44 +97,33 @@
               </tr>
             </table>
           </div>
-          <!-- div id='name' class='name clickable' onclick='updatePlayerName()' align='center'></div -->
         </div>
         <div id='betListing'></div>
       </div>
       <div id='closeBets' class='bttn red' onclick='closeBets()'>Close</div>
     </div>
-    <div id='singleBetListBG' class='smallRound modal'>
-      <div id='singleBetListWindow'>
+    <div id='singleBetListBG' class='smallRound modalBG'>
+      <div id='singleBetListWindow' class='modalWindow'>
         <div id='singleBetListing'></div>
       </div>
       <div id='closeSingle' class='bttn red' onclick='closeSingle()'>Close</div>
     </div>
-    <!-- div id='buffer'></div -->
-    <!-- div id='generalButtons'>
-      <div id='openButtons'>
-        <div id='openGameplay' class='bttn board blue' onclick='clickModalButton("gameplay")'>Game Play</div><br />
-        <div id='openRules' class='bttn board blue' onclick='clickModalButton("rules")'>Bet Types</div><br />
-        <div id='openSettings' class='bttn board blue' onclick='clickModalButton("settings")'>Settings</div><br />
-        <div id='openTutorial' class='bttn board blue' onclick='clickModalButton("tutorial")'>Tutorial</div><br />
-        <div id='openAbout' class='bttn board blue' onclick='clickModalButton("about")'>About</div><br />
-        <div id='openBets' class='bttn board blue' onclick='openBets()'>Show Bets</div><br />
-        <div id='openBetResults' class='bttn board blue' onclick='openBetResults()'>Last Results</div>
+    <div id='tutorialBG' class='modalBG smallRound tutorial'>
+      <div id='tutorialWindow' class='modalWindow'>
+        <p id='tutorialDescription'>Now I have stuff</p>
       </div>
       <div id='closeTutorial' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
-      < fb:like href="http://duleone.com/craps" send="false" width="450" show_faces="true"></fb:like>
-    </div -->
-    <!-- div id='tutorialInstruction'></div -->
-    <div id='modalScreen' onclick="closeModal()" class='modalScreen'></div>
-    <div id='modal' class='smallRound modal'>
-      <div id='modalButtons'>
+    </div>
+    <div id='drawer' class='smallRound modalBG'>
+      <div id='drawerButtons'>
         <div id='gameplayButton' class='tab active' onclick='clickModalButton("gameplay")'>Game Play</div>
         <div id='rulesButton' class='tab' onclick='clickModalButton("rules")'>Bet Types</div>
         <div id='settingsButton' class='tab' onclick='clickModalButton("settings")'>Settings</div>
         <div id='tutorialButton' class='tab' onclick='clickModalButton("tutorial")'>Tutorial</div>
         <div id='aboutButton' class='tab' onclick='clickModalButton("about")'>About</div>
       </div>
-      <div id='modalWindow'>
-        <div id='about'>
+      <div id='drawerWindow' class='modalWindow'>
+        <div id='about' class='drawerWindow off'>
           <h3>
             About the Author
           </h3>
@@ -157,12 +136,19 @@
             Version: 1.1.0
           </p>
         </div>
-        <div id='tutorial'>
-          <p id='tutorialDescription'></p>
+        <div id='tutorial' class='drawerWindow'>
+          <!--p id='tutorialStartDescription'></p -->
+          <p>
+            This tutorial will teach you how to place a Pass Line bet, as well as a Pass Line Odds bet and walk you through a Pass Line bet sequence.<br /><br />
+            The Pass Line bet is the traditional/standard bet in Craps, and the one that most people think of when they think of Craps.<br /><br />
+            While you are completing the tutorial, this window will describe what is happening, but you can close this window with the 'Close' button below to see your bets. To open this window again, click the 'Tutorial' button.<br /><br />
+            Starting the tutorial will remove all your bets and reset the game.<br /><br />
+            To start the tutorial, click 'Start Tutorial'.
+          </p>
           <div id='startTutorial' class='bttn yellow' onclick='startTutorial()'>Start Tutorial</div>
-          <div id='closeTutorial2' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div>
+          <!--div id='closeTutorial' class='bttn red' onclick='closeTutorial()'>Close Tutorial</div -->
         </div>
-        <div id='settings'>
+        <div id='settings' class='drawerWindow'>
           <label for='startingBank'>Starting Bank: </label>
           <input id='startingBank' type='number' size="10"><br /><br />
           <label for='settingsName'>Your Name: </label>
@@ -204,7 +190,7 @@
             <div id='resetColors' class='bttn yellow' onclick='resetColors()'>Reset Custom Colors</div>
           </div>
         </div>
-        <div id='rules'>
+        <div id='rules' class='drawerWindow'>
           <div id='rulesButtons'>
             <div id='standardButton' class='insideTab active' onclick='clickRulesButton("standard")'>Standard</div>
             <div id='multiButton' class='insideTab' onclick='clickRulesButton("multi")'>Multi-Roll</div>
@@ -306,7 +292,7 @@
             </div>
           </div>
         </div>
-        <div id='gameplay'>
+        <div id='gameplay' class='drawerWindow'>
           <ul>
             <li>To read about the different bets, check out the "Bets" tab.</li>
             <li>To roll, press the dice on the table.</li>
@@ -354,14 +340,14 @@
           </table>
         </div>
       </div>
-      <div id='closeModal' class='bttn red' onclick='closeModal()'>Close</div>
+      <div id='closeDrawer' class='bttn red' onclick='closeModal()'>Close</div>
     </div>
     <div id='glossary' class='modalTop'>
       <span id='glossaryTerm' style='display:block'></span>
       <span id='glossaryDefinition' style='display:block'></span>
     </div>
     <div id='glossaryScreen' onclick="closeGlossary()" class='modalScreen'></div>
-    <div id='betResultsBG' class='smallRound' class='modal'>
+    <div id='betResultsBG' class='smallRound' class='modalBG'>
       <div id='betResultsWindow'>
         <div id='lastRoll'>
         Your last roll was <span id='die1'></span> <span id='die2'></span>
@@ -463,14 +449,10 @@
                   draw(Board);
                   return;
                 }
-                //if(boardArea.name == "Save Game"){
-                //  if(GameState.tutorial){
-                //    return;
-                //  }
-                //  saveGameState();
-                //  return;
-                //}
                 if(boardArea.name == "Menu"){
+                  if(GameState.tutorial){
+                    return;
+                  }
                   openModal();
                   return;
                 }
@@ -668,36 +650,7 @@
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});
-        resizeModal();
-        /*
-        $('#modal').show();
-        $('#modal').width($('#gameplayButton').width() + 
-                          $('#rulesButton').width() + 
-                          $('#settingsButton').width() + 
-                          $('#tutorialButton').width() + 
-                          $('#aboutButton').width() + 
-                          115);
-        $('#modalWindow').height($('#modal').height() - 55);
-        $('#rules').show();
-        $('#rules').height($('#modalWindow').height() - 20);
-        $('#rules').width($('#modalWindow').width() - 20);
-        $('#standard').show();
-        $('#multi').show();
-        $('#single').show();
-        $('#standard').width($('#rules').width() - 20);
-        $('#multi').width($('#rules').width() - 20);
-        $('#single').width($('#rules').width() - 20);
-        $('#fire').width($('#rules').width() - 20);
-        $('#standard').height($('#rules').height() - 45);
-        $('#multi').height($('#rules').height() - 45);
-        $('#single').height($('#rules').height() - 45);
-        $('#fire').height($('#rules').height() - 45);
-        $('#multi').hide();
-        $('#single').hide();
-        $('#fire').hide();
-        $('#rules').hide();
-        $('#modal').hide();
-        */
+        resizeDrawer();
         $('#settingsName').val(PlayerManager.players[0].player.name);
         $('#settingsName').change(function(){
           PlayerManager.players[0].player.changeName($('#settingsName').val());

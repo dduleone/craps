@@ -67,7 +67,7 @@ $.extend(PlayerManager, {
     //$('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
     $('#betListWindow').height($('#betListBG').height() - 35);
     $('#betResultsWindow').height($('#betResultsBG').height() - 35);
-    resizeModal();
+    resizeDrawer();
     
     localStorage.clear();
     localStorage['name'] = PlayerManager.players[0].player.name;

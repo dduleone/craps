@@ -106,6 +106,16 @@ function updateBetDesc(){
 
 function clickAreaPlaceBet(area){
   var name = prettyToName(area.name);
+  if(GameState.tutorial){
+    if(name == 'passline'){
+      if(GameState.tutorialState == 0){
+        $('#tutorialBG').addClass('two');
+      }else if(GameState.tutorialState == 3){
+        $('#tutorialBG').addClass('five');
+      }
+      updateTutorial();
+    }
+  }
   var oddsPoint = false;
   if(name == 'comeOdds' || name == 'dontComeOdds'){
     oddsPoint = parseInt(area.name.substring(area.name.length - 1));
@@ -1074,6 +1084,24 @@ function place(){
 }
 
 function create(){
+  if(GameState.tutorial){
+    if($('#betType').val() == 'passline'){
+      if(parseInt($('#betValue').val()) != 100){
+        $('#tutorialBG').removeClass('two');
+        updateTutorial();
+        cancel();
+        return;
+      }
+    }
+    if($('#betType').val() == 'passlineOdds'){
+      if(parseInt($('#betValue').val()) != 500){
+        $('#tutorialBG').removeClass('five');
+        updateTutorial();
+        cancel();
+        return;
+      }
+    }
+  }
   var origBet = null;
   if(['passlineOdds', 'comeOdds', 'dontPassOdds', 'dontComeOdds'].indexOf($('#betType').val()) != -1){
     origBet = _CRAPS.dealer.betManager.getBetById($('#orig').val());
@@ -1098,6 +1126,16 @@ function create(){
 }
 
 function cancel(){
+  if(GameState.tutorial){
+    if($('#betType').val() == 'passline'){
+      $('#tutorialBG').removeClass('two');
+      updateTutorial();
+    }
+    if($('#betType').val() == 'passlineOdds'){
+      $('#tutorialBG').removeClass('five');
+      updateTutorial();
+    }
+  }
   $('#betForm').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, BET_FORM_FADE_OUT, function(){$('#betForm').hide();});
   PlayerManager.updatePlayerArea();
   _CRAPS.dealer.betManager.displayBets();
