@@ -110,8 +110,12 @@ function clickAreaPlaceBet(area){
     if(name == 'passline'){
       if(GameState.tutorialState == 0){
         $('#tutorialBG').addClass('two');
+        $('#glossary').removeClass('one two three four five six');
+        $('#glossary').addClass('two');
       }else if(GameState.tutorialState == 3){
         $('#tutorialBG').addClass('five');
+        $('#glossary').removeClass('one two three four five six');
+        $('#glossary').addClass('five');
       }
       updateTutorial();
     }
@@ -1129,10 +1133,14 @@ function cancel(){
   if(GameState.tutorial){
     if($('#betType').val() == 'passline'){
       $('#tutorialBG').removeClass('two');
+    $('#glossary').removeClass('one two three four five six');
+    $('#glossary').addClass('one');
       updateTutorial();
     }
     if($('#betType').val() == 'passlineOdds'){
       $('#tutorialBG').removeClass('five');
+    $('#glossary').removeClass('one two three four five six');
+    $('#glossary').addClass('four');
       updateTutorial();
     }
   }

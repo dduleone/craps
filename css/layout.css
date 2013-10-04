@@ -461,14 +461,34 @@
     position: absolute;
     background: #444 repeat-y;
     color: #FFF;
+    /*
     top: 30%;
     right: 5%;
     width: 19%;
+    */
     height: auto;
     padding: 1%;
     display: none;
     border: 1px;
     border-color: #FFFFFF;
+  }
+  .glossary.one{
+    top: 25%;
+    left: 16.25%;
+    width: 22.5%;
+  }
+  .glossary.two,
+  .glossary.five{
+    top: 26.66%;
+    left: 35%;
+    width: 30%;
+  }
+  .glossary.three,
+  .glossary.four,
+  .glossary.six{
+    top: 40.33%;
+    left: 15%;
+    width: 30%;
   }
   #glossaryTerm{
     position: relative;
