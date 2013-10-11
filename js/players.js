@@ -38,12 +38,6 @@ $.extend(PlayerManager, {
     
     var bank = $('#bank');
     $('#settingsName').val(this.players[0].player.name)
-    //if($('#modalButtons').height() > 60){
-    //  $('#modalWindow').height($('#modal').height() - 95);
-    //}else{
-    //  $('#modalWindow').height($('#modal').height() - 65);
-    //}
-    //$('#tutorialInstruction').css({'top': ($('#generalButtons').offset().top + $('#generalButtons').height())});
     var totalBets = 0;
     for(x in _CRAPS.dealer.betManager.bets){
       totalBets += _CRAPS.dealer.betManager.bets[x].bet.value;
@@ -64,9 +58,6 @@ $.extend(PlayerManager, {
       total.attr('class', 'winning');
     }
     $('#bank').css({top: 0, margin: '0px', border: '0px'});
-    //$('#bank').height(Math.max($('#availBank').offset().top, $('#inPlay').offset().top, $('#totBank').offset().top) + Math.max($('#availBank').height(), $('#inPlay').height(), $('#totBank').height()));
-    $('#betListWindow').height($('#betListBG').height() - 35);
-    $('#betResultsWindow').height($('#betResultsBG').height() - 35);
     resizeDrawer();
     
     localStorage.clear();

@@ -172,7 +172,7 @@ function resizeDrawer(){
             $('#settingsButton').width() + 
             $('#tutorialButton').width() + 
             $('#aboutButton').width() + 
-            115);
+            115);/*
   $('#drawerWindow').height(_drawer.height() - _drawer.height()*(0.005) - $('#board').height()*(0.02) - 35);
   var rules = $('#rules');
   var rulesHidden = (rules.css('visibility')== 'hidden' || rules.css('display') == 'none')
@@ -223,7 +223,7 @@ function resizeDrawer(){
   }
   if(rulesHidden){
     rules.hide();
-  }
+  }*/
   if(hidden){
     _drawer.hide();
   }
