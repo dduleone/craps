@@ -408,8 +408,13 @@
     left: 15%;
     top: 35%;
     display: none;
-    height: auto;
+    height: 30%;
     width: 70%;
+  }
+  #closeSingle{
+    position: absolute;
+    left: 2%;
+    bottom: 2%;
   }
   #closeBets{
     position: absolute;
