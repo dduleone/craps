@@ -667,17 +667,12 @@ var colors5 = {
                 ctx.lineTo(550 + offset[n], 175);
                 ctx.stroke();
                 ctx.lineWidth = 2;
-                if (!ctx.setLineDash) {
-                    ctx.setLineDash = function () {}
-                }
                 ctx.beginPath();
-                ctx.setLineDash([5]);
                 ctx.moveTo(550 + offset[n], 100);
                 ctx.lineTo(550 + offset[n], 175);
                 ctx.stroke();
                 ctx.closePath();
                 this.drawText();
-                ctx.setLineDash([0]);
             },
             drawText: function() {
                 var ctx = this.board.context;
