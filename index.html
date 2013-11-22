@@ -351,7 +351,7 @@
     </div>
     <div id='glossaryScreen' onclick="closeGlossary()" class='modalScreen'></div>
     <div id='betResultsBG' class='smallRound' class='modalBG'>
-      <div id='betResultsWindow'>
+      <div id='betResultsWindow' class='modalWindow'>
         <div id='lastRoll'>
         Your last roll was <span id='die1'></span> <span id='die2'></span>
         </div>
@@ -649,7 +649,7 @@
         $('#settings').hide();
         $('#tutorial').hide();
         $('#about').hide();
-        $('#betResultsWindow').height($('#betResultsBG').height() - 35);
+        //$('#betResultsWindow').height($('#betResultsBG').height() - 35);
         $('#betValue').attr('value', '100');
         $('#betValue').css({width: '50px'});
         $('#betForm').css({left: ($('#board').offset().left + $('#board').width() + 2)});

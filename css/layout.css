@@ -436,13 +436,14 @@
     padding: 1%;
   }
   #betResultsWindow{
-    position: relative;
     background: #222;
     color: #FFF;
     overflow: hidden;
   }
   #closeBetResults{
-    position: relative;
+    position: absolute;
+    left: 2%;
+    bottom: 2%;
   }
   #winningBets{
     position: relative;
