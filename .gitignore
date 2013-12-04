@@ -38,3 +38,6 @@ ehthumbs.db
 Thumbs.db
 
 _ignore
+
+# old files
+*.old

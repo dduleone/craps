@@ -1498,8 +1498,8 @@ var colors5 = {
         draw: function(){
           var ctx = this.board.context;
           ctx.beginPath();
-          ctx.rect(1203, 203, 75, 75);
-          ctx.rect(1303, 203, 75, 75);
+          ctx.rect(1153, 203, 75, 75);
+          ctx.rect(1253, 203, 75, 75);
           ctx.fillStyle = '#000000';
           ctx.fill();
           ctx.lineWidth = 5;
@@ -1507,8 +1507,8 @@ var colors5 = {
           ctx.stroke();
           ctx.closePath();
           ctx.beginPath();
-          ctx.rect(1202, 202, 75, 75);
-          ctx.rect(1302, 202, 75, 75);
+          ctx.rect(1152, 202, 75, 75);
+          ctx.rect(1252, 202, 75, 75);
           var col = colorToNumArray(this.board.colors.dice);
           col[0] = Math.round(col[0]*(1/3))
           col[1] = Math.round(col[1]*(1/3))
@@ -1520,8 +1520,8 @@ var colors5 = {
           ctx.stroke();
           ctx.closePath();
           ctx.beginPath();
-          ctx.rect(1201, 201, 75, 75);
-          ctx.rect(1301, 201, 75, 75);
+          ctx.rect(1151, 201, 75, 75);
+          ctx.rect(1251, 201, 75, 75);
           var col = colorToNumArray(this.board.colors.dice);
           col[0] = Math.round(col[0]*(2/3))
           col[1] = Math.round(col[1]*(2/3))
@@ -1533,8 +1533,8 @@ var colors5 = {
           ctx.stroke();
           ctx.closePath();
           ctx.beginPath();
-          ctx.rect(1200, 200, 75, 75);
-          ctx.rect(1300, 200, 75, 75);
+          ctx.rect(1150, 200, 75, 75);
+          ctx.rect(1250, 200, 75, 75);
           ctx.fillStyle = this.board.colors.dice;
           ctx.fill();
           ctx.lineWidth = 5;
@@ -1546,7 +1546,7 @@ var colors5 = {
           ctx.lineCap = 'round';
           var lines = getButtonColors(this.board.colors.dice);
           ctx.beginPath();
-          ctx.rect(1200, 290, 175, 40);
+          ctx.rect(1150, 290, 175, 40);
           ctx.fillStyle = lines[2];
           ctx.fill();
           //ctx.lineWidth = 1;
@@ -1556,17 +1556,17 @@ var colors5 = {
           ctx.lineWidth = 5;
           ctx.strokeStyle = lines[0];
           ctx.beginPath();
-          ctx.moveTo(1200,330);//ll
-          ctx.lineTo(1375,330);//lr
-          ctx.lineTo(1375,290);//ur
+          ctx.moveTo(1150,330);//ll
+          ctx.lineTo(1325,330);//lr
+          ctx.lineTo(1325,290);//ur
           ctx.stroke();
           ctx.closePath();
           
           ctx.strokeStyle = lines[1];
           ctx.beginPath();
-          ctx.moveTo(1375,290);//ur
-          ctx.lineTo(1200,290);//ul
-          ctx.lineTo(1200,330);//ll
+          ctx.moveTo(1325,290);//ur
+          ctx.lineTo(1150,290);//ul
+          ctx.lineTo(1150,330);//ll
           ctx.stroke();
           ctx.closePath();
           
@@ -1577,7 +1577,7 @@ var colors5 = {
           ctx.textAlign = "left";
           ctx.font = "25pt Verdana";
           //ctx.rotate(Math.PI * -0.2);
-          ctx.fillText("Roll", 1257, 323);
+          ctx.fillText("Roll", 1207, 323);
           ctx.stroke();
           ctx.restore();
         },
@@ -1587,43 +1587,43 @@ var colors5 = {
           for(die in dice){
             switch(dice[die]){
             case false:
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
               this.drawDot(1212.5 + offset[die], 262.5);
               this.drawDot(1212.5 + offset[die], 212.5);
+              this.drawDot(1162.5 + offset[die], 262.5);
+              this.drawDot(1162.5 + offset[die], 212.5);
               break;
             case 1:
-              this.drawDot(1237.5 + offset[die], 237.5);
+              this.drawDot(1187.5 + offset[die], 237.5);
               break;
             case 2:
-              this.drawDot(1212.5 + offset[die], 212.5);
-              this.drawDot(1262.5 + offset[die], 262.5);
+              this.drawDot(1162.5 + offset[die], 212.5);
+              this.drawDot(1212.5 + offset[die], 262.5);
               break;
             case 3:
-              this.drawDot(1212.5 + offset[die], 262.5);
-              this.drawDot(1237.5 + offset[die], 237.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1162.5 + offset[die], 262.5);
+              this.drawDot(1187.5 + offset[die], 237.5);
+              this.drawDot(1212.5 + offset[die], 212.5);
               break;
             case 4:
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
               this.drawDot(1212.5 + offset[die], 262.5);
               this.drawDot(1212.5 + offset[die], 212.5);
+              this.drawDot(1162.5 + offset[die], 262.5);
+              this.drawDot(1162.5 + offset[die], 212.5);
               break;
             case 5:
-              this.drawDot(1237.5 + offset[die], 237.5);
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
+              this.drawDot(1187.5 + offset[die], 237.5);
               this.drawDot(1212.5 + offset[die], 262.5);
               this.drawDot(1212.5 + offset[die], 212.5);
+              this.drawDot(1162.5 + offset[die], 262.5);
+              this.drawDot(1162.5 + offset[die], 212.5);
               break;
             case 6:
-              this.drawDot(1262.5 + offset[die], 262.5);
-              this.drawDot(1262.5 + offset[die], 237.5);
-              this.drawDot(1212.5 + offset[die], 237.5);
-              this.drawDot(1262.5 + offset[die], 212.5);
               this.drawDot(1212.5 + offset[die], 262.5);
+              this.drawDot(1212.5 + offset[die], 237.5);
+              this.drawDot(1162.5 + offset[die], 237.5);
               this.drawDot(1212.5 + offset[die], 212.5);
+              this.drawDot(1162.5 + offset[die], 262.5);
+              this.drawDot(1162.5 + offset[die], 212.5);
               break;
             default:
               return;
@@ -1641,7 +1641,7 @@ var colors5 = {
           ctx.stroke();
         },
         isClickedRegion: function(x, y) {
-            if (x > 1200 && x < 1375 && y > 200 && y < 330) {
+            if (x > 1150 && x < 1325 && y > 200 && y < 330) {
                 return true;
             }
             return false;
@@ -1973,9 +1973,9 @@ var colors5 = {
             //ctx.fillText('3x-4x-5x Odds', 300, 905); 
             //ctx.fillText('Min Bet: $' + _CRAPS.minBet, 300, 935); 
             //ctx.fillText('Max Bet: $' + _CRAPS.maxBet, 300, 965);
-            ctx.fillText('3x-4x-5x Odds', 1200, 55); 
-            ctx.fillText('Min Bet: $' + _CRAPS.minBet, 1200, 85); 
-            ctx.fillText('Max Bet: $' + _CRAPS.maxBet, 1200, 115);
+            ctx.fillText('3x-4x-5x Odds', 1150, 55); 
+            ctx.fillText('Min Bet: $' + _CRAPS.minBet, 1150, 85); 
+            ctx.fillText('Max Bet: $' + _CRAPS.maxBet, 1150, 115);
             ctx.closePath();
             ctx.beginPath();
             ctx.font = '40pt Verdana';
@@ -2007,9 +2007,9 @@ var colors5 = {
             ctx.beginPath();
             var boardColors = colorToNumArray(this.colors.board);
             if(boardColors[0] < 64 && boardColors[1] < 64 && boardColors[2] < 64){
-              ctx.drawImage(logoWhite, 1430, 70, 400, 320);
+              ctx.drawImage(logoWhite, 1359, 105, 382, 320);
             } else {
-              ctx.drawImage(logo, 1430, 70, 400, 320);
+              ctx.drawImage(logo, 1359, 105, 382, 320);
             }
             //ctx.drawImage(logoFull, 1430, 70, 400, 320);
             ctx.closePath();
@@ -2124,7 +2124,7 @@ var colors5 = {
           if(!GameState.point){
             ctx.beginPath();
             ctx.lineWidth = 5;
-            ctx.arc(1130, 60, 30, 2 * Math.PI, false);
+            ctx.arc(1550, 60, 30, 2 * Math.PI, false);
             ctx.fillStyle = this.colors.pointOff;
             ctx.fill();
             ctx.strokeStyle = this.colors.pointBorder;
@@ -2133,7 +2133,7 @@ var colors5 = {
             ctx.beginPath();
             ctx.fillStyle = this.colors.text;
             ctx.font = "24pt Verdana";
-            ctx.fillText('OFF', 1098, 73);
+            ctx.fillText('OFF', 1518, 73);
             ctx.stroke();
             ctx.closePath();
           }
