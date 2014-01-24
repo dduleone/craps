@@ -104,6 +104,22 @@ function updateBetDesc(){
   }
 };
 
+function decrement(){
+  var step = parseInt($('#betValSlide').attr('step'));
+  if(parseInt($('#betValue').val()) > parseInt($('#betValSlide').attr('min'))){
+    $('#betValue').val(Math.max((parseInt($('#betValue').val()) - step), parseInt($('#betValSlide').attr('min'))));
+  }
+  updateSlider($('#betValue').val());
+};
+
+function increment(){
+  var step = parseInt($('#betValSlide').attr('step'));
+  if(parseInt($('#betValue').val()) < parseInt($('#betValSlide').attr('max'))){
+    $('#betValue').val(Math.min((parseInt($('#betValue').val()) + step), parseInt($('#betValSlide').attr('max'))));
+  }
+  updateSlider($('#betValue').val());
+};
+
 function clickAreaPlaceBet(area){
   var name = prettyToName(area.name);
   if(GameState.tutorial){
