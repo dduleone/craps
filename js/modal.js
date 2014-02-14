@@ -45,7 +45,7 @@ function closeModal(){
   colors = eval("colors" + localStorage['colors']);
   //$('#drawer').animate({opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#modalScreen').hide();$('#drawer').hide();});
   $('#drawer').animate({left: ($('#board').offset().left + $('#board').width() + 2), opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#drawer').hide();});
-  $('#openButtons').show();
+  //$('#openButtons').show();
   PlayerManager.updatePlayerArea();
   _CRAPS.dealer.betManager.displayBets();
   closeBets();
@@ -55,7 +55,7 @@ function closeModal(){
 
 function closeBets(){
   var betList = $('#betListBG');
-  betList.animate({left: '100%', opacity: 0}, MODAL_FADE_INTERVAL), function(){$('#betListBG').hide();};
+  betList.animate({left: '100%', opacity: 0}, MODAL_FADE_INTERVAL, function(){$('#betListBG').hide();});
   $('#modalScreen').hide();
 }
 
